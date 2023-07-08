@@ -1,8 +1,8 @@
 import { take } from 'rxjs/operators';
 import {NotionPostRepository} from "../../../repositories/server/notionPostRepository";
-import {Post} from "@/dtos";
-import {loadEnvVariables} from "../../helper/envLoader";
-import {delay} from "../../helper/utils";
+import {Post} from "@/core/models";
+import {loadEnvVariables} from "../../testHelpers/envLoader";
+import {delay} from "../../testHelpers/utils";
 
 describe('NotionPostRepository Integration Test', () => {
     let notionPostRepository: NotionPostRepository;

@@ -1,7 +1,7 @@
 import styles from './header.module.css';
 import {ThemeToggle} from "@/app/components/client/theme/themeSwicher";
 import Link from "next/link";
-import {Routes} from "@/routes";
+import {Routes} from "@/app/routes";
 
 export const Header = () => {
     return (

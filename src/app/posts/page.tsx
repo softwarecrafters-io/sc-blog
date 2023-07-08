@@ -2,10 +2,10 @@ import LikeButton from "@/app/posts/components/LikeButton";
 import Link from "next/link";
 import {Suspense} from "react";
 import {SummaryPost} from "@/dtos";
-import {Factory} from "@/factory";
+import {ServerFactory} from "@/factories/serverFactory";
 
 export default async function PostsPage() {
-    const repository = Factory.getHttpPostRepository();
+    const repository = ServerFactory.getHttpPostRepository();
     const posts: SummaryPost[] = await repository.getAllPosts();
 
     return (

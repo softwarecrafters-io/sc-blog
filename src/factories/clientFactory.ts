@@ -1,7 +1,7 @@
 import {HttpPostRepository} from "@/repositories/client/httpPostRepository";
 import {NotionPostRepository} from "@/repositories/server/notionPostRepository";
 
-export class Factory{
+export class ServerFactory {
     private static postRepository: NotionPostRepository;
     private static httpPostRepository: HttpPostRepository;
 

@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server";
-import {addSubscriber} from "@/services/subscriptionService";
+import {addSubscriber} from "@/repositories/server/subscriptionService";
 
 const handler = async (req: Request) => {
     const body = await req.json()

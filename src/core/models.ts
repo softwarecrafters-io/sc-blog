@@ -1,5 +1,3 @@
-
-
 export type SummaryPost = {
     id: string;
     slug: string;
@@ -7,7 +5,8 @@ export type SummaryPost = {
     title: string;
     tags: string[];
     description: string;
-    date: string
+    date: string,
+    username:string
 }
 
 export type Post = SummaryPost & {markdownBody:string}
@@ -21,6 +20,7 @@ export const fromSummaryToPost = (summaryPost: SummaryPost, markdownBody:string)
         description: summaryPost.description,
         date: summaryPost.date,
         slug: summaryPost.slug,
+        username: summaryPost.username,
         markdownBody: markdownBody
     }
 }
@@ -33,6 +33,11 @@ export const fromPostToSummary = (post: Post): SummaryPost => {
         tags: post.tags,
         description: post.description,
         date: post.date,
-        slug: post.slug
+        slug: post.slug,
+        username: post.username
     }
+}
+
+export type Subscriber = {
+    email: string;
 }

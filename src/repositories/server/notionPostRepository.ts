@@ -1,7 +1,7 @@
 import {Client} from "@notionhq/client";
-import {fromPostToSummary, fromSummaryToPost, Post, SummaryPost} from "../../dtos";
+import {fromPostToSummary, fromSummaryToPost, Post, SummaryPost} from "../../core/models";
 import {NotionToMarkdown} from "notion-to-md";
-import {PostRepository} from "@/repositories/postRepository";
+import {PostRepository} from "../../core/repositories";
 import {defaultIfEmpty, forkJoin, map, mergeMap, Observable, of, tap} from "rxjs";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
@@ -22,17 +22,6 @@ export class NotionPostRepository implements PostRepository{
             throw new Error('Notion API Key or Database ID not found');
         }
         return new NotionPostRepository(apiKey, databaseId, cacheInMsSeconds);
-    }
-
-    getPostBy(slug:string): Observable<SummaryPost | undefined>{
-        return this.getAllPosts().pipe(
-            map(posts => posts.filter(post => post.slug === slug)[0])
-        );
-    }
-
-    getAllSummaryPosts(): Observable<SummaryPost[]> {
-        return this.getAllPosts().pipe(
-            map(ps => ps.map(p => fromPostToSummary(p))));
     }
 
     getAllPosts(): Observable<Post[]> {
@@ -83,7 +72,8 @@ export class NotionPostRepository implements PostRepository{
             tags: this.extractTags(page),
             description: this.extractDescription(page),
             date: this.extractDate(page),
-            slug: this.extractSlug(page)
+            slug: this.extractSlug(page),
+            username: this.extractUserName(page)
         };
         const missingFields = Object.keys(summaryPost).filter(key => !(summaryPost as any)[key]);
         if (missingFields.length > 0) {
@@ -127,5 +117,9 @@ export class NotionPostRepository implements PostRepository{
 
     private extractSlug(page: any): string {
         return page.properties?.Slug?.rich_text[0]?.plain_text;
+    }
+
+    private extractUserName(page: any) {
+        return page.properties?.Username?.rich_text[0]?.plain_text;
     }
 }

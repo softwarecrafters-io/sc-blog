@@ -1,9 +1,9 @@
 import {NextResponse} from "next/server";
 import {NotionPostRepository} from "@/repositories/server/notionPostRepository";
-import {Factory} from "@/factory";
+import {ServerFactory} from "@/factories/serverFactory";
 
 const handler = async () => {
-    const postRepository = Factory.getPostRepository();
+    const postRepository = ServerFactory.getPostRepository();
     return postRepository.getAllPosts().toPromise();
 }
 

@@ -1,4 +1,4 @@
-import {SummaryPost} from "@/dtos";
+import {SummaryPost} from "@/core/models";
 
 export class HttpPostRepository {
     baseUrl = "http://127.0.0.1:3005/api/posts";

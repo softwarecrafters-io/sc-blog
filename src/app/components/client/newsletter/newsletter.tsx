@@ -4,7 +4,7 @@ import {useNewsletter} from "@/app/components/client/newsletter/useNewsletter";
 import {Thanks} from "@/app/components/client/newsletter/thanks/thanks";
 import Image from "next/image";
 import Link from "next/link";
-import {Routes} from "@/routes";
+import {Routes} from "@/app/routes";
 
 export const Newsletter = ({hideEntry = false}:{hideEntry?:boolean}) => {
     const {handleSubscribe, handleEmailChange, isSubscribed, hasError, errorMessage  } = useNewsletter();
