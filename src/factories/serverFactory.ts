@@ -1,11 +1,12 @@
 import {HttpPostRepository} from "@/repositories/client/httpPostRepository";
 import {NotionPostRepository} from "@/repositories/server/notionPostRepository";
+import {PostRepository} from "@/core/repositories";
+import {BlogService} from "@/application/blogService";
 
 export class ServerFactory {
-    private static postRepository: NotionPostRepository;
-    private static httpPostRepository: HttpPostRepository;
+    private static postRepository: PostRepository;
 
-    public static getPostRepository(): NotionPostRepository {
+    static getPostRepository(): PostRepository {
         if(this.postRepository== null){
             const apiKey = process.env.NOTION_API_KEY as string;
             const databaseId = process.env.NOTION_BLOG_DATABASE_ID as string;
@@ -14,10 +15,7 @@ export class ServerFactory {
         return this.postRepository;
     }
 
-    public static getHttpPostRepository(): HttpPostRepository {
-        if(this.httpPostRepository== null){
-            this.httpPostRepository = new HttpPostRepository();
-        }
-        return this.httpPostRepository;
+    static createBlogService(): BlogService {
+        return new BlogService(this.getPostRepository());
     }
 }

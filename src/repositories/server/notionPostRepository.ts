@@ -1,5 +1,5 @@
 import {Client} from "@notionhq/client";
-import {fromPostToSummary, fromSummaryToPost, Post, SummaryPost} from "../../core/models";
+import {fromPostToSummary, fromSummaryToPost, Post, SummarizedPost} from "../../core/models";
 import {NotionToMarkdown} from "notion-to-md";
 import {PostRepository} from "../../core/repositories";
 import {defaultIfEmpty, forkJoin, map, mergeMap, Observable, of, tap} from "rxjs";
@@ -24,7 +24,31 @@ export class NotionPostRepository implements PostRepository{
         return new NotionPostRepository(apiKey, databaseId, cacheInMsSeconds);
     }
 
-    getAllPosts(): Observable<Post[]> {
+    summarizedPosts() {
+        return this.allPosts().pipe(
+            map(posts => posts.map(post => fromPostToSummary(post)))
+        );
+    }
+
+    postBy(slug: string) {
+        return this.allPosts().pipe(
+            map(posts => posts.find(post => post.slug === slug))
+        )
+    }
+
+    summarizedPostsByTag(tag: string) {
+        return this.allPosts().pipe(
+            map(posts => posts.filter(post => post.tags.includes(tag)))
+        )
+    }
+
+    summarizedPostsByUser(username: string) {
+        return this.allPosts().pipe(
+            map(posts => posts.filter(post => post.username === username))
+        )
+    }
+
+    allPosts(): Observable<Post[]> {
         if (this.requestTimestamp + this.cacheInMs <= Date.now()) {
             return this.requestPosts().pipe(
                 map(sps => sps.map(sp => this.summaryPostToPost(sp))),
@@ -35,19 +59,19 @@ export class NotionPostRepository implements PostRepository{
         return of(this.posts);
     }
 
-    private summaryPostToPost(summaryPost: SummaryPost): Observable<Post> {
+    private summaryPostToPost(summaryPost: SummarizedPost): Observable<Post> {
         return fromPromise(this.notionToMarkdown.pageToMarkdown(summaryPost.id)).pipe(
             map(blocks => this.notionToMarkdown.toMarkdownString(blocks)),
             map(body => fromSummaryToPost(summaryPost, body.parent)
         ));
     }
 
-    private requestPosts(): Observable<SummaryPost[]> {
+    private requestPosts(): Observable<SummarizedPost[]> {
         this.requestTimestamp = Date.now();
         return fromPromise(this.notionRequest()).pipe(
             map(r => r.results
                 .map(p => this.pageToPostTransformer(p))
-                .filter(p => p != null) as SummaryPost[]
+                .filter(p => p != null) as SummarizedPost[]
             )
         );
     }
@@ -64,7 +88,7 @@ export class NotionPostRepository implements PostRepository{
         });
     }
 
-    private pageToPostTransformer(page: any): SummaryPost | undefined {
+    private pageToPostTransformer(page: any): SummarizedPost | undefined {
         const summaryPost = {
             id: this.extractId(page),
             cover: this.extractCover(page),
@@ -81,7 +105,7 @@ export class NotionPostRepository implements PostRepository{
             console.warn(message);
             return undefined;
         }
-        return summaryPost as SummaryPost;
+        return summaryPost as SummarizedPost;
     }
     private extractId(page: any): string {
         return page.id;

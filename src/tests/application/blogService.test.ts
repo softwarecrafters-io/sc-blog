@@ -1,21 +1,17 @@
-import {of} from "rxjs";
-import {fromPostToSummary, Post, SummaryPost} from "../../core/models";
+import {fromPostToSummary, Post, SummarizedPost} from "../../core/models";
 import {BlogService} from "../../application/blogService";
+import {InMemoryPostRepository, PostRepository} from "../../core/repositories";
 
 describe('The Blog Service', () => {
     const mockPosts: Post[] = fakePosts();
-    const post1: Post = mockPosts[0];
-    const post2: Post = mockPosts[1];
-    const summarizedPost1: SummaryPost = fakeSummaryPosts()[0];
-    const summarizedPost2: SummaryPost = fakeSummaryPosts()[1];
-    const fakePostRepository = {
-        getAllPosts: ()=> of(mockPosts),
-    };
-    const  service = new BlogService(fakePostRepository);
+    const summarizedPost1: SummarizedPost = fakeSummaryPosts()[0];
+    const summarizedPost2: SummarizedPost = fakeSummaryPosts()[1];
+
+    const  service = new BlogService(new InMemoryPostRepository(mockPosts));
 
 
     it('should return all summarized posts', async () => {
-        const expectedResult: SummaryPost[] = [summarizedPost1, summarizedPost2];
+        const expectedResult: SummarizedPost[] = [summarizedPost1, summarizedPost2];
 
         const result = await service.summarizedPosts().toPromise();
 
@@ -31,13 +27,13 @@ describe('The Blog Service', () => {
     it('should return summarized posts by tag', async () => {
         const result = await service.summarizedPostsByTag('Tag2').toPromise();
 
-        expect(result).toEqual([post1]);
+        expect(result).toEqual([summarizedPost1]);
     });
 
     it('should return summarized posts by username', async () => {
         const result = await service.summarizedPostsByUser('Miguel Gomez').toPromise();
 
-        expect(result).toEqual([post2]);
+        expect(result).toEqual([summarizedPost2]);
     });
 
     it('should return unique tags', async () => {

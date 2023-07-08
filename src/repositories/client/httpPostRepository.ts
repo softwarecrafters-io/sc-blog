@@ -1,25 +1,29 @@
-import {SummaryPost} from "@/core/models";
+import { Post, SummarizedPost} from "../../core/models";
+import {PostRepository} from "../../core/repositories";
+import {Observable} from "rxjs";
+import {HttpRequester} from "@/repositories/client/httpRequester";
 
-export class HttpPostRepository {
-    baseUrl = "http://127.0.0.1:3005/api/posts";
-    private readonly cacheInSeconds = 1;
+export class HttpPostRepository implements PostRepository{
+    constructor(private requester: HttpRequester, private baseUri: string, private cacheInSeconds = 60) {}
 
-    getAllPosts(): Promise<SummaryPost[]>{
-        return this.request<SummaryPost[]>(this.baseUrl);
+    postBy(slug: string): Observable<Post | undefined> {
+        const url = `${this.baseUri}/posts/${slug}`;
+        return this.requester.get<Post>(url, this.cacheInSeconds);
     }
 
-    getPostBy(slug:string): Promise<SummaryPost>{
-        return this.request<SummaryPost>(`${this.baseUrl}/${slug}`);
+    summarizedPosts(): Observable<SummarizedPost[]> {
+        const url = `${this.baseUri}/posts`;
+        return this.requester.get<SummarizedPost[]>(url, this.cacheInSeconds)
     }
 
+    summarizedPostsByTag(tag: string): Observable<SummarizedPost[]> {
+        const url = `${this.baseUri}/posts?tag=${encodeURIComponent(tag)}`;
+        return this.requester.get<SummarizedPost[]>(url, this.cacheInSeconds)
+    }
 
-    private request<T>(url: string): Promise<T> {
-        const options = {
-            next: {
-                revalidate: this.cacheInSeconds
-            }
-        };
-
-        return fetch(url, options).then(response => response.json());
+    summarizedPostsByUser(username: string): Observable<SummarizedPost[]> {
+        const url = `${this.baseUri}/posts?username=${encodeURIComponent(username)}`;
+        return this.requester.get<SummarizedPost[]>(url, this.cacheInSeconds)
     }
 }
+

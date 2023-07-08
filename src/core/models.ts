@@ -1,4 +1,4 @@
-export type SummaryPost = {
+export type SummarizedPost = {
     id: string;
     slug: string;
     cover: string;
@@ -9,9 +9,9 @@ export type SummaryPost = {
     username:string
 }
 
-export type Post = SummaryPost & {markdownBody:string}
+export type Post = SummarizedPost & {markdownBody:string}
 
-export const fromSummaryToPost = (summaryPost: SummaryPost, markdownBody:string): Post => {
+export const fromSummaryToPost = (summaryPost: SummarizedPost, markdownBody:string): Post => {
     return {
         id: summaryPost.id,
         cover: summaryPost.cover,
@@ -25,7 +25,7 @@ export const fromSummaryToPost = (summaryPost: SummaryPost, markdownBody:string)
     }
 }
 
-export const fromPostToSummary = (post: Post): SummaryPost => {
+export const fromPostToSummary = (post: Post): SummarizedPost => {
     return {
         id: post.id,
         cover: post.cover,

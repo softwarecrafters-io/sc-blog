@@ -18,7 +18,7 @@ describe('NotionPostRepository Integration Test', () => {
     });
 
     it('getAllPosts return posts from notion', async () => {
-        const allPosts = (await notionPostRepository.getAllPosts().toPromise()) as Post[];
+        const allPosts = (await notionPostRepository.allPosts().toPromise()) as Post[];
         expect(allPosts.length).toBeGreaterThan(0);
     });
 });
@@ -45,23 +45,23 @@ describe('NotionPostRepository Cache Tests', () => {
     });
 
     it('should use cache for requests within cache interval', async () => {
-        let allPosts = await notionPostRepository.getAllPosts().toPromise() as Post[];
+        let allPosts = await notionPostRepository.allPosts().toPromise() as Post[];
         expect(allPosts.length).toBeGreaterThan(0);
 
         expect((notionPostRepository as any).notionRequest).toHaveBeenCalledTimes(1);
 
-        allPosts = await notionPostRepository.getAllPosts().toPromise() as Post[];
+        allPosts = await notionPostRepository.allPosts().toPromise() as Post[];
 
         expect((notionPostRepository as any).notionRequest).toHaveBeenCalledTimes(1);
     }, 15000);
 
     it('should not use cache for requests outside of cache interval', async () => {
-        let allPosts = (await notionPostRepository.getAllPosts().toPromise()) as Post[];
+        let allPosts = (await notionPostRepository.allPosts().toPromise()) as Post[];
         expect(allPosts.length).toBeGreaterThan(0);
 
         expect((notionPostRepository as any).notionRequest).toHaveBeenCalledTimes(1);
         await delay((notionPostRepository as any).cacheInMs + 1000);
-        allPosts = await notionPostRepository.getAllPosts().toPromise() as Post[];
+        allPosts = await notionPostRepository.allPosts().toPromise() as Post[];
 
         expect((notionPostRepository as any).notionRequest).toHaveBeenCalledTimes(2);
     }, 15000);

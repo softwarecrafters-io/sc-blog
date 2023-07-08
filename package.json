@@ -20,6 +20,7 @@
     "eslint-config-next": "13.4.7",
     "gray-matter": "^4.0.3",
     "next": "13.4.7",
+    "nock": "^13.3.1",
     "notion-to-md": "^3.1.0",
     "polished": "^4.2.2",
     "react": "18.2.0",
