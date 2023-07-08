@@ -1,0 +1,104 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 25px 40px 0 40px;
+    border-radius: 2px;
+    max-width: 700px;
+}
+
+@media (max-width: 800px){
+    .container{
+        width: 95%;
+    }
+}
+
+.content{
+    display: flex;
+    align-items: center;
+}
+
+.profile{
+    margin: 5px;
+}
+
+.profilePhone{
+    display: none;
+}
+
+@media (max-width: 1100px){
+    .picture {
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 560px){
+    .container{
+        margin-top: 0px;
+        padding: 15px 20px 0 20px;
+    }
+    .profile {
+        display: none;
+    }
+    .profilePhone{
+        display: flex;
+        align-self: center;
+        margin: 5px auto;
+        height: 150px;
+        width: 150px;
+    }
+}
+
+.text{
+    margin-top: 5px;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    margin: 15px 0;
+}
+
+.formInput{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    border: var(--border-color) 1px solid;
+    border-radius: 5px;
+}
+
+.email{
+    width: calc(100% - 200px);
+}
+
+.actionButton{
+    width: 200px;
+    margin: 2px;
+    border-radius: 5px 5px;
+}
+
+.privacyContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.privacyMessage{
+    font-size: 0.8rem;
+}
+
+.checkbox{
+    margin: -1px 10px 0px 0px;
+    height: 16px;
+}
+
+.errorMessage{
+    color: red;
+    font-size: 0.8rem;
+    margin: 0;
+}
+

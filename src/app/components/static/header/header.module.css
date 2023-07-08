@@ -1,0 +1,13 @@
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top:10px;
+}
+
+.logoSvg{
+    fill:var(--highlight-color);
+    fill-opacity:1;
+    stroke-width:0.0857143
+}

@@ -1,0 +1,31 @@
+.themeToggleContainer{
+    position: absolute;
+    top:1rem;
+    right: 1rem;
+}
+
+.sun {
+    height: 24px;
+    width: 24px;
+    color: var(--icon-color);
+    cursor: pointer;
+    margin-right: 7px;
+    transition: transform 0.3s ease;
+}
+
+.sun:hover{
+    color: var(--highlight-color);
+}
+
+.moon {
+    height: 24px;
+    width: 24px;
+    color: var(--icon-color);
+    cursor: pointer;
+    margin-right: 7px;
+    transition: transform 0.3s ease;
+}
+
+.moon:hover{
+    color: var(--highlight-color);
+}

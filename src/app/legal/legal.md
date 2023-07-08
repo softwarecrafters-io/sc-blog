@@ -1,0 +1,3 @@
+# Legal...
+
+Esto es un ejemplo de un archivo markdown que se puede editar en el editor de texto de su preferencia.
