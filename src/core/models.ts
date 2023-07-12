@@ -24,6 +24,9 @@ export function calculateReadingTime(post:Post): number {
 }
 
 export function formatDate(post: Post | SummarizedPost): string {
+    if(!post.date){
+        return ""
+    }
     const inputDate = new Date(post.date);
     const currentDate = new Date();
     const yesterday = new Date();
@@ -41,6 +44,16 @@ export function formatDate(post: Post | SummarizedPost): string {
     return `${day} ${months[monthIndex]} ${year}`;
 }
 
+export function ProfilePicture(post: Post): string {
+    if(post.username === 'Miguel A. Gómez'){
+        return 'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Assets/foto-circle-small.png'
+    }
+    return ""
+}
+
+export function canBeFollowed(post: Post): boolean {
+    return post.username !== 'Miguel A. Gómez'
+}
 
 export const fromSummaryToPost = (summaryPost: SummarizedPost, markdownBody:string): Post => {
     return {

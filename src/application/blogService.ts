@@ -1,6 +1,7 @@
 import {PostRepository} from "../core/repositories";
 import {fromPostToSummary} from "../core/models";
 import {map} from "rxjs";
+import {PaginationService} from "@/core/services";
 
 export class BlogService{
     constructor(private postRepository: PostRepository) {}

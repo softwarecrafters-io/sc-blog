@@ -1,5 +1,5 @@
 import {Params} from "next/dist/shared/lib/router/utils/route-matcher";
-import {usePosts} from "@/app/posts/usePosts";
+import {usePosts} from "@/app/components/client/lastPosts/usePosts";
 import {ClientFactory} from "@/factories/clientFactory";
 import {PostBlock} from "@/app/components/static/post/post";
 

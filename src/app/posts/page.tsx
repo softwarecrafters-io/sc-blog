@@ -4,7 +4,7 @@ import {Suspense} from "react";
 import {ClientFactory} from "@/factories/clientFactory";
 import {SummarizedPost} from "@/core/models";
 import {BlogService} from "@/application/blogService";
-import {usePosts} from "@/app/posts/usePosts";
+import {usePosts} from "@/app/components/client/lastPosts/usePosts";
 import {Routes} from "@/app/routes";
 
 

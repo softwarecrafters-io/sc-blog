@@ -15,7 +15,7 @@ export const SummarizedPostBlock = ({summarizedPost}:{summarizedPost:SummarizedP
                     <span className={styles.subtitle}>{summarizedPost.description}</span>
                     </Link>
                     <div className={styles.meta}>
-                        <span className={styles.tag}>JavaScript</span>
+                        <span className={styles.tag}>{summarizedPost.category}</span>
                         <span className={styles.time}>{summarizedPost.readingTime} min read · {formatDate(summarizedPost)}</span>
                     </div>
                 </div>
