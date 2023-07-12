@@ -1,0 +1,342 @@
+<p><a href="http://miguelgomez.io/xamarin/xamarin-forms-apps-nativas-introduccion/">En el anterior artículo</a> vimos una breve introducción al <strong>patrón de diseño MVVM</strong>. Tal como decía en ese post, está considerado una buena práctica el uso de dicho patrón a la hora de desarrollar un proyecto, tanto con Xamarin tradicional, como con Xamarin Forms. El objetivo de esta entrada es continuar profundizando en el desarrollo con Xamarin Forms aplicando MVVM.</p>
+<h2>Los orígenes de MVVM</h2>
+
+<p>En el año 2004, un grupo de desarrollo de Microsoft trabajaba en un proyecto denominado "Avalon", más conocido por su nombre definitivo WPF (Windows Presentation Foundation). El propósito de dicho proyecto era permitir el desarrollo de aplicaciones de escritorio más completas y con un aspecto visual mucho más logrado y complejo de lo que era posible con Windows Forms.</p>
+<p>
+    Al año siguiente <a href="https://www.linkedin.com/in/john-gossman-5664952">John Gossman</a> (miembro del equipo de desarrollo de "Avalon"), en un <a href="https://blogs.msdn.microsoft.com/johngossman/2005/10/08/introduction-to-modelviewviewmodel-pattern-for-building-wpf-apps/" target="_blank" rel="noopener">artículo de la MSDN</a>,  mostraba al público el patrón MVVM. En el artículo, MVVM se presenta como una variación del patrón MVC ajustado a "WPF" y a su sistema de enlace a datos, aunque realmente es una adaptación del patrón  "presentation model" creado por el mítico <a href="http://martinfowler.com/eaaDev/PresentationModel.html">Martin Fowler</a>.
+</p>
+
+<h2>Elementos del patrón MVVM</h2>
+
+<p>
+    La finalidad principal del patrón<strong> MVVM</strong> (Modelo Vista Vista-Modelo) es tratar de <strong>desacoplar</strong> lo máximo posible <strong>la interfaz de usuario</strong> de la lógica de la aplicación. Veamos a grandes rasgos sus partes principales:
+</p>
+
+<h3>El modelo</h3>
+<p>
+    Representa la capa de datos y/o la lógica de negocio, también denominado como el objeto del dominio. El modelo contiene la información, pero nunca las acciones o servicios que la manipulan. En ningún caso tiene dependencia alguna con la vista.
+</p>
+<h3>La vista</h3>
+<p>
+    La misión de la vista es representar la información a través de los elementos visuales que la componen. Las vistas en MVVM son activas, contienen comportamientos, eventos y enlaces a datos que, en cierta manera, necesitan tener conocimiento del modelo subyacente. En Xamarin Forms podemos crear nuestras interfaces a través de código C# o XAML.
+</p>
+<h3>Modelo de vista (ViewModel)</h3>
+<p>
+    El <strong>ViewModel</strong> (modelo de vista) es un actor <strong>intermediario</strong> entre el modelo y la vista, contiene toda la <strong>lógica de presentación</strong> y se comporta como una abstracción de la interfaz. La comunicación entre la vista y el viewmodel se realiza por medio los enlaces de datos (<strong>binders</strong>).
+</p>
+
+<img class="align-center" alt="mvvm" src="https://res.cloudinary.com/software-crafters/image/upload/v1544443712/posts/patron-mvvm-xamarin-forms/mvvm.png"/>
+
+<h2>MVVM en Xamarin Forms, interacción con el usuario</h2>
+<p>
+    Vamos a tomar como punto de partida el <a href="http://miguelgomez.io/xamarin/xamarin-forms-apps-nativas-introduccion/">ejemplo visto en la entrada anterior</a>, la idea es añadir a dicho ejemplo un elemento entry en el cual el usuario pueda introducir un texto y a su vez este se vaya reflejando en un elemento de tipo label.
+</p>
+
+<p>
+    Contábamos con una estructura MVVM lo más sencilla posible, teníamos un ViewModel  denominado MainViewModel con una propiedad llamada “MyMessage":
+</p>
+
+<pre class="language-csharp"><code>public class MainViewModel
+{
+     private string _myMessage;
+
+     public MainViewModel()
+     {
+          Message = "Hello MVVM!";
+     }
+
+
+     public string MyMessage
+     {
+          get { return _myMessage; }
+          set { _myMessage = value; }
+     }
+}
+</code></pre>
+
+<p>
+    Además, contabamos con una vista que utilizaba como contexto "MainViewModel" enlazando desde el atributo "text" de un label a la propiedad "MyMessage":
+</p>
+
+<pre class="language-csharp"><code>//XAML
+&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="simpleMVVM.Views.MainView"&gt;
+ &lt;Label Text="{Binding MyMessage}"
+        VerticalOptions="Center"
+        HorizontalOptions="Center" /&gt;
+&lt;/ContentPage&gt;
+
+//Code behind
+namespace simpleMVVM.Views
+{
+    public partial class MainView : ContentPage
+    {
+        public MainView()
+        {
+            InitializeComponent();
+            BindingContext = new MainViewModel();
+        }
+    }
+}
+</code></pre>
+
+<h3 class="SubTitle">Modos de enlace a datos</h3>
+<p>
+    Antes de continuar con el ejemplo veamos como funcionan los modos de enlace a datos. En Xamarin Forms el modo de enlace a datos se define con la palabra reservada "mode", la cual nos indica como se comporta el mismo. Contamos con los siguientes
+</p>
+
+<ul>
+    <li><strong>OneWay:</strong> es el valor por defecto, indica que el enlace se produce en un solo destino, el de lectura. Si el valor del elemento de la vista cambia, no enlazará con el ViewModel asociado.</li>
+    <li><strong>OneWayToSource: </strong>este valor enlaza en un único sentido la <em>View</em> al <em>ViewModel</em>.</li>
+    <li><strong>TwoWay: </strong>en este caso indica que el enlace es bidireccional. En un primer momento, la vista toma el valor de la propiedad del ViewModel y si este cambia en la vista es enviado de vuelta hacia el ViewModel.</li>
+</ul>
+
+<p>
+    Continuando con el ejemplo, vamos a añadir un elemento de tipo entry, que esté enlazado a la propiedad "myMessage" de forma bidireccional, un elemento label que está enlazado con el modo por defecto (oneWay) y un stacklayout que haces las veces de contenedor, debido a que las páginas no pueden contener más de un elemento.
+</p>
+
+<pre class="language-csharp"><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="simpleMVVM.Views.MainView"&gt;
+    &lt;StackLayout&gt;
+
+        &lt;Entry Text="{Binding MyMessage, Mode=TwoWay}"
+              VerticalOptions="Center"
+              HorizontalOptions="Center" /&gt;
+
+        &lt;Label Text="{Binding MyMessage}"
+              VerticalOptions="Center"
+              HorizontalOptions="Center" /&gt;
+
+    &lt;/StackLayout&gt;
+&lt;/ContentPage&gt;
+
+</code></pre>
+
+<p>
+    Al hacer debug sobre el código anterior, observarás que aparentemente todo está funcionando correctamente. Si  examinas el contenido de la propiedad My<code>Message</code> verás que el valor se ha actualizado correctamente, pero el texto del elemento label no se actualiza, esto es debido a que no se ha notificado a la vista que el valor de la propiedad ha cambiado. Es aquí donde entra en juego la interfaz <strong>INotifyPropertyChanged</strong>.
+</p>
+<h3>Notificación de cambios (<strong>INotifyPropertyChanged)</strong></h3>
+
+<p>
+    La interfaz <strong>INotifyPropertyChanged </strong>define un método llamado <strong>RaisePropertyChanged </strong>y un evento llamado <strong>PropertyChanged,</strong> que debemos implementar<strong>.</strong> Dicho evento será lanzado cuando se actualice el valor de la propiedad deseada del <em>ViewModel y notificará a</em> la View que evaluará de nuevo el valor de dicha propiedad. Para que esto funcione correctamente es necesario ejecutar el método <strong>RaisePropertyChanged</strong> en el setter de la propiedad.
+</p>
+
+<pre class="language-csharp"><code>public class MainViewModel
+{
+     private string _myMessage;
+
+     public MainViewModel()
+     {
+          Message = "Hello MVVM!";
+     }
+
+     public string MyMessage
+     {
+          get { return _myMessage; }
+          set
+          {
+               _myMessage = value;
+               RaisePropertyChanged("MyMessage");
+          }
+     }
+
+     private void RaisePropertyChanged(string propertyName)
+     {
+          var handle = PropertyChanged;
+          if (handle != null)
+               handle(this, new PropertyChangedEventArgs(propertyName));
+     }
+
+     public event PropertyChangedEventHandler PropertyChanged;
+}
+</code></pre>
+
+<p>
+    Dado que todos los ViewModels o la mayoría, van a hacer uso de la interfaz INotifyPropertyChanged, sería interesante crear un <strong>ViewModel base</strong>, del cual hereden demás. Por otro lado, vamos a hacer uso del atributo <code>CallerMemberName</code> con el cual aseguras que el nombre de la propiedad que llama al método RaisePropertyChanged es el correcto sin tener que indicarlo explícitamente.
+</p>
+
+<pre class="language-csharp"><code>public class ViewModelBase
+{
+     private void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+     {
+          var handle = PropertyChanged;
+          if (handle != null)
+               handle(this, new PropertyChangedEventArgs(propertyName));
+     }
+
+     public event PropertyChangedEventHandler PropertyChanged;
+}
+
+</code></pre>
+
+<p>Tras refactorizar el <code>MainViewModel</code> quedaría tal que así:</p>
+
+<pre class="language-csharp"><code>public class MainViewModel : ViewModelBase
+{
+     private string _myMessage;
+
+     public MainViewModel()
+     {
+     }
+
+     public string MyMessage
+     {
+          get { return _myMessage; }
+          set
+          {
+               _myMessage = value;
+               RaisePropertyChanged();
+          }
+     }
+}
+</code></pre>
+
+<p>
+    Este sería el resultado, tras ejecutar el proyecto:
+</p>
+
+<img class="align-center" alt="binding2way" src="https://res.cloudinary.com/software-crafters/image/upload/v1544443711/posts/patron-mvvm-xamarin-forms/binding-2way.gif"/>
+
+<h3>Comandos</h3>
+<p>
+    Nos faltaría por ver la interacción a priori más básica que puede realizar un usuario sobre una app, pulsar un botón y que ocurra algo. Para llevar a cabo esta funcionalidad se aplica el patrón <strong>Command</strong> (comando) cuyo objetivo no es otro que encapsular la invocación de un método de otro objeto.
+</p>
+
+<blockquote>"Debes depender de abstracciones, no de concreciones"</blockquote>
+
+<p>
+    Para aplicar este mecanismo en Xamarin.Forms junto con MVVM el ViewModel asociado a la vista debe exponer una propiedad que implemente la interfaz <code>ICommand</code>. El valor de dicha propiedad puede ser asignado a elementos visuales como botones, a través de la propiedad <strong>comando </strong>vía enlace a datos. Esto a su vez ejecutará el método <strong>Execute</strong> de dicha interfaz, la cual además define un método <strong>CanExecute</strong> que permite verificar si el comando puede ser ejecutado o no.
+</p>
+
+<p>
+    Al igual que ocurría con la implementación de la interfaz <span class="CodeInline">INotifyPropertyChanged, cuando utilizamos comandos se tiende a repetir más código del necesario, por esta razón se utilizan implementaciones reutilizables </span>como <strong>DelegateCommand</strong>.  Esta implementación es una clase que implementa la intefaz <strong>ICommnad</strong> que recibe dos parámetros en su constructor del tipo <span class="CodeInline">Action</span> y <span class="CodeInline">Func, el método a ejecutar (<strong>Execute</strong>) y el método que indica si se puede ejecutar o no(<strong>CanExecute</strong>)</span>, respectivamente.
+</p>
+
+<pre class="language-csharp"><code>public class DelegateCommand : ICommand
+{
+     private Action _execute;
+     private Func&lt;bool&gt; _canExecute;
+
+     public DelegateCommand(Action execute, Func&lt;bool&gt; canExecute = null)
+     {
+          _execute = execute;
+          _canExecute = canExecute;
+     }
+
+     public bool CanExecute(object parameter)
+     {
+          if (_canExecute == null)
+               return true;
+
+          return _canExecute();
+     }
+
+     public event EventHandler CanExecuteChanged;
+
+     public void Execute(object parameter)
+     {
+          if (_execute != null)
+               _execute();
+     }
+
+     public void RaiseCanExecuteChanged()
+     {
+          var handle = CanExecuteChanged;
+          if (handle != null)
+               handle(this, new EventArgs());
+     }
+}
+</code></pre>
+
+<p>
+    Si no estás muy familiarizado con C#, los tipos <code>Action</code> y <code>Func&lt;bool&gt;</code>, son delegados genéricos. <code>Action</code> simplemente es un delegado que no devuelve nada y en este caso tampoco recibe ningún parametro; y <code>Func&lt;bool&gt;</code>, tampoco tiene parámetros y en este caso devuelve un booleano. Por sino lo sabes, un delegado no es más que un tipo de dato que representa un puntero a un método.
+</p>
+
+<p>
+    Continuando con el ejemplo, vamos a añadir a la view del ejemplo anterior un botón, el cual al ser pulsado incrementará un contador que se mostrará en el elemento label de la misma. Para ello se le asigna el commando MyCommand a la propiedad command del botón, el cual se implimentará en el correspondiente ViewModel.
+</p>
+
+<pre class="language-csharp"><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="simpleMVVM.Views.MainView"&gt;
+    &lt;StackLayout&gt;
+
+        &lt;Button Text="Sent"
+              Command="{Binding MyCommand}"
+              VerticalOptions="Center"
+              HorizontalOptions="Center" /&gt;
+
+        &lt;Label Text="{Binding MyMessage}"
+              VerticalOptions="Center"
+              HorizontalOptions="Center" /&gt;
+
+    &lt;/StackLayout&gt;
+&lt;/ContentPage&gt;
+
+</code></pre>
+
+<p>
+    En el <code>MainViewModel</code> se crea una propiedad del tipo <code>ICommand</code> denominada MyCommand, cuya variable privada será del tipo <code>DelegateCommand</code> que hemos implementado con anterioridad. En el getter de esta propiedad, se instanciará DelegateCommand recibiendo como parámetro el método que contiene la lógica para incrementar el contador, quedando el <code>MainViewModel</code> tal que así:
+</p>
+
+
+<pre class="language-csharp"><code>public class MainViewModel : ViewModelBase
+{
+ 	 private int _counter;
+     private DelegateCommand _myCommand;
+
+     void counterCommandExecute()
+     {
+     	  _counter++;
+          RaisePropertyChanged("MyMessage");
+     }
+
+     public MainViewModel()
+     {
+     	_counter = 0;
+     }
+
+     public string MyMessage
+     {
+          get { return string.Format("{0} times", _counter); }
+     }
+
+     public ICommand MyCommand
+     {
+          get { return _myCommand = _myCommand ?? new DelegateCommand(counterCommandExecute); }
+     }
+}
+
+</code></pre>
+
+<p>
+    Tras ejecutar la app se puede observar que al pulsar el botón el contador se va incrementando correctamente:
+</p>
+
+<img alt="comandos" src="https://res.cloudinary.com/software-crafters/image/upload/v1544443711/posts/patron-mvvm-xamarin-forms/commands.gif"/>
+
+<h2>Resumen</h2>
+<p>
+    En este artículo se han expuesto los conceptos básicos para aplicar el patrón MVVM a la hora de realizar las interacciones básicas de los usuarios con Xamarin Forms, donde destacan las notificaciones y los comandos.
+</p>
+
+<p>
+    Continuaré profundizando en próximas entradas en el desarrollo con Xamarin, seguiré exponiendo conceptos fundamentales como la navegación entre páginas, contenedores de dependencias, persistencia de datos en el dispositivo, consumo de APIS, etc.
+</p>
+
+<p>
+    Si te ha gustado la entrada valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.
+</p>
+
+<p>
+    Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a>
+</p>
+
+<a class="align-center" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

@@ -37,13 +37,13 @@ export class NotionPostRepository implements PostRepository{
     }
 
     summarizedPostsByTag(tag: string) {
-        return this.allPosts().pipe(
+        return this.summarizedPosts().pipe(
             map(posts => posts.filter(post => post.tags.includes(tag)))
         )
     }
 
     summarizedPostsByUser(username: string) {
-        return this.allPosts().pipe(
+        return this.summarizedPosts().pipe(
             map(posts => posts.filter(post => post.username === username))
         )
     }
@@ -94,10 +94,12 @@ export class NotionPostRepository implements PostRepository{
             cover: this.extractCover(page),
             title: this.extractTitle(page),
             tags: this.extractTags(page),
+            category: this.extractCategory(page),
             description: this.extractDescription(page),
             date: this.extractDate(page),
             slug: this.extractSlug(page),
-            username: this.extractUserName(page)
+            username: this.extractUserName(page),
+            userPicture: this.extractUserPicture(page)
         };
         const missingFields = Object.keys(summaryPost).filter(key => !(summaryPost as any)[key]);
         if (missingFields.length > 0) {
@@ -136,7 +138,7 @@ export class NotionPostRepository implements PostRepository{
     }
 
     private extractDate(page: any): string {
-        return page.created_time;
+        return page.properties?.Updated?.date?.start;
     }
 
     private extractSlug(page: any): string {
@@ -145,5 +147,13 @@ export class NotionPostRepository implements PostRepository{
 
     private extractUserName(page: any) {
         return page.properties?.Username?.rich_text[0]?.plain_text;
+    }
+
+    private extractUserPicture(page: any) {
+        return page.properties?.UserPicture?.files[0]?.name;
+    }
+
+    private extractCategory(page: any) {
+        return page.properties?.Category?.select?.name;
     }
 }

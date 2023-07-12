@@ -1,0 +1,71 @@
+<p>
+    <strong>Test Driven Development (TDD)</strong>, o <strong>desarrollo dirigido por pruebas</strong> en castellano, es una
+    técnica de ingeniería de software para, valga la redundancia, diseñar software. Como
+    su propio nombre indica, esta técnica dirige el desarrollo de un producto a través de
+    ir escribiendo pruebas, generalmente unitarias.
+</p>
+
+<p>
+    El TDD fue desarrollada por <strong>Kent Beck</strong> a finales de la década de los 90 y forma
+    parte de la metodología <strong>extreme programming</strong>. Su autor y los seguidores del TDD
+    aseguran que con esta técnica se consigue un código más tolerante al cambio, robusto,
+    seguro, más barato de mantener e, incluso, una vez que te acostumbras a aplicarlo,
+    promete una mayor velocidad a la hora de desarrollar
+</p>
+
+
+<h2>Las tres leyes del TDD</h2>
+<p>
+    Robert C. Martin describe la esencia del TDD como un proceso que atiende a las
+    siguientes tres reglas:
+</p>
+
+<ul>
+    <li>No escribirás código de producción sin antes escribir un test que falle.</li>
+    <li>No escribirás más de un test unitario suficiente para fallar (y no compilar es fallar)</li>
+    <li>No escribirás más código del necesario para hacer pasar el test.</li>
+</ul>
+
+<p>
+    Estas tres leyes derivan en la repetición de lo que se conoce como el ciclo Red-GreenRefactor. Veamos en qué consiste:
+</p>
+
+
+<h2>El ciclo Red-Green-Refactor</h2>
+
+<p>El ciclo Red-Green-Refactor, también conocido como algoritmo del TDD, se basa en:</p>
+
+<ul>
+    <li>
+        <strong>Red:</strong> Escribir un test que falle, es decir, tenemos que realizar el test antes
+        de escribir la implementación. Normalmente se suelen utilizar test unitarios,
+        aunque en algunos contextos puede tener sentido hacer TDD con test de
+        integración
+    </li>
+    <li>
+        <strong>Green:</strong> Una vez creado el test que falla, implementaremos el mínimo código
+        necesario para que el test pase.
+    </li>
+    <li>
+        <strong>Refactor:</strong> Por último, tras conseguir que nuestro código pase el test, debemos
+        examinarlo para ver si hay alguna mejora que podamos realizar.
+    </li>
+    <li>
+        Una vez que hemos cerrado el ciclo, empezamos de nuevo con el siguiente
+        requisito.
+    </li>
+</ul>
+
+<p>
+    Esta forma de programar ofrece dos beneficios principales. El primero y más obvio
+    es que obtenemos un código con una buena cobertura de test, lo que es positivo hasta
+    cierto punto. Recuerda, nos pagan por escribir código que funciona, no por hacer test.
+</p>
+
+<p>
+    El segundo beneficio es que escribir primero las pruebas nos ayuda a diseñar la API
+    que va a tener nuestro componente, ya que nos obliga a pensar en cómo queremos
+    utilizarlo. Esto suele acabar derivando en componentes con responsabilidades bien
+    definidas y bajo acoplamiento.
+</p>
+

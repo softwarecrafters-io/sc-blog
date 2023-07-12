@@ -1,0 +1,159 @@
+<p>
+    Antes de empezar tengo que advertirte que <strong>ningún lenguaje</strong> de programación, por simple que sea, <strong>puede aprenderse</strong> en profundidad<strong> en tan poco tiempo</strong>, a no ser que se requiera de experiencia previa en otros lenguajes. Dominar <strong>la programación precisa de experiencia</strong>, lo cual a su vez requiere de un tiempo mínimo que permita <strong>afianzar las estructuras mentales</strong> necesarias para entender la secuencia lógica a seguir para <strong>desarrollar</strong> un programa o proyecto de software.
+</p>
+
+<p>
+    El objetivo de este artículo no es enseñar a programar, sino tratar de exponer en 10 minutos los elementos más importantes del lenguaje<strong> Python</strong>, sería algo así como una mezcla entre un <strong>tutorial</strong> y una <strong>cheatsheet</strong>. Haré uso de una <strong>REPL</strong> para exponer los <strong>ejemplos</strong>, con lo que<strong> podrás modificar</strong> y jugar con ellos sin tener que salir de la entrada. Es totalmente recomendable seguir el artículo en un ordenador o tablet, ya que la REPL por limitaciones de espacio no es tan cómoda de utilizar en un móvil.
+</p>
+
+<h3>Características de Python</h3>
+
+<p>
+    <strong>Python</strong> un lenguaje <strong>multiparadigma</strong>, que soporta <strong>orientación a objetos</strong>, <strong>programación imperativa</strong> y, en menor medida, <strong>programación funcional</strong>. Es <strong>interpretado</strong>, de tipado <strong>dinámico</strong> y <strong>multiplataforma</strong>.
+</p>
+
+<h3>Lo básico de Python</h3>
+
+<p>
+    La <strong>sintaxis</strong> de Python es extremadamente "<strong>limpia</strong>", no se requiere de ningún caracter que indique el final de una secuencia y los bloques se definen a través de la <strong>indentación</strong> <strong>del</strong> <strong>código</strong>. Los <strong>comentarios</strong> de una sola línea se definen con el carácter almohadilla <strong>(#)</strong> y las cadenas de multiples líneas<strong> (""")</strong> se suelen emplear para escribir comentarios multilínea.
+</p>
+
+<p>
+    Los <strong>operadores aritméticos</strong> <strong>+</strong>, <strong>-</strong> y <strong>/</strong> significan en Python lo mismo que en matemáticas. El asterisco <strong>(*)</strong> es el símbolo para la multiplicación, el <strong>%</strong> se usa para obtener el <strong>módulo</strong>, <strong>//</strong> para <strong>división entera</strong> y<strong> **</strong> es el símbolo para las <strong>potencias</strong>. También disponemos de los operadores <strong>incrementar</strong> <strong>(+=)</strong> y <strong>decrementar</strong> <strong>(-=)</strong>.
+</p>
+
+<p>
+    Existen tres <strong>operadores lógicos</strong>: <strong>and</strong>, <strong>or</strong>, y <strong>not</strong>. La semántica (significado) de estos operadores es similar a sus significados en inglés (en español “y”, “o” y “no”).
+</p>
+
+<p>
+    La <strong>asignación</strong> de valores, como en la mayoría de lenguajes, se realiza con el símbolo "igual" <strong>(=)</strong>. La doble igualdad <strong>(==)</strong> se usa para comprobar que <strong>dos valores son iguales</strong>, además disponemos de estos <strong>operadores de comparación</strong>: distinto que<strong> (!=)</strong>, mayor que <strong>(&gt;)</strong>, menor que<strong> (&lt;)</strong>, mayor o igual <strong>(&gt;=)</strong> y menor o igual<strong> (&lt;=)</strong>.
+</p>
+
+<iframe src="https://trinket.io/embed/python/ddca196861?start=result" width="100%" height="350" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen="allowfullscreen"></iframe>
+
+<h3>Tipos de datos</h3>
+
+<p>
+    Los tipos de datos básicos en Python son los <strong>numéricos</strong> formados por <strong>enteros</strong>, los <strong>reales</strong> y los <strong>complejos</strong>; las <strong>cadenas de texto</strong> y los <strong>booleanos</strong>. La función <strong>type</strong> nos devuelve el tipo:
+</p>
+
+<iframe src="https://trinket.io/embed/python/726196e8a5?start=result" width="100%" height="350" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen="allowfullscreen"></iframe>
+
+<h3>Estructuras de control de flujo</h3>
+<p>
+    Las <strong>sentencias de control de flujo</strong>, son bloques de código en los que se agrupan instrucciones de manera controlada. Por un lado tenemos las<strong> estruturas condicionales</strong> (<strong>if, if .. else, if ..elif ..else</strong>) y por otro las <strong>estructuras iterativas</strong> (<strong>for, while</strong>).
+</p>
+
+<iframe src="https://trinket.io/embed/python/278ec880ae?start=result" width="100%" height="350" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen="allowfullscreen"></iframe>
+<h3>Funciones</h3>
+<p>
+    Una <strong>función</strong> no es más que un bloque de código reutilizable encargado de realizar una determinada tarea. Para definir una función en Python debemos utilizar la palabra reservada "<strong>def</strong>" seguido del nombre de la función y los parámetros los indicamos entre parentesis. Veamos varios ejemplos:
+</p>
+
+<iframe src="https://trinket.io/embed/python/7546e43933?start=result" width="100%" height="350" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen="allowfullscreen"></iframe>
+<h3>Funciones, parametros *args y **kwargs</h3>
+<p>
+    En el ejemplo anterior hemos visto varias formas de definir y ejecutar a las funciones en Python, ya sea con parámetros por con valores por defecto o keywords como argumentos. Nos faltaría ver como llamarlas con <strong>colecciones como argumentos</strong>, una forma muy común de pasar valores a las funciones en Python, y que en muchas ocasiones cuesta entender. Para ello debemos tener claro que las <strong>tupla</strong> como colección de argumentos se define con <strong>*args</strong> y el <strong>diccionario</strong> con <strong>**kwargs. Veamos un ejemplo en la REPL:</strong>
+</p>
+
+<iframe src="https://trinket.io/embed/python/f5b589414c?start=result" width="100%" height="350" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen="allowfullscreen"></iframe>
+<h3>Manipulación de cadenas</h3>
+<p>
+    Las cadenas en Python pueden definirse entre comillas simples o dobles. En la REPL se muestra un ejemplo de la mayoría de las operaciones que podemos realizar ellas:
+</p>
+
+<iframe src="https://trinket.io/embed/python/24b9d40038?start=result" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen="allowfullscreen"></iframe>
+<h3>Estructuras de datos (colecciones)</h3>
+<p>
+    Las <strong>colecciones</strong> son un tipo de datos diseñados específicamente para <strong>agrupar objetos</strong> y llevar a cabo tareas con ellos.  Las estructuras de datos más utilizadas en Python son las <strong>listas</strong>, <strong>tuplas</strong> (listas inmutables) y los <strong>diccionarios</strong>, aunque personalmente también suelo usar mucho los <strong>conjuntos</strong> (sets).
+</p>
+
+<p>
+    No todas las estructuras de datos exponen exactamente las mismas operaciones, por ejemplo una lista no deja buscar por clave (si bien sí por índice) y un conjunto no deja buscar ni por una cosa ni por otra.
+</p>
+
+<p>
+    El siguiente playground está dividido en tres ficheros, main.py desde el que se importa listas.py y diccionarios.py, para ver los resultados de uno u otro, elimina o comenta su respectivo import.
+</p>
+
+<iframe src="https://trinket.io/embed/python/dcedc5d48c?start=result" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen="allowfullscreen"></iframe>
+
+<h3>Clases y objetos</h3>
+<p>
+    En programación orientada a objetos (POO), <strong>un objeto</strong> es una entidad que <strong>agrupa un estado y una funcionalidad</strong> relacionada. El estado se define a través de las variables denominadas atributos y la funcionalidad a través de funciones denominadas en POO cómo métodos. Por otro lado, <strong>una clase,</strong> no es más que una plantilla genérica a partir de la cuál instanciamos los objetos. Dicho de otra manera, una clase <strong>es una abstracción en la que se define el comportamiento</strong> que va a tener el objeto.
+</p>
+
+<p>
+    En Python, las <strong>clases</strong> se declaran mediante la palabra reservada <strong>class</strong> seguida del nombre de la clase, la clase base de la cual hereda, si no extiende de ninguna debe hacerlo de <strong>object</strong>; a continuación dos puntos (:), luego el indentado y el cuerpo de la clase.
+</p>
+
+<p>
+    El método <strong>constructor</strong> de la clase se define con la palabra clave <strong>__init__</strong> y al igual que el resto de métodos definidos en la clase recibe como primer parámetro <strong>self</strong>, el interprete de python requiere de este argumento para referenciarlos como métodos de instancia.
+</p>
+
+<iframe src="https://trinket.io/embed/python/4885d0bfb7?start=result" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen="allowfullscreen"></iframe>
+
+<h3>Excepciones</h3>
+<p>
+    No soy muy fan de usar excepciones, pero es cierto que con Python hay momentos en los que su uso no se puede obviar. Las <strong>excepciones</strong> en Python se manejan esencialmente con <strong>try-except</strong>:
+</p>
+<iframe src="https://trinket.io/embed/python/c8a23c5b22?start=result" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen="allowfullscreen"></iframe>
+<h3>Depurando con PDB</h3>
+
+<p>
+    El <strong>depurador por defecto</strong> de python es <strong><a href="https://docs.python.org/3/library/pdb.html" target="_blank" rel="nofollow">pdb</a></strong> , nos permite inspeccionar nuestro código de forma interactiva. La forma más simple de utilizarlo es ejecutando <code>pdb.set_trace()</code>:
+</p>
+
+<pre class="language-python"><code>import pdb
+a = "aaa"
+pdb.set_trace()
+b = "bbb"
+c = "ccc"
+final = a + b + c
+print final
+</code></pre>
+
+<p>
+    Los comandos básicos del depurador son: "<strong>n</strong>"(next) para ejecutar la <strong>siguiente sentencia, </strong>para <strong>mostrar el valor</strong> de las variables "<strong>p</strong>"(print), si queremos ir <strong>paso a paso</strong> dentro de las subrutinas utilizariamos "<strong>s</strong>"(step), y por último <strong>"q"</strong>(quit) para <strong>salir</strong>.
+</p>
+
+<h3>Guia de estilo - PEP8</h3>
+<p>
+    En Python existen las denominadas PEP's (Python Enhancement Proposals), en concreto la PEP 8 hace referencia a las convenciones de estilo de programación en Python.
+</p>
+<p>
+    Entre las convenciones principales, destacan:
+</p>
+
+<ul>
+    <li>Usar 4 espacios para indentar.</li>
+    <li>Tamaños de línea con un máximo de 79 caracteres.</li>
+    <li>Las funciones y las clases se deben separar con dos lineas en blanco, mientras que los métodos de clase solo con uno.</li>
+    <li>Los import deben de estar separados uno en cada línea. Se permite: <code>from urllib2 import urlopen, Request</code></li>
+    <li>Las sentencias import deben de estar siempre en la parte superior del archivo agrupadas de la siguiente manera:
+        <ul>
+            <li>Librería estándar</li>
+            <li>Librerías de terceros</li>
+            <li>import's de la aplicación local</li>
+        </ul>
+    </li>
+    <li>Usar espacios alrededor de los operadores aritméticos, a excepción de cuando forman parte de los argumentos de una función.</li>
+    <li>No se deben de realizar comentarios obvios</li>
+    <li>No se deben comparar booleanos mediante <code> ==</code></li>
+</ul>
+
+<h3>Resumen</h3>
+<p>
+    Este tutorial no pretende ser una guía exhaustiva sobre Python, aunque he condensado bastante información en poco más de 1000 palabras, me he dejado muchísimos elementos en el tintero, cómo expresiones regulares, ficheros, testing, POO, elementos de programación funcional.
+</p>
+
+<p>
+    Espero haber facilitado tu transición a Python, y si ya lo conocías espero que el artículo te sirva como referencia. Si te ha gustado la entrada valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.
+</p>
+
+<p>
+    Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a>
+</p>
+
+<a class="aligncenter" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

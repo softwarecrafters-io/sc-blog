@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {isValidEmail} from "@/core/models";
 
 type NewsletterState = {
     email: string,
@@ -6,10 +7,6 @@ type NewsletterState = {
     isSuccess: boolean
 }
 
-function isValidEmail(email: string) {
-    const regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regExp.test(email);
-}
 
 export const useNewsletter = () => {
     const [state, setState] = useState<NewsletterState>({email: "", error: "", isSuccess: false})

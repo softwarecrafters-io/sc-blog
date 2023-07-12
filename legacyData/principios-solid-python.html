@@ -1,0 +1,252 @@
+<p>El objetivo de este artículo es que el lector aprenda aplicar los principios SOLID con el lenguaje Python. SOLID es un acrónimo creado por <a class="new" title="Michael Feathers (page does not exist)" href="https://michaelfeathers.silvrback.com/" target="_blank">Michael Feathers</a> para los principios publicados por <a href="https://sites.google.com/site/unclebobconsultingllc/">Robert C. Martin</a>, en su libro <a href="http://www.goodreads.com/book/show/84985.Agile_Software_Development_Principles_Patterns_and_Practices" target="_blank">Agile Software Development: Principles, Patterns, and Practices</a>.</p>
+<p>Se trata de cinco principios de diseño orientado a objetos que nos ayudarán a crear mejor código, más estructurado, con clases de responsabilidad más definida y más desacopladas entre sí:</p>
+
+<ul>
+    <li><strong>S</strong>ingle Responsibility: Responsabilidad única.</li>
+    <li><strong>O</strong>pen/Closed: Abierto/Cerrado.</li>
+    <li><strong>L</strong>iskov substitution: Sustitución de Liskov.</li>
+    <li><strong>I</strong>nterface segregation: Segregación de interfaz.</li>
+    <li><strong>D</strong>ependency Inversion: Inversión de dependencia.</li>
+</ul>
+<p>Es importante resaltar que se trata de principios, no de reglas. Una regla es de obligatorio cumplimiento, en cambio, los principios son recomendaciones que pueden ayudar a hacer las cosas mejor. Además, siempre puedes encontrar algún contexto en el que te los puedas saltar, lo importante es hacerlo de forma consciente.</p>
+
+<h2>Single Responsibility Principle (SRP)</h2>
+<blockquote>[bctt tweet="Nunca debería haber más de un motivo por el cual cambiar una clase"]</blockquote>
+
+<p>
+    El primero de los cinco principios, single responsibility principle o en castellano, principio de responsabilidad única, viene a decir que una clase debe tener tan solo una única responsabilidad. A finales de los 80, <a href="https://es.wikipedia.org/wiki/Kent_Beck" target="_blank">Kent Beck</a> y <a href="https://es.wikipedia.org/wiki/Ward_Cunningham" target="_blank">Ward Cunningham</a>, ya aplicaban este principio mediante tarjetas CRC (Class, Responsibility, Collaboration) con las que detectaban responsabilidades y colaboraciones entre clases.
+</p>
+
+<p>
+    El principio responsabilidad única no se basa en diseñar clases con un sólo método, sino éstas tan sólo deberían tener una fuente de cambio. En otras palabras, aquellas clases que se vieran obligadas a cambiar ante una modificación en la base de datos y a la vez ante un cambio en la lógica de negocio, tendría más de un motivo para cambiar, es decir, más de una responsabilidad.
+</p>
+
+<p>
+    Este principio se suele incumplir  cuando en una misma clase están involucradas varias capas de la arquitectura. Veamos un ejemplo:
+</p>
+
+<pre class="language-python"><code>class Vehicle(object):
+    def __init__(self, name):
+        self._name = name
+	self._persistence = MySQLdb.connect()
+        self._engine = Engine()
+
+    def getName():
+        return self._name()
+
+    def getEngineRPM():
+        return self._engine.getRPM()
+
+    def getMaxSpeed():
+        return self._speed
+
+    def print():
+    return print ‘Vehicle: {}, Max Speed: {}, RMP: {}’.format(self._name, self._speed, self._engine.getRPM())</code></pre>
+
+<p>
+    A primera vista se puede detectar que estamos mezclando tres capas muy diferenciadas: la lógica de negocio,  la lógica de presentación y la lógica de persistencia. Además estamos instanciando la clase <code>engine</code> dentro de <code>vehicle</code>, así que también nos estamos saltando el principio de inversión de dependencias.
+</p>
+
+<p>
+    Una solución para el problema de las múltiples responsabilidades de la clase anterior, podría pasar por abstraer dos clases, como por ejemplo <code>VehicleRepository</code> para manejar la persistencia y <code>VehiclePrinter</code> para gestionar la capa de presentación.
+</p>
+
+<pre class="language-python"><code>class Vehicle(object):
+    def __init__(self, name, engine):
+        self._name = name
+        self._engine = engine
+
+    def getName(self):
+        return self._name()
+
+    def getEngineRPM(self):
+        return self._engine.getRPM()
+
+    def getMaxSpeed(self):
+        return self._speed
+
+
+class VehicleRepository(object):
+    def __init__(self, vehicle, db)
+        self._persistence = db
+        self._vehicle = vehicle
+
+
+class VehiclePrinter(object):
+    def __init__(self, vehicle, db)
+        self._persistence = db
+        self._vehicle = vehicle
+
+    def print(self):
+    return print ‘Vehicle: {}, Max Speed: {}, RMP: {}’.format(self._vehicle.getName(), self._vehicle.getMaxSpeed(), self._vehicle.getRPM())</code></pre>
+
+<p>
+    En este caso se veía muy claro lo que teníamos que hacer para aplicar correctamente el SRP, pero muchas veces los detalles serán más sutiles y probablemente no los detectarás a la primera. No te obseciones simplemente aplica el sentido común.
+</p>
+
+<h2>Open-Closed Principle (OCP)</h2>
+<blockquote>"Todas las entidades software deberían estar abiertas a extensión, pero cerradas a modificación"</blockquote>
+<p>El segundo de los principios,  Open-Closed (Abierto/Cerrado), cuyo nombre se lo debemos a <a href="https://bertrandmeyer.com/bio/" target="_blank">Bertrand Meyer</a>. Básicamente nos recomienda que cuando se pretende introducir un nuevo comportamiento en un sistema existente, en lugar de modificar las clases antiguas, se deben crear nuevas mediante herencia y redefinición de los métodos de la clase padre (polimorfismo), o inyectando dependencias que implementen el mismo contrato.</p>
+
+<p>Este principio promete mejoras en la estabilidad de tu aplicación al evitar que los objetos existentes cambien con frecuencia, lo que también hace que las cadenas de dependencia sean un poco menos frágiles ya que habría menos partes móviles de las que preocuparse. Este principio aplica bien a la hora trabajar con un framework o con código legacy, evidentemente si el código lo has hecho tu o tu equipo, refactoriza.
+</p>
+
+<p>
+    Un buen ejemplo en el que se aplica este principio es el que veíamos en <a href="https://miguelgomez.io/django/extender-user-django/#AbstractUser" target="_blank"> este artículo </a> a la hora de <a href="https://miguelgomez.io/django/extender-user-django/#AbstractUser" target="_blank"> extender el user de django </a> desde la clase <code>AbstractUser</code>
+</p>
+
+<pre class="language-python"><code>from django.db import models
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    bio = models.TextField(max_length=500, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+</code></pre>
+
+<h2 id="liskov_substitution_principle_lsp">Liskov Substitution Principle (LSP)</h2>
+<blockquote>"Las funciones que utilicen punteros o referencias a clases base deben ser capaces de usar objetos de clases derivadas sin saberlo." username="unclebobmartin"</blockquote>
+
+<p>
+    El principio de Sustitución de Liskov, obtiene su nombre de <a href="https://es.wikipedia.org/wiki/Barbara_Liskov" target="_blank">Barbara Liskov</a>. Este principio está relacionado con el anterior en lo que a la extensibilidad de las clases se refiere, y viene a decir que dada una instancia de una clase B, siendo esta un subtipo de una clase A, debemos poder sustituirla por una instancia de la clase A sin mayor problema.
+</p>
+
+<p>
+    En los lenguajes orientados a objetos de tipado estático, este principio describe principalmente una regla sobre una relación entre una subclase y una superclase. Cuando hablamos de lenguajes de tipado dinámico como Python, nos interesa qué mensajes responde ese objeto en lugar de a qué clase pertenece.
+</p>
+
+<p>
+    Un ejemplo que ilustra bastante bien la importancia de este principio es el de tratar de modelar un cuadrado como la concreción de un rectángulo:
+</p>
+
+<pre class="language-python"><code>class Rectangle(object):
+
+    def getWidth(self)
+        return _width
+
+    def setWidth(self, width)
+        self._width = width
+
+    def getHeight(self)
+        return _height
+
+    def setHeight(self, height)
+        self._height = height
+
+    def calculateArea(self)
+        return self._width * self._height;
+
+class Square(Rectangle):
+    def setWidth(self, width)
+        self._width = width
+        self._height = height
+
+    def setWidth(self, height)
+        self._height = height
+        self._width = width
+
+class TestRectangle(unittest.TestCase):
+
+    def setUp(self):
+        pass
+
+    def test_calculateArea(self):
+        r = Rectangle()
+        r.setWidth(5);
+        r.setHeight(4);
+        self.assertEqual(r.calculateArea(), 20)
+</code></pre>
+
+<p>
+    Si tratamos de sustituir en el test el rectángulo por un cuadrado, el test no se cumple, ya que el resultado sería 16 en lugar de 20. Estaríamos por tanto violando el principio de sustitución de Liskov.
+</p>
+
+<p>
+    La regla principal para no violar este principio es básicamente tratar de heredar lo menos posible o  no usar los mixins a menos que se esté bastante seguro de que el comportamiento que está implementando no interferirá con las operaciones internas de sus ancestros.
+</p>
+
+<h2>Interface Segregation Principle (ISP)</h2>
+<blockquote>"Los clientes no deberían estar obligados a depender de interfaces que no utilicen."</blockquote>
+<p>
+    El principio de segregación de la interfaz nos indica que ninguna clase debería depender de métodos que no usa. Cuando creemos interfaces (clases en lenguajes interpretados como Python) que definan comportamientos, es importante estar seguros de que todas los objetos que implementen esas interfaces/clases se vayan a necesitar, de lo contrario, es mejor tener varias interfaces/clases pequeñas.
+</p>
+
+<p>
+    Una forma de no violar este principio en Python es aplicando <a href="https://en.wikipedia.org/wiki/Duck_typing#In_Python" target="_blank"><strong>duck typing</strong></a>. Este concepto viene decir que los métodos y propiedades de un objeto determinan su validez semántica, en vez de su jerarquía de clases o la implementación de una interfaz específica.
+</p>
+
+<h2>Dependency Inversión Principle (DIP)</h2>
+<blockquote>"Los módulos de alto nivel no deben depender de módulos de bajo nivel. Ambos deben depender de abstracciones. "</blockquote>
+<blockquote>"Las abstracciones no deben depender de concreciones. Los detalles deben depender de abstracciones."</blockquote>
+
+<p>
+    Quinto y último de los principios, la inversión de dependencia, cuyo objetivo principal es desacoplar nuestro código de sus dependencias directas.  Este principio viene a decir que las clases de las capas superiores no deberían depender de las clases de las capas inferiores, sino que ambas deberían depender de abstracciones. A su vez, dichas abstracciones no deberían depender de los detalles, sino que son los detalles los que deberían depender de las mismas.
+</p>
+
+<p>
+    La inversión de dependencias da origen a la inyección de dependencias. Este concepto se basa en hacer que una clase A inyecte objetos en una clase B en lugar de dejar que sea la propia clase B la que se encargue de instanciar el objeto. Veamoslo con el ejemplo del vehiculo:
+</p>
+
+<pre class="language-python"><code>class Engine(object):
+    def __init__(self):
+        pass
+
+    def accelerate(self):
+        pass
+
+    def getRPM(self):
+        currentRPM = 0
+        #...
+        return currentRPM
+
+class Vehicle(object):
+    def __init__(self):
+        self._engine = Engine()
+
+    def getEngineRPM(self)
+        return self._engine.getRPM();
+</code></pre>
+
+<p>
+    El código anterior ilustra la manera “habitual” de definir la colaboración entre clases. Como podemos observar, existe una clase <code>Vehicle</code> que contiene un objeto de la clase <code>Engine</code>. La clase <code>Vehicle</code> obtiene las revoluciones del motor invocando el método <code>getEngineRPM</code> del objeto Motor y devolviendo su resultado. Este caso se corresponde con una dependencia, el módulo superior <code>Vehicle</code> depende del módulo inferior <code>Engine</code>, lo cual genera un código tremendamente acoplado y dificil de testear.
+</p>
+
+<p>
+    Para desacoplar la dependencia <code>Engine</code> de <code>Vehicle</code> debemos hacer que la clase <code>Vehicle</code> deje de responsabilizarse de instanciar el objeto <code>Engine</code>, inyectándolo como parámetro al constructor, evitando así que la responsabilidad recaiga sobre la propia clase. De este modo desacoplamos ambos objetos, quedando la clase tal que así:
+</p>
+
+<pre class="lang-python" data-start-line="1" data-visibility="visible" data-highlight="" data-caption=""><code>class Vehicle(object):
+    def __init__(self, engine):
+        self._engine = engine
+
+    def getEngineRPM(self)
+    return self._engine.getRPM();</code></pre>
+
+<p>
+    Ahora la responsabilidad de instanciar la clase <code>engine</code> ya no corresponde a la clase <code>vehicule</code>. Además, en Python, el parámetro <code>engine</code> no tiene porqué ser una instancia de la clase <code>engine</code>, podría ser cualquier objeto siempre y cuando tuviera un método <code>getRPM()</code>. Esta es una ventaja inherente a los lenguajes dinámicos, ya que nos permiten aprovechar el duck typing y evitar así tener que definir el tipo de la dependencia.
+</p>
+
+<p>
+    Hasta ahora no he comentado nada de sobre los contenedores de inversión de control, aunque no es necesario para hacer inyección de dependencias, puede ser interesante su uso, sobre todo en los lenguajes de tipado estático. En los lenguajes dinámicos los contenedores de inversión de control pierden su interés ya que en los constructores de las clases no está especificado el tipo de las dependencias y si quieren usar estarás obligado a definir de forma un tanto forzada las dependencias entre los objetos para que el contenedor pueda componer unos con otros.
+</p>
+
+<p>
+    Como hemos podido ver, la inyección de dependencias por si misma nos ayuda a crear clases con responsabilidad más definida, más estructuradas y desacopladas entre sí.
+</p>
+
+<h3>Resumen</h3>
+<p>
+    Los prinpicios SOLID, pese al abuso que se hace últimamente de ellos, son una herramienta que nos ayudan a comprender mejor el diseño de software orientado a objetos. Si los aplicas con sentido común, sin dogmatizarlos, estarás en mejores condiciones para encontrar optimas soluciones a los problemas software.
+</p>
+
+<p>
+    Si te ha gustado el artículo, valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.
+</p>
+
+<p>
+    Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a>
+</p>
+
+<a class="aligncenter" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

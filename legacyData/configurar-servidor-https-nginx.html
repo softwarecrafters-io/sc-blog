@@ -1,0 +1,74 @@
+<p>Dudaba sobre si hacer esta entrada o no, ya que hay mucha documentación al respecto en la red (aunque algo desordenada a mi entender), pero la principal motivación del blog es que las entradas me sirvan a mi mismo, así que prefiero publicarlo a que quede perdido en una nota de Evernote.</p>
+
+<p>Bueno vamos a ello, disponer de&nbsp;una conexión https en nuestro sitio web nos brinda&nbsp;varias&nbsp;ventajas, por un lado nos proporciona un plus de seguridad&nbsp;al encriptar &nbsp;la conexión del sitio, y por otro ayuda a mejorar el SEO del mismo, ya que Google premia los sitios que disponen de este tipo de conexión.</p>
+
+<p>Esta entrada no pretende ser&nbsp;una guía muy exhaustiva simplemente expondré los pasos necesarios para crear y configurar un certificado SSL en&nbsp;un&nbsp;servidor Nginx.</p>
+
+<h3>Paso 1: Generar la clave privada (.key)</h3>
+
+<p>Nos conectamos a nuestro servidor y generamos la clave privada con openssl en el directorio /etc/ssl. Nos solicitará que creemos una contraseña.</p>
+
+<pre class="language-batch"><code>cd /etc/ssl/
+sudo openssl genrsa -des3 -out tudominio.key 2048
+
+</code></pre>
+
+<h3>Paso 2: Crear la solicitud de certificado (.csr)</h3>
+<p>Para generar una solicitud de firma de certificado lo que se denomina como Certificate Signing Request (CSR), ejecutamos lo siguiente:</p>
+
+
+<pre class="language-batch"><code>sudo openssl req -new -newkey rsa:2048 -nodes -keyout tudominio.key -out tudominio.csr
+</code></pre>
+
+<p>Introducimos la información solicitada:<br> <strong>Country Name (AU)</strong>: El formato de dos letras de tu país<br> <strong>State or Province (S):</strong> Nombre del estado o provincia en donde se encuentra tu organización. No es obligatorio.<br> <strong>Locality or City (L):</strong> Nombre de la ciudad en la que está registrada o se encuentra tu organización. No es obligatorio.<br> <strong>Organization (O):</strong> El nombre legalmente registrado para tu negocio. Si te inscribes como un individuo, ingresa el nombre del certificado del solicitante.<br> <strong>Organization Unit:</strong> No es obligatorio, se refiera al nombre DBA (Doing Business As).<br> <strong>Common Name (CN):</strong> El nombre de dominio completo o dirección URL que quieras asegurar. Si estás solicitando un certificado Wildcard, agrega un asterisco (*) a la izquierda del nombre común, por ejemplo, *.coolexample.com.<br> Una vez completado el formulario nos solicitará otro password, este es opcional, si lo creamos cada vez que reiniciemos Nginx deberemos introducirlo.</p>
+
+<h3>Paso 3: Generar los certificados intermedios (.crt)</h3>
+
+<p>Copia el contenido de todo el fichero CSR generado y pégalo/subelo a la autoridad certificadora. En mi caso lo hice con GoDaddy, ya que tenían los certificados a 5$. En este paso se generán dos certificados intermedios.</p>
+
+<h3>Paso 4: Contatenar los certificados intermedios (.crt)</h3>
+
+<p>A continuación debemos concatenar los certificados intermedios generados en el paso anterior. (da igual el orden).</p>
+
+<pre class="language-batch"><code>cat certificado1.crt certificado2.crt >> tudominio.crt
+</code></pre>
+
+<h3>Paso 5: Configurar Nginx</h3>
+
+<p>Subimos el certficado a nuestro servidor al directorio <code class="prettyprint">/etc/ssl/</code> y editamos nuestro fichero de configuración de Nginx tal que así:</p>
+
+<pre class="language-batch"><code>server {
+listen 443;
+server_name tudominio.com;
+
+root /var/www/;
+index index.html index.htm;
+
+ssl on;
+ssl_certificate /etc/ssl/tudominio.crt;
+ssl_certificate_key /etc/ssl/tudominio.key;
+}
+
+</code></pre>
+
+<p>Si además queremos que todo nuestro trafico http sea redireccionado a https añadimos lo siguiente:</p>
+
+
+<pre class="language-batch"><code>server {
+listen 80;
+server_name tudominio.com www.tudominio.com;
+return 301 https://$host$request_uri;
+}
+</code></pre>
+
+<p>En principio esto es todo lo que necesitamos para hacer uso del protocolo seguro de HTTPS en nuestro servidor, cualquier duda que tengais no dudeis en comentarla.</p>
+
+<p>
+    Si te ha gustado el artículo, valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.
+</p>
+
+<p>
+    Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a>
+</p>
+
+<a class="aligncenter" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

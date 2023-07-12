@@ -1,0 +1,483 @@
+<p>
+    Hoy en día, <strong>crear aplicaciones</strong> móviles para múltiples plataformas <strong>supone</strong> <strong>todo un reto</strong> para los desarrolladores. Tratar de abordar un desarrollo usando los toolkits nativos de cada sistema requiere de una cantidad enorme de conocimientos específicos para cada uno de ellos. Nos encontraremos con un <strong>panorama</strong> enormemente <strong>complejo</strong>, con <strong>múltiples lenguajes</strong>, <strong>varios entornos de desarrollo</strong> y <strong>APIs</strong> de todos los colores. <strong>Xamarin</strong> <strong>trata de poner solución</strong> a esta problemática ofreciéndonos un conjunto de herramientas que nos permitirá desarrollar <strong>aplicaciones nativas, compartiendo </strong>la mayor cantidad de <strong>código</strong>, entre las plataformas más importantes: <strong>Android</strong>, <strong>iOS</strong> y <strong>Windows Phone</strong>.
+</p>
+
+<p>
+    Este <strong>artículo</strong> va dirigido a <strong>desarrolladores</strong> que estén <strong>interesados</strong> en comenzar a crear <strong>aplicaciones cross-platform</strong> <strong>nativas</strong> con Xamarin, sería recomendable que estuviesen familiarizados con el lenguaje <strong>C#</strong> y/o con el SDK de <strong>iOS</strong> o <strong>Android</strong>, aunque <strong>no es imprescindible.</strong> En la <strong>primera parte</strong> de la entrada trataré algunas <strong>generalidades</strong> como la problemática del desarrollo multiplataforma, las características claves de Xamarin, la instalación y puesta en marcha y la cuando elegir entre Xamarin Tradicional o Xamarin Forms. En la <strong>segunda parte</strong>me centraré en <strong>Xamarin.Forms </strong>y en sus elementos clave;  por último, veremos una pequeña introducción a la implementación del <strong>patrón MVVM en Xamarin Forms</strong>.
+</p>
+
+<h2>La problemática del desarrollo multiplataforma</h2>
+<p>
+    Como podemos observar en la siguiente tabla, cada plataforma cuenta con su <strong>propio</strong> entorno de desarrollo integrado (<strong>IDE</strong>), con uno o <strong>varios lenguajes</strong> de programación, con un lenguaje especifico para las <strong>vistas,</strong> y por si fuera poco los<strong> </strong><strong>patrones de diseño</strong> a aplicar <strong>difieren</strong> <strong>entre</strong> las diferentes <strong>plataformas</strong>.
+</p>
+
+<table class="Table" align="center">
+    <tbody>
+    <tr>
+        <th></th>
+        <th>iOS</th>
+        <th>Android</th>
+        <th>Windows</th>
+    </tr>
+    <tr>
+        <td><b>IDE</b></td>
+        <td>XCode</td>
+        <td>Android Studio</td>
+        <td>Visual Studio</td>
+    </tr>
+    <tr>
+        <td><b>Lenguaje</b></td>
+        <td>ObjectiveC o Swift</td>
+        <td>Java</td>
+        <td>C#</td>
+    </tr>
+    <tr>
+        <td><b>Vistas</b></td>
+        <td>Storyboard o XIBS</td>
+        <td>AXML</td>
+        <td>XAML</td>
+    </tr>
+    <tr>
+        <td><b>Patrón de diseño</b></td>
+        <td>MVC</td>
+        <td>MVC</td>
+        <td>MVVM</td>
+    </tr>
+    </tbody>
+</table>
+
+<p>
+    Abordar todos estos aspectos requiere de una cantidad de enorme de conocimientos por parte del desarrollador y, por otro lado, no parece ser eficiente tener que reescribir la lógica de negocio para cada uno de los sistemas.
+</p>
+
+<h3>¿Que opciones tenemos? Apps híbridas o nativas</h3>
+
+<p>Tradicionalmente, cuando hablamos de <strong>tecnologías multiplataforma</strong>, pensamos en un <strong>enfoque minimalista</strong>: reducir nuestra implementación/desarrollo a un mínimo denominador en todas las plataformas. Esto es lo que se propone en las <strong>aplicaciones híbridas</strong> desarrolladas con tecnologías del tipo PhoneGap/Cordova, en las cuales escribimos códigohtml y javascript  que tiene que ser interpretado por un navegador web. Este tipo de soluciones <strong>no consigue igualar</strong> la respuesta y <strong>la experiencia de usuario</strong> de una app <strong>nativa.</strong> Por poner un ejemplo, Mark Zuckerberg (CEO de Facebook), reconoció que el mayor error que habían cometido en la trayectoria de Facebook fue crear  en un primer momento una app híbrida en lugar de una nativa.</p>
+
+<blockquote>
+    Mark Zuckerberg: nuestro mayor error ha sido crear en un principio una app híbrida en lugar de nativa
+</blockquote>
+
+<p>
+    <strong>Xamarin</strong> nos ofrece un enfoque multiplataforma diferente, ya que nos facilita la tarea de desarrollar cualquier tipo de <strong>aplicación/juego</strong> de forma <strong>nativa</strong> para las plataformas más usadas: <strong>iOS, Android y Windows</strong>. Para ello nos brinda acceso al <strong>100% de las APIS nativas + las APIs comunes de .NET</strong>, con un mismo lenguaje de programación<strong> </strong><strong>C#</strong>.
+</p>
+
+<p>
+    Existen <strong>alternativas</strong> interesantes a Xamarin que también proponen un enfoque nativo, como puede ser <strong><a href="https://facebook.github.io/react-native/">React Native</a> </strong>de Facebook (aún en beta) , que permite escribir apps para android e iOS Nativas en <strong>Javascript</strong> con el estilo de <strong>React</strong>. O, <strong><a href="http://www.rubymotion.com/">Ruby Motion</a>,</strong> una tecnología que nos permite realizar apps para Android e iOS con <strong>Ruby</strong>, si RoR forma parte de tu stack esta plataforma es más que interesante. Aunque sin duda, por <strong>aceptación</strong>, <strong>cuota, comunidad</strong> y <strong>evolución</strong> brilla con luz propia <strong>Xamarin</strong>.
+</p>
+
+<img class="align-center" alt="reactnavive vs rubymotion" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/React-Native-rubymotion-300x120.png">
+
+<h2>Características</h2>
+
+<ul>
+    <li><strong>Compartir código:</strong>Además de compartir un mismo lenguaje y entorno de desarrollo, podemos utilizar un mismo patrón de desarrollo.</li>
+    <li><strong>Completa cobertura de las APIs de iOS y Android: </strong>Tenemos todas las APIs disponibles con C#, cualquier cosa que se pueda hacer con Objective-C/Swift o Java, se puede hacer con C# y Xamarin.</li>
+</ul>
+<img class="aligncenter size-full wp-image-505" src="http://miguelgomez.io/wp-content/uploads/2016/11/api-xamarin.png" alt="api-xamarin" width="985" height="277" />
+<ul>
+    <li><strong>Aplicaciones nativas:</strong>Las aplicaciones desarrolladas con Xamarin son 100% nativas.</li>
+    <li><strong>Siempre actualizado</strong>: Xamarin suele añadir soporte el mismo día del lanzamiento oficial de una actualización.</li>
+    <li><strong>Open source y gratis</strong>: Tras la compra de Xamarin por parte de Microsoft, pasó a ser Open Source y gratuito.</li>
+</ul>
+
+<h2>Instalación de Xamarin</h2>
+<p><strong>En Mac OS</strong></p>
+<p>
+    Para instalar Xamarin en Mac OS, tan solo tenemos que <a href="https://www.xamarin.com/download">descargar el instalador </a>y a continuación un asistente nos guiará en la instalación de Xamarin Studio y los SDKs  de las diferentes plataformas.
+</p>
+
+<p><strong>En windows:</strong></p>
+<p>
+    Para comenzar a trabajar con Xamarin en Windows se debe realizar la descarga de <a href="https://go.microsoft.com/fwlink/?LinkId=691978&amp;clcid=0x409">Visual Studio Community</a>. Tras ejecutar el instalador tenemos la posibilidad de elegir entre una instalación típica o personalizada. Escogemos personalizada y seleccionamos el checkbox de Xamarin dentro del apartado de desarrollo móvil multiplataforma.
+</p>
+
+<p>
+    Para compilar y acceder a opciones como el editor visual de iOS necesitamos de forma inevitable tener conexión con un Mac. Todo el proceso de conexión se realiza de forma prácticamente transparente desde Visual Studio a través de la herramienta Xamarin Mac Agent por medio de una conexión ssh.
+</p>
+
+<h2>Xamarin Tradicional vs Xamarin Forms</h2>
+
+<p>
+    Antes de empezar a desarrollar con  Xamarin debemos <strong>elegir</strong> si utilizar <strong>Xamarin Tradicional</strong>(Xamarin.iOS y Xamarin.Android) o <strong>Xamarin Forms</strong> para crear nuestro proyecto, aunque algunos expertos de la comunidad como <a href="https://twitter.com/_jmgomez_">@_jmgomez_</a> ya plantean algunas soluciones “fuera de la caja” (<a href="http://jmgomez.me/with-xamarinforms-or-without-it/">artículo</a>).
+</p>
+
+<p>
+    En <strong>Xamarin tradicional</strong>, se puede <strong>compartir toda la lógica</strong> de la aplicación entre las diferentes plataformas, <strong>a excepción de la interfaz de usuario</strong>, la cual será independiente para cada una de las mismas. En cambio,<strong> Xamarin Forms</strong> añade una capa de abstracción sobre la UI que <strong>permite compartir</strong>, además de la lógica de negocio, <strong>la interfaz de usuario</strong>, aumentando consigo la reutilización de código.
+</p>
+
+<p>
+    <strong>¿Cuando escoger uno u otro?</strong>
+</p>
+
+<p>
+    <strong>Xamarin tradicional</strong> es idóneo cuando se requiere un nivel muy elevado de personalización de la interfaz de usuario para cada una de las plataformas, siendo <strong>más importante el nivel personalización de la UI que la cantidad de código compartido</strong>; mientras que <strong>Xamarin.Forms</strong> es la mejor opción cuando las aplicaciones requieren <strong>menos especificidad en la UI</strong> y hacen más <strong>énfasis en compartir la mayor cantidad posible de código</strong>.
+</p>
+
+<img class="align-center" alt="xamarin-1" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/xamarin-1.png"/>
+
+<h2>Xamarin Forms</h2>
+<p>
+    La capa de abstracción que añade Xamarin Forms a la UI nos facilita la tarea de crear interfaces de usuarios nativas compartidas, ya que cada uno de los elementos de dicha abstracción son mapeados a elementos propios de cada una de las plataformas.
+</p>
+
+<h3>XAML</h3>
+<p>
+    Las interfaces en <strong>Xamarin Forms</strong> se pueden definir tanto con código <strong>C#</strong> desde <strong>Code Behind,</strong><strong> </strong>como con <strong><a href="https://msdn.microsoft.com/es-es/library/cc295302.aspx">XAML</a></strong>, mi recomendación es utilizar este último para aprovechar su enfoque de separación de responsabilidades entre diseño y codificación.
+</p>
+
+<p>
+    <strong>XAML</strong> (e<strong>X</strong>tensible <strong>A</strong>pplication <strong>M</strong>arkup <strong>L</strong>anguage) es un lenguaje declarativo basado en <strong>XML</strong> y pensado para escribir la interfaz gráfica de una aplicación de forma textual y ordenada, aparece por primera vez en la versión 3.0 del Framework de .NET.
+</p>
+
+<p>
+    Una de las características más importantes de <strong>XAML</strong> es que <strong>todos los elementos que definamos en este son instanciados por el CLR</strong> y <strong>quedan accesibles</strong> como objetos <strong>desde código</strong>, sin necesidad de realizar de nuevo la declaración de los mismos en Code Behind, gracias al mecanismo de las clases parciales.
+</p>
+
+<p>
+    <strong>XAML</strong> permite construir la jerarquía de objetos de componen la interfaz. Con el uso de <strong>etiquetas</strong>podemos <strong>definir cada uno de los elementos visuales</strong>, y con el uso de <strong>atributos definimos la apariencia y el comportamiento</strong> de cada uno de los elementos.
+</p>
+
+<p>
+    Veamos un ejemplo de una misma interfaz definida en XAML y C#:
+</p>
+
+<pre class="language-csharp"><code>//XAML
+    &lt;TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyApp.MainPage"&gt;
+    &lt;TabbedPage.Children&gt;
+        &lt;ContentPage Title="Profile" Icon="Profile.png"&gt;
+            &lt;StackLayout Spacing="20" Padding="20" VerticalOptions="Center"&gt;
+                &lt;Entry Placeholder="Username" Text="{Binding Username}"/&gt;
+                &lt;Entry Placeholder="Password" Text="{Binding Password}" IsPassword="true"/&gt;
+                &lt;Button Text="Login" TextColor="White" BackgroundColor="#77D065" Command="{Binding LoginCommand}"/&gt;
+            &lt;/StackLayout&gt;
+        &lt;/ContentPage&gt;
+        &lt;ContentPage Title="Settings" Icon="Settings.png"&gt;
+            <!-- Settings -->
+        &lt;/ContentPage&gt;
+    &lt;/TabbedPage.Children&gt;
+&lt;/TabbedPage&gt;
+
+//Code behind
+using Xamarin.Forms;
+
+var profilePage = new ContentPage {
+    Title = "Profile",
+    Icon = "Profile.png",
+    Content = new StackLayout {
+        Spacing = 20, Padding = 50,
+        VerticalOptions = LayoutOptions.Center,
+        Children = {
+            new Entry { Placeholder = "Username" },
+            new Entry { Placeholder = "Password", IsPassword = true },
+            new Button {
+                Text = "Login",
+                TextColor = Color.White,
+                BackgroundColor = Color.FromHex("77D065") }}}
+};
+
+var settingsPage = new ContentPage {
+    Title = "Settings",
+    Icon = "Settings.png",
+    (...)
+};
+
+var mainPage = new TabbedPage { Children = { profilePage, settingsPage } };
+</code></pre>
+
+<h3>Pages</h3>
+<p>
+    Las páginas son elementos contenedores que representan una pantalla de la aplicación. Xamarin.Forms.Page representa un ViewController en iOS, una Page en UWP, en Android cada página se comporta como un Activity, pero no lo son.
+</p>
+
+<img class="align-center" alt="xamarin forms pages" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/Xamarin.Forms-Pages.png"/>
+
+<p>
+    <strong>ContentPage:</strong> es la página más simple, cuenta con una única vista donde añadir contenido. <br/>
+<strong>MasterDetailPage:</strong> gestiona dos paneles de información.<br/>
+<strong>NavigationPage:</strong> gestiona la navegación entre paginas.<br/>
+<strong>TabbedPage:</strong> facilita el acceso a las subpáginas mediante tabs.<br/>
+<strong>TemplatedPage:</strong> muestra el contenido a pantalla completa, permite utilizar plantillas para definir el contenido.<br/>
+<strong>CarouselPage:</strong> permite el acceso a las subpáginas haciendo un gesto de scroll lateral.
+</p>
+
+<h3><strong>Layouts</strong></h3>
+<p>
+    Los layouts son elementos contenedores de otros layouts o vistas, son especialmente necesarios ya que las páginas sólo contener un elemento hijo. Lo utilizaremos para establecer la posición y alineación de los elementos que contienen.
+</p>
+
+<img class="align-center" alt="xamarin forms layouts" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/Xamarin.Forms-Layouts.png"/>
+<p>
+    Los más destacados son:<br/>
+    <strong>ContentView: </strong>permitir crear elementos más complejos a partir del mismo.<br/>
+    <strong>ScrollView:</strong> si el contenido lo requiere permite hacer scroll.<br/>
+    <strong>StackLayout: </strong>organiza y posiciona otros controles, es uno de los layouts más utilizados, por defecto los apila verticalmente.<br/>
+    <strong>AbsoluteLayout:</strong> hace uso posiciones absolutas para posicionar los elementos.<br/>
+    <strong>GridLayout:</strong> Permite la organización de elementos por medio de filas y columnas.<br/>
+    <strong>RelativeLayout:</strong> facilita el posicionamiento de los elementos mediante constraints.<br/>
+</p>
+<h3>Views (controles)</h3>
+
+<p>
+    Las Views, también denominados controles o widgets, hacen referencia a los elementos visuales como pueden ser botones, labels, o textboxs. Xamarin Forms nos provee de multiples views:
+</p>
+
+<img class="align-center" alt="xamarin forms views" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/controls-xamarin-1024x367.png"/>
+
+<p>
+    Puedes ver la descripción de cada uno de los controles y como se visualizan en las diferentes plataformas desde <a href="https://developer.xamarin.com/guides/xamarin-forms/controls/views/" target="_blank">aquí</a>.
+</p>
+
+<h2>Creando nuestra primera app Xamarin.Forms</h2>
+<p>
+    Para crear nuestra app abrimos Visual Studio o Xamarin Studio, dependiendo si estáis en Windows o Mac, respectivamente, en mi caso voy a usar Xamarin Studio. A continuación, nos dirigimos a nueva solución para crear un nuevo proyecto partiendo de la plantilla de aplicación multiplataforma “Forms App”:
+</p>
+
+<img class="align-center" alt="xamarin forms 1" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/app-xamarin-forms-1.png"/>
+
+<p>
+    En la siguiente pantalla del asistente rellenamos los campos del nombre de la app y del identificador de la organización, seleccionamos las plataformas Android e iOS, en el caso de estar en Visual Studio también podriamos incluir en nuestro proyecto UWP.
+</p>
+
+<h3>Shared Project (SP) vs Portable Class Library (PCL)</h3>
+
+<p>
+    Seguidamente nos encontramos con que debemos escoger entre un SP (<strong>Shared Projec</strong>t)  y una PCL (<strong>Portable Class Library</strong>). Aunque ambos persiguen el <strong>mismo objetivo</strong>, <strong>compartir la mayor cantidad posible de código</strong> entre plataformas, difieren en varios aspectos.
+</p>
+
+<p>
+    <strong>Las PCL</strong> a diferencia de los SP, <strong>generan un asembly reutilizable (dll) que puede ser consumido fuera de la solución</strong>. Es importante tener en cuenta que en las PCL no se tiene acceso completo al framework de .NET.
+</p>
+
+<p>
+    <strong>Los SP no se compilan como un ensamblado a parte</strong>,<strong> </strong><strong>sino como parte de cada proyecto al que están referenciado</strong>, como si fuese código del propio proyecto. Los SP permiten hacer uso de directivas que permiten generar código especifico para cada una de las plataformas.<br/>
+
+    En nuestro caso usaremos la PCL:
+</p>
+
+<img class="align-center" alt="xamarin forms 2" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/app-xamarin-forms-2.png"/>
+
+<h3>Estructura de una solución Xamarin.Forms</h3>
+
+<p>
+    Una vez finalizado el asistente, se generará una solución estructurada en tres proyectos:
+</p>
+
+<img class="align-center" alt="xamarin forms 3" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/app-xamarin-forms-3.png"/>
+
+<p>
+    El primero de los proyectos corresponde a la PCL, el  cual contendrá el código compartido de la aplicación para todas las plataformas. A continuación tenemos los proyectos específicos de iOS y Android.
+</p>
+
+<p>
+    En el proyecto compartido, a modo de ejemplo se ha generado una página llamada helloFormsPage que cuenta con un elemento de tipo ContentPage que a su vez contiene un control Label en el que se muestra un texto de bienvenida.
+</p>
+
+<p>
+    HelloFormsPage está formado por dos ficheros por un lado tenemos el XAML y por otro el code behing en C# los cuales corresponden a una misma clase distribuida en dos ficheros, a este concepto se le denomina <strong>clases parciales. </strong>Por lo tanto el <strong>XAML</strong> no <strong>es</strong> más que <strong>una clase parcial de nuestro Code Behind</strong>, que se completa con el fichero que lleva el  mismo nombre que el XAML pero con la extensión .cs.
+</p>
+
+<pre class="language-html"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:local="clr-namespace:helloForms"
+        x:Class="helloForms.helloFormsPage"&gt;
+    &lt;Label Text="Welcome to Xamarin Forms!" VerticalOptions="Center" HorizontalOptions="Center" /&gt;
+&lt;/ContentPage&gt;
+
+</code></pre>
+<p>
+    En el proyecto compartido, además de contar con la clase de ejemplo helloFormsPage, tenemos una clase llamada App, en la cual se indica cual será la primera página a mostrar en todas las plataformas, esto se realiza en el constructor de la misma. Además cuenta con otros métodos que nos permiten ejecutar acciones según el estado de la aplicación.
+
+</p>
+<pre class="language-csharp"><code>namespace helloForms
+{
+    public partial class App : Application
+    {
+        public App()
+        {
+            InitializeComponent();
+            MainPage = new helloFormsPage();
+        }
+        protected override void OnStart()
+        {
+            // Handle when your app starts
+        }
+        protected override void OnSleep()
+        {
+            // Handle when your app sleeps
+        }
+        protected override void OnResume()
+        {
+            // Handle when your app resumes
+        }
+    }
+}
+</code></pre>
+
+<p>
+    En el proyecto de Android tenemos una clase denominada MainActivity que cuenta con un método OnCreate() en el cual inicializamos la app del proyecto compartido:
+</p>
+
+<pre class="language-csharp"><code>namespace helloForms.Droid
+{
+    [Activity(Label = "helloForms.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    {
+        protected override void OnCreate(Bundle bundle)
+        {
+            TabLayoutResource = Resource.Layout.Tabbar;
+            ToolbarResource = Resource.Layout.Toolbar;
+            base.OnCreate(bundle);
+            global::Xamarin.Forms.Forms.Init(this, bundle);
+            LoadApplication(new App());
+        }
+    }
+}
+</code></pre>
+
+<p>
+    Por último, en iOS, disponemos de la clase AppDelegate en la cual cargaremos la app del proyecto compartido:
+</p>
+
+<pre class="language-csharp"><code>namespace helloForms.iOS
+{
+    [Register("AppDelegate")]
+    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    {
+        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        {
+            global::Xamarin.Forms.Forms.Init();
+            LoadApplication(new App());
+            return base.FinishedLaunching(app, options);
+        }
+    }
+}
+</code></pre>
+
+<p>
+    Si, ejecutamos el proyecto en los emuladores de iOS y Android obtendríamos el siguiente resultado:
+</p>
+
+<img class="align-center" alt="xamarin forms 4" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/app-xamarin-forms-4.png"/>
+
+<h2>El patrón MVVM en Xamarin Forms</h2>
+<p>
+    Aunque no es obligatorio utilizar el patrón MVVM para desarrollar una aplicación con Xamarin Forms, está considerado una buena práctica hacer uso del mismo. A continuación veremos algunos conceptos claves para entender el por qué.
+</p>
+
+<p>
+    <strong>MVVM</strong> (Modelo Vista Vista-Modelo) <strong>es un patrón de diseño</strong> derivado de MVC, cuyo <strong>objetivo</strong> es tratar de <strong>desacoplar</strong> al máximo <strong>la interfaz de usuario</strong> de la lógica de la aplicación,  para ello hace uso de un lenguaje de marcado en las vistas, XAML en el caso de Xamarin Forms. El <strong>modelo</strong> realiza la misma función que en MVC, representa la<strong> </strong><strong>capa de datos</strong> y/o la lógica de negocio de nuestro proyecto, en ningún caso tiene dependencia alguna de la vista.
+</p>
+
+<p>
+    El <strong>ViewModel</strong> (modelo de vista) es un actor <strong>intermediario</strong> entre el modelo y la vista, contiene toda la <strong>lógica de presentación</strong> y se comporta como una abstracción de la interfaz. La comunicación entre la vista y el viewmodel se realiza por medio los enlaces de datos (<strong>binders</strong>).
+</p>
+
+<img class="align-center" alt="mvvm 1" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533331/posts/xamarin-forms-app-nativas-introduccion/mvvm-1-1500x482_1.png"/>
+
+<p>
+    A continuación vamos a crear un ejemplo sencillo para mostrar como implementar en una solución Xamarin forms el patrón MVVM.
+</p>
+
+<p>
+    Vamos a partir de un nuevo proyecto Xamarin.Forms utilizando una librería portable. En la PCL creamos las carpetas Views, ViewModels, y dentro de ViewModels la carpeta Base. Quedando la estructura de la solución tal que así:
+</p>
+
+<img class="align-center" alt="mvvm 2" src="https://res.cloudinary.com/software-crafters/image/upload/v1544533330/posts/xamarin-forms-app-nativas-introduccion/mvvm-2.png"/>
+
+<p>
+    Una vez creadas las carpetas, añadimos la página principal, para ello hacemos clic derecho sobre la carpeta Views, le damos a la opción agregar nuevo archivo, seleccionamos “Forms ContentPage”,  lo llamamos MainView y añadimos el siguiente código:
+</p>
+
+<p>
+
+</p>
+
+<pre class="language-html"><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+x:Class="simpleMVVM.Views.MainView"&gt;
+     &lt;Label Text="{Binding MyMessage}"
+          VerticalOptions="Center"
+          HorizontalOptions="Center" /&gt;
+&lt;/ContentPage&gt;
+</code></pre>
+
+<p>
+    En el XAML anterior podemos observar que en el atributo text  del elemento Label hemos utilizado lo que se denomina una expresión de enlace a datos, en próximos posts veremos con más detalle su funcionamiento por ahora nos basta con saber que cuando el compilador se encuentra con una expresión entre llaves la interpreta,y, en este caso, al encontrarse con la palabra reservada <strong>Binding</strong>, lo que hace es enlazar el valor de la propiedad MyMessage la cual definiremos en el ViewModel.
+</p>
+
+<p>
+    Lo siguiente que vamos a hacer es crear nuestro primer ViewModel. Un <strong>ViewModel</strong> no es más que una <strong>clase</strong> en la que se expone la información <strong>con propiedades públicas</strong>. Por lo tanto, agregamos dentro de la carpeta ViewModels una clase a la que vamos a denominar MainViewModel con una propiedad llamada “MyMessage”:
+</p>
+
+<pre class="language-csharp"><code>
+    public class MainViewModel
+{
+     private string _myMessage;
+
+     public MainViewModel()
+     {
+          Message = "Hello MVVM!";
+     }
+
+
+     public string MyMessage
+     {
+          get { return _myMessage; }
+          set { _myMessage = value; }
+     }
+}
+</code></pre>
+
+<p>
+    A continuación, tenemos que enlazar nuestro ViewModel con el contexto de datos de la página. Para ello asignamos en la propiedad BindingContext de la nuestra vista una instancia de nuestro ViewModel. El <strong>Code Behind</strong> de la vista quedaría así:
+</p>
+
+<pre class="language-csharp"><code>namespace simpleMVVM.Views
+{
+    public partial class MainView : ContentPage
+    {
+        public MainView()
+        {
+            InitializeComponent();
+            BindingContext = new MainViewModel();
+        }
+    }
+}
+</code></pre>
+
+<p>
+    Por último, tan solo nos queda indicar cual es la página principal en la propiedad MainPage de la clase App:
+</p>
+
+<pre class="language-csharp"><code>public App()
+{
+    InitializeComponent();
+    MainPage = new MainView();
+}
+</code></pre>
+
+<p>
+    Esta sería la estructura MVVM más sencilla posible, en principio nos sirve para ilustrar los fundamentos básicos. No obstante, <strong>no hemos cubierto</strong>  conceptos como <strong>los modos de enlace a datos</strong>, <strong>las notificaciones</strong> y <strong>los comandos</strong>, imprescindibles para conseguir una de interacción completa del usuario, quedarán pendientes para próximas entradas.
+</p>
+
+<h2>Resumen</h2>
+<p>
+    En este artículo he tratado de sentar las bases, en la medida de lo posible, de Xamarin y en particular de Xamarin Forms, me he dejado muchos temas en el tintero, y en otros he sido muy superficial, cómo por ejemplo en la introducción del patrón MVVM, pero el post estaba creciendo exponencialmente.
+</p>
+
+<p>
+    La idea es continuar profundizando en próximas entradas en el desarrollo con Xamarin, tanto tradicional como con forms. Espero haber facilitado tu transición a Xamarin, o por lo menos haber sabido trasladarte alguna de sus virtudes.
+</p>
+
+<p>
+    Si te ha gustado la entrada valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.
+</p>
+
+<p>
+    Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a>
+</p>
+
+<a class="align-center" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

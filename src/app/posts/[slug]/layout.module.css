@@ -1,0 +1,15 @@
+.breadcrumb{
+    font-size: 0.8rem;
+    margin: 25px 0 0;
+    align-self: flex-start;
+}
+
+.breadcrumbLink{
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.breadcrumbLink:visited {
+    color: var(--text-color);
+    text-decoration: none;
+}

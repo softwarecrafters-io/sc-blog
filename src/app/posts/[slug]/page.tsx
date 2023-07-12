@@ -1,16 +1,18 @@
 import {Params} from "next/dist/shared/lib/router/utils/route-matcher";
-import {ServerFactory} from "@/factories/serverFactory";
-import LikeButton from "@/app/posts/components/LikeButton";
+import {usePosts} from "@/app/posts/usePosts";
+import {ClientFactory} from "@/factories/clientFactory";
+import {PostBlock} from "@/app/components/static/post/post";
 
 export default async function SinglePostPage({params}:Params) {
+    const {getPostBySlug} = usePosts(ClientFactory.createBlogService());
     const {slug} = params;
-    const repository = ServerFactory.getHttpPostRepository();
-    const post = await repository.getPostBy(slug);
+    const post = await getPostBySlug(slug);
+
     return (
-        <article>
-            <h1>{post.title}</h1>
-            <p>{post.description}</p>
-            <LikeButton/>
-        </article>
+        <>
+            <PostBlock post={post}/>
+        </>
     )
 }
+
+

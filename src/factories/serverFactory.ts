@@ -1,10 +1,16 @@
 import {HttpPostRepository} from "@/repositories/client/httpPostRepository";
 import {NotionPostRepository} from "@/repositories/server/notionPostRepository";
-import {PostRepository} from "@/core/repositories";
+import {InMemoryPostRepository, PostRepository, SubscriberRepository} from "@/core/repositories";
 import {BlogService} from "@/application/blogService";
+import {MailerLiteSubscriberRepository} from "@/repositories/server/mailerLiteSubscriberRepository";
+import {NewsletterService} from "@/application/newsletterService";
+import {BlogServiceWithLegacyPosts} from "@/application/blogServiceWithLegacyPosts";
+import {FilePostRepository} from "@/repositories/server/filePostRepository/filePostRepository";
+import {legacyPosts} from "@/repositories/server/filePostRepository/legacyPostDatasource";
 
 export class ServerFactory {
     private static postRepository: PostRepository;
+    private static legacyPostRepository: PostRepository;
 
     static getPostRepository(): PostRepository {
         if(this.postRepository== null){
@@ -15,7 +21,31 @@ export class ServerFactory {
         return this.postRepository;
     }
 
-    static createBlogService(): BlogService {
-        return new BlogService(this.getPostRepository());
+    static getLegacyPostRepository(): PostRepository {
+        if(this.legacyPostRepository== null){
+            this.legacyPostRepository = new FilePostRepository(legacyPosts);
+        }
+        return this.legacyPostRepository;
+    }
+
+    static getInMemoryPostRepository(): PostRepository {
+        if(this.postRepository== null){
+            this.postRepository = new InMemoryPostRepository([]);
+        }
+        return this.postRepository;
+    }
+
+    static createSubscriberRepository(): SubscriberRepository {
+        const apiKey = process.env.MAILER_LITE_API_KEY as string;
+        const groupId = process.env.MAILER_LITE_GROUP_ID as string;
+        return new MailerLiteSubscriberRepository(apiKey, groupId)
+    }
+
+    static createBlogServiceWithLegacyPosts(): BlogServiceWithLegacyPosts {
+        return new BlogServiceWithLegacyPosts(this.getPostRepository(), this.getLegacyPostRepository());
+    }
+
+    static createNewsletterService(): NewsletterService {
+        return new NewsletterService(this.createSubscriberRepository());
     }
 }

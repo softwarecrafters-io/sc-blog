@@ -1,18 +1,22 @@
 .container{
     display: flex;
     flex-direction: column;
-    width: 90%;
-    padding: 25px 40px 0 40px;
-    border-radius: 2px;
+    width: 100%;
     max-width: 700px;
+    margin-top: 25px;
 }
 
-@media (max-width: 800px){
+@media (max-width: 700px){
     .container{
-        width: 95%;
+        width: 100%;
     }
 }
 
+.title{
+    width: 60%;
+    margin: 10px auto;
+    text-align: center;
+}
 .content{
     display: flex;
     align-items: center;
@@ -26,16 +30,14 @@
     display: none;
 }
 
-@media (max-width: 1100px){
-    .picture {
-        margin-top: 0px;
-    }
-}
 
-@media (max-width: 560px){
+@media (max-width: 700px){
     .container{
         margin-top: 0px;
         padding: 15px 20px 0 20px;
+    }
+    .title {
+        width: 100%;
     }
     .profile {
         display: none;

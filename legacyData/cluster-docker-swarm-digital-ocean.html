@@ -1,0 +1,146 @@
+<p>Docker Swarm es una herramienta integrada en el ecosistema de Docker que permite la gestión de un cluster de servidores. Pone a nuestra disposición&nbsp;una API con la que podemos&nbsp;administrar&nbsp;las&nbsp; tareas y asignación de recursos de cada&nbsp;contenedor dentro de cada una de las máquinas. Dicha API nos permite gestionar el cluster como si se tratase de una sola máquina Docker.</p>
+
+<p>En este artículo veremos&nbsp;cómo construir un cluster de servidores&nbsp;con Docker Swarm, se utilizará&nbsp;Docker Machine con el driver de Digital Ocean para aprovisionar cada una de las máquinas.</p>
+
+<img class="align-center" alt="docker-compose" src="https://res.cloudinary.com/software-crafters/image/upload/v1545047302/posts/cluster-docker-swarm-digital-ocean/docker_compose.png"/>
+
+<blockquote>La mejor manera de orquestar docker es con el propio docker</blockquote>
+
+<h3>Requisitos</h3>
+
+<p>Para seguir este tutorial necesitamos los siguiente:</p>
+
+<ul>
+    <li>Tener instalado docker en tu máquina (puedes instalarlo desde <a href="https://docs.docker.com/engine/installation/">aquí</a>)</li>
+    <li>Disponer de un token de&nbsp;API de Digital Ocean. Si no lo tienes puedes generar uno siguiendo <a href="https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2">esta guía</a>.</li>
+</ul>
+
+<h3>Generar el token de Swarm</h3>
+
+<p>El&nbsp;sistema&nbsp;de descubrimiento de nodos de Swarm, Discovery Service, se sirve de&nbsp;un <i>token</i> para reconocer&nbsp;todos&nbsp;nodos que forman parte de un clúster.&nbsp;Veamos como generar dicho token para poder hacer uso de&nbsp;Discovery Service.</p>
+
+<p>En primer lugar guardaremos en una variable de sesión el&nbsp;token de Digital Ocean:</p>
+
+<pre class="language-batch"><code>export DO_TOKEN="abcdefghijklmnopqrstuvwxyz1234567890"
+
+</code></pre>
+
+<p>A continuación, creamos una maquina con docker machine llamada swarm-1, dicha máquina servirá simplemente para generar el token de cluster:</p>
+
+<pre class="language-batch"><code>docker-machine create \
+--driver digitalocean \
+--digitalocean-access-token ${DO_TOKEN} \
+--digitalocean-image "ubuntu-16-04-x64" \
+--digitalocean-region "lon1" \
+--digitalocean-size "512mb" \
+swarm-1
+</code></pre>
+
+<p>Seleccionamos esta maquina:</p>
+<pre class="language-batch"><code>eval $(docker-machine env swarm-1)
+
+</code></pre>
+
+<p>Generamos el token de cluster:</p>
+<pre class="language-batch"><code>docker run swarm create
+
+</code></pre>
+
+<p>Almacenamos en una variable de entorno dicho token y lo exportamos:</p>
+<pre class="language-batch"><code>export SWARM_TOKEN=61ef79938e5559d480c2841991c49f5d
+</code></pre>
+
+<p>Ya podemos eliminar esta instancia de digital ocean, como hemos dicho sólo la necesitabamos para crear el ID.</p>
+<pre class="language-batch"><code>docker-machine rm swarm-1
+</code></pre>
+
+<h3>Nodo principal (Swarm Master)</h3>
+<p>Es el encargado de gestionar los recursos del clúster. Para crearlo ejecutaremos el siguiente código:</p>
+
+<pre class="language-batch"><code>docker-machine create \
+--driver digitalocean \
+--digitalocean-access-token ${DO_TOKEN} \
+--digitalocean-image "ubuntu-16-04-x64" \
+--digitalocean-region "lon1" \
+--digitalocean-size "512mb" \
+--swarm --swarm-master \
+--swarm-discovery token://${SWARM_TOKEN} \
+swarm-master
+</code></pre>
+
+<h3>Nodos secundarios</h3>
+<p>Una vez creado el nodo principal ya podemos añadir los nodos secundarios que necesitemos, en este caso vamos a añadir dos nodos al cluster:<br> <strong>Nodo 1:</strong></p>
+<pre class="language-batch"><code>docker-machine create \
+--driver digitalocean \
+--digitalocean-access-token ${DO_TOKEN} \
+--digitalocean-image "ubuntu-16-04-x64" \
+--digitalocean-region "lon1" \
+--digitalocean-size "512mb" \
+--swarm \
+--swarm-discovery token://${SWARM_TOKEN} \
+swarm-node-1
+
+</code></pre>
+
+<p><strong>Nodo 2:</strong></p>
+<pre class="language-batch"><code>
+docker-machine create \
+--driver digitalocean \
+--digitalocean-access-token ${DO_TOKEN} \
+--digitalocean-image "ubuntu-16-04-x64" \
+--digitalocean-region "lon1" \
+--digitalocean-size "512mb" \
+--swarm \
+--swarm-discovery token://${SWARM_TOKEN} \
+swarm-node-2
+</code></pre>
+
+<p>Comprobamos que todos los nodos están funcionan correctamente</p>
+<pre class="language-batch"><code>docker-machine ls
+</code></pre>
+
+<p>Si seleccionamos unos de los nodos: <code class="prettyprint">eval $(docker-machine env --swarm swarm-master)</code>y,&nbsp;ejecutamos <code class="prettyprint">docker info,</code> podremos ver la información de los dos nodos secundarios y del nodo principal, containers, CPUs, Memoria kernel.</p>
+
+<h3>Contenedores en el clúster</h3>
+
+<p>Vamos a ejecutar dos contenedores con la imagen nginx y aplicando una limitación de 400M de memoria a cada uno de los contenedores</p>
+
+<pre class="language-batch"><code>docker run --name web-1 -d -P -m 400M nginx
+</code></pre>
+
+<p>Podemos comprobar si el contenedor está ejecutandose correctamente con <code class="prettyprint">docker ps</code>. Observamos que el planificador de docker swarm ha escogido para correr el contenedor web-1 el nodo principal.</p>
+
+<p>Veamos que ocurre si inicializamos otro contenedor denominado “web-2” con las mismas restricciones que el anterior:</p>
+<pre class="language-batch"><code>docker run --name web-2 -d -P -m 400M nginx
+</code></pre>
+
+<p>En esta ocasión, el planificador ha asignado el contenedor al nodo 1, porque no había suficiente memoria en el nodo principal.</p>
+
+<p>Si lo consideramos necesario podemos ampliar el tamaño del cluster, ejecutando simplemente:</p>
+
+<pre class="language-batch"><code>docker run --name web-2 -d -P -m 400M nginx
+docker-machine create \
+--driver digitalocean \
+--digitalocean-access-token ${DO_TOKEN} \
+--digitalocean-image "ubuntu-16-04-x64" \
+--digitalocean-region "lon1" \
+--digitalocean-size "512mb" \
+--swarm \
+--swarm-discovery token://${SWARM_TOKEN} \
+swarm-node-3
+</code></pre>
+
+<h3>Conclusión</h3>
+<p>Hemos podido ver que&nbsp;orquestar hosts de Docker con Docker Swarm es un proceso relativamente sencillo. Poco a poco el ecosistema de docker se está&nbsp;volviendo más robusto y completo. En el caso concreto de&nbsp;Swarm, &nbsp;personalmente aun no lo utilizaría en entornos de producción, pero como hemos podido ver es una herramienta que promete mucho.</p>
+<p>Happy clustering!!</p>
+
+
+<p>
+    Si te ha gustado la entrada valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.
+</p>
+
+<p>
+    Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a>
+</p>
+
+<a class="aligncenter" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

@@ -64,6 +64,8 @@ function fakePosts() {
             description: 'Description for first post',
             date: '2023-07-10',
             username: 'John Doe',
+            userPicture: 'user1.jpg',
+            category: 'Category 1',
             markdownBody: 'Content of the first post',
         },
         {
@@ -75,6 +77,8 @@ function fakePosts() {
             description: 'Description for second post',
             date: '2023-07-11',
             username: 'Miguel Gomez',
+            userPicture: 'user2.jpg',
+            category: 'Category 1',
             markdownBody: 'Content of the second post',
         },
     ];

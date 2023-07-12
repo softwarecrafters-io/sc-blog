@@ -1,0 +1,415 @@
+<blockquote><strong>Esto trata sobre manejar con buen gusto los efectos secundarios de las operaciones as&iacute;ncronas -- Erik Meijer sobre Rx</strong></blockquote>
+<p>La programaci&oacute;n reactiva es un concepto relativamente nuevo que est&aacute; revolucionando el mundo del <em>software</em>. Hoy en d&iacute;a, cualquier sistema serio involucra muchos subsistemas as&iacute;ncronos que necesitan ser coordinados eficientemente, algo tremendamente complicado con las t&eacute;cnicas de programaci&oacute;n cl&aacute;sicas.</p>
+<p>En este art&iacute;culo tratar&eacute; de introducir la filosof&iacute;a de programaci&oacute;n reactiva y las posibilidades que nos brinda JavaScript, junto a RxJS, en este aspecto. Repasaremos algunos conceptos clave para entender la programaci&oacute;n reactiva y veremos algunos ejemplos pragm&aacute;ticos sobre c&oacute;mo usar RxJS.</p>
+<h2>Manejando la asincron&iacute;a con JavaScript </h2>
+<p>En los &uacute;ltimos a&ntilde;os, JavaScript se ha convertido en uno de los lenguajes m&aacute;s utilizados del mundo, se encuentra en infraestructuras cr&iacute;ticas de las empresas m&aacute;s importantes, en las cuales un correcto manejo de la asincron&iacute;a se vuelve esencial. </p>
+<p>Antes de profundizar en conceptos relacionados con la reactividad, veamos un peque&ntilde;o resumen sobre los <strong><em>callbacks</em></strong> y los <strong><em>promises</em></strong>, dos de los mecanismos cl&aacute;sicos para manejar la asincron&iacute;a en JavaScript.</p>
+<h3><em>Callbacks</em></h3>
+<p>Los <em>callbacks</em> son la forma m&aacute;s antigua de gestionar la asincron&iacute;a. Como ya sabr&eacute;is, un <em>callback</em> no es m&aacute;s que una funci&oacute;n que recibe como argumento otra funci&oacute;n y la ejecuta. En otras palabras, una funci&oacute;n "a" se usa como argumento de otra funci&oacute;n "b". Cuando se llama a "b", esta ejecuta "a". </p>
+
+<pre class="language-javascript"><code>function b(callback){
+    //do something
+    callback()
+}
+
+function a(){
+     console.log('hello');
+}
+</code></pre>
+
+<p>Los <em>callbacks</em> son muy sencillos de entender y es por ello que son la forma m&aacute;s extendida de manejar la asincron&iacute;a en JavaScript. No obstante, los <em>callbacks</em> tienen varios inconvenientes, como pueden ser la gesti&oacute;n de errores o el aumento de la complejidad a la hora de manejar la concurrencia; por no hablar del temido <em>callback hell.</em></p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943598/posts/introduccion-programacion-reactiva-rxjs/callback-hell.png" alt="callback-hell"/>
+
+<h3><em>Promises</em></h3>
+<p>Las <em>promises</em> o promesas son un patr&oacute;n que nos ayuda a realizar operaciones as&iacute;ncronas sin muchos de los inconvenientes de los <em>callbacks</em>. Una promesa representa un valor que puede estar disponible ahora, en el futuro o nunca. Vinieron a salvarnos del tan temido <em>callback hell</em>. Generalmente hacen que los programas sean m&aacute;s claros al mantener un estilo de c&oacute;digo s&iacute;ncrono, reduciendo la necesidad de anidar bloques y simplificando el manejo del estado.</p>
+<p>Las promesas pueden encontrarse en 3 estados diferentes: </p>
+<ul>
+    <li><strong><em>Pending</em></strong>: Estado inicial</li>
+    <li><strong><em>Fulfilled</em></strong>: Representa una operaci&oacute;n satisfactoria</li>
+    <li><strong><em>Rejected</em></strong>: Representa una operaci&oacute;n fallida</li>
+</ul>
+<p>Veamos un ejemplo de c&oacute;mo se crean y c&oacute;mo se consumen:</p>
+
+<pre class="language-javascript"><code>//Creando la promesa
+const requestPosts = (url) =>
+	new Promise((resolve, reject) => {
+		const req = new XMLHttpRequest();
+		req.open('GET', url);
+
+		req.onload = () =>
+			(req.status == 200)
+				? resolve((req.response)
+				: reject(req.status);
+
+		req.send();
+	})
+
+//Consumiendo la promesa
+const url = 'https://jsonplaceholder.typicode.com/posts'
+
+requestPosts(url)
+	.then(r =>
+    	console.log(JSON.parse(r))
+  	)
+  	.catch((e) =>
+    	console.log(`Error: ${e}`)
+  	);
+</code></pre>
+
+<p>Desafortunadamente, las promesas no son la panacea. Representan una mejora con respecto a los <em>callbacks</em>, pero tienen una deficiencia importante: solo producen un valor &uacute;nico. Esto es un factor limitante a la hora de manejar eventos recurrentes, como clics del <em>mouse</em> o flujos de datos provenientes del servidor, ya que tendr&iacute;amos que preocuparnos de cada evento por separado en lugar de controlar el flujo de eventos tal como viene dado. </p>
+<h3><em>Async / Await</em></h3>
+<p>Desde la versi&oacute;n ES8 de JavaScript, ya tenemos disponible el patr&oacute;n <strong><em>async/await</em></strong><strong>. </strong>Esta caracter&iacute;stica heredada de otros lenguajes como c# nos permite resolver promesas escribiendo c&oacute;digo con un estilo s&iacute;ncrono, es decir, a&ntilde;ade az&uacute;car sint&aacute;ctico a las promesas.</p>
+<p>Para usar <strong><em>async/await</em></strong> debemos declarar una funci&oacute;n con el modificador <em>async</em>. Esto nos <strong>permite a&ntilde;adir el modificador </strong><strong><em>await</em></strong><strong> delante de la expresi&oacute;n as&iacute;ncrona en dicha funci&oacute;n, deteniendo la ejecuci&oacute;n hasta que se resuelva la expresi&oacute;n.</strong></p>
+<p>La promesa del ejemplo anterior la podr&iacute;amos consumir as&iacute;:</p>
+<pre class="language-javascript"><code>async function main(){
+    const url = 'https://jsonplaceholder.typicode.com/posts'
+    const response = await requestPosts(url)
+
+    console.log(response)
+}
+</code></pre>
+
+<p><em>A priori</em>, queda un c&oacute;digo mucho m&aacute;s elegante, adem&aacute;s de resolver el problema de la anidaci&oacute;n de promesas. El problema viene con el tratamiento de los errores, y es que debemos &ldquo;envolver&rdquo; nuestro c&oacute;digo en bloques <em>try catch</em>, con lo cual el manejo de errores se vuelve muy tedioso:</p>
+
+<pre class="language-javascript"><code>async function main(){
+	const url = 'https://jsonplaceholder.typicode.com/posts'
+	try{
+        const response = await requestPosts(url)
+        console.log(response)
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+</code></pre>
+
+<p>En los siguientes p&aacute;rrafos veremos c&oacute;mo RxJS nos puede ayudar a solucionar estas limitaciones, pero antes veamos qu&eacute; es la programaci&oacute;n reactiva.</p>
+
+<h2>&iquest;Qu&eacute; es la programaci&oacute;n reactiva?</h2>
+<p>Seg&uacute;n el <strong><em>Reactive Manifesto</em></strong>, la programaci&oacute;n reactiva es un paradigma enfocado en el trabajo con <em>stream</em> de datos de manera as&iacute;ncrona. En este se establece las bases de los sistemas reactivos, los cuales deben ser:</p>
+<ul>
+    <li><strong>Responsivos</strong>: aseguran la calidad del servicio cumpliendo unos tiempos de respuesta establecidos.</li>
+    <li><strong>Resilientes</strong>: se mantienen responsivos incluso cuando se enfrentan a situaciones de error.</li>
+    <li><strong>El&aacute;sticos</strong>: se mantienen responsivos incluso ante aumentos en la carga de trabajo.</li>
+    <li><strong>Orientados a mensajes</strong>: minimizan el acoplamiento entre componentes al establecer interacciones basadas en el intercambio de mensajes de manera as&iacute;ncrona.</li>
+</ul>
+<h3>&iquest;Qu&eacute; son los </strong><strong><em>streams</em></strong>?</h3>
+<p>Para entender la programaci&oacute;n reactiva, debemos entender lo que son los <em>streams</em>. Podr&iacute;amos decir que un <em>stream</em> es un tipo de colecci&oacute;n, al igual que un <em>array</em> o un <em>string</em>, en este caso, de eventos o elementos futuros. La diferencia radica en que los <em>stream</em> no est&aacute;n disponibles de forma s&iacute;ncrona y que, adem&aacute;s, desconocemos su tama&ntilde;o.</p>
+<p>Un <em>stream</em> puede provenir de m&uacute;ltiples fuentes, como por ejemplo:</p>
+<ul>
+    <li>Eventos del DOM - (eventos del rat&oacute;n, eventos del teclado, eventos de formularios, etc.)</li>
+    <li>Animaciones</li>
+    <li>Peticiones HTTP </li>
+    <li><em>WebSockets</em></li>
+    <li>Lectura o escritura de ficheros.</li>
+    <li>Llamadas a base de datos</li>
+</ul>
+<h2>&iquest;Qu&eacute; es RxJS?</h2>
+<p>RxJS es una implementaci&oacute;n para JavaScript de las <em>Reactive Extensions</em>. Estas fueron desarrolladas por Erik Meijer en Microsoft en el 2009. B&aacute;sicamente son una librer&iacute;a para trabajar con <em>streams</em> mediante el uso de observables.</p>
+<blockquote>Las Rx est&aacute;n implementadas en m&aacute;s de 18 lenguajes de programaci&oacute;n. En el mundo de Javascript tambi&eacute;n son conocidas como el &ldquo;Lodash&rdquo; de los eventos.</blockquote>
+<p>Esta librer&iacute;a nos proporciona un marco de trabajo en el que todo gira alrededor del tipo b&aacute;sico, el &ldquo;observable&rdquo;, el cual simplemente representa un <em>stream</em> de datos. Adem&aacute;s, disponemos de otros tipos complementarios como &ldquo;<em>observer, schedulers, subjects</em>&rdquo; y operadores inspirados en <em>Arrays</em> &ldquo;<em>map, filter, reduce</em>&rdquo;, etc; los cuales nos permiten el manejo de eventos as&iacute;ncronos como colecciones. En p&aacute;rrafos posteriores, veremos los operadores m&aacute;s importantes.</p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943598/posts/introduccion-programacion-reactiva-rxjs/observables.png" alt="observable"/>
+<h3><em>Observer</em> e <em>Iterator</em></h3>
+<p>Para entender qu&eacute; son y de d&oacute;nde provienen los observables, debemos entender sus bases, el patr&oacute;n observer y el patr&oacute;n iterator.</p>
+<p><strong>Patr&oacute;n </strong><strong><em>observer</em></strong></p>
+<p>La filosof&iacute;a del patr&oacute;n observador es sencilla: un objeto, denominado sujeto (<em>subject</em>), posee un estado. Si dicho estado cambia, es capaz de &ldquo;notificar&rdquo; a sus suscriptores (<em>ob</em><em>servers</em>) de este cambio. Gracias a ello, los objetos suscritos al objeto <em>subject</em> no tienen por qu&eacute; preocuparse de cu&aacute;ndo se produce un cambio de estado, ya que este se encargar&aacute; de informar de forma activa a todos aquellos objetos que hayan decidido suscribirse. </p>
+<p>Veamos una implementaci&oacute;n b&aacute;sica de dicho patr&oacute;n:</p>
+
+
+<pre class="language-javascript"><code>class Subject {
+    constructor(){
+        this.observers = []
+    }
+
+    add(obs){
+	  this.observers = this.observers.concat(obs)
+    }
+
+    delete(obs){
+	  this.observers = this.observers.filter(l => l !== obs)
+    }
+
+    notify(msg){
+	  this.observers.map(obs => obs.update(msg))
+    }
+}
+</code></pre>
+
+<p>Como podemos comprobar, la implementaci&oacute;n es muy sencilla. Si creamos una instancia de esta clase, el objeto <em>subject</em> contiene una lista de <em>observers</em>. Estos <em>observers</em> se pueden a&ntilde;adir a trav&eacute;s de <em>add,</em> o eliminar a trav&eacute;s del m&eacute;todo <em>delete</em>. Adem&aacute;s, por medio del m&eacute;todo <em>notify</em>, podemos notificar a dichos <em>observers</em>. </p>
+<p>Veamos un ejemplo de c&oacute;mo funciona:</p>
+
+<pre class="language-javascript"><code>const observer1 = {
+	update: msg => console.log(`observer 1: ${msg}`)
+}
+
+const observer2 = {
+	update: msg => console.log(`observer 2: ${msg}`)
+}
+
+const subject = new Subject()
+subject.add(observer1)
+subject.add(observer2)
+subject.notify("Hello");
+//observer 1: Hello
+//observer 2: Hello
+</code></pre>
+
+<p>Como podemos observar en el c&oacute;digo anterior, <em>observer1</em> y <em>observer2</em> son notificados cada vez que el objeto <em>subject</em> actualiza su estado interno. Esta implementaci&oacute;n es muy sencilla, pero nos sirve para ilustrar c&oacute;mo el patr&oacute;n observador nos permite desacoplar los eventos y la reacci&oacute;n de los objetos que est&aacute;n a la escucha. </p>
+<p><strong>Patr&oacute;n </strong><strong><em>Iterator</em></strong></p>
+<p>La otra pieza fundamental del puzle es el patr&oacute;n <em>iterator</em>. El objetivo de este patr&oacute;n es proporcionarnos una manera de acceder a los elementos de un objeto agregado, de forma secuencial, sin exponer sus detalles. Es decir, proporciona a una colecci&oacute;n un medio para navegar por sus datos sin exponer su estructura interna.</p>
+<p>La implementaci&oacute;n del iterador es muy simple, tan solo necesita la especificaci&oacute;n de dos m&eacute;todos: next (), para obtener el siguiente elemento en la colecci&oacute;n, y hasNext (), para verificar si quedan elementos en dicha colecci&oacute;n. </p>
+
+<pre class="language-javascript"><code>class CustomIterator {
+    constructor(collection) {
+        this.index = 0;
+        this.collection = collection;
+    }
+
+    next = () =>
+        this.hasNext()
+            ? this.collection[this.index++]
+            : null
+
+    hasNext = () =>
+        this.index + 1 < this.collection.length;
+}
+
+const customIterator = new CustomIterator([1,2,3,4])
+console.log(customIterator.next(), consumer.hasNext()) //1, true
+</code></pre>
+
+<p>Como vemos, es un patr&oacute;n extremadamente simple, pero nos proporciona una excelente forma de encapsular la l&oacute;gica mediante la cual recorremos cualquier tipo de estructura de datos. La combinaci&oacute;n de este patr&oacute;n junto con el patr&oacute;n <em>observer</em> nos es tremendamente efectiva y es la base de los observables de las <em>Reactive Extensions.</em></p>
+<h2>Qu&eacute; es un observable</h2>
+<p>Tras analizar sus fundamentos, veamos qu&eacute; entendemos por <strong>observable.</strong> &nbsp;Como podemos imaginar, el tipo observable es el eje central de Rx. Simplemente representa la idea de una colecci&oacute;n de valores o eventos futuros. &nbsp;</p>
+<p>Los valores o eventos se emiten en orden, igual que en el patr&oacute;n <em>iterator</em>. En lugar de que sean los objetos que lo consumen los que solicitan el siguiente elemento, es el propio observable el que &ldquo;empuja&rdquo; los siguientes elementos a los objetos suscritos, a medida que estos est&aacute;n disponibles, tal como suced&iacute;a en el <em>subject</em> del patr&oacute;n <em>observer</em>.</p>
+<h3>Caracter&iacute;sticas: </h3>
+<ul>
+    <li>Proporcionan soporte para enviar mensajes entre <em>publishers</em> y <em>subscribers</em>.</li>
+    <li>Ofrecen beneficios significativos sobre otras t&eacute;cnicas a la hora de trabajar con eventos y manejar la asincron&iacute;a.</li>
+    <li>Los observables son <em>lazy</em> (perezosos). No comienzan a emitir datos hasta que te suscribes a ellos.</li>
+    <li>Al igual que los iteradores, un observable puede indicar cu&aacute;ndo se completa la secuencia.</li>
+    <li>Nos permiten declarar c&oacute;mo reaccionar a una secuencia de elementos, en lugar de tener que reaccionar a los elementos de forma individual.</li>
+</ul>
+<p><strong>Ejemplo de observable</strong></p>
+<p>Antes de continuar, veamos una implementaci&oacute;n sencilla de c&oacute;mo consumir un observable:</p>
+
+<pre class="language-javascript"><code>import { fromEvent } from 'rxjs';
+const link = document.getElementById("customLink");
+
+const obs = {
+    next: function(value) {
+        console.log(value);
+    },
+    error: function(err) {
+        console.error(err);
+    },
+    complete: function() {
+        console.log("Completed");
+    }
+};
+
+// Create an Observable from event
+const observable = fromEvent(link, "click");
+// Subscribe to begin listening for async result
+observable.subscribe(obs);
+</code></pre>
+
+<p>Lo primero que hacemos es crear un observable a partir de un evento, en concreto del evento clic de un enlace con la id &ldquo;customLink&rdquo;. A continuaci&oacute;n, nos suscribimos a dicho observable por medio de la funci&oacute;n <strong>subscribe</strong>, pas&aacute;ndole el objeto &ldquo;obs&rdquo;, que cumple con la interfaz <strong>observer. </strong></p>
+<h3><em>Subscription</em> y <em>observer</em></h3>
+<p>En el ejemplo anterior aparecen dos conceptos b&aacute;sicos de Rx: <strong><em>subscription</em></strong> y <strong><em>observer</em></strong>. </p>
+<p><strong><em>Subscription</em></strong> representa la ejecuci&oacute;n de un observable. Como hemos comentado, los observables son <em>lazy</em>, por lo tanto, hasta que no nos suscribimos a ellos, no comienzan a emitir valores. Los suscriptores tienen que implementar la interfaz de observador.</p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943598/posts/introduccion-programacion-reactiva-rxjs/observables-subscribers.png" alt="observable-observers"/>
+
+<p><strong><em>Observer</em></strong> es un objeto que sabe reaccionar a los valores entregados por el observable. Para ello implementa la interfaz de observador. Dicha interfaz contiene los m&eacute;todos <strong>next()</strong>, <strong>error()</strong> y <strong>complete()</strong>. &nbsp;</p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943598/posts/introduccion-programacion-reactiva-rxjs/observable-process.png" alt="observable process"/>
+
+<p><strong><em>Next</em></strong><strong>() </strong>es el equivalente al m&eacute;todo <em>update</em> en el patr&oacute;n <em>observer</em>. Se llama cuando el observable emite un nuevo valor. <strong><em>Complete</em></strong><strong>() </strong>se ejecuta cuando no hay m&aacute;s datos disponibles. </p>
+<p>El m&eacute;todo <strong><em>error</em></strong><strong>()</strong> se ejecuta cuando se produce un error en el observable, al igual que <strong><em>complete</em></strong><strong>(). </strong>Una vez ejecutado, las siguientes llamadas no tendr&aacute;n efecto.</p>
+
+<h2>Visualizaci&oacute;n de observables</h2>
+<p>Para entender el comportamiento de los observables nos apoyaremos en los<strong> diagramas de </strong><strong><em>marbles</em></strong><strong> o canicas. &nbsp;</strong>Estos diagramas son muy clarificadores, ya que nos ayudan a simplificar el comportamiento de los observables y de los operadores que aplicamos sobre ellos, los cuales nos ayudar&aacute;n a visualizar de forma m&aacute;s clara el comportamiento de los operadores. </p>
+<p>En este tipo de diagramas el tiempo viene representado por la l&iacute;nea horizontal y los valores emitidos por el observable se encuentran representados por canicas. </p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943598/posts/introduccion-programacion-reactiva-rxjs/marble.png" alt="observable marble"/>
+
+<p>En el ejemplo tenemos un observable que emite los valores de un evento. Cada una de las canicas representa un elemento emitido, la &ldquo;x&rdquo; representa un error y la l&iacute;nea vertical indica que el observable ha dejado de emitir valores.</p>
+<h2>Operadores</h2>
+<p>Un operador es, en esencia, una funci&oacute;n pura que toma un observable como entrada y genera otro observable como salida. Existen docenas de operadores divididos en ocho categor&iacute;as: creacionales, de transformaci&oacute;n, de filtrado, condicionales, de combinaci&oacute;n, multidifusi&oacute;n, manejo de errores y de utilidad. </p>
+<p>A continuaci&oacute;n, veremos los m&aacute;s importante desde un punto de vista pragm&aacute;tico, mediante los cuales podremos realizar el 90% de las operaciones en cualquier proyecto real. </p>
+
+<h3>Operadores de creaci&oacute;n</h3>
+<p>RxJS nos ofrece una serie de operadores destinados a la creaci&oacute;n de observables. Estas funciones simplifican el proceso de creaci&oacute;n de observables a partir de elementos como <em>arrays</em>, eventos, <em>callbacks</em> o promesas.</p>
+<p><strong><em>Create</em></strong></p>
+<p>Es el operador de creaci&oacute;n m&aacute;s b&aacute;sico. Crea un observable a partir de una funci&oacute;n recibida y esta define c&oacute;mo el observable va a emitir los valores:</p>
+
+<pre class="language-javascript"><code>// RxJS v6+
+import { Observable } from 'rxjs';
+/*
+  Create an observable that emits 'Hello' and 'World' on
+  subscription.
+*/
+const hello = Observable.create((observer) => {
+  observer.next('Hello');
+  observer.next('World');
+});
+
+//output: 'Hello'...'World'
+const subscribe = hello.subscribe(val => console.log(val));
+</code></pre>
+
+<p><strong><em>From</em></strong></p>
+<p>Este operador de creaci&oacute;n convierte una colecci&oacute;n o una promesa en un observable:</p>
+<pre class="language-javascript"><code>// RxJS v6+
+import { from } from 'rxjs';
+
+//emit array as a sequence of values
+const arraySource = from([1, 2, 3, 4, 5]);
+//output: 1,2,3,4,5
+arraySource.subscribe(val => console.log(val));
+
+//emit result of promise
+const promiseSource = from(new Promise(resolve => resolve('Hello World!')));
+//output: 'Hello World'
+const subscribe = promiseSource.subscribe(val => console.log(val));
+
+//emit string as a sequence
+const source = from('Hello World');
+//output: 'H','e','l','l','o',' ','W','o','r','l','d'
+const subscribe = source.subscribe(val => console.log(val));
+</code></pre>
+<p><strong><em>fromEvent</em></strong></p>
+<p>Como su propio nombre indica, este operador convierte cualquier tipo de evento en un observable:</p>
+<pre class="language-javascript"><code>// RxJS v6+
+import { fromEvent } from 'rxjs';
+//convert the mousemove event stream of the DOM into an observable sequence.
+const source = fromEvent(document, 'mousemove');
+source.subscribe(e => console.log(e.clientX + ', ' + e.clientY));
+</code></pre>
+
+<h3>Operadores de filtrado</h3>
+<p>Como su propio nombre indica, son operadores destinados al filtrado de los valores emitidos por el observable. Estos operadores son los m&aacute;s sencillos y f&aacute;ciles de utilizar, ya que simplemente aceptan o rechazan ciertos valores seg&uacute;n los criterios de filtrado aplicados. Sin duda, en este apartado el m&aacute;s importante es <strong><em>filter</em></strong>.</p>
+<p><strong><em>Filter</em></strong></p>
+<p><em>Filter</em> se comporta igual que el operador est&aacute;ndar de JavaScript. Solo emitir&aacute; valores si cumple la condici&oacute;n dada por el predicado.</p>
+<img class="align-center" alt="filter" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943597/posts/introduccion-programacion-reactiva-rxjs/filter.png"/>
+<pre class="language-javascript"><code>// RxJS v6+
+import { from } from 'rxjs';
+import { filter } from 'rxjs/operators';
+
+const numbers = from([2, 30, 22, 5, 60, 1])
+
+
+numbers
+    .pipe(filter(n => n > 10))
+    .subscribe(n => console.log(n))
+</code></pre>
+
+<p>En este caso, el predicado devuelve solo los elementos de entrada mayor que 10. Por lo tanto, solo se emiten los valores 30, 22 y 60. </p>
+
+<h3>Operadores de transformaci&oacute;n</h3>
+<p>Existen multitud de operadores que nos permiten aplicar transformaciones elegantes a los observables, aunque en la pr&aacute;ctica los m&aacute;s utilizados son los cl&aacute;sicos <strong><em>map</em></strong> y <strong><em>reduce</em></strong>, adem&aacute;s de alg&uacute;n otro que deriva de estos como <strong><em>mergeMap (flatmap)</em></strong> y <strong><em>concatMap</em></strong>. Siendo pragm&aacute;ticos, con estos operadores tenemos lo necesario para la mayor&iacute;a de los casos. Los dem&aacute;s los estudiar&iacute;a bajo demanda, es decir, mientras los fuera necesitando.</p>
+<p><strong><em>Map</em></strong></p>
+<p>Transforma los elementos emitidos por un observable aplicando una funci&oacute;n a cada uno de los mismos. </p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943597/posts/introduccion-programacion-reactiva-rxjs/map.png" alt="map"/>
+<pre class="language-javascript"><code>// RxJS v6+
+import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+const numbers = from([1, 2, 3])
+
+numbers
+   .pipe(map(x => 10 * x))
+   .subscribe(n => console.log(n))
+
+</code></pre>
+
+<p>En el ejemplo, el observable de origen contiene tres elementos num&eacute;ricos (1, 2 y 3). <em>Map</em> toma el valor de cada uno de ellos y le aplica la funci&oacute;n recibida. En este caso multiplica por 10 cada uno de los elementos.</p>
+<p><strong><em>Reduce</em></strong></p>
+<p>Funciona igual que en los <em>Arrays</em> de JavaScript. Aplica una funci&oacute;n a un acumulador y a cada valor (de izquierda a derecha) para reducirlo a uno solo.</p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943598/posts/introduccion-programacion-reactiva-rxjs/reduce.png" alt="reduce"/>
+
+<pre class="language-javascript"><code>// RxJS v6+
+import { from } from 'rxjs';
+import { reduce } from 'rxjs/operators';
+
+
+const numbers = from([1, 2, 3, 4, 5])
+numbers
+	.pipe(reduce((x, y) => x + y))
+	.subscribe(n => console.log(n))
+</code></pre>
+
+<p><strong><em>mergeMap</em></strong></p>
+<p>Tambi&eacute;n como <strong><em>flatMap</em></strong>. Es un operador tremendamente potente. En muchas ocasiones se da la casu&iacute;stica en la que tenemos un observable cuyos elementos emitidos son tambi&eacute;n observables, con la complejidad que ello conlleva. Lo que va a hacer <strong><em>mergeMap</em></strong> es transformar un observable en otros observables y unificar la salida de los mismos bajo un solo <em>stream</em>.</p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943598/posts/introduccion-programacion-reactiva-rxjs/flatmap.png" alt="flatmap" />
+<pre class="language-javascript"><code>// RxJS v6+
+import { from, of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+
+const values = from([
+    of(1,2,3),
+    of(4,5,6),
+    of(7,8,9)
+])
+
+values
+	.pipe(mergeMap(v =>v))
+	.subscribe(v => console.log(v))
+</code></pre>
+<p>En este ejemplo, <em>value</em> es un observable que emite a su vez otros tres observables. <em>Flatmap</em> lo que hace es un <em>unwrap </em>de cada uno de estos observables emitiendo en la secuencia principal uno solo.</p>
+<p>Es importante tener en cuenta que <em>flatMap</em> no garantiza el orden en el <em>stream</em> resultante. </p>
+
+<p><strong><em>ConcatMap</em></strong></p>
+
+<p>Es similar a <em>flatMap</em>, aunque en este caso transforma un solo observable de origen a la vez. Por lo tanto, garantiza que los elementos emitidos en el <em>stream</em> resultante mantengan el mismo orden.</p>
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943598/posts/introduccion-programacion-reactiva-rxjs/concatmap.png" alt="concatmap" />
+
+<pre class="language-javascript"><code>​// RxJS v6+
+import { from, of } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
+
+const values = from([
+    of(1,2,3),
+    of(4,5,6),
+    of(7,8,9)
+])
+
+values
+	.pipe(concatMap(v =>v))
+	.subscribe(v => console.log(v))
+</code></pre>
+
+<p>Al igual que suced&iacute;a con <em>flatMap</em>, <em>concatMap</em> hace un <em>unwrap</em> de cada uno de estos observables, emitiendo en la secuencia principal un solo <em>stream</em> con la diferencia de que en este caso asegura el orden. </p>
+<h3>Operadores de combinaci&oacute;n</h3>
+<p>En multitud de ocasiones nos veremos en la casu&iacute;stica de tener que combinar m&aacute;s de un <em>stream</em> a la vez y es aqu&iacute; donde entra este tipo de operadores. Mi operador de combinaci&oacute;n preferido es <strong>zip.</strong></p>
+<p><strong>Zip</strong></p>
+<p>Combina las emisiones de m&uacute;ltiples observables aplicando la operaci&oacute;n de la funci&oacute;n opcional especificada en el &uacute;ltimo par&aacute;metro. </p>
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1546943598/posts/introduccion-programacion-reactiva-rxjs/zip.png" alt="zip" />
+
+<pre class="language-javascript"><code>​// RxJS v6+
+import { from, of } from 'rxjs';
+import { zip } from 'rxjs/operators';
+
+
+const numbers = of(1,2,3,4,5)
+const strings = of('a', 'b', 'c', 'd')
+
+zip(numbers, strings, (n,s)=>(n+s))
+	.subscribe(v => console.log(v))
+</code></pre>
+
+<p>El operador zip emitir&aacute; un observable resultante cuando cada observable de origen emita un nuevo elemento (previamente descomprimido). En la pr&aacute;ctica, muchas veces se suele utilizar para resolver varios observables a la vez, obteniendo los valores en la funci&oacute;n opcional.</p>
+
+<h2>Resumen</h2>
+<p>Este es el art&iacute;culo m&aacute;s largo que he escrito hasta el momento, pero creo que este es el post que me hubiera gustado encontrar hace unos a&ntilde;os cuando empec&eacute; a estudiar la programaci&oacute;n reactiva. Creo que es un buen resumen de c&oacute;mo manejar la complejidad de la asincron&iacute;a en general y, en particular, haciendo uso del paradigma reactivo junto con RxJS. Quiz&aacute;s se echa en falta alg&uacute;n ejemplo en un escenario real, pero eso lo dejar&eacute; para futuras entradas.</p>
+<p>Si te ha gustado la entrada, valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias. &iexcl;Estar&eacute; encantado de responder! </p>
+
+<p>Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a></p>
+
+<a class="aligncenter" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

@@ -10,8 +10,8 @@ xdescribe('HttpPostRepository', () => {
     let baseUri: string = 'http://localhost:3000';
 
     beforeAll(() => {
-        const requester = new HttpRequester();
-        repo = new HttpPostRepository(requester,baseUri);
+        const requester = new HttpRequester(baseUri);
+        repo = new HttpPostRepository(requester);
     });
 
     it('gets summarized posts', async () => {
@@ -62,7 +62,7 @@ xdescribe('HttpPostRepository', () => {
 });
 
 
-function fakePosts() {
+function fakePosts(): Post[] {
     return [
         {
             id: '1',
@@ -73,6 +73,8 @@ function fakePosts() {
             description: 'Description for first post',
             date: '2023-07-10',
             username: 'John Doe',
+            userPicture: 'user1.jpg',
+            category: 'Category 1',
             markdownBody: 'Content of the first post',
         },
         {
@@ -84,6 +86,8 @@ function fakePosts() {
             description: 'Description for second post',
             date: '2023-07-11',
             username: 'Miguel Gomez',
+            userPicture: 'user2.jpg',
+            category: 'Category 2',
             markdownBody: 'Content of the second post',
         },
     ];

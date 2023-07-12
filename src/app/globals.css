@@ -2,54 +2,63 @@
     /* Definición de variables para el tema 'light' */
     --bg-color-light: #ffffff;
     --text-color-light: #111827;
+    --text-secondary-color-light: #757575;
     --border-color-light: #ddd;
     --button-bg-color-light: #111827;
     --button-text-color-light: #fff;
     --link-color-light: #31adff;
     --icon-color-light: #888;
     --highlight-color-light: #000;
-
+    --bg-code-color-light: #fafafa;
     /* Definición de variables para el tema 'dark' */
     --bg-color-dark: #1c1c1c;
     --text-color-dark: #f0f0f0;
+    --text-secondary-color-dark: #f0f0f0;
     --border-color-dark: #444;
     --button-bg-color-dark: #555;
     --button-text-color-dark: #f0f0f0;
     --link-color-dark: #fde047;
     --icon-color-dark: #f0f0f0;
     --highlight-color-dark: #fff;
+    --bg-code-color-dark: #282c34;
 
     /* Inicializa las variables a los valores del tema 'light' */
     --bg-color: var(--bg-color-light);
     --text-color: var(--text-color-light);
+    --text-secondary-color: var(--text-secondary-color-light);
     --border-color: var(--border-color-light);
     --button-bg-color: var(--button-bg-color-light);
     --button-text-color: var(--button-text-color-light);
     --link-color: var(--link-color-light);
     --icon-color: var(--icon-color-light);
     --highlight-color: var(--highlight-color-light);
+    --bg-code-color: var(--bg-code-color-light);
 }
 
 [data-theme="light"] {
     --bg-color: var(--bg-color-light);
     --text-color: var(--text-color-light);
+    --text-secondary-color: var(--text-secondary-color-light);
     --border-color: var(--border-color-light);
     --button-bg-color: var(--button-bg-color-light);
     --button-text-color: var(--button-text-color-light);
     --link-color: var(--link-color-light);
     --icon-color: var(--icon-color-light);
     --highlight-color: var(--highlight-color-light);
+    --bg-code-color: var(--bg-code-color-light);
 }
 
 [data-theme="dark"] {
     --bg-color: var(--bg-color-dark);
     --text-color: var(--text-color-dark);
+    --text-secondary-color: var(--text-secondary-color-dark);
     --border-color: var(--border-color-dark);
     --button-bg-color: var(--button-bg-color-dark);
     --button-text-color: var(--button-text-color-dark);
     --link-color: var(--link-color-dark);
     --icon-color: var(--icon-color-dark);
     --highlight-color: var(--highlight-color-dark);
+    --bg-code-color: var(--bg-code-color-dark);
 }
 
 body {
@@ -84,7 +93,6 @@ h1{
     font-weight: bold;
     font-size: 2rem;
     font-style: italic;
-    text-align: center;
 }
 
 h2{
@@ -92,7 +100,6 @@ h2{
     font-size: 1.3rem;
     letter-spacing: 2px;
     line-height: 1.25rem;
-    text-align: center;
 }
 
 p{
@@ -107,4 +114,24 @@ input[type="email"]{
     background-color: var(--bg-color);
     color: var(--text-color);
     outline: none;
+}
+
+blockquote{
+    border-left: 7px solid var(--highlight-color);
+    font-style: italic;
+    margin: 10px auto;
+    padding: 0px 0px 15px 60px;
+    background-color: var(--bg-code-color);
+    width: 90%;
+}
+
+blockquote:before {
+    content: "“";
+    color: var(--highlight-color);
+    font-size: 96px;
+    line-height: 0;
+    position: relative;
+    left: -45px;
+    top: 60px;
+    font-style: normal;
 }

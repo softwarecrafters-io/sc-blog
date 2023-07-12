@@ -1,12 +1,11 @@
-import {NextResponse} from "next/server";
-import {NotionPostRepository} from "@/repositories/server/notionPostRepository";
+import {NextRequest, NextResponse} from "next/server";
 import {ServerFactory} from "@/factories/serverFactory";
 
-const handler = async () => {
-    const postRepository = ServerFactory.getPostRepository();
-    return postRepository.getAllPosts().toPromise();
+const controller = (request: NextRequest) => {
+    const blogService = ServerFactory.createBlogServiceWithLegacyPosts();
+    return  blogService.summarizedPosts().toPromise();
 }
 
-export  function GET(){
-    return handler().then(v => NextResponse.json(v));
+export async function GET(request: NextRequest){
+    return NextResponse.json(await controller(request));
 }

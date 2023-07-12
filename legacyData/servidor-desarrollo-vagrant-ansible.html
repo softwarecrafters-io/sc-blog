@@ -1,0 +1,178 @@
+<p>
+    <strong>Vagrant</strong> es una de esas herramientas&nbsp;que&nbsp;a priori parece que no tiene cabida en tu stack, pero una vez que comienzas&nbsp;a utilizarla se vuelve indispensable. <a href="http://miguelgomez.io/devops/instancias-de-digitalocean-con-vagrant/">En una entrada&nbsp;anterior</a> vimos como hacer uso de la misma&nbsp;con el driver de Digital Ocean<strong>, </strong>en ese&nbsp;caso&nbsp;para desplegar Droplets, aunque el&nbsp;objetivo principal de&nbsp;esta herramienta es crear <strong>entornos</strong> de <strong>desarrollo</strong>&nbsp;<strong>aislados</strong>.
+</p>
+
+<p>
+    Vagrant permite que el <strong>abastecimiento</strong> de&nbsp;las máquinas a través de&nbsp;un script Bash o por medio de cualquier herramienta de orquestación tipo&nbsp;<strong>Puppet</strong>, <strong>Salt</strong>, <strong>Cheff</strong> o <strong>Ansible</strong>. En&nbsp;esta ocasión utilizaremos Ansible para el aprovisionar&nbsp;nuestro entorno.
+</p>
+
+<p>
+    En esta serie de artículos veremos como crear&nbsp;un <strong>servidor</strong>&nbsp;de <strong>desarrollo</strong> aislado para <strong>Django</strong>. Te preguntarás, ¿pero si con&nbsp;<strong>Python</strong> ya tenemos <strong>virtualenv</strong>? Si, pero ya sabemos que virtualenv no es perfecto y en muchas ocasiones&nbsp;no aísla todo lo bien que debería. Además Vagrant nos permite&nbsp;replicar el entorno de producción en local, con todas las ventajas que conlleva desarrollar en el entorno que nos vamos a encontrar en&nbsp;producción. En este ejemplo utilizaremos&nbsp;<strong>Ubuntu 16.04</strong> cómo sistema operativo, <strong>Nginx</strong> de proxy inverso, <strong>Postgree </strong>como sistema gestor de base de datos y&nbsp;<strong>Gunicorn</strong>&nbsp;de servidor web.
+</p>
+
+<h3>Por qué Ansible</h3>
+
+<p>La diferencia principal entre Ansible y otras herramientas de orquestación, es que&nbsp;<strong>Ansible</strong> <strong>se comunica</strong> con el/los servidor/es <strong>vía SSH</strong>, &nbsp;no como Puppet o Chef que necesitan tener instaladas dependencias en el/los servidor/es para poder ser utilizados.</p>
+
+<p><strong>La principal ventaja de Ansible es su simplicidad</strong>, las tareas se definen &nbsp;en formato <strong>YAML</strong>, tiene&nbsp;una <strong>comunidad inmensa</strong> (cuenta más seguidores en Github que Salt, Puppet y Cheff juntos).&nbsp;Por si fuera poco está <strong>escrito en Python </strong>y permite el uso de plantillas <strong>Jinja 2</strong> para generar ficheros de configuración.</p>
+
+<p>Gracias a <strong>Ansible</strong> podremos replicar la máquina orquestada&nbsp;para desarrollo <strong>en producción</strong> sin demasiado coste adicional, dedicaré un artículo&nbsp;en el futuro para tratar esta problemática.</p>
+
+<h3>Requisitos</h3>
+
+<p>Antes que nada tenemos que tener instalado en nuestro equipo Vagrant y Ansible. Vagrant lo puedes descargar&nbsp;desde <a href="https://www.vagrantup.com/downloads.html">aquí</a>,&nbsp;<strong>Ansible</strong>&nbsp;lo puedes instalar con <strong>Brew</strong> o con <strong>PIP</strong>,&nbsp;tal como indican en la <a href="http://docs.ansible.com/ansible/intro_installation.html">documentación oficial</a>.</p>
+
+<h3><strong>Vagrantfile</strong></h3>
+
+<p>Comenzaremos creando un nuevo directorio para nuestro proyecto:</p>
+
+<pre class="language-batch"><code>mkdir -p ~/Projects/ansible-vagrant-django
+cd ~/Projects/ansible-vagrant-django
+</code></pre>
+
+<p>A continuación, ejecutaremos el comando <code class="prettyprint">Vagrant init</code> para crear un nuevo <code class="prettyprint">Vagrantfile</code> basado en <strong>Ubuntu 16.04</strong>:</p>
+
+<pre class="language-batch"><code>vagrant init geerlingguy/ubuntu1604
+</code></pre>
+
+<p>Debe haberse generado un fichero llamado <strong>Vagrantfile</strong> en la raíz del directorio. Este contiene <strong>información básica</strong> sobre la máquina que queremos aprovisionar, y multiples comentarios, los eliminamos&nbsp;y dejamos el fichero así:</p>
+
+<pre class="language-batch"><code>API_VERSION = "2"
+
+Vagrant.configure(API_VERSION) do |config|
+  config.vm.box = "geerlingguy/ubuntu1604"
+end
+</code></pre>
+
+<p>Vamos a necesitar una manera de acceder a nuestro servidor web una vez que la máquina esté lista, así que le indicaremos a Vagrant que mapee el puerto 8000 de nuestro equipo al puerto 8000 de la maquina virtual. Para ello, agrega el siguiente código:</p>
+
+<pre class="language-ruby"><code>config.vm.network "forwarded_port", guest: 80, host: 8080
+config.vm.network "public_network"
+</code></pre>
+
+<p>Para&nbsp;poder acceder vía SSH a nuestra máquina y que sincronice nuestro directorio de trabajo dentro de la máquina, necesitaremos añadir&nbsp;estás dos directivas:</p>
+
+<pre class="language-ruby"><code>config.ssh.forward_agent = true
+config.vm.synced_folder "./", "/var/www/djangoproject"
+</code></pre>
+
+<p>Por último, indicaremos que queremos aprovisionar la máquina con Ansible, y dónde va a encontrar el fichero con los comandos de ansible:</p>
+
+<pre class="language-ruby"><code>config.vm.provision :ansible do |ansible|
+  ansible.playbook = "provision/vagrant.yml"
+end
+</code></pre>
+
+<p>Una vez añadidos todos los requerimientos nuestro Vagrantfile quedará así:</p>
+
+<pre class="language-ruby"><code>
+    # -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+API_VERSION = "2"
+
+Vagrant.configure(API_VERSION) do |config|
+
+  config.vm.box = "geerlingguy/ubuntu1604"
+
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "public_network"
+
+  config.ssh.forward_agent = true
+  config.vm.synced_folder "./", "/var/www/djangoproject"
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provision/vagrant.yml"
+  end
+end
+</code></pre>
+
+<h3>Playbooks de Ansible</h3>
+
+<p>Un <strong>Playbook</strong> de <strong>Ansible</strong> es un fichero que permite definir todas las tareas que se van a realizar en uno o varios hosts&nbsp;(servidores), en este caso en nuestro servidor de desarrollo.</p>
+
+<p>Las <strong>tareas</strong> equivalen a uno o multiples&nbsp;<strong>comandos bash</strong>, cada una de las mismas hace uso de un modulo de Ansible. <strong>Los módulos</strong> son <strong>librerías</strong> que utiliza <strong>Ansible</strong> para controlar servicios, ficheros, paquetes o comandos, como por ejemplo <strong>apt</strong>, <strong>copy</strong> o <strong>service</strong>.</p>
+
+<p>Veamos como&nbsp;escribir nuestro primer Playbook, lo primero que debemos hacer es crear un directorio provision y dentro de este un fichero denominado vagrant.yml:</p>
+
+<pre class="language-yaml"><code>mkdir provision
+cd provision
+touch vagrant.yml
+</code></pre>
+
+<p>Seguidamente añadimos a nuestro playbook los hosts en los que se van a ejecutar las tareas, en este caso como estamos haciendo uso de Vagrant indicaremos que puede ejecutar las tareas en todos los servidores conocidos y además con permisos de usuario root (become yes):</p>
+
+<pre class="language-yaml"><code>- hosts: all
+  become: yes
+</code></pre>
+
+<h3>Tareas de Ansible</h3>
+
+<p>Tal como hemos dicho, las tareas (<strong>Tasks</strong>) de <strong>Ansible</strong>&nbsp;realizan&nbsp;su función ejecutando un modulo, son <strong>ejecutadas en orden</strong>, una cada vez <strong>en</strong> <strong>cada uno de los nodos</strong> definidos en la directiva ‘hosts’ (en este caso sólo tenemos el nodo de nuestra máquina virtual).<br> Cada una de las <strong>tareas</strong> tienen como mínimo un <strong>nombre</strong> y el <strong>módulo</strong> que ejecutan. Por ejemplo, instalar python-pip sería tan sencillo como esto:</p>
+
+<pre class="language-yaml"><code>- name: Install python pip
+  apt: name=python-pip
+</code></pre>
+
+<p>En este artículo, para evitar que&nbsp;se haga excesivamente extenso, solo crearemos la tarea “instalar los paquetes básicos”, dejaremos para la próxima entrada las tareas referentes a la configuración de <strong>PosgtgreeSQL</strong>, <strong>Nginx</strong>, <strong>Gunicorn</strong> y <strong>Django</strong>.<br> Dicha tarea quedaría tal que así:</p>
+
+
+<pre class="language-yaml"><code>- name: Install base packages
+  apt: name={{ item }} update_cache=yes state=installed
+  with_items:
+    - build-essential
+    - acl
+    - ntp
+    - htop
+    - git
+    - libpq-dev
+    - python-dev
+    - python-pip
+    - python-pycurl
+    - nginx
+    - gunicorn
+</code></pre>
+
+<p>En esta tarea estamos ejecutando el modulo apt, le estamos indicando que actualice la caché y que el estado de final de la tarea sea “installed”. La directiva “with_items” permite que la tarea se ejecute para cada uno de los paquetes indicados.</p>
+
+<p>Así luce nuestro playbook hasta el momento:</p>
+
+
+<pre class="language-yaml"><code>---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Install base packages
+      apt: name={{ item }} update_cache=yes state=installed
+      with_items:
+        - build-essential
+        - acl
+        - ntp
+        - htop
+        - git
+        - libpq-dev
+        - python-dev
+        - python-pip
+        - python-pycurl
+        - nginx
+        - gunicorn
+</code></pre>
+
+<p>Si a continuación ejecutamos el comando <code class="prettyprint">vagrant up</code>&nbsp;se “levantará” nuestra máquina con la “box” asignada, en este caso Ubuntu 16.04, y la configuración que hemos indicado en el vagrantfile.</p>
+
+<p>Una vez terminado este proceso, y sólo si es la primera vez que se ejecuta, comenzará el aprovisionamiento de&nbsp;la máquina con nuestro playbook de Ansible. Si añadimos tareas a posteriori al playbook podemos volver a ejecutar el aprovisionamiento con el comando <code class="prettyprint">vagrant provision</code>.</p>
+
+<h3>Resumen</h3>
+
+<p>En esta entrada hemos visto cómo configurar un servidor de desarrollo casi genérico usando Vagrant y Ansible.&nbsp;He dejado muchas cosas en el tintero, pero el post se estaba haciendo demasiado largo. En el siguiente entraré en materia en lo referente a la configuración del stack de Django y continuaré profundizando en lo que a Ansible se refiere, trateré temas como&nbsp;Roles, Handlers, Vars y demás.</p>
+
+<p>
+    Si te ha gustado la entrada valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.
+</p>
+
+<p>
+    Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a>
+</p>
+
+<a class="aligncenter" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

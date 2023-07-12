@@ -1,0 +1,404 @@
+<p>
+    Hoy me toca escribir sobre otra de las tecnologías que uso en varios de los proyectos en los que trabajo, <strong>ReactJS</strong>. Se que existe muchísima información en la red sobre esta librería, aunque en muchos casos inconexa.
+</p>
+<p>
+    El objetivo de este artículo es tratar de organizar y condensar los conceptos fundamentales para comenzar a utilizar esta tecnología desarrollando un ejemplo práctico (<a href="https://softwarecrafters.io/demos/intro-reactjs" target="_blank" rel="noopener">demo</a>).
+</p>
+<h2>¿Qué es React.js?</h2>
+<p>
+    Como muchos ya sabréis, <strong>ReactJS</strong> es una <strong>librería Javascript</strong> desarrollada por <strong>Facebook</strong> y diseñada para ayudarnos a crear<strong> SPA's</strong> (Single Page Application), su objetivo concretamente es tratar de facilitar la tarea de <strong>desarrollar interfaces</strong> de usuario. Podríamos decir que React es la <strong>V </strong>en un contexto en el que se use el patrón MVC o MVVM.
+</p>
+
+<p>
+    Hace uso del paradigma denominado  <a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_componentes" target="_blank" rel="noopener">programación orientada a componentes</a>. Dichos componentes se representan como clases que heredan de la clase <code>Component</code> cuyo único requerimiento especial es especificar el método render que define cuál será el contenido del mismo:
+</p>
+<pre class="language-javascript"><code>class MyComponent extends React.Component {
+  render() {
+    return (
+      &lt;h1&gt;Hello World&lt;/h1&gt;
+    );
+  }
+}</code>
+</pre>
+
+<p>
+    La definición de dichos componentes se realiza usando una sintaxis especial llamada <strong>JSX</strong> que permite escribir etiquetas HTML dentro de JavaScript para mejorar la expresividad del código. Usar JSX no es obligatorio, pero si es muy recomendable. Para más información sobre JSX puedes consultar la <a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank" rel="noopener">documentación oficial</a>.
+</p>
+<h2>Configuración del entorno mediante "Create React App"</h2>
+
+<p>
+    Normalmente cuando vamos a construir una aplicación Web con Javascript tendremos que lidiar con una cantidad de ingente de herramientas como  gestores de paquetes, transpiladores, linkers, builders, etc. El equipo de desarrollo de Facebook ha sabido ver esta problemática y se ha sacado de la manga el proyecto <a href="https://github.com/facebookincubator/create-react-app" target="_blank" rel="noopener">Create React App</a>, el cual realizará por nosotros toda la configuración inicial necesaria para poder empezar a desarrollar con React.
+</p>
+
+<p>
+    <strong>Create React App</strong> se puede utilizar con el nuevo gestor de dependencias <a href="https://yarnpkg.com/en/" target="_blank" rel="noopener">Yarn</a>, creado también por la gente de Facebook, o con el clásico <strong>NPM</strong>. En el artículo haré uso de NPM, aunque te aconsejo que le des una oportunidad a Yarn, tiene muy buena pinta.
+</p>
+
+<p>
+    El único requisito imprescindible para poder hacer uso de Create React App con NPM es tener instalado en el sistema una versión de <a href="https://nodejs.org/es/" target="_blank" rel="noopener">NodeJs</a> &gt;= 4. Si ya dispones de npm puedes instalar <code>create react app</code> como cualquier otro paquete:
+</p>
+
+<pre class="language-javascript"><code>npm install -g create-react-app</code></pre>
+<p>
+    Una vez instalado puedes inicializar el proyecto:
+</p>
+<pre class="language-javascript"><code>create-react-app MyWebApp</code></pre>
+<p>
+    Con este simple gesto tendrás configurado<a href="http://www.ecma-international.org/ecma-262/6.0/" target="_blank" rel="noopener"> JavaScript ES6</a> con <a href="https://facebook.github.io/react/">React</a>, <a href="https://webpack.github.io/" target="_blank" rel="noopener">Webpack</a>, <a href="https://babeljs.io/" target="_blank" rel="noopener">Babel</a> y <a href="http://eslint.org/" target="_blank" rel="noopener">Eslint</a>, nada de instalar dependencias, ni de crear tareas. Está todo listo para ejecutar el servidor de desarrollo, y probar la aplicación:
+</p>
+<pre class="language-javascript"><code>cd MyWebApp
+npm start</code></pre>
+
+<p>Con el servidor corriendo, dirígete a la url 127.0.0.1:3000 para ver la aplicación en funcionamiento:</p>
+
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544294255/posts/tutorial-react-js-introduccion/create-react-app.png" alt="create-react-app" width="765" height="309" />
+
+
+<p>
+    El proyecto generado tendrá una estructura tal que así:
+</p>
+
+<pre class="language-javascript"><code>```
+MyWebApp/
+  README.md
+  node_modules/
+  package.json
+  public/
+    index.html
+    favicon.ico
+  src/
+    App.css
+    App.js
+    App.test.js
+    index.css
+    index.js
+    logo.svg
+```</code></pre>
+
+<ul>
+    <li><strong>node_modules</strong>: contiene las dependencias npm del proyecto</li>
+    <li><strong>public</strong>: esta es la raíz de nuestro servidor donde se podrá encontrar el index.html, el archivo principal y el favicon.</li>
+    <li><strong>src</strong>: es el directorio principal donde vamos a colocar los archivos de nuestros componentes.</li>
+</ul>
+
+<p>
+    Además encontrarás varios archivos sueltos, un readme, el .gitignore y el <strong>package.json</strong>, este último contiene las dependencias de npm además de la información del proyecto.
+</p>
+
+<p>
+    Es importante tener en cuenta que para que Create React App funcione correctamente tenemos que tener obligatoriamente el fichero principal de html en "public/index.html" y punto de entrada de javascript en "scr/index.js".
+</p>
+
+<h2>La app de ejemplo</h2>
+<p>
+    La app que se va a desarrollar constará de un formulario en el que el usuario podrá introducir un nombre y un email, y estos se añadirán a un listado (<a href="" target="_blank" rel="noopener">demo</a>).
+</p>
+<p>
+    La web app estará formada por tres componentes que iremos construyendo a lo largo del artículo, <code>User</code>, <code>UserList</code>, <code>UserForm </code>; además del componente principal (<code>App</code>) y el punto de entrada (<code>index.js</code>. Puedes descargar el ejemplo completo desde mi cuenta de <a href="https://github.com/miguelghz/Intro-ReactJS" target="_blank" rel="noopener">Github</a>.
+</p>
+<h3>El componente principal y el punto de entrada javascript</h3>
+<p>
+    Como he comentado el punto de entrada a la aplicación es el fichero scr/index.js, en este se inicializa el componente principal App.js, a través del método <code>ReactDOM.Render</code>. Dicho método recibe como primer parámetro el componente a renderizar y como segundo el elemento del DOM donde el componente va ser renderizado:
+</p>
+<pre class="language-javascript"><code>import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(
+  &lt;App /&gt;,
+  document.getElementById('root')
+);
+
+</code></pre>
+<p>A continuación vemos el código auto-generado que corresponde al componente principal:</p>
+
+<pre class="language-javascript"><code>import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+class App extends Component {
+  render() {
+    return (
+      &lt;div className="App"&gt;
+        &lt;div className="App-header"&gt;
+          &lt;img src={logo} className="App-logo" alt="logo" /&gt;
+          &lt;h2&gt;Bienvenido a React&lt;/h2&gt;
+        &lt;/div&gt;
+          &lt;p className="App-intro"&gt;
+            Lista de usuarios
+          &lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default App;
+
+</code></pre>
+
+<p>
+    Antes de continuar desarrollando el ejemplo voy eliminar unas cuantas líneas de este componente para dejarlo, por ahora, lo más simple posible:
+</p>
+
+<pre class="language-javascript"><code>import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    return (
+      &lt;h1&gt;Hello World!&lt;/h1&gt;
+    );
+  }
+}
+
+export default App;
+
+</code></pre>
+
+<p>
+    En la primera línea <code>import React… </code> se está importando la librería React y la clase Component de la cual van a heredar todos los componentes que se creen mediante clases. Éstas requieren del método <code>render()</code> para poder funcionar.
+</p>
+
+<p>
+    En la versión previa de Javascript se utilizaba la función <code>React.createClass</code> para inicializar componentes, gracias a ES6 y a su azúcar sintáctico, esto se ha simplificado.
+</p>
+<h2>Propiedades (props) de react</h2>
+
+<p>
+    Las propiedades de un componente (props) pueden definirse como los atributos de configuración para dicho componente. Éstas son recibidas desde un nivel superior, normalmente al realizar la  instanciación del componente y por definición son inmutables.
+</p>
+
+<p>
+    Siguiendo con el ejemplo, voy a implementar el componente <code>User</code>, el cual contiene dos props <code>name</code> y <code>user</code>, las cuales redenrizará en un elemento de lista <code>li</code>.
+</p>
+
+<pre class="language-javascript"><code>import React, { Component } from 'react';
+
+class User extends Component {
+  render () {
+    return (
+      &lt;li&gt;
+        {this.props.name} - {this.props.email}
+      &lt;/li&gt;
+    );
+  }
+}
+
+export default User;
+</code></pre>
+
+<p>
+    Las props, basicamente, son el mecanismo principal de React para pasar datos de un componente padre a un componente hijo.
+</p>
+
+<h3>Anidación de componentes</h3>
+<p>
+    Una vez creado el componente User, definiremos el componente <code>UserList</code>, cuyo objetivo será renderizar una lista de componentes <code>User</code>:
+</p>
+<pre class="language-javascript"><code>class UserList extends Component {
+  render () {
+    return (
+        &lt;ul&gt;
+          {this.props.users.map(u =&gt; {
+            return (
+              &lt;User
+                key={u.id}
+                name={u.name}
+                email={u.email}
+              /&gt;
+            );
+          })}
+        &lt;/ul&gt;
+    );
+  }
+}
+</code></pre>
+<p>
+    En el código del componente anterior renderizará una lista de usuarios, para ello hace uso del método <code>map</code>, con el cual itera sobre cada uno de los elementos del array de usuarios que contiene la propiedad <code>this.props.users</code>, esta prop será recibida desde el componente <code>App</code>.
+</p>
+
+<p>
+    Map devuelve por cada elemento un componente <code>User</code>, el cual recibe vía props el nombre, el email y una key. La propiedad key es un identificador que usa React en las listas, para renderizar los componentes de forma más eficiente.
+</p>
+
+<h2>Estado en los componentes</h2>
+<p>
+    Podría definirse el estado de un componente como una representación del mismo en un momento concreto, algo así como una instantánea del componente. Dicho estado se iniciará con un valor por defecto.
+</p>
+
+<p>
+    Existen dos tipos de componentes con y sin estado, también denominados statefull y stateless,  respectivamente.
+</p>
+<h3>Componentes stateless</h3>
+<p>
+    Todos los componentes implementados hasta el momento han sido stateless, sin estado. Este tipo de componentes podrían representarse como una función pura:
+</p>
+<pre class="language-javascript"><code>
+    function User(props) {
+    return (
+        &lt;li&gt;{props.name} - {props.email}&lt;/li&gt;
+    );
+}
+</code></pre>
+<p>
+    Las funciones puras por definición no tienen efectos colaterales, con lo cual este tipo de componentes no admite ciclos de vida. Para no complicar las cosas, continuaremos creando nuestros componentes como clases.
+</p>
+<h3>Componentes statefull</h3>
+<p>
+    Los componentes con estado permiten mantener datos propios a lo largo del tiempo e implementar comportamientos en sus diferentes métodos del ciclo de vida.
+</p>
+<h3>El ciclo de vida de un componente en React</h3>
+<p>
+    El ciclo de vida no es más que una serie de estados por los cuales pasa todo componente a lo largo de su existencia, basicamente se pueden clasificar en tres etapas de montaje o inicialización, actualización y destrucción. Dichas etapas tienen correspondencia en diversos métodos, que nosotros podemos implementar para realizar acciones concretas cuando estos van sucendiendo. Aunque en el ejemplo que estamos desarrollando no voy a hacer uso del ciclo de vida, haré un pequeño inciso para describir sus métodos sin profundizar excesivamente:
+</p>
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544294255/posts/tutorial-react-js-introduccion/Cheatsheet-life-cicle.jpg" alt="Ciclo de vida de los componentes en React" width="736" height="605" />
+
+<p><strong>Métodos de inicialización:</strong></p>
+<ul>
+    <li><code>componentWillMount()</code>: se ejecuta antes de que se renderice el componente por primera vez, es muy util para manejar ciertos datos necesarios para la representación del componente o declarar ciertos eventos. Las referencias a los elementos del componente aun no están disponibles.</li>
+    <li><code>componentDidMount()</code>: se dispara justo después del primer renderizado, es decir el DOM ya está disponible. Este es el sitio adecuado para realizar peticiones AJAX, setIntervals o integrar librerías de terceros.</li>
+</ul>
+<p><strong>Métodos de actualización:</strong></p>
+<ul>
+    <li><code>componentWillReceiveProps(nextProps)</code>: es ejecutado cuando las propiedades se van a actualizar, recibe el próximo valor que va a tener el objeto de propiedades.</li>
+    <li><code>shouldComponentUpdate(nextProps, nextState)</code>: se lanza antes del render y decide si nuestro componente se re-renderiza o no. Recibe dos parametros, las nuevas propiedades y el nuevo estado.</li>
+    <li><code>componentWillUpdate(nextProps, nextState)</code>: se ejecutará justo después de que shouldComponentUpdate devuelva true, está pensado para preparar al componente para su actualización por lo que se debe evitar modificar estados en este punto.</li>
+    <li><code>componentDidUpdate(prevProps, prevState)</code>: se invoca justo después de haberse producido la actualización del componente, los cambios ya están trasladados al DOM.</li>
+</ul>
+
+<p>
+    <strong>Métodos de desmontaje:</strong>
+</p>
+
+<ul>
+    <li><code>componentWillUnmount()</code>: es el único método que interviene en el desmontaje de un componente, es invocado justo antes de que el componente se desmonte, es ideal para realizar operaciones de limpieza como listeners de eventos o temporizadores.</li>
+</ul>
+
+<p>
+    Continuando con el ejemplo, voy a modificar el componente App para asignarle un estado inicial que almacene un array con varios objetos "user". Para ello sobreescribiremos el método constructor del componente asignando  al estado inicial (<code>this.state</code>) el array de usuarios.
+</p>
+
+<p>
+    Finalmente, en el método render renderizará un componente del tipo <code>UserList</code>, al cual se le pasa el estado a través de la prop <code>users</code>. Quedando el componente tal que así:
+</p>
+
+<pre class="language-javascript"><code>
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      users: [
+        {id: 1, name: "miguel", email: "test@miguelgomez.io"},
+        {id: 2, name: "test", email: "test@test.es"}
+      ]
+    };
+  }
+
+  render() {
+    return (
+        &lt;UserList users={this.state.users} /&gt;
+    );
+  }
+}
+</code></pre>
+
+<p>
+    Gracias al estado se pueden añadir nuevos usuarios al array los cuales se renderizarán automáticamente. Esto es posible ya que, como hemos visto en los ciclos de vida, el estado tiene la particularidad de que cuando cambia el método render vuelve a ejecutarse.
+</p>
+
+<h2>Propagación de eventos</h2>
+
+<p>Los eventos, al contrario que las propiedades, se propagan de hijos a padres. Es decir, son lanzados por los componentes hijos y el padre es el encargado de gestionarlos.</p>
+
+<p>
+    Veamos esto en nuestro ejemplo, para ello vamos añadir al componente UserForm un formulario con dos campos, uno para el email y otro para el nombre.
+</p>
+
+<pre class="language-javascript"><code>
+import React, { Component } from 'react'
+
+export default class UserForm extends Component{
+  render(){
+    return (
+      &lt;form onSubmit={this.props.onAddUser}&gt;
+          &lt;input type="text" placeholder="Nombre" name="name" /&gt;
+          &lt;input type="email" placeholder="Email" name="email" /&gt;
+          &lt;input type="submit" value="Guardar" /&gt;
+      &lt;/form&gt;
+    );
+  }
+}
+</code></pre>
+<p>
+    Cada vez que se pulse el botón guardar el formulario disparará el evento <code>onSubmit()</code>, el cual llama a una función que recibirá del componente padre a través de la propiedad <code>props.OnAddUser</code> (a esto se le conoce como <strong>Callback</strong>).
+</p>
+
+<p>
+    La función callback se define en el componente App, <code>handleOnAddUser(event)</code> y será la encargado de manejar el evento.
+</p>
+
+<pre class="language-javascript"><code>
+    class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      users: [
+        {id: 1, name: "miguel", email: "miguelghz@miguelgomez.io"},
+        {id: 2, name: "test", email: "test@test.es"}
+      ]
+    };
+  }
+
+  handleOnAddUser (event) {
+    event.preventDefault();
+    let user = {
+      name: event.target.name.value,
+      email: event.target.email.value
+    };
+    this.setState({
+      users: this.state.users.concat([user])
+    });
+  }
+
+  render() {
+    return (
+        &lt;div&gt;
+          &lt;UserList users={this.state.users}  /&gt;
+          &lt;UserForm onAddUser={this.handleOnAddUser.bind(this)} /&gt;
+        &lt;/div&gt;
+    );
+  }
+}
+</code></pre>
+
+<p>
+    El método <code>handleOnAddUser</code> recibe como parámetro un objecto event, el cual contiene toda la información del evento, tanto su comportamiento como los valores de los inputs del formulario. Para evitar que el evento dispare su comportamiento por defecto (en este caso recargar la página), ejecutaremos el método <code>preventDefault()</code> antes de capturar los valores de los campos "name" y "user".
+</p>
+
+<p>
+    Por último, actualizaremos el array, para ello en lugar de modificarlo añadiendo el nuevo elemento con el método <code>push</code>, usamos el método <code>concat</code>. De esta manera se creará un nuevo array en lugar de modificar el existente, manteniendo así cierta inmutabilidad en el estado del componente.
+</p>
+
+<p>
+    Puedes descargar el ejemplo completo desde <a href="https://github.com/miguelghz/Intro-ReactJS" target="_blank" rel="noopener">aquí</a>.
+</p>
+
+<h2>Resumen</h2>
+
+<p>
+    En este tutorial he tratado de mostrar el funcionamiento básico de ReactJS mientras he ido exponiendo los elementos fundamentales. Aunque he condensado bastante información en este artículo, me he dejado muchísimos elementos en el tintero. La idea es que esta entrada sirva como base a futuras publicaciones relacionadas con esta magnifica librería.
+</p>
+
+<p>
+    Espero haber facilitado tu transición a ReactJS, si ya lo conocías espero que el artículo te sirva como referencia.
+</p>
+
+<p>
+    Si te ha gustado la entrada valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.
+</p>
+
+<p>
+    Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a>
+</p>
+
+<a class="aligncenter" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

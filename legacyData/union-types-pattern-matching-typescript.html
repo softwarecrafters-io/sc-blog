@@ -1,0 +1,453 @@
+
+<p>Muchos ya sabréis que el tipado estático del lenguaje de programación TypeScript permite declarar un tipo de dato como numérico, texto, booleano o de instancia de clase, por poner algunos ejemplos típicos. Lo que quizás no es tan conocido, seguramente porque no existe en los lenguajes más populares, es que TypeScript también soporta union types (o tipos unión traducido al español).</p>
+<h2>Conociendo los union types</h2>
+
+<p>Conceptualmente se parecen a los enum types (o tipos enumerados) pero con una importante vuelta de tuerca: permiten definir un tipo como una lista cerrada de valores y, a su vez, cada valor puede ser de un tipo diferente. Suena interesante, ¿no?</p>
+
+<p>Veamos cómo definirlo:</p>
+
+<pre class="language-javascript"><code>let a: number | string;
+</code></pre>
+
+<p>
+    Vemos que poniendo el símbolo “|” entre dos tipos le estamos indicando que la variable “a” puede ser de tipo numérica o de tipo texto. Podemos poner tantas opciones como queramos (más adelante veremos otros ejemplos).
+</p>
+
+<p>
+    Una vez declarado el tipo, vamos a ver qué podemos hacer con él:
+</p>
+
+<p>
+
+</p>
+
+<pre class="language-javascript"><code>let a: number | string;
+a = 1; // a es un número. Es válido
+a = "hello world"; // a ahora es texto. También es válido
+a = true; // ¡Error! El compilador dice que a no puede ser true
+</code></pre>
+
+<p>
+    No hay sorpresa. Al haber declarado el tipo de la variable a como numérica o de texto, podemos definirla con el valor 1 o el <code>“hello world”</code>. Pero al intentar usar valores de otro tipo, en este caso booleano, el compilador nos advierte de que hay un error de tipo y el código no compila.
+</p>
+
+<p>
+    Vale, y ahora que conocemos la sintaxis, nos preguntaremos, ¿y para qué sirve el tipo unión? Si buscamos en los objetivos de diseño del <a href="/typescript/typescript-javascript-introduccion">lenguaje TypeScript, encontraremos razones de peso</a>: “Es un superconjunto de JavaScript que trata de evitar errores mediante los tipos y, al mismo tiempo, preservar el comportamiento original de JavaScript” . Por lo tanto, los union type son un mecanismo que permite especificar diferentes tipos para una misma variable, parámetro de una función o como resultado devuelto.
+</p>
+
+<p>
+    Veamos algunos ejemplos de uso de union type dentro del propio núcleo del lenguaje:
+</p>
+
+<pre class="language-javascript"><code>const someDate = new Date(1553444243368); // 2019/03/24 17:17 en formato epoch
+const anotherDate = new Date(“Mar 24, 2019”); // 2019/03/24 00:00 en formato inglés
+
+const result: RegExpExecArray | null =  /\d+/.exec(“123456”);
+</code></pre>
+
+<p>
+    Podemos observar que el constructor del tipo Date puede recibir un número, que sería el tiempo en formato epoch o un texto donde la fecha esté definida en inglés con un determinado formato. También vemos que la función exec (muy usada para validar texto con expresiones regulares) puede devolver un objeto especial con el resultado o null.
+</p>
+
+<p>
+    Cuando usamos TypeScript, el compilador también usa union types en las propias definiciones de la API del lenguaje para saber qué se puede hacer con los tipos base de JavaScript. Esta es parte de la definición de los tipos que vimos en el ejemplo anterior:
+</p>
+
+<pre class="language-javascript"><code>// extracto de typescript/lib/lib.es5.d.ts
+
+interface Date {
+new(value: number | string): Date;
+}
+
+interface RegExp {
+exec(string: string): RegExpExecArray | null;
+}
+
+</code></pre>
+
+<p>
+    No hace falta entenderla en profundidad. Es solo una curiosidad y la prueba de que hasta el propio TypeScript define muchos tipos base de JavaScript con union types. De hecho, las librerías más conocidas hechas en TypeScript, como pueden ser react o angular, usan union types.
+</p>
+
+<h2>Caso práctico</h2>
+<p>
+    Imaginemos que queremos hacer una librería con una función que dobla el valor que se le pasa. Y vamos a permitir que el parámetro pueda ser de tipo numérico, texto o lista (array). Con lo que hemos contado hasta ahora tendríamos algo así:
+</p>
+
+<pre class="language-javascript"><code>function double(value: number | string | any[]): number | string | any[] {
+   if (typeof value === "number")
+       return value * 2;
+   if (typeof value === "string")
+       return value.concat(valor)
+   return [...value, ...value];
+}
+
+double(1); // 2
+double("hello"); // "hello"
+double([1,2,3]); // [1,2,3,1,2,3]
+double(false); // Error. El argumento no se puede asignar
+double({id: 1, name: "Pepe"}); // Error. El argumento no se puede asignar
+
+</code></pre>
+
+<p>
+    Bien. Ya tenemos nuestra función polimórfica “double” operativa. Aunque funciona es un poco verbosa y personalmente prefiero que el código sea lo más conciso posible. Así que lo primero que vamos a hacer es mejorar la forma de declarar los tipos que acepta y devuelve. Para eso necesitamos introducir el type alias (o alias de tipo en español).
+    TypeScript permite ponerle otro nombre a un tipo de datos. Así:
+</p>
+
+<pre class="language-javascript"><code>type &#60;alias&#62; = &#60;tipo&#62;;
+</code></pre>
+
+<p>
+    Podemos definir el alias con un tipo cualquiera, incluso definido por el usuario como pueden ser interfaces, clases, union types u otros type alias.
+</p>
+
+<p>
+    Para nuestra función definiríamos el siguiente alias:
+</p>
+
+<pre class="language-javascript"><code>type DoubleType = number | string | any[];
+</code></pre>
+
+<p>
+    Y ahora podemos sustituir el tipo de entrada y salida por el alias, quedando la definición más simple:
+</p>
+
+<pre class="language-javascript"><code>function double(value: DoubleType ): DoubleType {
+   if (typeof value === "number")
+       return value * 2;
+   if (typeof value === "string")
+       return value.concat(value)
+   return [...value, ...value];
+}
+</code></pre>
+
+<p>
+    Podríamos quedarnos aquí. Pero ¿y si pudiéramos sustituir el código por algo más expresivo?
+</p>
+
+<h2>
+    Pattern matching al rescate
+</h2>
+
+<p>
+    Al igual que union type, el pattern matching es algo típicamente usado por lenguajes de programación funcionales y estáticamente tipados como Haskell, Scala o F#. Por lo que encontraremos muchas referencias a éstos y a su sintaxis. Pero no te asustes; el concepto es muy simple y en realidad ya lo conoces, más o menos:
+</p>
+
+<pre class="language-javascript"><code>let result: DoubleType;
+
+switch (value) {
+   case typeof value === "number":
+result = value * 2;
+break;
+   case typeof value === "string":
+result = value.concat(valor);
+break;
+   default:
+result = [...value, ...value];
+}
+
+</code></pre>
+
+<h2>¿Qué es el pattern matching?</h2>
+<p>
+     Es una estructura del lenguaje que nos permite comprobar un valor contra una serie de casos. Cuando un caso se cumple, se ejecuta la expresión asociada y se termina. Idealmente, los casos permiten especificar no solo valores constantes, si no también tipos, tipos con propiedades concretas o condiciones complejas.
+    Conceptualmente, se parece a un switch mejorado, como en el ejemplo de arriba, que tiene una sintaxis no válida en TypeScript.
+</p>
+
+<p>
+    A pesar de que TypeScript no soporta pattern matching en su sintaxis, podemos recurrir a bibliotecas (libraries) para suplir su carencia. En nuestro caso vamos a usar el paquete de npm llamado <a href="https://www.npmjs.com/package/x-match-expression" target="_blank">x-match-expression</a>.
+</p>
+
+<pre class="language-javascript"><code>import {match} from "x-match-expression";
+
+function double(value: DoubleType): DoubleType {
+   return match(value)
+       .caseNumber(function (n) { return n * 2})
+       .caseString(function (s) { return s.concat(s)})
+       .default(function (array) { return [...array, ...array]});
+}
+</code></pre>
+
+<p>
+    Todavía lo podemos simplificar un poco más usando expresiones lambda en vez de funciones:
+</p>
+
+<pre class="language-javascript"><code>import {match} from "x-match-expression";
+
+function double(value: DoubleType): DoubleType {
+   return match(value)
+       .caseNumber(n => n * 2)
+       .caseString(s => s.concat(s))
+       .default(array => [...array, ...array]);
+}
+
+</code></pre>
+
+
+<p>
+    El código ahora se ve más conciso, pero vamos a explicarlo detalladamente. Primero, importamos la función match, que nos va a permitir hacer el pattern matching en sí. A continuación, la invocamos pasándole el valor que queremos comprobar. Luego, definimos los casos caseNumber y CaseString. Cada caso comprueba si el valor es de un tipo concreto y, si lo és se ejecuta la expresión asociada al caso. Si nos fijamos, la expresión tiene para cada caso un parámetro del tipo que se está probando (esto se aprecia con un editor de código). Es decir, en el caseNumber tendríamos la certeza de que n es numérico. Este principio se aplica a los demás casos que tiene la librería. Finalmente, añadimos un caso por defecto (default), necesario para completar la expresión.
+</p>
+
+<p>
+    Aquí hay un editor online para hacer pruebas con todo lo anterior:  <a href="https://stackblitz.com/edit/typescript-crd5ep" target="_blank">https://stackblitz.com/edit/typescript-crd5ep</a>
+</p>
+
+<h2>
+    Lista de casos de uso de x-match-expression
+</h2>
+
+<p>
+    Antes de ver la lista de casos, algunos conceptos generales:
+</p>
+<ul>
+    <li>Hay un caso por cada tipo primitivo de dato en JavaScript</li>
+    <li>Por cada case&lt;&lt;Type&gt;&gt;, hay un case&lt;&lt;Type&gt;&gt;If adicional que tiene un parámetro más llamado predicado, que sirve para hacer una comprobación extra. </li>
+    <li>Todos los casos reciben un parámetro llamado mapper, que es la función que se ejecuta o valor que se devuelve. Si se usa como función, recibe como parámetro el elemento con el tipo acorde al caso.
+    </li>
+    <li>Para terminar el patrón y ejecutarlo, hay que finalizar con el caso default.</li>
+</ul>
+
+<p>
+    Esta es la lista de los casos de uso más comunes que tiene la librería:
+</p>
+<ul>
+    <li><strong>case:</strong> es el comodín. Se le pasa un predicado cualquiera que nosotros definamos</li>
+    <li><strong>caseIntance:</strong>comprueba si un elemento es instancia de clase o tiene una función como prototype (función constructora)</li>
+    <li><strong>caseTrue:</strong>  comprueba si un elemento es true</li>
+    <li><strong>caseFalse:</strong>  comprueba si un elemento es false</li>
+    <li><strong>caseBolean:</strong> comprueba si un elemento es de tipo booleano</li>
+    <li><strong>caseEqual:</strong> comprueba si un elemento es igual a otro (no hace comparación profunda)</li>
+    <li><strong>caseNotEqual:</strong>  comprueba si un elemento es distinto a otro (no hace comparación profunda)</li>
+    <li><strong>caseNumber:</strong>  comprueba si un elemento es de tipo numérico</li>
+    <li><strong>caseAlmostEqual:</strong>  comprueba si un elemento es un número aproximado a otro (útil para operaciones decimales)</li>
+    <li><strong>caseNull:</strong>  comprueba si un elemento es nulo</li>
+    <li><strong>caseObject:</strong>  comprueba si un elemento es de tipo Object</li>
+    <li><strong>caseObjectLike:</strong>  comprueba si un elemento tiene partes iguales a otro (mismos keys con los mismos valores)</li>
+    <li><strong>caseObjectWithKeys:</strong>  comprueba si un elemento es un objeto con ciertas claves</li>
+    <li><strong>caseString:</strong>  comprueba si un elemento es de tipo string</li>
+    <li><strong>caseStringLike:</strong>  comprueba si un elemento es de tipo string y cumple con una expresión regular</li>
+    <li><strong>caseEmptyString:</strong>  comprueba si un elemento es un string vacío</li>
+    <li><strong>caseDate:</strong> comprueba si un elemento es de tipo Date</li>
+    <li><strong>caseArray:</strong>  comprueba si un elemento es de tipo Array</li>
+    <li><strong>caseEmptyArray:</strong> comprueba si un elemento es de tipo Array vacío</li>
+</ul>
+
+<p>
+    Para mí los más utilizados son <strong>caseInstance y caseInstanceIf</strong>, que permiten usar union types con clases. Hay más casos. Te animo a jugar con la librería y descubrirlos.
+</p>
+
+<h2>
+    Uniones discriminadas
+</h2>
+
+<p>
+    Hay otro concepto en TypeScript relacionado con los union types llamado discriminated unions (o uniones discriminadas en español). Básicamente son tipos que tienen alguna propiedad común, pero con un valor conocido diferente para cada posible tipo y se unen en un tipo unión. Como puede sonar a chino, vamos a poner un poco de código para aclararlo:
+</p>
+
+<pre class="language-javascript"><code>interface Person {
+type: “person”;
+	name: string;
+}
+
+interface Insect {
+	type: “insecto”;
+	legs: number;
+}
+
+type Animal = Person | Insect;
+</code></pre>
+
+<p>
+    Vemos que hay un tipo unión llamado Animal que está formado por dos tipos, los cuales comparten la propiedad type y tienen un valor conocido (técnicamente se llama tipo singleton, que puede ser un texto, un número o un valor concreto booleano).
+</p>
+
+<p>
+    La particularidad de una variable con tipo unión discriminada es que el compilador es capaz de darse cuenta de qué tipo concreto es en realidad si le preguntamos por la propiedad que diferencia a uno de sus posibles tipos del otro. Aquí lo vemos:
+</p>
+
+<pre class="language-javascript"><code>const value: Animal = getValue() // no sabemos qué será
+
+// a partir de aquí el compilador sabe que es del tipo Person
+if (value.type === “person”)
+console.log(`He is called ${value.name}`);
+
+</code></pre>
+
+<p>
+    Este tipo discriminado es interesante, pero no deja de ser un pattern matching limitado y un sistema de tipos “poco elegante”. Personalmente prefiero usar tipos de verdad (instancias de clases) y pattern matching con la librería mencionada pero puede tener sus casos de uso.  Sobre todo para código legado (legacy code en inglés).
+</p>
+
+<h2>
+    Un ejemplo avanzado de pattern matching
+</h2>
+
+<p>
+    Ahora que sabemos cómo definir y usar tanto los union types como el pattern matching, hemos visto que son una buena pareja de herramientas para nuestro cinturón de programador: Con los union types podemos definir exactamente qué opciones son válidas para un dato, impidiendo estados inválidos y la posibilidad de que futuros tipos se usen sin que lo especifiquemos explícitamente. Y con el pattern matching podemos expresar de forma concisa cómo tratar cada caso.
+</p>
+
+<p>
+    La primera afirmación suena anti principios SOLID, porque salvo lo de impedir estados inválidos, que suena bien, ¿por qué no íbamos a querer que se extienda una parte de la aplicación con nuevos tipos? ¿verdad? Al contrario: es justo lo que no queremos. Al poner la responsabilidad sobre un conjunto de tipos cerrados, y no sobre una interfaz extensible (imaginemos un tipo genérico de error, por ejemplo) estamos forzando que nuestro código sea más confiable y esté mejor documentado.
+</p>
+<p>
+    Si es la primera vez que lees esta idea, seguramente te chocará y probablemente no estés de acuerdo. Pero piensa lo siguiente: ¿Por qué no usar el sistema de tipos de TypeScript en todo su potencial, para que los tipos sean los que “prueben” la validez del sistema? Personalmente, encuentro en los tipos unión una mejor forma de documentar y dar consistencia al código frente a otras opciones como las interfaces o la herencia en muchos casos.
+</p>
+
+<p>
+    Voy a poner un ejemplo: Tenemos que desarrollar una funcionalidad que permita almacenar un correo electrónico en una base de datos. Nuestra primera aproximación podría ser así:
+</p>
+
+<pre class="language-javascript"><code>function saveInDatabase(text: string): boolean {
+   //...
+}
+
+function saveEmail(email: string) {
+   return saveInDatabase(email);
+}
+
+const result = saveEmail("pepe@mail.com");
+console.log(result ? "saved" : "an error happened");
+</code></pre>
+
+<p>
+    saveEmail devuelve true si tiene éxito y false en caso contrario. Ahora nos damos cuenta de que saveInDatabase tiene que diferenciar entre:
+    Errores generales de la base de datos (como que no se puede conectar, que está llena, que no hay permisos. Es decir cosas irrelevantes desde el punto de vista del dominio o negocio)
+    Si el correo ya estaba almacenado previamente
+    Modificamos nuestro programa con los nuevos requisitos:
+</p>
+
+<pre class="language-javascript"><code>
+class DatabaseError {
+code: number;
+message: string;
+}
+
+class DuplicatedEmailError {}
+
+class Ok {}
+
+
+function saveInDatabase(email: string): DatabaseError | DuplicatedEmailError | Ok {
+//...
+}
+
+function saveEmail(email: string) {
+return saveInDatabase(email);
+}
+
+
+const result = saveEmail("pepe@mail.com");
+
+const message = match(result)
+.caseInstance(DatabaseError, error => "Your email could not be saved. Please try again in few minutes")
+.caseInstance(DuplicatedEmailError, _ => "Your email is already registered. Please check your spam folder")
+.default("Your email was successfully registered");
+
+console.log(message);
+</code></pre>
+<p>
+    Modificamos saveInDatabase para que devuelva los tipos de error que esperamos. El tipo DatabaseError contiene un código de error y un mensaje que nos pueden servir para logear el problema y que un administrador lo resuelva (No vamos implementar eso ahora). El tipo DuplicatedEmailError nos dice algo importante desde el punto de vista de negocio y lo vamos a discriminar del otro error.
+</p>
+<p>
+    Si miramos el tipo de datos que devuelve la función, sabremos exactamente las posibilidades a tratar. Con pattern matching sobre esas posibilidades construimos el mensaje que recibirá el usuario. Ya tenemos nuestra versión actualizada con los nuevos requisitos. El lector avispado podría pensar que si en todos los casos al final estamos creando un mensaje de texto, ¿por qué no usar un tipo Message como resultado de saveEmail?
+</p>
+<p><strong>Problemas con esa aproximación:</strong></p>
+<ul>
+    <li>
+        Para discernir si la operación tuvo éxito o no, para hacer otra cosa, habría que mirar el mensaje en sí. Se podría arreglar parcialmente añadiendo un código al mensaje, pero eso no deja de ser un tipo mal hecho.
+    </li>
+    <li>
+        El mensaje no se debe devolver en la capa de base de datos, ¿y si hay que traducirlo o formatearlo de alguna manera?
+    </li>
+    <li>
+        Si la función devuelve Message, ¿cómo sabríamos todos los mensajes diferentes que podría devolver la función? Tendríamos que ir a la implementación y ver cuidadosamente todo el código. Puede haber muchas capas por debajo que devuelven diferentes mensajes. En resumen, tendríamos una falta de control sobre las opciones existentes. Los tipos cerrados nos dan esa gran ventaja.
+    </li>
+    <li>
+        ¿Cómo enfocaríamos los test sobre esta implementación? Estarían basados y comprobar el texto devuelto en los mensajes y ésto no es muy robusto ni mantenible a la larga.
+    </li>
+</ul>
+
+<p>
+    <strong>Nos llega un nuevo requisito</strong>, que es validar el email, de modo que:
+</p>
+
+<ul>
+    <li>
+        Tenga un formato estandard
+    </li>
+    <li>
+        No contenga ciertas palabras
+    </li>
+    <li>
+        Tenga un largo máximo
+    </li>
+</ul>
+
+<p>
+    Entonces modificamos el programa y nos quedaría:
+</p>
+
+<pre class="language-javascript"><code>import {match} from "x-match-expression";
+
+class DatabaseError {
+   code: number;
+   message: string;
+}
+
+class DuplicatedEmailError {}
+
+class TooLongEmailError {
+   maxLenght: number;
+}
+
+class WrongEmailFormatError {}
+
+class EmailWithInvalidWordsError {
+   words: string[]
+}
+
+class Ok {}
+
+
+function validateEmail(email: string): WrongEmailFormatError | TooLongEmailError | EmailWithInvalidWordsError | Ok {
+   //...
+}
+
+function saveInDatabase(text: string): DatabaseError | DuplicatedEmailError | Ok {
+   //...
+}
+
+function saveEmail(email: string) {
+   const validationResult = validateEmail(email);
+   if (validationResult  instanceof Ok)
+       return saveInDatabase(email);
+   return validationResult;
+}
+
+
+const result = saveEmail("pepe@mail.com");
+
+const message = match(result)
+   .caseInstance(WrongEmailFormatError, _ => "Please use the format abcde@dominio.com")
+   .caseInstance(TooLongEmailError, _ => `Email can not be larger than ${_.maxLenght} characters`)
+   .caseInstance(EmailWithInvalidWordsError, _ => `Email address cannot contain ${_.words.join(", ")}.`)
+   .caseInstance(DatabaseError, error => "Your email could not be saved. Please try again in a few minutes")
+   .caseInstance(DuplicatedEmailError, _ => "Your email address is already registered. Please, check your spam folder")
+   .default("Your email was successfully registered");
+
+console.log(message);
+
+</code></pre>
+
+<p>
+    Hemos añadido los tipos de error requeridos. Algunos de ellos contienen propiedades que podemos usar para dar información al usuario. Al tener los errores como tipos específicos, tenemos la interfaz del método saveEmail ‘cerrada’ y podemos gestionarlos en la capa de abstracción adecuada sin miedo a sorpresas futuras.
+</p>
+
+<p>
+    A pesar de todas las mejoras introducidas en el ejemplo, éste aún se podría perfeccionar más con el uso de mónadas (los famosos monads). Concretamente con un tipo Either o Error que permita componer dentro de la función todos los pasos de forma elegante y concisa. Pero esto queda para otro artículo.
+</p>
+
+<p>
+    Con lo que debemos quedarnos aquí es que los union types, los type alias y el pattern matching nos permiten disponer de nuevas formas de codificar nuestros programas  convirtiéndose en una alternativa sencilla y concisa a la herencia de clases, haciendo nuestro código más funcional y facilitando su mantenibilidad por medio de contratos cerrados autodocumentados. Si no conocías estos conceptos, te invito a que experimentes con ellos y des tu opinión.
+</p>
+

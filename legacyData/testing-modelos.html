@@ -1,0 +1,277 @@
+<p>El testing es una de las partes más importantes de cualquier proyecto de software, ya que aporta calidad y seguridad a nuestro código.&nbsp;&nbsp;En esta entrada voy a&nbsp;tratar de exponer algunas prácticas muy recomendables para testear&nbsp;modelos en Django de forma eficiente y segura.</p>
+
+<h3>Evita los mocks</h3>
+
+<p>Por norma general, en&nbsp;la gran mayoría de los errores relacionados con los modelos&nbsp;está involucrada la base de datos y suelen ocurrir&nbsp;por:</p>
+
+<ul>
+    <li>Migraciones&nbsp;obsoletas.</li>
+    <li>Tipos de datos erróneos.</li>
+    <li>Restricciones de referencia / integridad.</li>
+    <li>Errores en las consultas de recuperación&nbsp;de datos.</li>
+</ul>
+
+<p>Dichos errores no se reproducirán si estamos “mockeando” los datos, por lo tanto el mocking en el testing de modelos&nbsp;deberíamos tratar de minimizarlo, ya que&nbsp;las pruebas nos proporcionarían una falsa sensación de seguridad, dejando que las cuestiones anteriores se pasen por alto.</p>
+
+<p>Esto no implica que nunca se deban mockear los objetos de los tests de modelos, &nbsp;simplemente debemos ser cuidadosos a la hora de utilizarlos.</p>
+
+<h3>No testees framework</h3>
+
+<p>Los modelos son simplemente una colección de campos que dependen de la funcionalidad estándar de Django.&nbsp;Dicha&nbsp;funcionalidad ya está más que testada,&nbsp;así que no seas redundante.</p>
+
+<p>Utilizaremos como ejemplo el modelo User que utilizamos en&nbsp;<a href="http://miguelgomez.io/python/extender-user-django/">este post</a>:</p>
+
+<pre class="language-python"><code>from __future__ import unicode_literals
+
+from django.db import models
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.utils.translation import ugettext_lazy as _
+
+from .managers import UserManager
+
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(_('email address'), unique=True)
+    first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
+    is_active = models.BooleanField(_('active'), default=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
+
+    def get_full_name(self):
+        '''
+        Returns the first_name plus the last_name, with a space in between.
+        '''
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name.strip()
+
+    def get_short_name(self):
+        '''
+        Returns the short name for the user.
+        '''
+        return self.first_name
+
+</code></pre>
+<p>En muchos tutoriales nos encontraríamos con pruebas como esta:<br></p>
+<pre class="language-python"><code>from django.test import TestCase
+from .models import User
+
+
+class UserModelTest(TestCase):
+
+    def test_user_creation(self):
+        User(email = "prueba@prueba.com", name='prueba user').save()
+
+        users = User.objects.all()
+        self.assertEquals(users.count(), 1)
+
+        user_from_db = users_in_db[0]
+        self.assertEquals(user.email, "prueba@prueba.com")
+        self.assertEquals(user.name, "prueba user")
+</code></pre>
+
+<p>Felicidades, ya has escrito tu primer test de modelos!! (dirían)</p>
+
+<p>Lo único que hemos hecho es comprobar&nbsp;que el ORM de Django puede almacenar un modelo correctamente.&nbsp;Pero, ¿qué sentido tiene realizar este tipo de pruebas? Pues la verdad es que no demasiado, no necesitamos probar la funcionalidad inherente al framework.</p>
+
+<h3>Prueba&nbsp;tu funcionalidad</h3>
+
+<p>En lugar de gastar tiempo en crear pruebas inútiles que realmente no son necesarias, tratar de seguir esta regla: Prueba sólo la funcionalidad personalizada que creaste en tu modelo.</p>
+
+<blockquote>
+    Prueba tu funcionalidad, no las inherentes al framework.
+</blockquote>
+
+<p>En el modelo User utilizado de ejemplo, no tenemos demasiadas funcionalidades personalizadas. Se me ocurre que podríamos probar que nuestro modelo utiliza una dirección de correo electrónico para el USERNAME_FIELD sólo para asegurarnos de que otro desarrollador no lo cambia.</p>
+
+<p>También podríamos añadir&nbsp;una función <code class="prettyprint">get_by_id(uid)</code> que reemplace las llamadas a <code class="prettyprint">User.objects.get(pk)</code>, veamos como quedaría el modelo:</p>
+
+<pre class="language-python"><code>from __future__ import unicode_literals
+from django.db import models
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.utils.translation import ugettext_lazy as _
+
+from .managers import UserManager
+
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(_('email address'), unique=True)
+    first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
+    is_active = models.BooleanField(_('active'), default=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
+
+    def get_full_name(self):
+        '''
+        Returns the first_name plus the last_name, with a space in between.
+        '''
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name.strip()
+
+    def get_short_name(self):
+        '''
+        Returns the short name for the user.
+        '''
+        return self.first_name
+
+    @classmethod
+    def get_by_id(cls, uid):
+        return User.objects.get(pk=uid)
+
+    def __unicode__(self):
+        return self.email
+
+</code></pre>
+
+<p>Nótese que hemos utilizado el decorador @classmethod para definir el método <code class="prettyprint">get_by_id()</code>. Hemos creado un método de clase en vez de instancia porque ya que este no&nbsp;tiene estado y de esta manera&nbsp;lo podemos llamar simplemente escribiendo <code class="prettyprint">User.get_by_id</code>.</p>
+
+<p>Veamos como queda el <strong>test del modelo</strong>:</p>
+
+<pre class="language-python"><code>from django.test import TestCase
+from accounts.models import User
+
+class UserModelTest(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.test_user = User(email="prueba@prueba.com", name='test user')
+        cls.test_user.save()
+
+    def test_user_to_string_email(self):
+        self.assertEquals(__unicode__(self.test_user), "prueba@prueba.com")
+
+    def test_get_by_id(self):
+        self.assertEquals(User.get_by_id(1), self.test_user)
+
+</code></pre>
+
+<p>Hay que prestar atención al método <code class="prettyprint">setUpClass()</code>, ya que todas nuestras pruebas están compartiendo&nbsp;el mismo objeto User, si en alguno de los test modificamos dicho objeto, podríamos provocar que las otras pruebas fallen de forma inesperada. Esto nos puede conducir a sesiones de depuración absurdas ya que los tests fallarían sin razón aparente.</p>
+
+<p>Una estrategia más segura (y más lenta), sería crear el objeto en método <code class="prettyprint">setup()</code>, el cual se ejecuta antes de cada test, y luego destruir dicho objeto al final de la ejecución del mismo&nbsp;usando para ello el método <code class="prettyprint">tearDown()</code>.</p>
+
+<p>Nuestro test&nbsp;quedaría tal que así:</p>
+
+<pre class="language-python"><code>from django.test import TestCase
+from accounts.models import User
+
+class UserModelTest(TestCase):
+
+    def setUp(self):
+        self.test_user = User(email="prueba@prueba.com", name='test user')
+        self.test_user.save()
+
+    def test_user_to_string_email(self):
+        self.assertEquals(str(self.test_user), "prueba@prueba.com")
+
+    def test_get_by_id(self):
+        self.assertEquals(User.get_by_id(1), self.test_user)
+
+    def tearDown(self):
+        self.test_user.delete()
+
+</code></pre>
+
+<h3>Uso de Fixtures</h3>
+
+<p>Django nos proporciona una funcionalidad integrada para cargar automáticamente y rellenar los datos del modelo: las&nbsp;denominadas <strong>fixtures de Django</strong>. No soy demasiado fan de este enfoque, ya que generamos nuevos ficheros en los que buscar a la hora de depurar errores, pero he de reconocer que en un momento dado pueden resultar útil.</p>
+
+<p>Una fixture (accesorio) es una colección de datos en formato XML, YAML o JSON, que Django se encarga de importar a la base de datos, tanto para generar datos por defecto para nuestro proyecto o para nuestro entorno de pruebas.</p>
+
+<p>A continuación un ejemplo de una fixture en formato JSON:</p>
+
+<pre class="language-python"><code>[
+  {
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+      "email":"john@lennon.com",
+      "first_name": "John",
+      "last_name": "Lennon"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+      "email":"paul@mccartney.com",
+      "first_name": "Paul",
+      "last_name": "McCartney"
+    }
+  }
+]
+
+</code></pre>
+
+<p>Por defecto Django busca las fixtures en el directorio <code class="prettyprint">app_name/fixtures</code>, también podemos definir un directorio personalizado en nuestro fichero de configuración<code class="prettyprint">settings.FIXTURE_DIRS</code></p>
+
+<p>Veamos como referenciarlas en nuestro fichero de pruebas:</p>
+
+<pre class="language-python"><code>from django.test import TestCase
+from accounts.models import User
+
+class UserModelTest(TestCase):
+    fixtures = ['users_fixture.json', ]
+
+...
+
+</code></pre>
+
+<p>Indicar la extensión del fichero es opcional, debemos incluirla si queremos que Django busque sólo ficheros de un tipo en concreto.</p>
+
+<h3>Apps de terceros</h3>
+
+<p>Si te&nbsp;apetece&nbsp;seguir engordando el&nbsp;requirements.txt de tu proyecto puedes darle una oportunidad la app&nbsp;<a href="http://model-mommy.readthedocs.io/" target="_blank">Model Mommy</a> es una alternativa que nos ofrece la comunidad a las fixtures de Django. Nos ofrece una&nbsp;API&nbsp;simple que&nbsp;nos permite crear varios&nbsp;objetos en pocas lineas de código.</p>
+
+<p>Veamos un ejemplo:</p>
+
+<pre class="language-python"><code>
+from django.test import TestCase
+from model_mommy import mommy
+from model_mommy.recipe import Recipe, foreign_key
+
+from accounts.models import User
+
+class UserModelTest(TestCase):
+    def setUp(self):
+        self.test_user = mommy.make(User)
+
+    def test_user_creation_mommy(self):
+        self.assertTrue(isinstance(test_user, User))
+        self.assertEqual(test_user.__unicode__(), test_user.email)
+
+</code></pre>
+
+<h3>Conclusiones</h3>
+
+<p>Como he dicho al principio, el Testing es una práctica en&nbsp;la cual todo desarrollador debe&nbsp;conocer los conceptos básicos y aplicarlos.</p>
+
+<p>El principal problema del testing es lo sobrevalorado que en algunos casos puede llegar a estar,&nbsp;véase <span class="s1">el mito del 100% de cobertura, <a href="http://martinfowler.com/bliki/TestCoverage.html">este artículo</a>&nbsp;de&nbsp;<a href="https://es.wikipedia.org/wiki/Martin_Fowler">Martin Fowler</a> trata sobre ello.&nbsp;Es una locura pretender tener testado el 100% de nuestro código, sería una pérdida de tiempo total y absoluta de nuestro preciado tiempo, como hemos visto hay muchas partes del proyecto&nbsp;que no merece la pena testar.&nbsp;</span></p>
+
+<p>
+    Si te ha gustado el artículo, valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.
+</p>
+
+<p>
+    Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a>
+</p>
+
+<a class="aligncenter" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

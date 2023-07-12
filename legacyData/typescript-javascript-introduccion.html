@@ -1,0 +1,342 @@
+<p>Este es el primer artículo de una serie sobre el lenguaje de programación <strong>Typescript</strong> en la que abordaremos los fundamentos de este magnifico lenguaje open source. <strong>Typescript</strong> fue desarrollado en 2012 por Anders Hejlsberg, creador de Pascal, Delphi y C#, y su equipo en <strong>Microsoft.</strong></p>
+
+<h2>Qué es Typescript</h2>
+<p>Esencialmente se trata de un <strong>superconjunto de Javascript</strong>, es decir, amplía Javascript con una nueva sintaxis que añade, entre otras cosas, el <strong>tipado estático</strong> opcional, <strong>genéricos</strong>, <strong>decoradores</strong> y elementos de <strong>POO </strong>como interfaces o property accessors.</p>
+<p>TypeScript compila código JavaScript que se ejecuta en cualquier navegador, host, sistema operativo o motor de JavaScript que admita ECMAScript 3 (o más reciente).</p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181785/posts/typescript-javascript-introduccion/superset-typescript.png" alt="typescript superset" width="363" height="363" />
+<h2>Por qué Typescript</h2>
+<p>A lo largo de los últimos años Javascript ha crecido mucho y se ha convertido en el camino a seguir para escribir aplicaciones multiplataforma (aunque no el único, sigo siendo fan de Xamarin y C#). Las aplicaciones Javascript pueden ejecutarse en todas las plataformas, ya sea en móviles, web o escritorio. Sin embargo, cuando Javascript fue creado por primera vez su proposito no fue este, sino que fue diseñado para un uso simple en aplicaciones muy pequeñas.</p>
+
+<p>TypeScript trata de resolver la mayoría de los problemas con JavaScript centrándose en mejorar la experiencia y la productividad de nosotros, los desarrolladores. Nos permite utilizar técnicas como el tipado estático opcional y/o la encapsulación para generar un código mucho más mantenible y escalable que con JavaScript tradicional, sin perder el carácter dinámico del mismo.</p>
+
+<p>demás estos dos últimos años la popularidad de TypeScript se ha disparado y se perfila como uno de los lenguajes de programación con <strong>más futuro</strong>.</p>
+
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181933/posts/typescript-javascript-introduccion/grafica-typescript.png" alt="typescript-trend"/>
+
+<h2>Instalación de Typescript</h2>
+<p>Para poder instalar typescript el único <strong>requisito</strong> necesario es tener instalado en nuestro equipo <strong>nodejs</strong> y su administrador de paquetes (<strong>npm</strong>).</p>
+
+<p>Cuando nos referimos a la "instalación de typescript" en realidad hacemos referencia a la instalación de su <strong>compilador</strong>, llamado <strong>tsc. </strong> Este se encarga de convertir el código TypeScript a Javascript con la versión ECMAScript compatible que deseemos.</p>
+
+<p>Para instalarlo tan solo tenemos que ejecutar en la terminal lo siguiente:</p>
+<pre class="language-javascript"><code>npm install -g typescript</code></pre>
+
+<p>Para comprobar que la instalación se ha realizado correctamente ejecuta:</p>
+<pre class="language-javascript"><code>tsc -v</code></pre>
+<p>Esto nos mostrará la versión, en mi caso la 2.6</p>
+<h2>Uso de Typescript CLI</h2>
+<p>Para probar la instalación, creemos un archivo TypeScript simple llamado <strong>helloworld.ts</strong> con el siguiente código:</p>
+<pre class="language-javascript"><code>console.log("Hello world!")</code></pre>
+<p>El siguiente comando compilará un archivo <code>.ts</code> a un archivo <code>.js</code>:</p>
+<pre class="language-javascript"><code>tsc helloworld.ts</code></pre>
+<p>Esto creará un fichero <code>helloworld.js</code>. Este fichero lo podemos ejecutar en el navegador o como haremos en este caso, con Node:</p>
+<pre class="language-javascript"><code>node helloworld.js
+//"Hello world"</code></pre>
+<p>El comando tsc se puede utilizar de formas muy variadas, veamos unos cuantos usos interesantes:</p>
+<h3>Compilar varios archivos</h3>
+<p>Para compilar varios archivos:</p>
+<pre class="language-javascript"><code>tsc hello1.ts hello2.ts hello3.ts</code></pre>
+<p>También podríamos utilizar asteriscos:</p>
+<pre class="language-javascript"><code>tsc *.ts</code></pre>
+<p>Esto compilará todos los ficheros typescript que se encuentren en el directorio. Cada fichero typescript se compilará en su archivo javascript correspondiente.</p>
+<h3>Unir archivos</h3>
+<p>También podemos compilar todos los archivos TypeScript en un solo archivo JavaScript. Esto nos ayudaría a reducir el número de solicitudes HTTP que un navegador debe realizar y de esta manera mejorar el rendimiento de nuestro sitio web. Para ello utilizaremos la opción --out del compilador:</p>
+<pre class="language-javascript"><code>tsc *.ts --out helloworld.js</code></pre>
+<h3>Watcher</h3>
+<p>Si queremos evitar tener que compilar el archivo typescript cada vez que hagamos una modificación del mismo, podemos utilizar la opción <code>--watch</code>:</p>
+<pre class="language-javascript"><code>tsc *.ts --out helloworld.js --watch</code></pre>
+<p>Con esto conseguiremos que cada vez que guardemos las modificaciones el fichero se compilará automáticamente.</p>
+<h2>Creando un proyecto Typescript</h2>
+<p>Para crear un proyecto de TypeScript,  lo único que necesitamos es crear un directorio y dentro del mismo crear un archivo de configuración de Typescript tsconfig.json.  Este fichero, entre otras cosas, indica al compilador qué archivos compilar, qué archivos ignorar y qué a que version de javascript transpilar (por ejemplo, ECMAScript 3).</p>
+
+<p>Para crear nuestro primer proyecto de TypeScript, creemos el nuevo directorio y agreguemos el archivo de configuración de TypeScript:</p>
+<pre class="language-javascript"><code>mkdir myProject
+cd myProject
+touch tsconfig.json</code></pre>
+<h3>Configuración de Typescript</h3>
+<p>En este articulo ejecutaré todos los ejemplos en la terminal usando Node.js. Node corre sobre Chrome V8, uno de los motores de JavaScript más actualizados disponibles. La versión 6 de Node.js se envía con una versión de Chrome V8 capaz de soportar el 95% de la especificación ECMAScript 2015, como se muestra en <a href="http://node.green/" target="_blank" rel="noopener">Node Green</a>, mientras que la versión 8 es compatible con el 99%.</p>
+
+<p>Con respecto a ECMAScript 2017, ambas versiones admiten el 23% y el 73% de las especificaciones, respectivamente. Por lo tanto, la mejor opción es configurar nuestro proyecto para que se compile en ECMAScript 2015, lo que permitirá a los usuarios con Node.js 6 y 8 ejecutar los ejemplos sin problemas.</p>
+
+<p>Además de indicar la versión de javascript, también configuraremos estas otras opciones del compilador:</p>
+<ul>
+    <li><code>module</code>, indica a Typescript que use el formato <a href="http://requirejs.org/docs/commonjs.html">CommonJS</a> para los modulos.</li>
+    <li><code>removeComments</code>, elimina los comentarios del código generado.</li>
+    <li><code>sourceMap</code>, permite usar  mapas de origen para asignar el código transpilado al código fuente.</li>
+    <li><code>outDir</code>, indica el directorio en el cual se almacenará el código generado (build).</li>
+    <li><code>include</code>, indica el directorio de los ficheros a compilar (src).</li>
+</ul>
+<p>Nuestro fichero de configuración quedaría tal que así:</p>
+<pre class="language-javascript">
+    <code>{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "removeComments": true,
+    "outDir": "./build"
+  },
+  "include": ["src/**/*"]
+}</code>
+</pre>
+<p>Las opciones utilizadas en el archivo de configuración anterior son solo un pequeño subconjunto de lo que TypeScript admite. Por ejemplo, podríamos indicar al compilador que soporte decoradores, archivos tsx, etc. En la documentación oficial tenemos una lista con todas las <a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html" target="_blank" rel="noopener">opciones que admite el compilador.</a></p>
+
+<p>Ahora que entendemos cómo iniciar un proyecto y cómo configurar el compilador, estamos listos para ir profundizando en las diferentes características del lenguaje.</p>
+<h2>Sistema de tipos</h2>
+<p>Sin lugar a dudas la principal característica de Typescript es su sistema de tipos, el cual realiza una formalización de los tipos de Javascript, mediante una representación estática de su sistema de tipado dinámico. Esto permite a los desarrolladores definir variables y funciones fuertemente tipadas sin perder la esencia de Javascript (su naturaleza debilmente tipada y su extremada flexibilidad). Poder definir los tipos durante el tiempo de diseño nos ayuda a evitar errores en tiempo de ejecución, como podría ser pasar el tipo de variable incorrecto a una función.</p>
+
+<p>Veamos con un ejemplo de las ventajas que nos ofrece:</p>
+<pre class="language-javascript"><code>let myName: string = "Miguel";
+let printName = (name: string) ={
+    console.log(name);
+}</code>
+</pre>
+<p>Si intentamos ejecutar la función <code>printName()</code> pasándole un parámetro vacío o del tipo incorrecto el compilador nos advierte en tiempo de desarrollo, en lugar de generar excepciones en tiempo de ejecución. Además, el intellisense nos ayuda con el autocompletado sugiriendonos la variable más apropiada para pasar como parámetro a la función. Por otro lado, Typescript es lo suficientemente inteligente para inferir el tipo sin indicarselo explícitamente.</p>
+
+<br/>
+<img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181787/posts/typescript-javascript-introduccion/typescript-fundamentos-1.gif" alt="typescript-fundamentos" width="640" height="339" />
+<h2></h2>
+<p>Además de los tipos <strong>String</strong> y <strong>Number</strong>, TypeScript también admite los siguientes tipos básicos:</p>
+<ul>
+    <li><strong>Boolean</strong>: tipo de dato logico que representa verdadero o falso.</li>
+    <li><strong>Array</strong>: tipo de dato estructurado que permite almacenar una colección de elementos.</li>
+    <li><strong>Tuple</strong>: similar al array, pero con un número fijo de elementos escritos.</li>
+    <li><strong>Enum</strong>: representa al tipo enumeración. Una enumeración es una forma de dar nombres descriptivos a los conjuntos de valores numéricos</li>
+    <li><strong>Any</strong>: indica que la variable puede ser de cualquier tipo. Es muy útil a la hora de trabajar con librerías externas.</li>
+    <li><strong>Void</strong>: indica que una función no devolverá ningún valor.</li>
+    <li><strong>Never</strong>: este tipo representa el tipo de valores que nunca se producen. Por ejemplo para indicar que una función siempre arroja una excepción o que nunca termina su ejecución.</li>
+</ul>
+<p>Echemos un vistazo al siguiente codigo para obtener una vision general de lo que Typescript nos permite hacer con los tipos básicos:</p>
+<pre class="language-javascript"><code>// 1 - declaracion del tipo
+type Ranking = [number, string, boolean];
+
+// 2 - definición de variables
+let position: number;
+let playerName: string;
+let finishedGame: boolean;
+let ranking: Ranking;
+let hallOfFame: Array&lt;Ranking&gt; = [];
+
+// 3 - crea un ranking
+position = 1;
+playerName = "Bruno Krebs";
+finishedGame = true;
+ranking = [position, playerName, finishedGame];
+hallOfFame.push(ranking);
+
+// 4 - crea otro ranking
+position = 2;
+playerName = "Maria Helena";
+finishedGame = true;
+ranking = [position, playerName, finishedGame];
+hallOfFame.push(ranking);
+
+// 5 - define una funcion que recorre todos los rankings
+function printRankings(rankings: Array&lt;RankingTuple&gt;): void {
+  for (let ranking of rankings) {
+    console.log(ranking);
+  }
+}
+
+// 6 - llama a la función
+printRankings(hallOfFame);</code></pre>
+Si quieres continuar profundizando en el sistema de tipos de typescript te recomiendo que eches un vistazo a la <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" rel="noopener">documentación oficial</a>.
+<h2>Estructuras iterativas</h2>
+En typescript tenemos podemos hacer uso de dos tipos de bucles diferentes <strong>for ... in</strong> y <strong>for .. of</strong>. For... in es una proviene de versiones antiguas de javascript el cual nos permite recorrer objetos iterables obteniendo sus indices. En cambio, For...of es una caracteristica introducida en ES6, la cual nos permite recorrer colecciones obteniendo su valor, veamos las diferencias con un ejemplo:
+<pre class="language-javascript"><code>let list = [4, 5, 6];
+
+for (let i in list) {
+   console.log(i); // "0", "1", "2",
+}
+
+for (let i of list) {
+   console.log(i); // "4", "5", "6"
+}</code></pre>
+<h2>Modulos en typescript</h2>
+<p>Otra de las características de Typescript es heredada de ECMAScript 2015 la posibilidad de crear módulos, loc cuales no son más que una forma de encapsular código en su propio ámbito. Nos permiten agrupar nuestro código en diferentes ficheros, permitiéndonos exportarlos y utilizarlos donde los necesitemos. Esto nos facilita la tarea de crear software más ordenado y por ende más escalable y mantenible.</p>
+
+<p>Continuando con el ejemplo de la sección anterior, si quisieramos exportar el tipo Ranking y la función printRankings(), tan solo tendríamos que añadirle la palabra reservada <strong>export</strong> antes de la definición de los mismos:</p>
+<pre class="language-javascript"><code>export type RankingTuple = [number, string, boolean];
+
+export function printRankings(rankings: Array&lt;RankingTuple&gt;): void {
+  for (let ranking of rankings) {
+    console.log(ranking);
+  }
+}
+</code></pre>
+<p>Para importarlos en otro fichero tan solo nos bastaría con lo siguiente:</p>
+<pre class="prettyprint lang-javascript" data-start-line="1" data-visibility="visible" data-highlight="" data-caption="">import {RankingTuple, printRankings} from './myRankingModule.ts';</pre>
+<h2>Clases y objetos en Typescript</h2>
+<p>Un objeto es una entidad que agrupa un estado y una funcionalidad relacionada,una clase, no es más que una plantilla genérica a partir de la cuál instanciamos los objetos. Dicho de otra manera, una clase es una abstracción en la que se define el comportamiento que va a tener el objeto.</p>
+<p>Las clases en Typescript son muy similares a lo que nos ofrecen otros lenguajes de orientación a objetos tradicionales, esto nos ayudará a modularizar nuestro código y a simplificar el desarrollo. Veamos con un ejemplo como definir una clase:</p>
+<pre class="language-javascript"><code>class Employee {
+    //atributo accesible desde fuera de la clase
+    public name : string;
+    //atributos accesible desde clases que hereden de Employee
+    protected age: number;
+    //access only inside the Employee class
+    private mobile : string;
+
+    constructor(name:string ,age:number, mobile:string){
+        this.name = name;
+        this.age = age;
+        this.mobile = mobile;
+    }
+    getName(){
+       return this.name;
+    }
+
+    setName(name:string){
+       this.name = name;
+    }
+    getAge(){
+       return this.age;
+    }
+
+    setAge(age:number){
+       this.age = age;
+    }
+
+    getMobile(mobile:string){
+       this.mobile = mobile;
+    }
+}</code></pre>
+<h3>Métodos accesores (Getters y Setters)</h3>
+Como sabemos, los métodos <strong>get</strong> y <strong>set</strong>, también conocidos como métodos accesores, son simples funciones que usamos en las clases para mostrar (get) o modificar (set) el valor de un atributo. Normalmente los escribimos como "get" o "set" seguido del nombre de la propiedad a la que queremos acceder, por ejemplo: getName(). En Typescript se puede hacer de esta forma o haciendo uso de las palabras reservadas get o set delante del nombre de la función:
+<pre class="language-javascript"><code>class Actor {
+    private _name : string;
+    constructor(_name:string){
+        this._name = _name;
+    }
+    set name (value: string){
+        this._name = value;
+    }
+    get name (){
+        return this._name;
+    }
+}
+
+let actor = new Actor('Haider Malik');
+console.log(actor.name);
+//set
+actor.name = 'Jane Doe';
+console.log(actor.name);</code></pre>
+<h3>Herencia en typescript</h3>
+Otro elemento fundamental en la OO es la herencia, la cual nos permite extender la funcionalidad nuestra clase herendando de una clase padre. La clase hija hereda todos los miembros de su clase base y puede sobreescribir todos aquellos métodos y/o propiedades públicos o protegidos.
+<pre class="language-javascript"><code>class Manager extends Employee {
+   constructor(name : string, age: number , mobile : string){
+       super(name,age,mobile);
+       this.age = 24;
+   }
+}
+
+let manager = new Manager(‘Jane’,23, ‘0343–23332233’);
+console.log(manager.getName());
+console.log(manager.getAge());</code></pre>
+<h3>Clases abstractas</h3>
+Este tipo de clases no pueden ser instanciadas ya que se usan para definir comportamientos independientemente de su concreción. Su implementación en typescript es similar a la de una clase normal con la diferencia que hay que anteponer el termino <strong>abstract</strong> antes de declararlas.
+<pre class="language-javascript"><code>abstract class Product {
+    productName : string = "Default";
+    price :number = 1000;
+    abstract changeName(name: string): void;
+
+    calcPrice(){
+        return this.price;
+    }
+}
+
+class Mobile extends  Product {
+    changeName(name : string) : void {
+        this.productName = name;
+    }
+}
+
+let mobProduct = new Mobile();
+console.log(mobProduct);
+mobProduct.changeName("Super It Product");
+console.log(mobProduct);</code></pre>
+<h2>Interfaces en Typescript</h2>
+Las interfaces son abstracciones que definen el comportamiento de las clases que la implementan. Son muy prácticas ya que nos permiten decirle al compilador cual es el  comportamiento que debe esperar del objeto que definamos.
+
+Como ocurre en otros lenguajes de programación, TypeScript no requiere que un objeto tenga exactamente la misma estructura definida por la interfaz. Para que se los considere válidos, los objetos pueden tener cualquier forma siempre que definan las funciones y propiedades requeridas por la interfaz que implementan. Veamos un pequeño ejemplo de como declararla e implementarla:
+<pre class="language-javascript"><code>interface ICar{
+    engine: string;
+    color: string;
+
+    brake: () =&gt; void;
+}
+
+class Car implements ICar {
+    constructor (public engine: string, public color: string) {
+    }
+
+    function brake(){
+        console.log("Frenando...")
+    }
+}</code></pre>
+<h2>Decoradores en typescript</h2>
+<p>Los decoradores son un estándar propuesto en ECMAScript2016. En Typescript podemos habilitarlos añadiendo a nuestro tsconfig.json  la directiva "experimentalDecorators: true".</p>
+<pre class="language-javascript"><code>{
+    "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "outDir": "./build"
+  },
+  "include": ["src/**/*"]
+}</code></pre>
+<p>Por  si no lo sabías, los decoradores son un mecanismo para modificar clases, métodos,  propiedades e incluso parámetros de forma declarativa. Obviaré los decoradores de propiedades y de parámetros ya que en la practica no resultan demasiado interesantes.</p>
+<h3>Decorador de clase</h3>
+Un decorador de clase es una función que recibe y devuelve el método constructor de la clase que "decora". Veamos un ejemplo de implementación:
+<pre class="language-javascript"><code>const log = (originalConstructor: new(...args: any[]) =&gt; T) =&gt; {
+    function newConstructor(... args) {
+        console.log("Argumentos: ", args.join(", "));
+        new originalConstructor(args);
+    }
+
+    newConstructor.prototype = originalConstructor.prototype;
+    return newConstructor;
+}
+
+@log
+class Person {
+    constructor(name: string, age: number) {}
+}
+
+new Person("Miguel", 33);
+//Argumentos: Miguel, 33</code></pre>
+<p>Como podemos observar el decorador log reemplaza el constructor de la clase por una función que, en primer lugar, registra a través de la consola los argumentos y luego devuelve el constructor original.</p>
+<h3>Decorador de métodos</h3>
+<p>El decorador de métodos es una función que acepta 3 argumentos: el objeto sobre el que se define el método, la clave de la propiedad y un descriptor de propiedad:</p>
+<pre class="language-javascript"><code>const log = (target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor&lt;Function&gt;) =&gt; {
+    return {
+        value: function( ... args: any[]) {
+            console.log("Arguments: ", args.join(", "));
+            const result = descriptor.value.apply(target, args);
+            console.log("Result: ", result);
+            return result;
+        }
+    }
+}
+
+class Calculator {
+    @log
+    add(x: number, y: number) {
+        return x + y;
+    }
+}
+
+new Calculator().add(1, 3);
+//Arguments: 1, 3
+//Result: 4</code></pre>
+<p>En este ejemplo, el decorador log  reemplaza la función original por una nueva que registra los argumentos recibidos, ejecuta el método original, almacena el resultado en una variable local lo registra en la consola y finalmente lo devuelve.</p>
+
+<h3>Resumen</h3>
+<p>En este articulo he tratado de mostrar la mayoría de características básicas de Typescript. Aunque he condensado bastante información en este artículo, me he dejado muchísimos elementos en el tintero. La idea es que esta entrada sirva como base a futuras publicaciones relacionadas con este magnifica lenguaje.</p>
+
+<p>Espero haber facilitado tu transición a Typescript, si ya lo conocías espero que el artículo te sirva como referencia. Si te ha gustado la entrada valora y comparte en tus redes sociales. No dudes en comentar dudas, aportes o sugerencias, estaré encantado de responder.</p>
+
+<p>Este artículo se distribuye bajo una <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener">Licencia Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)</a></p>
+
+<a class="aligncenter" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES" target="_blank" rel="nofollow noopener"><img class="align-center" src="https://res.cloudinary.com/software-crafters/image/upload/v1544181784/licencia-cc.png" alt="licencia-cc" width="118" height="41" /></a>

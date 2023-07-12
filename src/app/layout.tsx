@@ -3,6 +3,7 @@ import { Raleway } from 'next/font/google'
 import styles from "@/app/layout.module.css";
 import {Header} from "@/app/components/static/header/header";
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
+import {Footer} from "@/app/components/static/footer/footer";
 
 const raleway = Raleway({
     weight: ['400', '700'],
@@ -27,6 +28,7 @@ export default function RootLayout({
           <main className={styles.main}>
               <Header />
               {children}
+              <Footer />
           </main>
       </body>
     </html>

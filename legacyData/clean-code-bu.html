@@ -1,0 +1,352 @@
+<blockquote>
+    <strong>"La fortaleza y la debilidad de JavaScript reside en que te permite hacer cualquier cosa, tanto para bien como para mal." -- </strong><a href="https://twitter.com/raganwald"><strong>Reginald Braithwaite</strong></a></blockquote>
+
+
+<h2>Funciones</h2>
+<blockquote><strong>&ldquo;Sabemos que estamos desarrollando c&oacute;digo limpio cuando cada funci&oacute;n hace exactamente lo que su nombre indica&rdquo; -- <a href="https://es.wikipedia.org/wiki/Ward_Cunningham" target="_blank"> Ward Cunningham</a></strong></blockquote>
+<p>Las funciones son la entidad organizativa m&aacute;s b&aacute;sica en cualquier programa. Es por ello que deben resultar sencillas de leer y de entender, adem&aacute;s de transmitir claramente su intenci&oacute;n. A continuaci&oacute;n veremos algunas pautas que creo que nos pueden ser de ayuda a la hora de escribir buenas funciones.</p>
+<h3><strong>Tama&ntilde;o reducido y hacer una &uacute;nica cosa</strong></h3>
+<p>La simplicidad es un pilar fundamental a la hora de tratar de escribir buen c&oacute;digo, es por ello que la primera recomendaci&oacute;n es que nuestras funciones <strong>deben de tener un tama&ntilde;o reducido</strong>. Normalmente suelo escribir funciones de 4 o 5 l&iacute;neas, en algunas ocasiones puedo llegar a 15 o 20 l&iacute;neas, pero no me excedo nunca de esa cantidad.</p>
+<p>Si te sueles exceder de esas 15 o 20 l&iacute;neas es que tu funci&oacute;n hace demasiadas cosas, lo que nos lleva a la segunda recomendaci&oacute;n y quiz&aacute;s la m&aacute;s importante: las funciones deben hacer una &uacute;nica cosa y hacerla bien.</p>
+
+<h3><strong>Limita el n&uacute;mero de argumentos</strong></h3>
+<p>Otra recomendaci&oacute;n importante es la de limitar el n&uacute;mero de argumentos que recibe una funci&oacute;n. En general deber&iacute;amos limitarnos a tres par&aacute;metros como m&aacute;ximo. En el caso de tener que exceder este n&uacute;mero, podr&iacute;a ser una buena idea a&ntilde;adir un nivel m&aacute;s de indirecci&oacute;n a trav&eacute;s de un objeto:</p>
+
+<pre class="language-javascript"><code>function createMenu(title, body, buttonText, cancellable) {
+  // ...
+}
+
+function createMenu({ title, body, buttonText, cancellable }) {
+  // ...
+}
+
+createMenu({
+  title: 'Foo',
+  body: 'Bar',
+  buttonText: 'Baz',
+  cancellable: true
+});
+</code></pre>
+
+<h3><strong>Prioriza el estilo declarativo frente al imperativo</strong></h3>
+<p>Aunque JavaScript no es un lenguaje funcional puro, s&iacute; que nos ofrece algunos elementos de la programaci&oacute;n funcional que nos permiten escribir un c&oacute;digo mucho m&aacute;s declarativo. Una buena pr&aacute;ctica podr&iacute;a ser priorizar las funciones de alto nivel map, filter y reduce sobre las estructuras control y condicionales. Esto nos permitir&aacute; obtener funciones mucho m&aacute;s expresivas y de tama&ntilde;o m&aacute;s reducido. </p>
+<pre class="language-javascript"><code>//worse
+var orders = [
+    { productTitle: "Product 1", amount: 10 },
+    { productTitle: "Product 2", amount: 30 },
+    { productTitle: "Product 3", amount: 20 },
+    { productTitle: "Product 4", amount: 60 }
+];
+
+var totalAmount = 0;
+
+for (var i = 0; i < orders.length; i++) {
+    totalAmount += orders[i].amount;
+}
+
+console.log(totalAmount); // 120
+
+//better
+let shoppingCart = [
+    { productTitle: "Product 1", amount: 10 },
+    { productTitle: "Product 2", amount: 30 },
+    { productTitle: "Product 3", amount: 20 },
+    { productTitle: "Product 4", amount: 60 }
+];
+
+const sumAmount = (currentAmount, order) => currentAmount + order.amount;
+
+function getTotalAmount(shoppingCart) {
+    return shoppingCart.reduce(sumAmount, 0);
+}
+
+getTotalAmount(shoppingCart); // 120
+</code></pre>
+
+<h3><strong>Usa funciones an&oacute;nimas</strong></h3>
+<p>Como vimos en la secci&oacute;n de los nombres, el valor de un buen nombre es fundamental para la legibilidad. Cuando escogemos un mal nombre sucede todo lo contrario, por ello a veces la mejor forma de escoger buenos nombres es no tener que hacerlo. Aqu&iacute; es donde entra la fortaleza de las funciones an&oacute;nimas y por lo que, siempre que el contexto lo permita, deber&iacute;as utilizarlas. De este modo, evitar&aacute;s que se propaguen alias y malos nombres por tu c&oacute;digo. Veamos un ejemplo:</p>
+
+<pre class="language-javascript"><code>const stuffList = [
+    { isEnabled: true, name: 'justin' },
+    { isEnabled: false, name: 'lauren' },
+    { isEnabled: false, name: 'max' },
+];
+
+const filteredStuff = stuffList.filter(stuff => !stuff.isEnabled);
+</code></pre>
+
+<p>La funcion <em>stuff =&gt; &nbsp;!stuff.isEnabled </em>es un predicado tan simple que extraerlo no tiene demasiado sentido. </p>
+<h3><strong>Transparencia referencial</strong></h3>
+<p>Muchas veces nos encontramos con funciones que prometen hacer una cosa y que en realidad generan efectos secundarios ocultos. Esto debemos tratar de evitarlo en la medida de lo posible, para ello suele ser buena idea aplicar el principio de transparencia referencial sobre nuestras funciones. </p>
+<p>Se dice que una funci&oacute;n cumple el principio de transparencia referencial si, para un valor de entrada, produce siempre el mismo valor de salida. Este tipo de funciones tambi&eacute;n se conocen como funciones puras y son la base de la programaci&oacute;n funcional. </p>
+
+<pre class="language-javascript"><code>//bad
+let counter = 1;
+
+function increaseCounter(value) {
+  counter = value + 1;
+}
+
+increaseCounter(counter);
+console.log(counter); // 2
+
+//better
+let counter = 1;
+
+function increaseCounter(value) {
+  return value + 1;
+}
+
+increaseCounter(counter); // 2
+console.log(counter); // 1
+</code></pre>
+
+<h3><strong>Aplica el principio DRY</strong></h3>
+<p>Teniendo en cuenta que la duplicaci&oacute;n de c&oacute;digo suele ser la ra&iacute;z de m&uacute;ltiples problemas, una buena pr&aacute;ctica ser&iacute;a la implementaci&oacute;n del principio DRY (don't repeat yourself). Este principio, que en espa&ntilde;ol significa no repetirse, nos evitar&aacute; m&uacute;ltiples quebraderos de cabeza como tener que testear lo mismo varias veces, adem&aacute;s de ayudarnos a reducir la cantidad de c&oacute;digo a mantener.</p>
+<p>Para ello lo ideal ser&iacute;a extraer el c&oacute;digo duplicado a una clase o funci&oacute;n y utilizarlo donde nos haga falta. Muchas veces esta duplicidad no ser&aacute; tan evidente y ser&aacute; nuestra experiencia la que nos ayude a detectarla, no tengas miedo a refactorizar cuando detectes estas situaciones.</p>
+
+<pre class="language-javascript"><code>//worse
+function showDeveloperList(developers) {
+  developers.forEach((developer) => {
+    const expectedSalary = developer.calculateExpectedSalary();
+    const experience = developer.getExperience();
+    const githubLink = developer.getGithubLink();
+    const data = {
+      expectedSalary,
+      experience,
+      githubLink
+    };
+
+    render(data);
+  });
+}
+
+function showManagerList(managers) {
+  managers.forEach((manager) => {
+    const expectedSalary = manager.calculateExpectedSalary();
+    const experience = manager.getExperience();
+    const portfolio = manager.getMBAProjects();
+    const data = {
+      expectedSalary,
+      experience,
+      portfolio
+    };
+
+    render(data);
+  });
+}
+
+//better
+function showEmployeeList(employees) {
+  const getCVLink = (employee) =>
+    employee.type == 'manager'
+      ? employee.getMBAProjects()
+      : employee.getGithubLink()
+
+  employees.forEach(employee => render({
+    employee.calculateExpectedSalary(),
+    employee.getExperience(),
+    getCVLink(employee)
+  });
+};
+</code></pre>
+
+<h2>Evita el uso de comentarios</h2>
+<blockquote><strong>&ldquo;No comentes el c&oacute;digo mal escrito, reescr&iacute;belo&rdquo; -- <a href="https://es.wikipedia.org/wiki/Brian_Kernighan" target="_blank"> Brian W. Kernighan</a> </strong></blockquote>
+<p>Cuando necesitas a&ntilde;adir comentarios a tu c&oacute;digo es porque este no es lo suficientemente autoexplicativo, lo cual quiere decir que no estamos siendo capaces de escoger buenos nombres. Cuando veas la necesidad de escribir un comentario, trata de refactorizar tu c&oacute;digo y/o nombrar los elementos del mismo de otra manera. </p>
+<p>A menudo, cuando usamos librer&iacute;as de terceros, APIS, <em>frameworks</em>, etc., nos encontraremos ante situaciones en las que escribir un comentario ser&aacute; mejor que dejar una soluci&oacute;n compleja o un <em>hack</em> sin explicaci&oacute;n. En definitiva, la idea es que los comentarios sean la excepci&oacute;n, no la regla.</p>
+
+<h2>Formato coherente</h2>
+<blockquote><strong>&ldquo;El buen c&oacute;digo siempre parece estar escrito por alguien a quien le importa.&rdquo; --  <a href="https://twitter.com/mfeathers?lang=es" target="_blank"> Michael Feathers</a></strong></blockquote>
+<p>En todo proyecto <em>software</em> debe existir una serie de pautas sencillas que nos ayuden a armonizar la legibilidad del c&oacute;digo de nuestro proyecto, sobre todo cuando trabajamos en equipo. Algunas de las reglas en las que se podr&iacute;a hacer hincapi&eacute; son: </p>
+
+<h3><strong>Problemas similares, soluciones sim&eacute;tricas</strong></h3>
+<p>Es capital seguir los mismos patrones a la hora de resolver problemas similares dentro del mismo proyecto. Por ejemplo, si estamos resolviendo un CRUD de una entidad de una determinada forma, es importante que para implementar el CRUD de otras entidades sigamos aplicando el mismo estilo. &nbsp;</p>
+<h3><strong>Tama&ntilde;o de los archivos</strong></h3>
+<p>Evita crear archivos excesivamente grandes o archivos demasiado cortos (de 5 a 6 l&iacute;neas). Lo ideal ser&iacute;a movernos en un intervalo de entre 200 y 500 l&iacute;neas.</p>
+<h3><strong>Densidad, apertura y distancia vertical</strong></h3>
+<p>Las l&iacute;neas de c&oacute;digo con una relaci&oacute;n directa deben ser verticalmente densas, mientras que las l&iacute;neas que separan conceptos deben de estar separadas por espacios en blanco. Por otro lado, los conceptos relacionados deben mantenerse pr&oacute;ximos entre s&iacute;.</p>
+<h3><strong>Lo m&aacute;s importante primero</strong></h3>
+<p>Los elementos superiores de los ficheros deben contener los conceptos y algoritmos m&aacute;s importantes, e ir incrementando los detalles a medida que descendemos en el fichero. </p>
+<h3><strong>Indentaci&oacute;n</strong></h3>
+<p>Por &uacute;ltimo, y no menos importante, debemos respetar la indentaci&oacute;n o sangrado. Debemos indentar nuestro c&oacute;digo de acuerdo a su posici&oacute;n dependiendo de si pertenece a la clase, a una funci&oacute;n o a un bloque de c&oacute;digo. </p>
+<p>Esto es algo que puede parecer de sentido com&uacute;n, pero quiero hacer hincapi&eacute; en ello porque no ser&iacute;a la primera vez que me encuentro con este problema. Es m&aacute;s, en la universidad tuve un profesor que, como le entregaras un ejercicio con una mala identaci&oacute;n, directamente ni te lo correg&iacute;a.</p>
+
+<h2>Clases</h2>
+<blockquote><strong>"Si quieres ser un programador productivo esfuérzate en escribir código  legible" -- <a href="https://twitter.com/unclebobmartin" target="_blank">Robert C. Martin</a></strong></blockquote>
+<p>Una clase, adem&aacute;s de ser una abstracci&oacute;n mediante la cual representamos entidades o conceptos, es un elemento organizativo muy potente. Es por ello que debemos tratar de prestar especial atenci&oacute;n a la hora de dise&ntilde;arlas. </p>
+<h3><strong>Tama&ntilde;o reducido</strong></h3>
+<p>Las clases, al igual que vimos en las funciones, deben tener un tama&ntilde;o reducido. Para conseguir esto debemos empezar por <strong>escoger un buen nombre</strong>. Un nombre adecuado es la primera forma de limitar el tama&ntilde;o de una clase, ya que nos debe describir la responsabilidad que desempe&ntilde;a la clase. </p>
+<p>Otra pauta que nos ayuda a mantener un tama&ntilde;o adecuado de nuestras clases es tratar de aplicar <strong>el principio de responsabilidad &uacute;nica</strong>. Este principio viene a decir que una clase no deber&iacute;a tener m&aacute;s de una responsabilidad, es decir, no deber&iacute;a tener m&aacute;s de un motivo por el que ser modificada. </p>
+<p>Veamos un ejemplo:</p>
+<pre class="language-javascript"><code>class UserSettings {
+    private user: User;
+    private settings: Settings;
+
+    constructor(user) {
+        this.user = user;
+    }
+
+    changeSettings(settings) {
+        if (this.verifyCredentials()) {
+        // ...
+        }
+     }
+
+     verifyCredentials() {
+        // ...
+     }
+}
+
+</code></pre>
+
+<p>La clase <em>UserSettings</em> tiene dos responsabilidades: por un lado tiene que gestionar las <em>settings</em> del usuario y, adem&aacute;s, se encarga del manejo de las credenciales. En este caso podr&iacute;a ser interesante extraer la verificaci&oacute;n de las credenciales a otra clase, por ejemplo <em>UserAuth</em>, y que dicha clase sea la responsable de gestionar las operaciones relacionadas con el manejo de las credenciales. Nosotros tan solo tendr&iacute;amos que inyectarla a trav&eacute;s del constructor de la clase <em>UserSettings</em> y usarla en donde la necesitemos, en este caso en el m&eacute;todo <em>changeSettings</em>. </p>
+
+<pre class="language-javascript"><code>class UserAuth{
+    private user: User;
+
+    constructor(user: User){
+        this.user = user
+    }
+
+    verifyCredentials(){
+        //...
+    }
+}
+
+class UserSettings {
+    private user: User;
+    private settings: Settings;
+    private auth: UserAuth;
+
+    constructor(user: User, auth:UserAuth) {
+        this.user = user;
+        this.auth = auth;
+    }
+
+    changeSettings(settings) {
+        if (this.auth.verifyCredentials()) {
+        // ...
+        }
+    }
+} </code></pre>
+
+<p>Esta forma de dise&ntilde;ar las clases nos permite mantener la responsabilidades bien definidas, adem&aacute;s de contener el tama&ntilde;o de las mismas.</p>
+
+<h3><strong>Organizaci&oacute;n</strong></h3>
+<p>Las clases deben comenzar con una lista de variables. En el caso de que hayan constantes p&uacute;blicas, estas deben aparecer primero. Seguidamente deben aparecer las variables est&aacute;ticas privadas y despu&eacute;s las de instancia privadas; en el caso de que utilizaremos variables de instancia p&uacute;blicas estas deben ir en &uacute;ltimo lugar</p>
+<p>Los m&eacute;todos o funciones p&uacute;blicas deber&iacute;an ir a continuaci&oacute;n de la lista de variables. Para ello comenzaremos con el m&eacute;todo constructor. En el caso de usar un <em>named</em> <em>constructor</em><em>,</em> este ir&iacute;a antes y, seguidamente, el m&eacute;todo constructor privado. A continuaci&oacute;n situaremos las funciones est&aacute;ticas de la clase y, si dispone de m&eacute;todos privados relacionados, los situaremos a continuaci&oacute;n. Seguidamente ir&iacute;an el resto de m&eacute;todos de instancia ordenados de mayor a menor importancia, dejando para el final los accesores (<em>getters</em> y <em>setters</em>).</p>
+<p>Para este ejemplo usaremos una peque&ntilde;a clase construida con <em>typescript,</em> ya que nos facilita la tarea de establecer m&eacute;todos y variables privadas.</p>
+
+<pre class="language-javascript"><code>class Post {
+    private title : string;
+    private content: number;
+    private createdAt: number;
+
+    static create(title:string; content:string){
+        return new Post(title, content)
+    }
+
+    private constructor(title:string; content:string){
+        this.setTitle(title);
+        this.setContent(content);
+        this.createdAt = Date.now();
+    }
+
+    setTitle(title:string){
+       if(StringUtils.isNullOrEmpty(title))
+           throw new Error(‘Title cannot be empty’)
+
+       this.title = title;
+    }
+
+    setContent(content:string){
+       if(StringUtils.isNullOrEmpty((content))
+           throw new Error(‘Content cannot be empty’)
+
+       this.content = content;
+    }
+
+    getTitle(){
+       return this.title;
+    }
+
+    getContent(){
+       return this.content;
+    }
+}</code></pre>
+
+<h3><strong>Prioriza la composici&oacute;n frente a la herencia</strong></h3>
+<p>Tanto la herencia como la composici&oacute;n son dos t&eacute;cnicas muy comunes aplicadas en la reutilizaci&oacute;n de c&oacute;digo. Como sabemos, la herencia permite definir una implementaci&oacute;n desde una clase padre, mientras que la composici&oacute;n se basa en ensamblar objetos diferentes para obtener una funcionalidad m&aacute;s compleja. </p>
+<p>Optar por la composici&oacute;n frente a la herencia nos ayuda a mantener cada clase encapsulada y centrada en una sola tarea (principio de responsabilidad), favoreciendo la modularidad y evitando el acoplamiento de dependencias. Un alto acoplamiento no solo nos obliga a arrastrar con dependencias que no necesitamos, sino que adem&aacute;s limita la flexibilidad de nuestro c&oacute;digo a la hora de introducir cambios. </p>
+<p><br>Esto no quiere decir que nunca debas usar la herencia. Hay situaciones en las que la herencia casa muy bien, la clave est&aacute; en saber diferenciarlas. Una buena forma de hacer esta diferenciaci&oacute;n es pregunt&aacute;ndote si la clase que hereda <strong>es</strong> realmente un hijo o simplemente <strong>tiene</strong> elementos del padre. Veamos un ejemplo:</p>
+
+<pre class="language-javascript"><code>lass Employee {
+    private this.name: string;
+    private this.email: string;
+
+    constructor(name:string, email:string) {
+        this.name = name;
+        this.email = email;
+    }
+
+  // ...
+}
+
+class EmployeeTaxData extends Employee {
+    private this.ssn: string;
+    private this.salary: number;
+
+    constructor(ssn:string, salary:number) {
+        super();
+        this.ssn = ssn;
+        this.salary = salary;
+     }
+  //...
+}
+</code></pre>
+
+<p>Como podemos ver, se trata de un ejemplo algo forzado de herencia mal aplicada, ya que en este caso un empleado &ldquo;tiene&rdquo; <em>EmployeeTaxData,</em> no &ldquo;es&rdquo; <em>EmployeeTaxData</em>. Si refactorizamos aplicando composici&oacute;n, las clases quedar&iacute;an de la siguiente manera:</p>
+
+<pre class="language-javascript"><code>class EmployeeTaxData{
+    private this.ssn: string;
+    private this.salary: number;
+
+    constructor(ssn:string, salary:number) {
+        super();
+        this.ssn = ssn;
+        this.salary = salary;
+     }
+  //...
+}
+
+class Employee {
+    private this.name: string;
+    private this.email: string;
+    private this.taxData: EmployeeTaxData;
+
+    constructor(name:string, email:string) {
+        this.name = name;
+        this.email = email;
+    }
+
+    setTaxData(taxData:EmployeeTaxData){
+        this.taxData = taxData;
+    }
+  // ...
+}
+</code></pre>
+
+<p>Como podemos observar, la responsabilidad de cada una de las clases queda mucho m&aacute;s definida de esta manera, adem&aacute;s de generar un c&oacute;digo menos acoplado y modular.</p>
+<h2>Conclusiones</h2>
+<p>Aunque en este art&iacute;culo me he centrado en la parte de <em>clean code</em> sobre la legibilidad del c&oacute;digo, dejando para futuros posts otras cuestiones fundamentales relacionadas con c&oacute;mo conseguir que nuestro c&oacute;digo sea m&aacute;s intuitivo, no solo m&aacute;s legible, como los principios SOLID, patrones de dise&ntilde;o, arquitectura limpia, l&iacute;mites, <em>testing</em>, etc.</p>
+<p>El t&eacute;rmino <em>clean code</em> realmente abarca mucho m&aacute;s de lo expuesto en este art&iacute;culo e incluso de lo que expone Uncle Bob en su libro. Creo que si miramos m&aacute;s all&aacute; del c&oacute;digo, <em>clean code</em> se convierte en una actitud, un deseo de hacer las cosas bien, de seguir buenas pr&aacute;cticas que nos conviertan en mejores profesionales.</p>
+<p>Si te ha gustado la entrada, valora y comparte en tus redes sociales. No dudes en plantear preguntas, aportes o sugerencias. &iexcl;Estar&eacute; encantado de responder!</p>
+<h2>Referencias</h2>
+<ul>
+    <li><a><em>Clean Code: A Handbook of Agile Software Craftsmanship</em></a> de Robert C. Martin</li>
+    <li><a>Design patterns</a> de &nbsp;Erich Gamma, John Vlissides, Richard Helm y Ralph Johnson</li>
+    <li><a>Implementation Patterns</a> de Kent Beck</li>
+    <li>https://github.com/ryanmcdermott/clean-code-javascript</li>
+    <li>Conversaciones con los colegas Dani Garc&iacute;a, <a href="https://twitter.com/PatrickHertling" target="_blank">Patrick</a>, <a href="https://twitter.com/carlosble" target="_blank">Carlos Bl&eacute;</a> y <a href="https://twitter.com/_jmgomez_" target="_blank">Juan M. G&oacute;mez.</a></li>
+</ul>

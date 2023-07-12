@@ -5,7 +5,7 @@ import {Routes} from "@/app/routes";
 
 export const Header = () => {
     return (
-        <header className={styles.header}>
+        <header className={styles.header} id={"header"}>
             <Logo/>
             <ThemeToggle/>
         </header>
