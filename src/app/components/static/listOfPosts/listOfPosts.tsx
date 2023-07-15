@@ -9,9 +9,9 @@ export const ListOfPosts = async ({currentPage, title}:{currentPage:number, titl
     const {getPostsWithPagination} = usePosts(ClientFactory.createBlogService());
     const {posts, pagination} = await getPostsWithPagination(currentPage);
     return (<div>
-        <h3>{title}</h3>
+        <h3 className={styles.title}>{title}</h3>
         {posts.map(post =>
-            <SummarizedPostBlock key={post.id} summarizedPost={post}/>
+            <SummarizedPostBlock key={post.id} summarizedPost={post} />
         )}
         <PostsPagination pagination={pagination}/>
     </div>)

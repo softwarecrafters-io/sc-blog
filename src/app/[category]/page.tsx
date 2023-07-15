@@ -1,8 +1,8 @@
 import {ListOfPosts} from "@/app/components/static/listOfPosts/listOfPosts";
 
-export default async function PostsPage() {
-
+type CategoryPageParams = { params: { category: string } };
+export default async function PostsPage({params}:CategoryPageParams) {
     return (
-        <ListOfPosts title={'Articulos'} currentPage={1}/>
+        <ListOfPosts title={params.category} currentPage={1}/>
   )
 }

@@ -7,7 +7,7 @@ export const HomeComponent = ({params}: { params: { slug: string }; }) => {
     return (
         <>
             <Newsletter/>
-            <ListOfPosts title={"Últimos artículos"} currentPage={currentPage}/>
+            <ListOfPosts title={"Últimos artículos"} currentPage={currentPage} />
         </>
     )
 }

@@ -1,8 +1,12 @@
+.title{
+    text-transform: capitalize;
+}
+
 .pagination{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .link{

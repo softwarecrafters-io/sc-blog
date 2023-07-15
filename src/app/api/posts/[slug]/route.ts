@@ -1,6 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
 import {ServerFactory} from "@/factories/serverFactory";
-import {notFound} from "next/navigation";
 
 type Params = {
     params: { slug: string }
@@ -11,7 +10,7 @@ const controller = async (request: NextRequest, params: Params ) => {
     const {slug} = params.params;
     const post = await blogService.postBy(slug).toPromise();
     if(!post){
-        return notFound();
+        return NextResponse.json({error: 'Post not found'}, {status: 404});
     }
     return NextResponse.json(post);
 }

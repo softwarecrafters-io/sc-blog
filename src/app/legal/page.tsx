@@ -9,16 +9,17 @@ export default async function Legal() {
     const data = await getMarkdown();
     return (
         <div className={styles.container}>
-            <h1>Legal</h1>
+            <h1>Tostón Legal</h1>
         <p>Aviso legal, política de privacidad, información de <em>cookies</em> y otras cosas extrañas que los
                 legisladores nos obligan a incluir.</p>
             <strong>Este aviso legal define las condiciones establecidas para los siguientes dominios:</strong>
             <ul>
-                <li><a href={'https://softwarecrafters.io'}>softwarecrafters.io</a></li>
-                <li><a href={'https://motivacion.dev'}>motivacion.dev</a></li>
-                <li><a href={'https://cleanjavascript.es'}>cleanjavascript.es</a></li>
-                <li><a href={'https://testingsostenible.com'}>testingsostenible.com</a></li>
+                <li><a href={'https://softwarecrafters.io'} target={'_blank'}>softwarecrafters.io</a></li>
+                <li><a href={'https://motivacion.dev'} target={'_blank'}>motivacion.dev</a></li>
+                <li><a href={'https://cleanjavascript.es'} target={'_blank'}>cleanjavascript.es</a></li>
+                <li><a href={'https://testingsostenible.com'} target={'_blank'}>testingsostenible.com</a></li>
             </ul>
+            <p>Por cierto, en la web <a href={'https://softwarecrafters.io'} target={'_blank'}>softwarecrafters.io</a> no usamos cookies, en el resto si. Si te interesan saber cuales son, las detallamos un poco más abajo.</p>
             <strong>Titular de los sitios web softwarecrafters.io, cleanjavascript.es <br/> y testingsostenible.com</strong>
             <ul>
                 <li><strong>Identidad del Responsable:</strong>&nbsp;Software Crafters, SLU</li>
@@ -127,7 +128,7 @@ export default async function Legal() {
                             <td cky-i18n="cookies.PHPSESSID.type">https</td>
                             <td cky-i18n="cookies.PHPSESSID.duration"></td>
                             <td cky-i18n="cookies.PHPSESSID.description">This cookie is native to PHP applications.
-                                The cookie is used to store and identify a users' unique session ID for the purpose
+                                The cookie is used to store and identify a users unique session ID for the purpose
                                 of managing user session on the website. The cookie is a session cookies and is
                                 deleted when all the browser windows are closed.
                             </td>
@@ -162,7 +163,7 @@ export default async function Legal() {
                             <td cky-i18n="cookies.cookieyes-necessary.duration">1 año</td>
                             <td cky-i18n="cookies.cookieyes-necessary.description">CookieYes establece esta cookie y
                                 se utiliza para recordar el consentimiento de los usuarios para el uso de cookies en
-                                la categoría 'Necesarias'.
+                                la categoría Necesarias.
                             </td>
                         </tr>
                         <tr>
@@ -171,7 +172,7 @@ export default async function Legal() {
                             <td cky-i18n="cookies.cookieyes-functional.duration">1 año</td>
                             <td cky-i18n="cookies.cookieyes-functional.description">CookieYes establece esta cookie
                                 y se utiliza para recordar el consentimiento de los usuarios para el uso de cookies
-                                en la categoría 'Funcional'.
+                                en la categoría Funcional.
                             </td>
                         </tr>
                         <tr>
@@ -180,7 +181,7 @@ export default async function Legal() {
                             <td cky-i18n="cookies.cookieyes-analytics.duration">1 año</td>
                             <td cky-i18n="cookies.cookieyes-analytics.description">CookieYes establece esta cookie y
                                 se utiliza para recordar el consentimiento de los usuarios para el uso de cookies en
-                                la categoría 'Analíticas'.
+                                la categoría Analíticas.
                             </td>
                         </tr>
                         <tr>
@@ -189,7 +190,7 @@ export default async function Legal() {
                             <td cky-i18n="cookies.cookieyes-performance.duration">1 año</td>
                             <td cky-i18n="cookies.cookieyes-performance.description">CookieYes establece esta cookie
                                 y se utiliza para recordar el consentimiento de los usuarios para el uso de cookies
-                                en la categoría 'Rendimiento'.
+                                en la categoría Rendimiento.
                             </td>
                         </tr>
                         <tr>
@@ -198,7 +199,7 @@ export default async function Legal() {
                             <td cky-i18n="cookies.cookieyes-advertisement.duration">1 año</td>
                             <td cky-i18n="cookies.cookieyes-advertisement.description">CookieYes establece esta
                                 cookie y se utiliza para recordar el consentimiento de los usuarios para el uso de
-                                cookies en la categoría 'Anuncios'.
+                                cookies en la categoría Anuncios.
                             </td>
                         </tr>
                         <tr>
@@ -214,7 +215,7 @@ export default async function Legal() {
                             <td cky-i18n="cookies.cookieyes-other.type">https</td>
                             <td cky-i18n="cookies.cookieyes-other.duration">1 año</td>
                             <td cky-i18n="cookies.cookieyes-other.description">CookieYes sets this cookie to
-                                remember the consent of users for the use of cookies in the 'Other' category.
+                                remember the consent of users for the use of cookies in the Other category.
                             </td>
                         </tr>
                         </tbody>

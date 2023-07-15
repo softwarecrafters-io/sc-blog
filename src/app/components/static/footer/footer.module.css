@@ -1,17 +1,19 @@
 .container{
+    bottom: 0;
     justify-self: flex-end;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem;
     width: 100%;
     max-width: 700px;
     margin: 5px 10px;
+    padding: 60px 0;
+    margin-top:auto;
 }
 
 .legal{
-    margin-top: 20px;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: var(--text-secondary-color);
+    opacity: 0.8;
     text-decoration: none;
 }

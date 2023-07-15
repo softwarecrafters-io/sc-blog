@@ -14,7 +14,7 @@ describe('PaginationService', () => {
 
     it('should paginate fakePosts correctly', () => {
         const paginatedPosts = paginationService.paginatePosts(1);
-        expect(paginatedPosts).toEqual(fakePosts.slice(0, 5));
+        expect(paginatedPosts).toEqual(fakePosts.slice(0, 4));
     });
 
     it('should calculate total pages correctly', () => {

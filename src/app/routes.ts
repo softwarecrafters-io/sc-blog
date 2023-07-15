@@ -5,15 +5,17 @@ export class Routes{
     static legal = '/legal';
     static posts = '/posts';
 
-    static buildPostRoute(post: Post | SummarizedPost) {
-        return `${post.category.toLowerCase()}/${post.slug}`;
+    static buildPostRoute(post: Post | SummarizedPost, isFromRoot: boolean) {
+        if (isFromRoot) {
+            return `${post.category.toLowerCase()}/${post.slug}`;
+        }
+        return `../${post.category.toLowerCase()}/${post.slug}`;
     }
 
-    static buildCategoryRoute(category: string) {
-        return `${category.toLowerCase()}`;
-    }
-
-    static buildCategoryRouteFromPost(category: string) {
+    static buildCategoryRoute(category: string, isFromRoot: boolean) {
+        if (isFromRoot) {
+            return `${category.toLowerCase()}`;
+        }
         return `../${category.toLowerCase()}`;
     }
 }
