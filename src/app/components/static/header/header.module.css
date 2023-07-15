@@ -6,8 +6,21 @@
     margin-top:10px;
 }
 
+.logo{
+}
+
+.containerLogoSvg{
+    height: 44px;
+    transition:  0.3s ease-in-out;
+}
+
+.containerLogoSvg:hover{
+    transform: scale(1.1);
+}
+
 .logoSvg{
     fill:var(--highlight-color);
     fill-opacity:1;
-    stroke-width:0.0857143
+    stroke-width:0.0857143;
+    transition: transform ease .3s;
 }

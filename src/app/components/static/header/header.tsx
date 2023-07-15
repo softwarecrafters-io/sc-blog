@@ -21,7 +21,8 @@ const Logo = () => {
 }
 
 const logoSvg = <svg
-    width="180"
+    className={styles.containerLogoSvg}
+    height="44"
     viewBox="0 0 85 25.585621"
     version="1.1"
     id="svg1930"

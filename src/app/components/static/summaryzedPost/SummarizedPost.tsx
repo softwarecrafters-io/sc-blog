@@ -3,11 +3,12 @@ import {Routes} from "@/app/routes";
 import {calculateReadingTime, formatDate, SummarizedPost} from "@/core/models";
 import styles from './summarizedPost.module.css';
 import Image from "next/image";
+import {useState} from "react";
 
 
 export const SummarizedPostBlock = ({summarizedPost}:{summarizedPost:SummarizedPost}) => {
     return (
-        <div className={styles.container} id={summarizedPost.slug}>
+        <div className={styles.container} id={summarizedPost.slug} >
             <div className={styles.containerMainContent}>
                 <div className={styles.containerText}>
                     <Link className={styles.link} href={Routes.buildPostRoute(summarizedPost)}>
@@ -15,7 +16,7 @@ export const SummarizedPostBlock = ({summarizedPost}:{summarizedPost:SummarizedP
                     <span className={styles.subtitle}>{summarizedPost.description}</span>
                     </Link>
                     <div className={styles.meta}>
-                        <span className={styles.tag}>{summarizedPost.category}</span>
+                        <Link className={styles.category} href={Routes.buildCategoryRoute(summarizedPost.category)}>{summarizedPost.category}</Link>
                         <span className={styles.time}>{summarizedPost.readingTime} min read · {formatDate(summarizedPost)}</span>
                     </div>
                 </div>

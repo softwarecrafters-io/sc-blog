@@ -2,7 +2,8 @@ import {calculateReadingTime, canBeFollowed, formatDate, Post, ProfilePicture} f
 import styles from "./post.module.css";
 import Image from "next/image";
 import {ScrollLink} from "@/app/components/client/ScrollLink";
-import {MarkdownBlock} from "@/app/components/client/MarkdownBlock";
+import {CodeBlock} from "@/app/components/client/CodeBlock";
+import ReactMarkdown from "react-markdown";
 
 export const PostBlock = ({post}: { post: Post }) => {
     return (
@@ -10,7 +11,7 @@ export const PostBlock = ({post}: { post: Post }) => {
             <h1 className={styles.title}>{post.title}</h1>
             <h2 className={styles.subtitle}>{post.description}</h2>
             <div className={styles.infoContainer}>
-                <Image className={styles.profile} src={ProfilePicture(post)} alt={post.username} width={50} height={50} hidden={!ProfilePicture(post)}/>
+                {ProfilePicture(post) && <Image className={styles.profile} src={ProfilePicture(post)} alt={post.username} width={50} height={50} />}
                 <div className={styles.info}>
                     <span className={styles.username}>{post.username} · <ScrollLink href={'#newsletter'} hidden={canBeFollowed(post)}>Follow</ScrollLink></span>
                     <span className={styles.time}>{calculateReadingTime(post)} min read · {formatDate(post)}</span>
@@ -21,3 +22,11 @@ export const PostBlock = ({post}: { post: Post }) => {
         </div>
     )
 }
+
+const MarkdownBlock = ({post}:{post:Post}) => (
+    <ReactMarkdown
+        components={{code({children}) {return <CodeBlock post={post}>{children}</CodeBlock>}}}>
+        {post.markdownBody}
+    </ReactMarkdown>
+)
+

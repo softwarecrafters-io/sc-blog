@@ -6,6 +6,14 @@ export class Routes{
     static posts = '/posts';
 
     static buildPostRoute(post: Post | SummarizedPost) {
-        return `${Routes.posts}/${post.slug}`;
+        return `${post.category.toLowerCase()}/${post.slug}`;
+    }
+
+    static buildCategoryRoute(category: string) {
+        return `${category.toLowerCase()}`;
+    }
+
+    static buildCategoryRouteFromPost(category: string) {
+        return `../${category.toLowerCase()}`;
     }
 }

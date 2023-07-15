@@ -71,18 +71,6 @@ export const legacyPostsWithMarkdownContent: LegacyPost[] = [
         "ogImage": "https://swcrafters.fra1.digitaloceanspaces.com/Posts/merkle-tree-typescript/og.png"
     },
     {
-        "title":"Introducción a la programación reactiva con RxJS",
-        "seoTitle":"▷ RxJS: Programación Reactiva【2020】",
-        "slug": "introduccion-programacion-reactiva-rxjs",
-        "category": "javascript",
-        "author": "Miguel A. Gómez",
-        "background":"https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/RxJS_category.png",
-        "summaryChars" : 396,
-        "content": fs.readFileSync("./legacyData/introduccion-programacion-reactiva-rxjs.html", {encoding: 'utf-8'}),
-        "summary":"RxJS es una librería que nos permite programar con un estilo funcional reactivo. La programación reactiva es un concepto relativamente nuevo ",
-        "ogImage":"https://res.cloudinary.com/software-crafters/image/upload/v1547037167/posts/introduccion-programacion-reactiva-rxjs/og-introduccion_a_la_programacion_reactiva_con_rxjs.png"
-    },
-    {
         "title":"Patrones de diseño con TypeScript en el mundo real: creacionales y estructurales",
         "seoTitle":"▷ PATRONES DE DISEÑO: creacionales y estructurales【2020】",
         "slug":"patrones-diseno-creacionales-estructurales",
@@ -260,6 +248,18 @@ export const legacyPostsWithMarkdownContent: LegacyPost[] = [
 ];
 
 const legacyPostsWithHtmlContent: LegacyPost[] = [
+    {
+        "title":"Introducción a la programación reactiva con RxJS",
+        "seoTitle":"▷ RxJS: Programación Reactiva【2020】",
+        "slug": "introduccion-programacion-reactiva-rxjs",
+        "category": "javascript",
+        "author": "Miguel A. Gómez",
+        "background":"https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/RxJS_category.png",
+        "summaryChars" : 396,
+        "content": nhm.translate(fs.readFileSync("./legacyData/introduccion-programacion-reactiva-rxjs.html", {encoding: 'utf-8'})),
+        "summary":"RxJS es una librería que nos permite programar con un estilo funcional reactivo. La programación reactiva es un concepto relativamente nuevo ",
+        "ogImage":"https://res.cloudinary.com/software-crafters/image/upload/v1547037167/posts/introduccion-programacion-reactiva-rxjs/og-introduccion_a_la_programacion_reactiva_con_rxjs.png"
+    },
     {
         "title":"Union types y pattern matching con TypeScript.",
         "seoTitle":"▷ Pattern Matching en TypeScript【2020】",

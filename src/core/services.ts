@@ -1,7 +1,7 @@
 import {Post, SummarizedPost} from "./models";
 
 export class PaginationService{
-    constructor(private readonly posts:SummarizedPost[], readonly pageSize = 5){}
+    constructor(private readonly posts:SummarizedPost[], readonly pageSize = 4){}
 
     paginatePosts(currentPage:number): SummarizedPost[] {
         const startIndex = this.pageSize * (currentPage - 1);
