@@ -18,7 +18,6 @@ export const ListOfPosts = async ({currentPage, title}:{currentPage:number, titl
 }
 
 const PostsPagination = ({pagination}:{pagination:Pagination} ) => {
-    console.log(pagination)
     const previousPage = () => {
         const currentPage = pagination.currentPage;
         if (currentPage > 1) {

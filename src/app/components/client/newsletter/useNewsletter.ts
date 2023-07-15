@@ -24,7 +24,6 @@ export const useNewsletter = () => {
     }
 
     const handleSuccess = () => {
-        console.log("success")
         setState({...state, isSuccess: true, error: ""})
     }
 
@@ -41,7 +40,6 @@ export const useNewsletter = () => {
     }
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value)
         setState({...state, email: event.target.value})
     }
 

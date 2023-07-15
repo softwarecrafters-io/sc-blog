@@ -15,7 +15,6 @@ export class HttpRequester {
     private request<T>(url: string, cacheInSeconds: number, params?: PaginationParams): Observable<T> {
         const queryParams = new URLSearchParams(params as Record<string, any>).toString();
         const fullUrl = `${url}?${queryParams}`;
-        console.log(fullUrl)
         const options = {
             method: 'GET',
             next:{

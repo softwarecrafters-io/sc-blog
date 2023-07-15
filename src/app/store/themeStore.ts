@@ -6,7 +6,6 @@ export class ThemeStore{
     private readonly themeSubject: Subject<Theme> = new Subject<Theme>();
 
     updateTheme(theme: Theme){
-        console.log('updating theme to: ' + theme);
         this.currentTheme = theme;
         this.themeSubject.next(theme);
     }
