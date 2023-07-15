@@ -19,7 +19,7 @@ xdescribe('HttpPostRepository', () => {
             .get('/posts')
             .reply(200, summarizedPosts);
 
-        const result = await repo.summarizedPosts().toPromise();
+        const result = await repo.summarizedPosts(1).toPromise();
         expect(result).toEqual(summarizedPosts);
     });
 

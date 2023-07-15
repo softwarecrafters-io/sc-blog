@@ -1,9 +1,9 @@
-import { Post, SummarizedPost} from "../../core/models";
-import {PostRepository} from "../../core/repositories";
+import {Pagination, Post, PostsWithPagination, SummarizedPost} from "../../core/models";
+import {PostRepository, PostRepositoryWithPagination} from "../../core/repositories";
 import {Observable} from "rxjs";
 import {HttpRequester} from "@/repositories/client/httpRequester";
 
-export class HttpPostRepository implements PostRepository{
+export class HttpPostRepository implements PostRepositoryWithPagination{
     constructor(private requester: HttpRequester) {}
 
     postBy(slug: string): Observable<Post | undefined> {
@@ -11,9 +11,9 @@ export class HttpPostRepository implements PostRepository{
         return this.requester.get<Post>(url);
     }
 
-    summarizedPosts(): Observable<SummarizedPost[]> {
+    summarizedPosts(page:number): Observable<PostsWithPagination> {
         const url = `/api/posts`;
-        return this.requester.get<SummarizedPost[]>(url)
+        return this.requester.get<PostsWithPagination>(url, {page})
     }
 
     summarizedPostsByTag(tag: string): Observable<SummarizedPost[]> {

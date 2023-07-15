@@ -1,13 +1,12 @@
-import {PostRepository} from "../core/repositories";
-import {fromPostToSummary} from "../core/models";
-import {map} from "rxjs";
-import {PaginationService} from "@/core/services";
+import {PostRepository, PostRepositoryWithPagination} from "../core/repositories";
+import {fromPostToSummary, Pagination, SummarizedPost, PostsWithPagination} from "../core/models";
+import {map, Observable} from "rxjs";
 
 export class BlogService{
-    constructor(private postRepository: PostRepository) {}
+    constructor(private postRepository: PostRepositoryWithPagination) {}
 
-    summarizedPosts() {
-        return this.postRepository.summarizedPosts();
+    summarizedPosts(page:number):Observable<PostsWithPagination> {
+        return this.postRepository.summarizedPosts(page);
     }
 
     postBy(slug: string) {
@@ -23,15 +22,17 @@ export class BlogService{
     }
 
     tags(){
-        return this.postRepository.summarizedPosts().pipe(
-            map(posts => posts.map(post => post.tags).flat()),
+        //todo tag repository
+        return this.postRepository.summarizedPosts(0).pipe(
+            map(posts => posts.posts.map(post => post.tags).flat()),
             map(tags => [...new Set(tags)])
         )
     }
 
     users(){
-        return this.postRepository.summarizedPosts().pipe(
-            map(posts => posts.map(post => post.username).flat()),
+        //todo user repository
+        return this.postRepository.summarizedPosts(0).pipe(
+            map(posts => posts.posts.map(post => post.username).flat()),
             map(users => [...new Set(users)])
         )
     }

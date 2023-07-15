@@ -5,11 +5,11 @@ import {SummarizedPostBlock} from "@/app/components/static/summaryzedPost/Summar
 import styles from './lastPosts.module.css';
 
 export const LastPosts = async () => {
-    const {getPosts, getPaginatedPosts, nextPage} = usePosts(ClientFactory.createBlogService());
-    const allPosts = await getPosts();
+    const {getPostsWithPagination, getPaginatedPosts, nextPage} = usePosts(ClientFactory.createBlogService());
+    const {posts, pagination} = await getPostsWithPagination();
     return (<div>
         <h3>Últimos artículos</h3>
-        {allPosts.map(post => <article key={post.id}>
+        {posts.map(post => <article key={post.id}>
             <SummarizedPostBlock summarizedPost={post}/>
         </article>)}
     </div>)

@@ -8,15 +8,14 @@ import {Theme} from "@/app/components/client/theme/themeSwicher";
 import {ClientFactory} from "@/factories/clientFactory";
 
 export const MarkdownBlock = ({post}:{post:Post}) => {
-    const [codeStyle, setCodeStyle] = useState(oneLight);
     const themeStore = ClientFactory.getThemeStore();
+    const [codeStyle, setCodeStyle] = useState(oneDark);
     useEffect(() => {
+        const storedTheme = window.localStorage.getItem('theme') as Theme;
+        const defaultTheme = storedTheme || 'light';
+        setCodeStyle(defaultTheme === 'dark' ? oneDark : oneLight);
         themeStore.getThemeSubject().subscribe((theme:Theme) => {
-            if(theme === 'dark'){
-                setCodeStyle(oneDark);
-            }else{
-                setCodeStyle(oneLight);
-            }
+            theme === 'dark' ? setCodeStyle(oneDark): setCodeStyle(oneLight)
         })
     }, []);
 
@@ -38,5 +37,4 @@ export const MarkdownBlock = ({post}:{post:Post}) => {
         }}>
         {post.markdownBody}
     </ReactMarkdown>
-
 }

@@ -95,3 +95,10 @@ export function isValidEmail(email: string) {
     const regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regExp.test(email);
 }
+
+export type Pagination = {
+    currentPage: number;
+    totalPages: number;
+}
+
+export type PostsWithPagination = {posts: SummarizedPost[], pagination:Pagination}

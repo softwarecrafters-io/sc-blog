@@ -1,9 +1,28 @@
 import {PostRepository} from "../core/repositories";
-import {fromPostToSummary, SummarizedPost} from "../core/models";
+import {fromPostToSummary, Pagination, PostsWithPagination, SummarizedPost} from "../core/models";
 import {map, Observable, zip} from "rxjs";
+import {PaginationService} from "../core/services";
 
 export class BlogServiceWithLegacyPosts{
     constructor(private postRepository: PostRepository, private legacyPostRepository: PostRepository) {}
+
+    summarizedPaginatedPosts(currentPage: number):Observable<PostsWithPagination> {
+        return this.summarizedPosts().pipe(
+            map(posts => {
+                const paginationService = new PaginationService(posts);
+                const paginatedPosts = paginationService.paginatePosts(currentPage);
+
+                const totalPages = paginationService.calculateTotalPages();
+                return{
+                    posts: paginatedPosts,
+                    pagination: {
+                        currentPage,
+                        totalPages,
+                    }
+                }
+            })
+        );
+    }
 
     summarizedPosts():Observable<SummarizedPost[]> {
         return zip(

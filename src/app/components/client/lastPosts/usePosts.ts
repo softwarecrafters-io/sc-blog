@@ -1,14 +1,15 @@
+'use client';
 import {BlogService} from "@/application/blogService";
-import {Post, SummarizedPost} from "@/core/models";
+import {Pagination, Post, PostsWithPagination, SummarizedPost} from "@/core/models";
 import {PaginationService} from "@/core/services";
 import {map, tap} from "rxjs";
 import {useEffect, useState} from "react";
 
 export const usePosts = (blogService:BlogService) => {
-
-    const getPosts = () => {
-        const request = blogService.summarizedPosts()
-        return request.toPromise() as Promise<SummarizedPost[]>;
+    const [currentPage, setCurrentPage] = useState(1);
+    const getPostsWithPagination = () => {
+        const request = blogService.summarizedPosts(1)
+        return request.toPromise() as Promise<PostsWithPagination>;
     }
 
     const nextPage = (posts:SummarizedPost[]) => {
@@ -20,5 +21,5 @@ export const usePosts = (blogService:BlogService) => {
     }
 
     const getPostBySlug = (slug: string) => blogService.postBy(slug).toPromise() as Promise<Post>;
-    return {getPosts, getPostBySlug, nextPage, getPaginatedPosts};
+    return {getPostsWithPagination, getPostBySlug, nextPage, getPaginatedPosts};
 }
