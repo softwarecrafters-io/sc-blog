@@ -37,7 +37,7 @@ jobs:
 #        run: npm run build
 
       - name: Build container image
-        run: docker build -t registry.digitalocean.com/software-crafter-nextjs-blog/blog:latest .
+        run: docker build --build-arg PUBLIC_URL=http://localhost:3000 -t registry.digitalocean.com/software-crafter-nextjs-blog/blog:latest .
 
 #      - name: Login to DigitalOcean Container Registry
 #        uses: docker/login-action@v1
