@@ -11,24 +11,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18' # puedes usar cualquier versión de Node.js que necesites
-
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Run Linter
-        run: npm run lint
+#      - name: Setup Node.js environment
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: '18' # puedes usar cualquier versión de Node.js que necesites
+#
+#      - name: Cache Node.js modules
+#        uses: actions/cache@v2
+#        with:
+#          path: ~/.npm
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.os }}-node-
+#
+#      - name: Install Dependencies
+#        run: npm ci
+#
+#      - name: Run Linter
+#        run: npm run lint
 
 #      - name: Run Tests
 #        run: npm run test
@@ -36,19 +36,22 @@ jobs:
 #      - name: Build Project
 #        run: npm run build
 
-      - name: Login to DigitalOcean Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: registry.digitalocean.com
-          username: placeholder
-          password: ${{ secrets.DIGITALOCEAN_REGISTRY_TOKEN }}
+      - name: Build container image
+        run: docker build -t registry.digitalocean.com/software-crafter-nextjs-blog/blog:latest .
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: registry.digitalocean.com/software-crafter-nextjs-blog/blog:latest
+#      - name: Login to DigitalOcean Container Registry
+#        uses: docker/login-action@v1
+#        with:
+#          registry: registry.digitalocean.com
+#          username: placeholder
+#          password: ${{ secrets.DIGITALOCEAN_REGISTRY_TOKEN }}
+#
+#      - name: Build and push Docker image
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          push: true
+#          tags: registry.digitalocean.com/software-crafter-nextjs-blog/blog:latest
 
 #      - name: DigitalOcean Deploy
 #        uses: digitalocean/action-doctl@v2
