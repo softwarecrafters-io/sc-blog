@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "docker:build": "docker build -t my-blog . ",
-    "docker:run": "docker run -p 3000:3000 --env-file .env.local my-blog"
+    "docker:build": "docker build -t blog . ",
+    "docker:run": "docker run -p 3000:3000 --env-file .env.local blog"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
