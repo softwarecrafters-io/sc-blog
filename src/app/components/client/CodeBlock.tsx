@@ -1,5 +1,7 @@
 'use client';
+// @ts-ignore
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
+// @ts-ignore
 import { oneDark, oneLight} from "react-syntax-highlighter/dist/esm/styles/prism";
 import {Post} from "@/core/models";
 import {ReactNode, useEffect, useState} from "react";
