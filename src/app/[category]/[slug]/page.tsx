@@ -5,9 +5,10 @@ import Link from "next/link";
 import {Routes} from "@/app/routes";
 import styles from './page.module.css';
 import {ListOfPosts} from "@/app/components/static/listOfPosts/listOfPosts";
+import {ServerFactory} from "@/factories/serverFactory";
 
 export default async function SinglePostPage({params}: { params:{slug: string;}}) {
-    const {getPostBySlug} = usePosts(ClientFactory.createBlogService());
+    const {getPostBySlug} = usePosts(ServerFactory.createBlogServiceWithLegacyPosts());
     const {slug} = params;
     try{
         const post = await getPostBySlug(slug);

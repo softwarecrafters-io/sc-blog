@@ -4,9 +4,10 @@ import {SummarizedPostBlock} from "@/app/components/static/summaryzedPost/Summar
 import styles from './listOfPosts.module.css';
 import {Pagination} from "@/core/models";
 import Link from "next/link";
+import {ServerFactory} from "@/factories/serverFactory";
 
 export const ListOfPosts = async ({currentPage, title}:{currentPage:number, title:string} ) => {
-    const {getPostsWithPagination} = usePosts(ClientFactory.createBlogService());
+    const {getPostsWithPagination} = usePosts(ServerFactory.createBlogServiceWithLegacyPosts());
     const {posts, pagination} = await getPostsWithPagination(currentPage);
     return (<div>
         <h3 className={styles.title}>{title}</h3>

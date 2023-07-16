@@ -1,87 +1,95 @@
-import {fromPostToSummary, Post, SummarizedPost} from "../../core/models";
 import {BlogService} from "../../application/blogService";
-import {InMemoryPaginatedPostRepository, InMemoryPostRepository, PostRepository} from "../../core/repositories";
+import {InMemoryPostRepository} from "../../core/repositories";
+import {Post, SummarizedPost} from "../../core/models";
 
-describe('The Blog Service', () => {
-    const mockPosts: Post[] = fakePosts();
-    const summarizedPost1: SummarizedPost = fakeSummaryPosts()[0];
-    const summarizedPost2: SummarizedPost = fakeSummaryPosts()[1];
+describe('BlogServiceWithLegacyPosts', () => {
+    let service: BlogService;
+    let postRepository: InMemoryPostRepository;
+    let legacyPostRepository: InMemoryPostRepository;
 
-    const  service = new BlogService(new InMemoryPaginatedPostRepository(mockPosts));
-
-
-    it('should return all summarized posts', async () => {
-        const result = await service.summarizedPosts(1).toPromise();
-
-        expect(result?.posts).toEqual([summarizedPost1, summarizedPost2]);
+    beforeEach(() => {
+        postRepository = new InMemoryPostRepository(testPosts);
+        legacyPostRepository = new InMemoryPostRepository(testLegacyPosts);
+        service = new BlogService(postRepository, legacyPostRepository);
     });
 
-    it('should return a post by slug', async () => {
-        const result = await service.postBy('first-post').toPromise();
-
-        expect(result).toEqual(mockPosts[0]);
+    it('should return all posts', async () => {
+        const posts = (await service.summarizedPosts().toPromise()) as SummarizedPost[] ;
+        expect(posts.length).toBe(4);
     });
 
-    it('should return summarized posts by tag', async () => {
-        const result = await service.summarizedPostsByTag('Tag2').toPromise();
-
-        expect(result).toEqual([summarizedPost1]);
+    it('should return post by slug', async () => {
+        const post = (await service.postBy('slug1').toPromise()) as Post;
+        expect(post?.title).toBe('title1');
     });
 
-    it('should return summarized posts by username', async () => {
-        const result = await service.summarizedPostsByUser('Miguel Gomez').toPromise();
-
-        expect(result).toEqual([summarizedPost2]);
+    it('should return posts by tag', async () => {
+        const posts = (await service.summarizedPostsByTag('tag1').toPromise()) as SummarizedPost[];
+        expect(posts.length).toBe(1);
+        expect(posts[0].title).toBe('title1');
     });
 
-    xit('should return unique tags', async () => {
-        const expectedResult = ['Tag1', 'Tag2', 'Tag3'];
-
-        const result = await service.tags().toPromise();
-
-        expect(result).toEqual(expectedResult);
-    });
-
-    xit('should return unique usernames', async () => {
-        const expectedResult = ['John Doe', 'Miguel Gomez'];
-
-        const result = await service.users().toPromise();
-
-        expect(result).toEqual(expectedResult);
+    it('should return posts by user', async () => {
+        const posts = (await service.summarizedPostsByUser('username1').toPromise()) as SummarizedPost[];
+        expect(posts.length).toBe(1);
+        expect(posts[0].title).toBe('title1');
     });
 });
 
-function fakePosts() {
-    return [
-        {
-            id: '1',
-            slug: 'first-post',
-            cover: 'image1.jpg',
-            title: 'First Post',
-            tags: ['Tag1', 'Tag2'],
-            description: 'Description for first post',
-            date: '2023-07-10',
-            username: 'John Doe',
-            userPicture: 'user1.jpg',
-            category: 'Category 1',
-            markdownBody: 'Content of the first post',
-        },
-        {
-            id: '2',
-            slug: 'second-post',
-            cover: 'image2.jpg',
-            title: 'Second Post',
-            tags: ['Tag1', 'Tag3'],
-            description: 'Description for second post',
-            date: '2023-07-11',
-            username: 'Miguel Gomez',
-            userPicture: 'user2.jpg',
-            category: 'Category 1',
-            markdownBody: 'Content of the second post',
-        },
-    ];
-}
+const testPosts: Post[] = [
+    {
+        id: '1',
+        slug: 'slug1',
+        cover: 'cover1',
+        title: 'title1',
+        tags: ['tag1'],
+        category: 'category1',
+        description: 'description1',
+        date: 'date1',
+        username: 'username1',
+        userPicture: 'userPicture1',
+        markdownBody: 'markdownBody1'
+    },
+    {
+        id: '2',
+        slug: 'slug2',
+        cover: 'cover2',
+        title: 'title2',
+        tags: ['tag2'],
+        category: 'category2',
+        description: 'description2',
+        date: 'date2',
+        username: 'username2',
+        userPicture: 'userPicture2',
+        markdownBody: 'markdownBody2'
+    }
+];
 
-function fakeSummaryPosts() {
-    return fakePosts().map(fromPostToSummary);
-}
+const testLegacyPosts: Post[] = [
+    {
+        id: '3',
+        slug: 'slug3',
+        cover: 'cover3',
+        title: 'title3',
+        tags: ['tag3'],
+        category: 'category3',
+        description: 'description3',
+        date: 'date3',
+        username: 'username3',
+        userPicture: 'userPicture3',
+        markdownBody: 'markdownBody3'
+    },
+    {
+        id: '4',
+        slug: 'slug4',
+        cover: 'cover4',
+        title: 'title4',
+        tags: ['tag4'],
+        category: 'category4',
+        description: 'description4',
+        date: 'date4',
+        username: 'username4',
+        userPicture: 'userPicture4',
+        markdownBody: 'markdownBody4'
+    }
+];

@@ -1,10 +1,8 @@
-import {HttpPostRepository} from "@/repositories/client/httpPostRepository";
 import {NotionPostRepository} from "@/repositories/server/notionPostRepository";
 import {InMemoryPostRepository, PostRepository, SubscriberRepository} from "@/core/repositories";
-import {BlogService} from "@/application/blogService";
 import {MailerLiteSubscriberRepository} from "@/repositories/server/mailerLiteSubscriberRepository";
 import {NewsletterService} from "@/application/newsletterService";
-import {BlogServiceWithLegacyPosts} from "@/application/blogServiceWithLegacyPosts";
+import {BlogService} from "@/application/blogService";
 import {FilePostRepository} from "@/repositories/server/filePostRepository/filePostRepository";
 import {legacyPosts} from "@/repositories/server/filePostRepository/legacyPostDatasource";
 
@@ -41,8 +39,8 @@ export class ServerFactory {
         return new MailerLiteSubscriberRepository(apiKey, groupId)
     }
 
-    static createBlogServiceWithLegacyPosts(): BlogServiceWithLegacyPosts {
-        return new BlogServiceWithLegacyPosts(this.getPostRepository(), this.getLegacyPostRepository());
+    static createBlogServiceWithLegacyPosts(): BlogService {
+        return new BlogService(this.getPostRepository(), this.getLegacyPostRepository());
     }
 
     static createNewsletterService(): NewsletterService {

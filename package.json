@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "docker:build": "docker build -t blog . ",
+    "docker:build": "docker build --build-arg PUBLIC_URL=http://localhost:3000 -t blog . ",
     "docker:run": "docker run -p 3000:3000 --env-file .env.local blog"
   },
   "dependencies": {

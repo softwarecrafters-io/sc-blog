@@ -1,9 +1,9 @@
-import {BlogService} from "@/application/blogService";
 import {Post, PostsWithPagination, SummarizedPost} from "@/core/models";
+import {BlogService} from "@/application/blogService";
 
 export const usePosts = (blogService:BlogService) => {
     const getPostsWithPagination = (currentPage:number) => {
-        const request = blogService.summarizedPosts(currentPage)
+        const request = blogService.summarizedPaginatedPosts(currentPage)
         return request.toPromise() as Promise<PostsWithPagination>;
     }
 
