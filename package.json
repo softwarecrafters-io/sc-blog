@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "docker:build": "docker build -t blog . ",
+    "docker:build": "export $(xargs < .env.local) && docker build --build-arg NOTION_API_KEY --build-arg NOTION_BLOG_DATABASE_ID -t blog . ",
     "docker:run": "docker run -p 3000:3000 --env-file .env.local blog"
   },
   "dependencies": {
