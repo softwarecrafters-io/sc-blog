@@ -40,6 +40,8 @@ jobs:
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_BLOG_DATABASE_ID: ${{ secrets.NOTION_BLOG_DATABASE_ID }}
+          MAILER_LITE_API_KEY: ${{ secrets.MAILER_LITE_API_KEY }}
+          MAILER_LITE_GROUP_ID: ${{ secrets.MAILER_LITE_GROUP_ID }}
 
       - name: Build container image
         run:  docker build --build-arg NOTION_API_KEY=${{ secrets.NOTION_API_KEY }} --build-arg NOTION_BLOG_DATABASE_ID=${{ secrets.NOTION_BLOG_DATABASE_ID }} -t registry.digitalocean.com/metagigs-registry/nextjs-sc-blog:latest .
