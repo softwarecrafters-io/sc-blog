@@ -14,8 +14,8 @@ const raleway = Raleway({
 })
 
 export const metadata = {
-  title: 'Software Crafters',
-  description: 'Software Crafters',
+    title: 'Software Crafters',
+    description: 'Software Crafters',
 }
 
 export default function RootLayout({

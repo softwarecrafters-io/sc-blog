@@ -16,7 +16,7 @@ export const ThemeToggle: React.FC = () => {
 
     useEffect(() => {
         const storedTheme = window.localStorage.getItem('theme') as Theme;
-        const defaultTheme = storedTheme || 'light'
+        const defaultTheme = storedTheme || 'dark'
         updateTheme(defaultTheme);
         document.documentElement.setAttribute('data-theme', defaultTheme);
     }, []);

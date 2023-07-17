@@ -2,7 +2,7 @@ import {Theme} from "@/app/components/client/theme/themeSwicher";
 import {Subject, map, delay} from "rxjs";
 
 export class ThemeStore{
-    private currentTheme: Theme = 'light';
+    private currentTheme: Theme = 'dark';
     private readonly themeSubject: Subject<Theme> = new Subject<Theme>();
 
     updateTheme(theme: Theme){
