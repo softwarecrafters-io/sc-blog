@@ -20,7 +20,7 @@ describe('NotionPostRepository Integration Test', () => {
     it('getAllPosts return posts from notion', async () => {
         const allPosts = (await notionPostRepository.allPosts().toPromise()) as Post[];
         expect(allPosts.length).toBeGreaterThan(0);
-    });
+    }, 20000);
 });
 
 describe('NotionPostRepository Cache Tests', () => {
@@ -53,7 +53,7 @@ describe('NotionPostRepository Cache Tests', () => {
         allPosts = await notionPostRepository.allPosts().toPromise() as Post[];
 
         expect((notionPostRepository as any).notionRequest).toHaveBeenCalledTimes(1);
-    }, 15000);
+    }, 20000);
 
     it('should not use cache for requests outside of cache interval', async () => {
         let allPosts = (await notionPostRepository.allPosts().toPromise()) as Post[];
@@ -64,5 +64,5 @@ describe('NotionPostRepository Cache Tests', () => {
         allPosts = await notionPostRepository.allPosts().toPromise() as Post[];
 
         expect((notionPostRepository as any).notionRequest).toHaveBeenCalledTimes(2);
-    }, 15000);
+    }, 20000);
 });
