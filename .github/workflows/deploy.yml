@@ -1,4 +1,4 @@
-name: Deploy blog
+name: Deploy blog CI/CD
 
 on:
   push:
@@ -18,13 +18,12 @@ jobs:
         uses: digitalocean/action-doctl@v2.3.0
         with:
             version: 1.92.0
-            token: ${{ secrets.DIGITALOCEAN_REGISTRY_TOKEN }}
+            token: ${{ secrets.DIGITALOCEAN_API_TOKEN }}
 
       - name: Log in to DO Container Registry
-        run: doctl registry login --expiry-seconds 600
-
-      - name: Push to DigitalOcean Container Registry
-        run: docker push registry.digitalocean.com/software-crafter-nextjs-blog/blog:latest
+        run: |
+          doctl registry login --expiry-seconds 600
+          docker push registry.digitalocean.com/software-crafter-nextjs-blog/blog:latest
 
 #      - name: Setup Node.js environment
 #        uses: actions/setup-node@v2
