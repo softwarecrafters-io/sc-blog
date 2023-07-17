@@ -3,7 +3,6 @@
     flex-direction: column;
     width: 100%;
     max-width: 700px;
-    margin-top: 25px;
 }
 
 @media (max-width: 700px){
@@ -24,6 +23,7 @@
 
 .profile{
     margin: 5px;
+    margin-right: 10px;
 }
 
 .profilePhone{
@@ -53,13 +53,14 @@
 
 .text{
     margin-top: 5px;
+    margin-left: 5px;
 }
 
 .formContainer {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
-    margin: 15px 0;
+    margin: 15px 10px 15px 0px;
 }
 
 .formInput{
@@ -72,11 +73,11 @@
 }
 
 .email{
-    width: calc(100% - 200px);
+    width: calc(100% - 150px);
 }
 
 .actionButton{
-    width: 200px;
+    width: 150px;
     margin: 2px;
     border-radius: 5px 5px;
 }
