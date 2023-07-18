@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {ServerFactory} from "@/factories/serverFactory";
+import {ServerFactory} from "@/infrastructure/factories/serverFactory";
 
 type Params = {
     params: { slug: string }

@@ -1,5 +1,5 @@
 import { take } from 'rxjs/operators';
-import {NotionPostRepository} from "../../../repositories/server/notionPostRepository";
+import {NotionPostRepository} from "../../../infrastructure/repositories/server/notionPostRepository";
 import {Post} from "@/core/models";
 import {loadEnvVariables} from "../../testHelpers/envLoader";
 import {delay} from "../../testHelpers/utils";

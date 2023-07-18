@@ -1,5 +1,5 @@
-import {FilePostRepository} from "../../../../repositories/server/filePostRepository/filePostRepository";
-import {legacyPosts} from "../../../../repositories/server/filePostRepository/legacyPostDatasource";
+import {FilePostRepository} from "../../../../infrastructure/repositories/server/filePostRepository/filePostRepository";
+import {legacyPosts} from "../../../../infrastructure/repositories/server/filePostRepository/legacyPostDatasource";
 
 describe('The file post repository', ()=>{
     const repo = new FilePostRepository(legacyPosts);

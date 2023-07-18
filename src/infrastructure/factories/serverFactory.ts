@@ -1,10 +1,10 @@
-import {NotionPostRepository} from "@/repositories/server/notionPostRepository";
+import {NotionPostRepository} from "@/infrastructure/repositories/server/notionPostRepository";
 import {InMemoryPostRepository, PostRepository, SubscriberRepository} from "@/core/repositories";
-import {MailerLiteSubscriberRepository} from "@/repositories/server/mailerLiteSubscriberRepository";
+import {MailerLiteSubscriberRepository} from "@/infrastructure/repositories/server/mailerLiteSubscriberRepository";
 import {NewsletterService} from "@/application/newsletterService";
 import {BlogService} from "@/application/blogService";
-import {FilePostRepository} from "@/repositories/server/filePostRepository/filePostRepository";
-import {legacyPosts} from "@/repositories/server/filePostRepository/legacyPostDatasource";
+import {FilePostRepository} from "@/infrastructure/repositories/server/filePostRepository/filePostRepository";
+import {legacyPosts} from "@/infrastructure/repositories/server/filePostRepository/legacyPostDatasource";
 
 export class ServerFactory {
     private static postRepository: PostRepository;

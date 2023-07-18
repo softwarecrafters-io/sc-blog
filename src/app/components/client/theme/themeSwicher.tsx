@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { SunIcon, MoonIcon, ComputerDesktopIcon } from "@heroicons/react/24/solid";
 import styles from './themeSwitcher.module.css';
-import {ClientFactory} from "@/factories/clientFactory";
+import {ClientFactory} from "@/infrastructure/factories/clientFactory";
 
 export type Theme = 'light' | 'dark' ;
 

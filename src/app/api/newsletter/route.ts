@@ -1,5 +1,5 @@
 import {NextResponse} from "next/server";
-import {ServerFactory} from "@/factories/serverFactory";
+import {ServerFactory} from "@/infrastructure/factories/serverFactory";
 
 const handler = async (req: Request) => {
     const body = await req.json()

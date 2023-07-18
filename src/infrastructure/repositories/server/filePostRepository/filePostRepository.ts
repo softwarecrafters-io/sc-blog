@@ -1,7 +1,7 @@
-import {PostRepository} from "../../../core/repositories";
+import {PostRepository} from "../../../../core/repositories";
 import {map, Observable, of} from "rxjs";
-import {fromPostToSummary, Post, SummarizedPost} from "../../../core/models";
-import {LegacyPost} from "../../../repositories/server/filePostRepository/legacyPostDatasource";
+import {fromPostToSummary, Post, SummarizedPost} from "../../../../core/models";
+import {LegacyPost} from "./legacyPostDatasource";
 
 export class FilePostRepository implements PostRepository{
     constructor(private legacyPosts: LegacyPost[]) {}

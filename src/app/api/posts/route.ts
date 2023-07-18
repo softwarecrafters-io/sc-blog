@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {ServerFactory} from "@/factories/serverFactory";
+import {ServerFactory} from "@/infrastructure/factories/serverFactory";
 import {map} from "rxjs";
 
 const controller = (request: NextRequest) => {

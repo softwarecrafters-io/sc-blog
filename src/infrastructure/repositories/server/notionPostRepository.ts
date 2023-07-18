@@ -1,7 +1,7 @@
 import {Client} from "@notionhq/client";
-import {fromPostToSummary, fromSummaryToPost, Post, SummarizedPost} from "../../core/models";
+import {fromPostToSummary, fromSummaryToPost, Post, SummarizedPost} from "../../../core/models";
 import {NotionToMarkdown} from "notion-to-md";
-import {PostRepository} from "../../core/repositories";
+import {PostRepository} from "../../../core/repositories";
 import {defaultIfEmpty, forkJoin, map, mergeMap, Observable, of, tap} from "rxjs";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 

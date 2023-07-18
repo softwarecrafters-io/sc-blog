@@ -1,6 +1,6 @@
 import {loadEnvVariables} from "../../testHelpers/envLoader";
 import {SubscriberRepository} from "../../../core/repositories";
-import {MailerLiteSubscriberRepository} from "../../../repositories/server/mailerLiteSubscriberRepository";
+import {MailerLiteSubscriberRepository} from "../../../infrastructure/repositories/server/mailerLiteSubscriberRepository";
 import {Subscriber} from "../../../core/models";
 
 describe('Subscription Service', ()=>{

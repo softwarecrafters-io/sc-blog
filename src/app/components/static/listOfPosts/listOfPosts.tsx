@@ -1,10 +1,10 @@
 import {usePosts} from "@/app/components/static/listOfPosts/usePosts";
-import {ClientFactory} from "@/factories/clientFactory";
+import {ClientFactory} from "@/infrastructure/factories/clientFactory";
 import {SummarizedPostBlock} from "@/app/components/static/summaryzedPost/SummarizedPost";
 import styles from './listOfPosts.module.css';
 import {Pagination} from "@/core/models";
 import Link from "next/link";
-import {ServerFactory} from "@/factories/serverFactory";
+import {ServerFactory} from "@/infrastructure/factories/serverFactory";
 
 export const ListOfPosts = async ({currentPage, title}:{currentPage:number, title:string} ) => {
     const {getPostsWithPagination} = usePosts(ServerFactory.createBlogServiceWithLegacyPosts());
