@@ -6,27 +6,44 @@ import {Routes} from "@/app/routes";
 import styles from './page.module.css';
 import {ListOfPosts} from "@/app/components/static/listOfPosts/listOfPosts";
 import {ServerFactory} from "@/factories/serverFactory";
+import {generateStaticMetadata} from "@/app/services/metadataGenerator";
+import {Post} from "@/core/models";
+import {notFound} from "next/navigation";
+import {homeMetadata} from "@/app/components/static/home/HomeComponent";
 
 export default async function SinglePostPage({params}: { params:{slug: string;}}) {
     const {getPostBySlug} = usePosts(ServerFactory.createBlogServiceWithLegacyPosts());
     const {slug} = params;
-    try{
-        const post = await getPostBySlug(slug);
-        return (
-            <>
-                <div className={styles.breadcrumb}>
-                    <Link href={Routes.home} className={styles.breadcrumbLink}>Home</Link> &bull; <Link href={Routes.buildCategoryRoute(post.category, false)} className={styles.breadcrumbLink}>{post.category}</Link>
-                </div>
-                <PostBlock post={post}/>
-            </>
-        )
-    }
-    catch (e){
-        return (<div>
-            <h1>Artículo no encontrado, prueba con alguno de los de abajo</h1>
+    const post = await getPostBySlug(slug);
+    if (!post) {
+        return <div>
+            <h3>404 - Artículo no encontrado, prueba con alguno de los de abajo</h3>
             <ListOfPosts currentPage={1} title={"Últimos artículos"}></ListOfPosts>
-        </div>)
+        </div>
     }
+    return (
+        <>
+            <div className={styles.breadcrumb}>
+                <Link href={Routes.home} className={styles.breadcrumbLink}>Home</Link> &bull; <Link href={Routes.buildCategoryRoute(post.category, false)} className={styles.breadcrumbLink}>{post.category}</Link>
+            </div>
+            <PostBlock post={post}/>
+        </>
+    )
 }
 
+export async function generateMetadata({params}:  { params:{slug: string;}} ){
+    const blogService = ServerFactory.createBlogServiceWithLegacyPosts();
+    const {slug} = params;
+    const post = await blogService.postBy(slug).toPromise() as Post;
+    if (!post) {
+        return homeMetadata();
+    }
 
+    const title = `${post.title} | Software Crafters`;
+    const description = `${post.description}`;
+    const url = "http://softwarecrafters.io" + post.slug;
+    const imageUrl = post.cover;
+
+    return generateStaticMetadata(
+        {title, description, url, imageUrl});
+}

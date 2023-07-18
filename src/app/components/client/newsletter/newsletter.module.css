@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 700px;
+    max-width: var(--max-width);
 }
 
-@media (max-width: 700px){
+@media (max-width: var(--max-width)){
     .container{
         width: 100%;
     }
@@ -13,7 +13,7 @@
 
 .title{
     width: 85%;
-    margin: 10px auto;
+    margin: 15px auto 0 auto;
     text-align: center;
 }
 .content{
@@ -37,7 +37,8 @@
         padding: 15px 20px 0 20px;
     }
     .title {
-        width: 100%;
+        width: 85%;
+        margin: 0 auto;
     }
     .profile {
         display: none;
@@ -45,22 +46,28 @@
     .profilePhone{
         display: flex;
         align-self: center;
-        margin: 5px auto;
+        margin: 15px auto 5px auto;
         height: 150px;
         width: 150px;
     }
 }
 
+.textContainer{
+    margin-top: 20px;
+    margin-right: 0px;
+}
+
 .text{
-    margin-top: 5px;
-    margin-left: 5px;
+    font-size: 0.95rem;
+    line-height: 1.4rem;
+    margin-top: -7px;
 }
 
 .formContainer {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
-    margin: 15px 10px 15px 0px;
+    margin: 0px 10px 15px 0px;
 }
 
 .formInput{

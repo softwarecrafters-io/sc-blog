@@ -1,4 +1,5 @@
 :root {
+    --max-width: 720px;
     /* Definición de variables para el tema 'light' */
     --bg-color-light: #ffffff;
     --text-color-light: #111827;
@@ -15,8 +16,8 @@
     --text-color-dark: #f0f0f0;
     --text-secondary-color-dark: #f0f0f0;
     --border-color-dark: #444;
-    --button-bg-color-dark: #555;
-    --button-text-color-dark: #f0f0f0;
+    --button-bg-color-dark: #FFf;
+    --button-text-color-dark: #1c1c1c;
     --link-color-dark: #fde047;
     --icon-color-dark: #f0f0f0;
     --highlight-color-dark: #fff;
