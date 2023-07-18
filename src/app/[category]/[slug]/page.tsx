@@ -10,6 +10,7 @@ import {generateStaticMetadata} from "@/app/services/metadataGenerator";
 import {Post} from "@/core/models";
 import {notFound} from "next/navigation";
 import {homeMetadata} from "@/app/components/static/home/HomeComponent";
+import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 
 export default async function SinglePostPage({params}: { params:{slug: string;}}) {
     const {getPostBySlug} = usePosts(ServerFactory.createBlogServiceWithLegacyPosts());
@@ -27,6 +28,7 @@ export default async function SinglePostPage({params}: { params:{slug: string;}}
                 <Link href={Routes.home} className={styles.breadcrumbLink}>Home</Link> &bull; <Link href={Routes.buildCategoryRoute(post.category, false)} className={styles.breadcrumbLink}>{post.category}</Link>
             </div>
             <PostBlock post={post}/>
+            <Newsletter/>
         </>
     )
 }

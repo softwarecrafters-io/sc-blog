@@ -13,7 +13,7 @@ export const PostBlock = ({post}: { post: Post }) => {
             <div className={styles.infoContainer}>
                 {ProfilePicture(post) && <Image className={styles.profile} src={ProfilePicture(post)} alt={post.username} width={50} height={50} />}
                 <div className={styles.info}>
-                    <span className={styles.username}>{post.username} · <ScrollLink href={'#newsletter'} hidden={canBeFollowed(post)}>Follow</ScrollLink></span>
+                    <span className={styles.username}>{post.username} · <ScrollLink href={'#newsletter'} hidden={canBeFollowed(post)}>Seguir</ScrollLink></span>
                     <span className={styles.time}>{calculateReadingTime(post)} min read · {formatDate(post)}</span>
                 </div>
             </div>
