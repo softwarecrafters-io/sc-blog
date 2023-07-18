@@ -5,20 +5,28 @@ import Link from "next/link";
 const categories = [
     {
         name: 'JavaScript',
-        cover: 'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/JS_category.png'
     },
     {
         name: 'React',
-        cover: 'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/ReactJS_category.png'
     },
     {
         name: 'TypeScript',
-        cover: 'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/TS_category.png'
     },
     {
         name: 'Devops',
-        cover: 'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/docker_category.png'
-    }
+    },
+    {
+        name: 'JavaScript',
+    },
+    {
+        name: 'React',
+    },
+    {
+        name: 'TypeScript',
+    },
+    {
+        name: 'Devops',
+    },
 ]
 
 export const CategoryBlock = () => {
