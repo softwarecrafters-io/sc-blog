@@ -13,7 +13,7 @@ export const Newsletter = ({hideEntry = false}:{hideEntry?:boolean}) => {
     }
     return <div className={styles.container} id={'newsletter'}>
         <div className={styles.header}>
-            <h2 className={styles.title}>La newsletter de los <strong>Software Crafters</strong>,<br/> por Miguel A. Gómez</h2>
+            <h3 className={styles.title}>La newsletter, por Miguel A. Gómez</h3>
             <Image className={styles.profilePhone} src={'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Assets/foto-circle-small.png'} alt={'Miguel A. Gómez - Clean JavaScript'} width={140} height={140}/>
             <div className={styles.content}>
                 <div className={styles.textContainer}>
