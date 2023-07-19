@@ -30,10 +30,13 @@ export default async function SinglePostPage({params}: { params:{slug: string;}}
             </div>
             <PostBlock post={post}/>
             <Newsletter/>
+
             <SuggestedPosts post={post} />
         </>
     )
 }
+
+export const revalidate = 10;
 
 export async function generateMetadata({params}:  { params:{slug: string;}} ){
     const blogService = ServerFactory.createBlogService();
