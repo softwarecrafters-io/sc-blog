@@ -12,11 +12,12 @@ export const HomeComponent = ({params}: { params: { slug: string }; }) => {
     return (
         <>
             <h1 className={styles.title}>El blog de los Software Crafters</h1>
-            <Newsletter/>
+            <Newsletter hideEntry={true}/>
             <PaginatedPosts title={"Últimos artículos"} currentPage={currentPage} />
             <CourseBlock/>
             <CategoryBlock/>
             <BookBlock/>
+            <Newsletter/>
         </>
     )
 }

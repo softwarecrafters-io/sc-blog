@@ -4,10 +4,12 @@ import Image from "next/image";
 import {ScrollLink} from "@/app/components/client/ScrollLink";
 import {CodeBlock} from "@/app/components/client/CodeBlock";
 import ReactMarkdown from "react-markdown";
+import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 
 export const PostBlock = ({post}: { post: Post }) => {
     return (
         <div className={styles.container}>
+            <Image className={styles.cover} src={post.cover} alt={post.title} width={700} height={468} />
             <h1 className={styles.title}>{post.title}</h1>
             <h2 className={styles.subtitle}>{post.description}</h2>
             <div className={styles.infoContainer}>
@@ -17,7 +19,7 @@ export const PostBlock = ({post}: { post: Post }) => {
                     <span className={styles.time}>{calculateReadingTime(post)} min read · {formatDate(post)}</span>
                 </div>
             </div>
-            <Image className={styles.cover} src={post.cover} alt={post.title} width={700} height={468} />
+            <Newsletter hideEntry={true} />
             <MarkdownBlock post={post} />
         </div>
     )
