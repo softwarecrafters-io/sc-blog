@@ -19,7 +19,7 @@ export const Newsletter = ({hideEntry = false}:{hideEntry?:boolean}) => {
                 <div className={styles.textContainer}>
                     {hideEntry ? <></> : <p className={styles.text}>Cada lunes, miércoles y viernes escribo un email con <strong>un consejo para subir de nivel como developer</strong>. Semana que estás fuera, consejos que te pierdes.</p>}
                     {hideEntry ? <></> : <p className={styles.text}>Aprenderás a escribir mejor código gracias a arquitectos en torres de marfil, barcos que se hunden y a developers que desarrollan lenguajes en 10 días ... </p>}
-                    <p className={styles.text}>Únete a las miles de personas que han descubierto una forma diferente de entender la programación.</p>
+                    <p className={styles.text}>Únete gratis a las miles de personas que han descubierto una forma diferente de entender la programación.</p>
                 </div>
                 {hideEntry ? <></> :<Image hidden={hideEntry} className={styles.profile} src={'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Assets/foto-circle-small.png'} alt={'Miguel A. Gómez - Clean JavaScript'} width={140} height={140}/>}
             </div>
