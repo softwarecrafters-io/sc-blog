@@ -1,0 +1,50 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+.title{
+
+}
+
+.posts{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 0px;
+    flex-wrap: wrap;
+}
+
+.post{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    text-decoration: none;
+    padding: 10px 0px;
+    max-width: 300px;
+    transition: transform .3s ease;
+}
+
+.post:hover{
+    text-decoration: none;
+    transform: scale(1.02);
+}
+
+.postTitle{
+    font-size: 1.1rem;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-align: center;
+}
+
+.cover{
+    border-radius: 5px;
+}

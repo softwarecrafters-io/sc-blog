@@ -29,8 +29,8 @@ export default async function SinglePostPage({params}: { params:{slug: string;}}
                 <Link href={Routes.home} className={styles.breadcrumbLink}>Home</Link> &bull; <Link href={Routes.buildCategoryRoute(post.category, false)} className={styles.breadcrumbLink}>{post.category}</Link>
             </div>
             <PostBlock post={post}/>
-            <SuggestedPosts post={post} />
             <Newsletter/>
+            <SuggestedPosts post={post} />
         </>
     )
 }
