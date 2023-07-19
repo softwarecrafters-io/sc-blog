@@ -35,7 +35,7 @@ export const CategoryBlock = () => {
             <h3 className={styles.title}>Artículos por temas</h3>
             <div className={styles.categories}>
                 {categories.map((category, index) => (
-                    <Link href={''} className={styles.category}>{category.name}</Link>
+                    <Link key={index} href={''} className={styles.category}>{category.name}</Link>
                 ))}
             </div>
         </div>
