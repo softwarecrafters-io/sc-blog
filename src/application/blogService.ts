@@ -1,10 +1,30 @@
 import {PostRepository} from "../core/repositories";
-import {PostsWithPagination, SummarizedPost} from "../core/models";
+import {Post, PostsWithPagination, SummarizedPost} from "../core/models";
 import {map, Observable, zip, mergeMap, of} from "rxjs";
 import {PaginationService} from "../core/services";
 
 export class BlogService {
     constructor(private postRepository: PostRepository, private legacyPostRepository: PostRepository) {}
+
+    previousPostBySlug(post: Post): Observable<SummarizedPost | undefined> {
+        return this.summarizedPosts().pipe(
+            map((posts: SummarizedPost[]) => {
+                const currentIndex = posts.findIndex(p => p.slug === post.slug);
+                let isFirstPost = currentIndex <= 0;
+                return isFirstPost ? undefined : posts[currentIndex - 1];
+            })
+        );
+    }
+
+    nextPostBySlug(post: Post): Observable<SummarizedPost | undefined> {
+        return this.summarizedPosts().pipe(
+            map((posts: SummarizedPost[]) => {
+                const currentIndex = posts.findIndex(p => p.slug === post.slug);
+                const isLastPost = !(currentIndex >= 0 && currentIndex < posts.length - 1);
+                return isLastPost ? undefined : posts[currentIndex + 1];
+            })
+        );
+    }
 
     summarizedPaginatedPosts(currentPage: number):Observable<PostsWithPagination> {
         return this.summarizedPosts().pipe(

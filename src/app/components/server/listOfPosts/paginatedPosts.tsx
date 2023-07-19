@@ -1,6 +1,6 @@
-import {usePosts} from "@/app/components/static/listOfPosts/usePosts";
+import {usePosts} from "@/app/components/server/listOfPosts/usePosts";
 import {ClientFactory} from "@/infrastructure/factories/clientFactory";
-import {SummarizedPostBlock} from "@/app/components/static/summaryzedPost/SummarizedPost";
+import {SummarizedPostBlock} from "@/app/components/server/summaryzedPost/SummarizedPost";
 import styles from './listOfPosts.module.css';
 import {Pagination, SummarizedPost} from "@/core/models";
 import Link from "next/link";

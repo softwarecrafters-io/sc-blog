@@ -1,10 +1,10 @@
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
-import {PaginatedPosts} from "@/app/components/static/listOfPosts/paginatedPosts";
+import {PaginatedPosts} from "@/app/components/server/listOfPosts/paginatedPosts";
 import styles from './home.module.css';
 import {generateStaticMetadata} from "@/app/services/metadataGenerator";
-import {CourseBlock} from "@/app/components/static/products/courseBlock";
-import {CategoryBlock} from "@/app/components/static/category/categoryBlock";
-import {BookBlock} from "@/app/components/static/products/bookBlock";
+import {CourseBlock} from "@/app/components/server/products/courseBlock";
+import {CategoryBlock} from "@/app/components/server/category/categoryBlock";
+import {BookBlock} from "@/app/components/server/products/bookBlock";
 
 export const HomeComponent = ({params}: { params: { slug: string }; }) => {
     const parsedSlug = Number(params.slug);

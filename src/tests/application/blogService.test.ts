@@ -2,7 +2,7 @@ import {BlogService} from "../../application/blogService";
 import {InMemoryPostRepository} from "../../core/repositories";
 import {Post, SummarizedPost} from "../../core/models";
 
-describe('BlogServiceWithLegacyPosts', () => {
+describe('The Blog Service', () => {
     let service: BlogService;
     let postRepository: InMemoryPostRepository;
     let legacyPostRepository: InMemoryPostRepository;
@@ -21,6 +21,26 @@ describe('BlogServiceWithLegacyPosts', () => {
     it('should return post by slug', async () => {
         const post = (await service.postBy('slug1').toPromise()) as Post;
         expect(post?.title).toBe('title1');
+    });
+
+    it('should return the previous post by slug', async () => {
+        const previousPost = (await service.previousPostBySlug({slug:'slug2'} as any).toPromise());
+        expect(previousPost?.title).toBe('title1');
+    });
+
+    it('should return null if there is no previous post by slug', async () => {
+        const previousPost = (await service.previousPostBySlug({slug:'slug1'} as any).toPromise());
+        expect(previousPost).toBeUndefined();
+    });
+
+    it('should return the next post by slug', async () => {
+        const nextPost = (await service.nextPostBySlug({slug:'slug1'} as any).toPromise());
+        expect(nextPost?.title).toBe('title2');
+    });
+
+    it('should return null if there is no next post by slug', async () => {
+        const nextPost = (await service.nextPostBySlug({slug:'slug4'} as any).toPromise());
+        expect(nextPost).toBeUndefined();
     });
 
     it('should return all summarized posts by existing given category', async () => {

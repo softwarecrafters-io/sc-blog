@@ -1,4 +1,4 @@
-import {HomeComponent, homeMetadata} from "@/app/components/static/home/HomeComponent";
+import {HomeComponent, homeMetadata} from "@/app/components/server/home/HomeComponent";
 
 export default async function Home({params}: { params: { slug: string }; }) {
     return (
