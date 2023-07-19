@@ -2,12 +2,12 @@ import {usePosts} from "@/app/components/static/listOfPosts/usePosts";
 import {ClientFactory} from "@/infrastructure/factories/clientFactory";
 import {SummarizedPostBlock} from "@/app/components/static/summaryzedPost/SummarizedPost";
 import styles from './listOfPosts.module.css';
-import {Pagination} from "@/core/models";
+import {Pagination, SummarizedPost} from "@/core/models";
 import Link from "next/link";
 import {ServerFactory} from "@/infrastructure/factories/serverFactory";
 
-export const ListOfPosts = async ({currentPage, title}:{currentPage:number, title:string} ) => {
-    const {getPostsWithPagination} = usePosts(ServerFactory.createBlogServiceWithLegacyPosts());
+export const PaginatedPosts = async ({currentPage, title}:{currentPage:number, title:string} ) => {
+    const {getPostsWithPagination} = usePosts(ServerFactory.createBlogService());
     const {posts, pagination} = await getPostsWithPagination(currentPage);
     return (<div>
         <h3 className={styles.title}>{title}</h3>
@@ -16,6 +16,17 @@ export const ListOfPosts = async ({currentPage, title}:{currentPage:number, titl
         )}
         <PostsPagination pagination={pagination}/>
     </div>)
+}
+
+export const PostsByCategory = async ({category, title}:{category:string, title:string} ) => {
+    const blogService = ServerFactory.createBlogService();
+    const posts = await blogService.allSummarizedPostsByCategory(category).toPromise() as SummarizedPost[];
+    return <div>
+        <h3 className={styles.title}>{title}</h3>
+        {posts.map(post =>
+            <SummarizedPostBlock key={post.id} summarizedPost={post} />
+        )}
+    </div>
 }
 
 const PostsPagination = ({pagination}:{pagination:Pagination} ) => {

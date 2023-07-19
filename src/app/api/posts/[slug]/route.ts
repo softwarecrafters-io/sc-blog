@@ -6,7 +6,7 @@ type Params = {
 }
 
 const controller = async (request: NextRequest, params: Params ) => {
-    const blogService = ServerFactory.createBlogServiceWithLegacyPosts();
+    const blogService = ServerFactory.createBlogService();
     const {slug} = params.params;
     const post = await blogService.postBy(slug).toPromise();
     if(!post){

@@ -1,41 +1,17 @@
 import styles from './category.module.css';
-import Image from "next/image";
 import Link from "next/link";
+import {ServerFactory} from "@/infrastructure/factories/serverFactory";
+import {Routes} from "@/app/routes";
 
-const categories = [
-    {
-        name: 'JavaScript',
-    },
-    {
-        name: 'React',
-    },
-    {
-        name: 'TypeScript',
-    },
-    {
-        name: 'Devops',
-    },
-    {
-        name: 'JavaScript',
-    },
-    {
-        name: 'React',
-    },
-    {
-        name: 'TypeScript',
-    },
-    {
-        name: 'Devops',
-    },
-]
-
-export const CategoryBlock = () => {
+export const  CategoryBlock = async () => {
+    const blogService = ServerFactory.createBlogService();
+    const categories = await blogService.categories().toPromise() as string[];
     return (
         <div className={styles.container}>
             <h3 className={styles.title}>Artículos por temas</h3>
             <div className={styles.categories}>
                 {categories.map((category, index) => (
-                    <Link key={index} href={''} className={styles.category}>{category.name}</Link>
+                    <Link key={index} href={Routes.buildCategoryRoute(category, true)} className={styles.category}>{category}</Link>
                 ))}
             </div>
         </div>

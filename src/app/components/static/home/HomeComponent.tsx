@@ -1,5 +1,5 @@
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
-import {ListOfPosts} from "@/app/components/static/listOfPosts/listOfPosts";
+import {PaginatedPosts} from "@/app/components/static/listOfPosts/paginatedPosts";
 import styles from './home.module.css';
 import {generateStaticMetadata} from "@/app/services/metadataGenerator";
 import {CourseBlock} from "@/app/components/static/products/courseBlock";
@@ -13,7 +13,7 @@ export const HomeComponent = ({params}: { params: { slug: string }; }) => {
         <>
             <h1 className={styles.title}>El blog de los Software Crafters</h1>
             <Newsletter/>
-            <ListOfPosts title={"Últimos artículos"} currentPage={currentPage} />
+            <PaginatedPosts title={"Últimos artículos"} currentPage={currentPage} />
             <CourseBlock/>
             <CategoryBlock/>
             <BookBlock/>

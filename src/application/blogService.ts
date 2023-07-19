@@ -1,6 +1,6 @@
 import {PostRepository} from "../core/repositories";
 import {PostsWithPagination, SummarizedPost} from "../core/models";
-import {map, Observable, zip} from "rxjs";
+import {map, Observable, zip, mergeMap, of} from "rxjs";
 import {PaginationService} from "../core/services";
 
 export class BlogService {
@@ -40,6 +40,19 @@ export class BlogService {
         );
     }
 
+    allSummarizedPostsByCategory(category: string) {
+        return this.categoryExists(category).pipe(
+            mergeMap((exists: boolean) => exists ? this.summarizedPosts() : of([])),
+            map((posts: SummarizedPost[]) => posts.filter(post => post.category.toLowerCase() === category.toLowerCase()))
+        );
+    }
+
+    categoryExists(category: string) {
+        return this.categories().pipe(
+            map(categories => categories.includes(category.toLowerCase()))
+        );
+    }
+
     summarizedPostsByTag(tag: string) {
         return zip(
             this.postRepository.summarizedPostsByTag(tag),
@@ -53,6 +66,13 @@ export class BlogService {
             this.postRepository.summarizedPostsByUser(username),
             this.legacyPostRepository.summarizedPostsByUser(username)).pipe(
             map(([posts, legacyPosts]) => [...posts, ...legacyPosts])
+        );
+    }
+
+    categories(){
+        return this.summarizedPosts().pipe(
+            map(posts => posts.map(post => post.category.toLowerCase())),
+            map(categories => [...new Set(categories)])
         );
     }
 

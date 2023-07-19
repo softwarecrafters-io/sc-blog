@@ -20,7 +20,7 @@ export const SummarizedPostBlock = ({summarizedPost}:{summarizedPost:SummarizedP
                     </Link>
                     <div className={styles.meta}>
                         <Link className={styles.category} href={Routes.buildCategoryRoute(summarizedPost.category, isLoadedFromHome)}>{summarizedPost.category}</Link>
-                        <span className={styles.time}>{summarizedPost.readingTime} min read · {formatDate(summarizedPost)}</span>
+                        <span className={styles.time}>{summarizedPost.readingTime} min read · {formatDate(summarizedPost)} - Por {summarizedPost.username}</span>
                     </div>
                 </div>
                 <Link className={styles.link} href={Routes.buildPostRoute(summarizedPost, isLoadedFromHome)}>

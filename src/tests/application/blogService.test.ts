@@ -23,6 +23,16 @@ describe('BlogServiceWithLegacyPosts', () => {
         expect(post?.title).toBe('title1');
     });
 
+    it('should return all summarized posts by existing given category', async () => {
+        const posts = (await service.allSummarizedPostsByCategory('category4').toPromise()) as SummarizedPost[] ;
+        expect(posts.length).toBe(1);
+    });
+
+    it('should not return any summarized posts by non existing given category', async () => {
+        const posts = (await service.allSummarizedPostsByCategory('non-existing-category').toPromise()) as SummarizedPost[] ;
+        expect(posts.length).toBe(0);
+    });
+
     it('should return posts by tag', async () => {
         const posts = (await service.summarizedPostsByTag('tag1').toPromise()) as SummarizedPost[];
         expect(posts.length).toBe(1);
@@ -33,6 +43,12 @@ describe('BlogServiceWithLegacyPosts', () => {
         const posts = (await service.summarizedPostsByUser('username1').toPromise()) as SummarizedPost[];
         expect(posts.length).toBe(1);
         expect(posts[0].title).toBe('title1');
+    });
+
+    it('should return all categories', async () => {
+        const catetories = (await service.categories().toPromise()) as string[] ;
+        expect(catetories.length).toBe(4);
+        expect(catetories).toEqual(['category1', 'category2', 'category3', 'category4']);
     });
 });
 

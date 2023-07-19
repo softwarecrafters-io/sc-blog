@@ -39,7 +39,7 @@ export class ServerFactory {
         return new MailerLiteSubscriberRepository(apiKey, groupId)
     }
 
-    static createBlogServiceWithLegacyPosts(): BlogService {
+    static createBlogService(): BlogService {
         return new BlogService(this.getPostRepository(), this.getLegacyPostRepository());
     }
 

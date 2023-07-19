@@ -29,6 +29,7 @@
     border:2px solid var(--border-color);
     padding: 10px 30px;
     transition: filter 0.3s;
+    text-transform: capitalize;
 }
 
 .category:first-child{

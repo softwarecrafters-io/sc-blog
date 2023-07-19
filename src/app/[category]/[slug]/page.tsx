@@ -4,7 +4,7 @@ import {PostBlock} from "@/app/components/static/post/post";
 import Link from "next/link";
 import {Routes} from "@/app/routes";
 import styles from './page.module.css';
-import {ListOfPosts} from "@/app/components/static/listOfPosts/listOfPosts";
+import {PaginatedPosts} from "@/app/components/static/listOfPosts/paginatedPosts";
 import {ServerFactory} from "@/infrastructure/factories/serverFactory";
 import {generateStaticMetadata} from "@/app/services/metadataGenerator";
 import {Post} from "@/core/models";
@@ -13,13 +13,13 @@ import {homeMetadata} from "@/app/components/static/home/HomeComponent";
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 
 export default async function SinglePostPage({params}: { params:{slug: string;}}) {
-    const {getPostBySlug} = usePosts(ServerFactory.createBlogServiceWithLegacyPosts());
+    const {getPostBySlug} = usePosts(ServerFactory.createBlogService());
     const {slug} = params;
     const post = await getPostBySlug(slug);
     if (!post) {
         return <div>
             <h3>404 - Artículo no encontrado, prueba con alguno de los de abajo</h3>
-            <ListOfPosts currentPage={1} title={"Últimos artículos"}></ListOfPosts>
+            <PaginatedPosts currentPage={1} title={"Últimos artículos"}></PaginatedPosts>
         </div>
     }
     return (
@@ -34,7 +34,7 @@ export default async function SinglePostPage({params}: { params:{slug: string;}}
 }
 
 export async function generateMetadata({params}:  { params:{slug: string;}} ){
-    const blogService = ServerFactory.createBlogServiceWithLegacyPosts();
+    const blogService = ServerFactory.createBlogService();
     const {slug} = params;
     const post = await blogService.postBy(slug).toPromise() as Post;
     if (!post) {
