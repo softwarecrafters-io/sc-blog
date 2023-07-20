@@ -20,15 +20,16 @@ export const PostBlock = ({post}: { post: Post }) => {
                 </div>
             </div>
             <Newsletter hideEntry={true} />
-            {/*<MarkdownBlock post={post} />*/}
+            <MarkdownBlock post={post} />
         </div>
     )
 }
 
 const MarkdownBlock = ({post}:{post:Post}) => (
-    <ReactMarkdown
-        components={{code({children}) {return <CodeBlock post={post}>{children}</CodeBlock>}}}>
-        {post.markdownBody}
-    </ReactMarkdown>
+        <ReactMarkdown
+            components={{code({children}) {
+                return <CodeBlock post={post}>{children}</CodeBlock>}}}>
+            {post.markdownBody}
+        </ReactMarkdown>
 )
 

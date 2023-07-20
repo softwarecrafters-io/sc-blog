@@ -147,8 +147,11 @@ img{
     height: auto;
 }
 
-pre{
-    width: 100%;
-    overflow-x: auto;
-}
+/*pre{*/
+/*    width: 100%;*/
+/*    overflow-x: auto;*/
+/*}*/
 
+code {
+    counter-reset: line;
+}

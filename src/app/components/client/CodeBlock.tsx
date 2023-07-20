@@ -21,7 +21,7 @@ export const CodeBlock = ({children, post}:{children:ReactNode, post:Post}) => {
         })
     }, []);
 
-    return <SyntaxHighlighter style={codeStyle} language={'typescript'} customStyle={{maxWidth: '700px'}}>
+    return <SyntaxHighlighter style={codeStyle} language={'typescript'}  customStyle={{maxWidth: '80vw', overflowX: 'scroll'}}>
         {String(children).replace(/\n$/, '')}
     </SyntaxHighlighter>
 }

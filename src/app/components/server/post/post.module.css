@@ -46,3 +46,9 @@
     margin-top: 4px;
     font-size:0.8rem
 }
+
+.markdownContainer{
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
