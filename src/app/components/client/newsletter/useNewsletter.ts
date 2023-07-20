@@ -4,18 +4,23 @@ import {isValidEmail} from "@/core/models";
 type NewsletterState = {
     email: string,
     error: string,
-    isSuccess: boolean
+    isSuccess: boolean,
+    isPrivacyPolicyAccepted: boolean
 }
 
 
 export const useNewsletter = () => {
-    const [state, setState] = useState<NewsletterState>({email: "", error: "", isSuccess: false})
+    const [state, setState] = useState<NewsletterState>({email: "", error: "", isSuccess: false, isPrivacyPolicyAccepted: false})
     const handleSubscribe = () => {
+        if(!state.isPrivacyPolicyAccepted) {
+            setErrorMessage("Tienes que aceptar la política de privacidad para poder suscribirte");
+            return;
+        }
         if (isValidEmail(state.email)) {
             fetch("/api/newsletter/", {method: "POST", body: JSON.stringify({email: state.email})})
                 .then(handleSuccess).catch(setErrorMessage)
         } else {
-            setErrorMessage("Invalid email")
+            setErrorMessage("El email proporcionado no es válido")
         }
     }
 
@@ -43,5 +48,9 @@ export const useNewsletter = () => {
         setState({...state, email: event.target.value})
     }
 
-    return {handleSubscribe, handleEmailChange, isSubscribed, errorMessage, hasError}
+    const handlePrivacyPolicyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setState({...state, isPrivacyPolicyAccepted: event.target.checked})
+    }
+
+    return {handleSubscribe, handleEmailChange, isSubscribed, errorMessage, hasError, handlePrivacyPolicyChange}
 }
