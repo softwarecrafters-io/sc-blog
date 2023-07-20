@@ -12,6 +12,7 @@ import {notFound} from "next/navigation";
 import {homeMetadata} from "@/app/components/server/home/HomeComponent";
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 import {SuggestedPosts} from "@/app/components/server/post/suggestedPosts";
+import {Loader} from "@/app/components/server/loader/loader";
 
 export default async function SinglePostPage({params}: { params:{slug: string;}}) {
     const {getPostBySlug} = usePosts(ServerFactory.createBlogService());
