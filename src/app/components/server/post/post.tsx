@@ -20,7 +20,7 @@ export const PostBlock = ({post}: { post: Post }) => {
                 </div>
             </div>
             <Newsletter hideEntry={true} />
-            <MarkdownBlock post={post} />
+            {/*<MarkdownBlock post={post} />*/}
         </div>
     )
 }

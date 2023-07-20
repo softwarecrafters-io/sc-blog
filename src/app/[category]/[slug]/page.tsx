@@ -25,7 +25,7 @@ export default async function SinglePostPage({params}: { params:{slug: string;}}
         </div>
     }
     return (
-        <>
+        <div>
             <div className={styles.breadcrumb}>
                 <Link href={Routes.home} className={styles.breadcrumbLink}>Home</Link> » <Link href={Routes.buildCategoryRoute(post.category, false)} className={styles.breadcrumbLink}>{post.category}</Link> » {post.title}
             </div>
@@ -33,7 +33,7 @@ export default async function SinglePostPage({params}: { params:{slug: string;}}
             <Newsletter/>
 
             <SuggestedPosts post={post} />
-        </>
+        </div>
     )
 }
 
