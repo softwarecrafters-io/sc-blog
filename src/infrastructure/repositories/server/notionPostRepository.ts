@@ -84,7 +84,13 @@ export class NotionPostRepository implements PostRepository{
                 checkbox: {
                     equals: true
                 }
-            }
+            },
+            sorts: [
+                {
+                    property: 'Updated',
+                    direction: 'descending'
+                }
+            ]
         });
     }
 

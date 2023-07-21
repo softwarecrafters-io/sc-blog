@@ -10,8 +10,8 @@ export function generateStaticMetadata({title, description, url, imageUrl}:{titl
             images: [
                 {
                     url: imageUrl,
-                    width: 600,
-                    height: 600,
+                    width: 1200,
+                    height: 630,
                 }
             ],
             locale: 'es_ES',
