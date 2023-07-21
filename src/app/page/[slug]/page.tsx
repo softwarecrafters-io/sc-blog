@@ -1,5 +1,5 @@
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
-import {PaginatedPosts} from "@/app/components/server/listOfPosts/paginatedPosts";
+import {PaginatedPosts} from "@/app/components/server/post/paginatedPosts";
 import {HomeComponent, homeMetadata} from "@/app/components/server/home/HomeComponent";
 
 export default async function Home({params}: { params: { slug: string }; }) {

@@ -1,18 +1,16 @@
-import {usePosts} from "@/app/components/server/listOfPosts/usePosts";
+import {usePosts} from "@/app/components/server/post/usePosts";
 import {ClientFactory} from "@/infrastructure/factories/clientFactory";
 import {PostBlock} from "@/app/components/server/post/post";
 import Link from "next/link";
 import {Routes} from "@/app/routes";
 import styles from './page.module.css';
-import {PaginatedPosts} from "@/app/components/server/listOfPosts/paginatedPosts";
+import {PaginatedPosts} from "@/app/components/server/post/paginatedPosts";
 import {ServerFactory} from "@/infrastructure/factories/serverFactory";
 import {generateStaticMetadata} from "@/app/services/metadataGenerator";
-import {Post} from "@/core/models";
-import {notFound} from "next/navigation";
+import {formatCategory, Post} from "@/core/models";
 import {homeMetadata} from "@/app/components/server/home/HomeComponent";
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 import {SuggestedPosts} from "@/app/components/server/post/suggestedPosts";
-import {Loader} from "@/app/components/server/loader/loader";
 
 export default async function SinglePostPage({params}: { params:{slug: string;}}) {
     const {getPostBySlug} = usePosts(ServerFactory.createBlogService());
@@ -24,10 +22,11 @@ export default async function SinglePostPage({params}: { params:{slug: string;}}
             <PaginatedPosts currentPage={1} title={"Últimos artículos"}></PaginatedPosts>
         </div>
     }
+    const formattedCategory = formatCategory(post.category)
     return (
         <div>
             <div className={styles.breadcrumb}>
-                <Link href={Routes.home} className={styles.breadcrumbLink}>Home</Link> » <Link href={Routes.buildCategoryRoute(post.category, false)} className={styles.breadcrumbLink}>{post.category}</Link> » {post.title}
+                <Link href={Routes.home} className={styles.breadcrumbLink}>Home</Link> » <Link href={Routes.buildCategoryRoute(post.category, false)} className={styles.breadcrumbLink}>{formattedCategory}</Link> » {post.title}
             </div>
             <PostBlock post={post}/>
             <SuggestedPosts post={post} />

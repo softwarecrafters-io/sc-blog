@@ -1,5 +1,5 @@
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
-import {PaginatedPosts} from "@/app/components/server/listOfPosts/paginatedPosts";
+import {PaginatedPosts} from "@/app/components/server/post/paginatedPosts";
 import styles from './home.module.css';
 import {generateStaticMetadata} from "@/app/services/metadataGenerator";
 import {CourseBlock} from "@/app/components/server/products/courseBlock";

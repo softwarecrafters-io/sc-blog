@@ -102,3 +102,10 @@ export type Pagination = {
 }
 
 export type PostsWithPagination = {posts: SummarizedPost[], pagination:Pagination}
+
+export function formatCategory(category:string):string{
+    if(category.length < 4){
+        return category.toUpperCase();
+    }
+    return category;
+}

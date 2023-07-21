@@ -1,4 +1,4 @@
-import {PaginatedPosts, PostsByCategory} from "@/app/components/server/listOfPosts/paginatedPosts";
+import {PaginatedPosts, PostsByCategory} from "@/app/components/server/post/paginatedPosts";
 import {generateStaticMetadata} from "@/app/services/metadataGenerator";
 
 type CategoryPageParams = { params: { category: string } };
