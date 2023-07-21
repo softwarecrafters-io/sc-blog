@@ -3367,176 +3367,6 @@ twitter [@AdrianFerrera91](https://twitter.com/AdrianFerrera91), o a través de 
     "username": "Adrián Ferrera",
   },
   {
-    "category": "javascript",
-    "cover": "https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/JS_category.png",
-    "date": "",
-    "description": "Clean code o código limpio en español, es un término al que ya hacían referencia desarrolladores de la talla de Ward Cunningham o Kent Beck",
-    "id": "clean-code-javascript",
-    "markdownBody": "
-<blockquote>
-    <strong>"Programar es el arte de decirle a otro humano lo que quieres que el ordenador haga."</strong><strong> -- </strong><a href="https://es.wikipedia.org/wiki/Donald_Knuth"><strong>Donald Knuth</strong></a>
-</blockquote>
-
-<p>En los &uacute;ltimos a&ntilde;os, JavaScript se ha convertido en uno de los lenguajes m&aacute;s utilizados del mundo. Su principal ventaja, y a la vez su mayor debilidad, es su versatilidad. Esa gran versatilidad ha derivado en algunas malas pr&aacute;cticas que se han ido extendiendo en la comunidad, a&uacute;n as&iacute;, Javascript se encuentra en infraestructuras cr&iacute;ticas de <a href="https://stackshare.io/javascript">empresas muy importantes</a> (Facebook, Netflix o Uber lo utilizan), en las cuales limitar los costes derivados del mantenimiento del <em>software</em> se vuelve esencial.</p>
-<p>El coste total de un producto <em>software</em> viene dado por la suma de los costes de desarrollo y de mantenimiento, siendo este &uacute;ltimo mucho m&aacute;s elevado que el coste del propio desarrollo inicial. A su vez, como expone Kent Beck en su libro <a href="https://amzn.to/2BHRU8P"><em>Implementation Patterns</em></a><em>, </em>el coste de mantenimiento viene dado por la suma de los costes de <strong>entender el c&oacute;digo</strong>, <strong>cambiarlo</strong>, <strong>testearlo</strong> y <strong>desplegarlo</strong>. </p>
-<img class="align-center" style="width: 75%" src="https://res.cloudinary.com/software-crafters/image/upload/v1551009219/posts/clean_code_javascript/Esquema_costes_Kent_Beck.png" alt="costes-software"/>
-<small class="align-center">Esquema de f&oacute;rmula de costes de Kent Beck</small>
-<p>La idea de este art&iacute;culo es tratar de minimizar el coste relacionado con la parte de entender el c&oacute;digo, para ello&nbsp;tratar&eacute; de sintetizar y ampliar algunos de los conceptos relacionados con esto que exponen <a href="https://twitter.com/unclebobmartin">Robert C. Martin</a>, <a href="https://twitter.com/KentBeck">Kent Beck</a>, <a href="https://twitter.com/WardCunningham">Ward Cunningham</a> y otros autores aplic&aacute;ndolos a JavaScript. </p>
-
-<h2>&iquest;Qu&eacute; es Clean Code?</h2>
-<p><em>Clean code</em> o c&oacute;digo limpio en espa&ntilde;ol, es un t&eacute;rmino al que ya hac&iacute;an referencia desarrolladores de la talla de Ward Cunningham o Kent Beck, aunque no se populariz&oacute; hasta que Robert C. Martin, tambi&eacute;n conocido como <em>Uncle Bob</em>, public&oacute; su libro &ldquo;<a href="https://amzn.to/2TUywwB"><em>Clean Code: A Handbook of Agile Software Craftsmanship</em></a>&rdquo; en 2008. </p>
-<p>El libro, aunque sea bastante dogm&aacute;tico y quiz&aacute;s demasiado focalizado en la programaci&oacute;n orientada a objetos, se ha convertido en un cl&aacute;sico que no debe faltar en la estanter&iacute;a de ning&uacute;n desarrollador que se precie, aunque sea para criticarlo. &nbsp;</p>
-<img class="align-center" style="width: 75%" src="https://res.cloudinary.com/software-crafters/image/upload/v1549281084/posts/clean_code_javascript/cleancode_wtf.jpg" alt="clean-code"/>
-<small class="align-center">Vi&ntilde;eta de <a href="https://www.osnews.com/comics/">osnews.com/comics/</a> sobre la calidad del c&oacute;digo </small>
-<p>Existen muchas definiciones para el t&eacute;rmino clean code, pero yo personalmente me quedo con la de mi amigo Carlos Bl&eacute;, ya que adem&aacute;s casa muy bien con el objetivo del art&iacute;culo.</p>
-<blockquote><strong>"C&oacute;digo</strong><strong> limpio es aquel que se ha escrito con la intenci&oacute;n de que otra persona (o t&uacute; mismo en el futuro) lo entienda." -- </strong><a href="https://twitter.com/carlosble"><strong>Carlos Bl&eacute;</strong></a></blockquote>
-<p>Los desarrolladores solemos escribir c&oacute;digo sin la intenci&oacute;n expl&iacute;cita de que vaya a ser entendido por otra persona, ya que la mayor&iacute;a de las veces nos centramos simplemente en implementar una soluci&oacute;n que funcione y que resuelva el problema. </p>
-<p>Tratar de entender el c&oacute;digo de un tercero o incluso el que escribimos nosotros mismos hace tan solo unas semanas, se puede volver una tarea realmente dif&iacute;cil. Es por ello que hacer un esfuerzo extra para que nuestra soluci&oacute;n sea legible e intuitiva es la base para reducir los costes de mantenimiento del <em>software</em> que producimos.</p>
-<p>A continuaci&oacute;n veremos algunas de las secciones del libro de Uncle Bob que m&aacute;s relacionadas est&aacute;n con la legibilidad del c&oacute;digo. Si conoces el libro o lo has le&iacute;do, podr&aacute;s observar que he a&ntilde;adido algunos conceptos y descartado otros, adem&aacute;s de incluir ejemplos sencillos aplicados a JavaScript. </p>
-<h2>Variables y nombres</h2>
-<blockquote><strong>&ldquo;Nuestro c&oacute;digo tiene que ser simple y directo, deber&iacute;a leerse con la misma facilidad que un texto bien escrito&rdquo; -- <a href="https://es.wikipedia.org/wiki/Grady_Booch" target="_blank">Grady Booch</a></strong></blockquote>
-<p>Nuestro c&oacute;digo deber&iacute;a poder leerse con la misma facilidad con la que leemos un texto bien escrito, es por ello que <strong>escoger buenos nombres</strong> es fundamental. Los nombres de variables, m&eacute;todos y clases deben seleccionarse con cuidado para que den expresividad y significado a nuestro c&oacute;digo. </p>
-<img class="align-center" style="width: 75%" src="https://res.cloudinary.com/software-crafters/image/upload/v1549360879/posts/clean_code_javascript/hardest-problem-naming.jpg" alt="costes-software"/>
-<small class="align-center">Vi&ntilde;eta de Commit Strip sobre el nombrado de variables.</small>
-<p>A continuaci&oacute;n veremos algunas pautas y ejemplos para tratar de mejorar a la hora de escoger buenos nombres:</p>
-<h3><strong>Nombres pronunciables y expresivos</strong></h3>
-<p>Los nombres, imprescindiblemente en ingl&eacute;s, deben ser pronunciables. Esto quiere decir que no deben ser abreviaturas ni llevar guion bajo o medio, priorizando el estilo <em>CamelCase</em>. Por otro lado, debemos intentar no ahorrarnos caracteres en los nombres, la idea es que sean lo m&aacute;s expresivos posible.</p>
-<pre class="language-javascript"><code>//bad
-const yyyymmdstr = moment().format('YYYY/MM/DD');
-
-//better
-const currentDate = moment().format('YYYY/MM/DD');
-</code></pre>
-
-<h3>Uso correcto de var, let y const</h3>
-<p>Debemos evitar a toda costa el uso de <em>var</em>, ya que define las variables con alcance global. Esto no ocurre con las variables definidas con let y const, ya que se definen para un &aacute;mbito en concreto. </p>
-<p>La diferencia entre <em>let</em> y <em>const</em> radica en que a esta &uacute;ltima no se le puede reasignar su valor (aunque s&iacute; modificarlo). Es por ello que usar const en variables a las que no tengamos pensado cambiar su valor puede ayudarnos a mejorar la intencionalidad de nuestro c&oacute;digo.</p>
-<pre class="language-javascript"><code>// old school JavaScript
-var variable = 5;
-{
-  console.log('variable); // 5
-  var variable = 10;
-}
-
-console.log(variable); // 10
-variable = variable*2;
-console.log(variable); // 20
-
-// modern JavaScript (let)
-let variable = 5;
-
-{
-   console.log(variable); // error
-   let variable = 10;
-}
-
-console.log(variable); // 5
-variable = variable*2;
-console.log(variable); // 10
-
-// modern JavaScript (const)
-const variable = 5;
-variable = variable*2; // error
-console.log(variable); // doesn't get here
-</code></pre>
-
-<h3><strong>Evitar que los nombres contengan informaci&oacute;n t&eacute;cnica </strong></h3>
-<p>Si estamos construyendo un <em>software</em> de tipo vertical (orientado a negocio), debemos intentar que los nombres no contengan informaci&oacute;n t&eacute;cnica en ellos, es decir, evitar incluir informaci&oacute;n relacionada con la tecnolog&iacute;a, como el tipo de dato o la <a href="https://es.wikipedia.org/wiki/Notaci%C3%B3n_h%C3%BAngara">notaci&oacute;n h&uacute;ngara,</a> el tipo de clase, etc. Esto s&iacute; se admite en desarrollo de <em>software</em> horizontal o librer&iacute;as de prop&oacute;sito general.</p>
-<pre class="language-javascript"><code>//bad
-class AbstractUser(){...}
-
-//better
-class User(){...}
-</code></pre>
-
-<h3><strong>L&eacute;xico coherente</strong></h3>
-<p>Debemos usar el mismo vocabulario para hacer referencia al mismo concepto, no debemos usar en algunos lados <em>User</em>, en otro <em>Client</em> y en otro <em>Customer</em>, a no ser que representen claramente conceptos diferentes. </p>
-<pre class="language-javascript"><code>//bad
-getUserInfo();
-getClientData();
-getCustomerRecord();
-
-//better
-getUser()
-</code></pre>
-
-<h3><strong>Usa el nombre adecuado según el tipo de dato</strong></h3>
-<p><strong>Arrays</strong></p>
-<p>Los arrays son una lista iterable de elementos, generalmente del mismo tipo. Es por ello que pluralizar el nombre de la variable puede ser una buena idea:</p>
-
-<pre class="language-javascript"><code>//bad
-const fruit = ['manzana', 'platano', 'fresa'];
-// regular
-const fruitList = ['manzana', 'platano', 'fresa'];
-// good
-const fruits = ['manzana', 'platano', 'fresa'];
-// better
-const fruitNames = ['manzana', 'platano', 'fresa'];
-</code></pre>
-
-<p><strong>Booleanos</strong></p>
-<p>Los booleanos solo pueden tener 2 valores, verdadero o falso. Dado esto, el uso de prefijos como "is", "has" y "can" ayudará inferir el tipo de variable, mejorando así la legibilidad de nuestro código.</p>
-
-
-<pre class="language-javascript"><code>//bad
-const open = true;
-const write = true;
-const fruit = true;
-
-// good
-const isOpen = true;
-const canWrite = true;
-const hasFruit = true;
-</code></pre>
-
-<p><strong>Números</strong></p>
-<p>Para los números es interesante escoger palabras que describan números, como “min”, “max”, “total”:</p>
-
-
-<pre class="language-javascript"><code>//bad
-const fruits = 3;
-
-//better
-const maxFruits = 5;
-const minFruits = 1;
-const totalFruits = 3;
-</code></pre>
-
-
-<p><strong>Funciones</strong></p>
-<p>Los nombres de las funciones deben representar acciones, por ello que deben construirse usando el verbo que representa la acción seguido de un sustantivo. Estos deben de ser descriptivos y, a su vez, concisos. Esto quiere decir que el nombre de la función debe expresar lo que hace, pero también debe de abstraerse de la implementación de la función.</p>
-<pre class="language-javascript"><code>//bad
-createUserIfNotExists()
-updateUserIfNotEmpty()
-sendEmailIfFieldsValid()
-
-//better
-createUser(...)
-updateUser(...)
-sendEmail()
-</code></pre>
-
-<p>En el caso de las funciones de acceso, modificación o predicado, el nombre debe el prefijo get, set, e is, respectivamente. [i]</p>
-
-<pre class="language-javascript"><code>
-getUser()
-setUser(...)
-isValidUser()
-</code></pre>
-
-<p><strong>Clases</strong></p>
-<p>Las clases y los objetos deben tener nombres formados por un sustantivo o frases de sustantivo como User, UserProfile, Account, AdressParser. Debemos evitar nombres como Manager, Processor, Data o Info.</p>
-<p>Hay que ser cuidadosos a la hora de escoger estos nombres, ya que son el paso previo a la hora de definir la responsabilidad de la clase. Si escogemos nombres demasiado genéricos tendemos a crear clases con múltiples responsabilidades.</p>
-",
-    "slug": "clean-code-javascript",
-    "tags": [
-      "javascript",
-    ],
-    "title": "Clean Code aplicado a Javascript",
-    "userPicture": "",
-    "username": "Miguel A. Gómez",
-  },
-  {
     "category": "typescript",
     "cover": "https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/TS_category.png",
     "date": "",
@@ -6932,6 +6762,218 @@ CSS forma parte de la web [#cssIsPartOfTheWeb](https://twitter.com/hashtag/cssIs
     "title": "CSS para Crafters",
     "userPicture": "",
     "username": "Joan León",
+  },
+  {
+    "category": "javascript",
+    "cover": "https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/JS_category.png",
+    "date": "",
+    "description": "Clean code o código limpio en español, es un término al que ya hacían referencia desarrolladores de la talla de Ward Cunningham o Kent Beck",
+    "id": "clean-code-javascript",
+    "markdownBody": "> **"Programar es el arte de decirle a otro humano lo que quieres que el ordenador haga."** **\\--** [**Donald Knuth**](https://es.wikipedia.org/wiki/Donald%5FKnuth) 
+
+En los últimos años, JavaScript se ha convertido en uno de los lenguajes más utilizados del mundo. Su principal ventaja, y a la vez su mayor debilidad, es su versatilidad. Esa gran versatilidad ha derivado en algunas malas prácticas que se han ido extendiendo en la comunidad, aún así, Javascript se encuentra en infraestructuras críticas de [empresas muy importantes](https://stackshare.io/javascript) (Facebook, Netflix o Uber lo utilizan), en las cuales limitar los costes derivados del mantenimiento del _software_ se vuelve esencial.
+
+El coste total de un producto _software_ viene dado por la suma de los costes de desarrollo y de mantenimiento, siendo este último mucho más elevado que el coste del propio desarrollo inicial. A su vez, como expone Kent Beck en su libro [_Implementation Patterns_](https://amzn.to/2BHRU8P)_,_ el coste de mantenimiento viene dado por la suma de los costes de **entender el código**, **cambiarlo**, **testearlo** y **desplegarlo**. 
+
+![costes-software](https://res.cloudinary.com/software-crafters/image/upload/v1551009219/posts/clean_code_javascript/Esquema_costes_Kent_Beck.png) Esquema de fórmula de costes de Kent Beck 
+
+La idea de este artículo es tratar de minimizar el coste relacionado con la parte de entender el código, para ello trataré de sintetizar y ampliar algunos de los conceptos relacionados con esto que exponen [Robert C. Martin](https://twitter.com/unclebobmartin), [Kent Beck](https://twitter.com/KentBeck), [Ward Cunningham](https://twitter.com/WardCunningham) y otros autores aplicándolos a JavaScript. 
+
+## ¿Qué es Clean Code?
+
+_Clean code_ o código limpio en español, es un término al que ya hacían referencia desarrolladores de la talla de Ward Cunningham o Kent Beck, aunque no se popularizó hasta que Robert C. Martin, también conocido como _Uncle Bob_, publicó su libro “[_Clean Code: A Handbook of Agile Software Craftsmanship_](https://amzn.to/2TUywwB)” en 2008\\. 
+
+El libro, aunque sea bastante dogmático y quizás demasiado focalizado en la programación orientada a objetos, se ha convertido en un clásico que no debe faltar en la estantería de ningún desarrollador que se precie, aunque sea para criticarlo. 
+
+![clean-code](https://res.cloudinary.com/software-crafters/image/upload/v1549281084/posts/clean_code_javascript/cleancode_wtf.jpg) Viñeta de [osnews.com/comics/](https://www.osnews.com/comics/) sobre la calidad del código 
+
+Existen muchas definiciones para el término clean code, pero yo personalmente me quedo con la de mi amigo Carlos Blé, ya que además casa muy bien con el objetivo del artículo.
+
+> **"Código** **limpio es aquel que se ha escrito con la intención de que otra persona (o tú mismo en el futuro) lo entienda." --** [**Carlos Blé**](https://twitter.com/carlosble)
+
+Los desarrolladores solemos escribir código sin la intención explícita de que vaya a ser entendido por otra persona, ya que la mayoría de las veces nos centramos simplemente en implementar una solución que funcione y que resuelva el problema. 
+
+Tratar de entender el código de un tercero o incluso el que escribimos nosotros mismos hace tan solo unas semanas, se puede volver una tarea realmente difícil. Es por ello que hacer un esfuerzo extra para que nuestra solución sea legible e intuitiva es la base para reducir los costes de mantenimiento del _software_ que producimos.
+
+A continuación veremos algunas de las secciones del libro de Uncle Bob que más relacionadas están con la legibilidad del código. Si conoces el libro o lo has leído, podrás observar que he añadido algunos conceptos y descartado otros, además de incluir ejemplos sencillos aplicados a JavaScript. 
+
+## Variables y nombres
+
+> **“Nuestro código tiene que ser simple y directo, debería leerse con la misma facilidad que un texto bien escrito” -- [Grady Booch](https://es.wikipedia.org/wiki/Grady%5FBooch)**
+
+Nuestro código debería poder leerse con la misma facilidad con la que leemos un texto bien escrito, es por ello que **escoger buenos nombres** es fundamental. Los nombres de variables, métodos y clases deben seleccionarse con cuidado para que den expresividad y significado a nuestro código. 
+
+![costes-software](https://res.cloudinary.com/software-crafters/image/upload/v1549360879/posts/clean_code_javascript/hardest-problem-naming.jpg) Viñeta de Commit Strip sobre el nombrado de variables. 
+
+A continuación veremos algunas pautas y ejemplos para tratar de mejorar a la hora de escoger buenos nombres:
+
+### **Nombres pronunciables y expresivos**
+
+Los nombres, imprescindiblemente en inglés, deben ser pronunciables. Esto quiere decir que no deben ser abreviaturas ni llevar guion bajo o medio, priorizando el estilo _CamelCase_. Por otro lado, debemos intentar no ahorrarnos caracteres en los nombres, la idea es que sean lo más expresivos posible.
+
+\`\`\`
+//bad
+const yyyymmdstr = moment().format('YYYY/MM/DD');
+
+//better
+const currentDate = moment().format('YYYY/MM/DD');
+
+\`\`\`
+
+### Uso correcto de var, let y const
+
+Debemos evitar a toda costa el uso de _var_, ya que define las variables con alcance global. Esto no ocurre con las variables definidas con let y const, ya que se definen para un ámbito en concreto. 
+
+La diferencia entre _let_ y _const_ radica en que a esta última no se le puede reasignar su valor (aunque sí modificarlo). Es por ello que usar const en variables a las que no tengamos pensado cambiar su valor puede ayudarnos a mejorar la intencionalidad de nuestro código.
+
+\`\`\`
+// old school JavaScript
+var variable = 5;
+{
+  console.log('variable); // 5
+  var variable = 10;
+}
+
+console.log(variable); // 10
+variable = variable*2;
+console.log(variable); // 20
+
+// modern JavaScript (let)
+let variable = 5;
+
+{
+   console.log(variable); // error
+   let variable = 10;
+}
+
+console.log(variable); // 5
+variable = variable*2;
+console.log(variable); // 10
+
+// modern JavaScript (const)
+const variable = 5;
+variable = variable*2; // error
+console.log(variable); // doesn't get here
+
+\`\`\`
+
+### **Evitar que los nombres contengan información técnica** 
+
+Si estamos construyendo un _software_ de tipo vertical (orientado a negocio), debemos intentar que los nombres no contengan información técnica en ellos, es decir, evitar incluir información relacionada con la tecnología, como el tipo de dato o la [notación húngara,](https://es.wikipedia.org/wiki/Notaci%C3%B3n%5Fh%C3%BAngara) el tipo de clase, etc. Esto sí se admite en desarrollo de _software_ horizontal o librerías de propósito general.
+
+\`\`\`
+//bad
+class AbstractUser(){...}
+
+//better
+class User(){...}
+
+\`\`\`
+
+### **Léxico coherente**
+
+Debemos usar el mismo vocabulario para hacer referencia al mismo concepto, no debemos usar en algunos lados _User_, en otro _Client_ y en otro _Customer_, a no ser que representen claramente conceptos diferentes. 
+
+\`\`\`
+//bad
+getUserInfo();
+getClientData();
+getCustomerRecord();
+
+//better
+getUser()
+
+\`\`\`
+
+### **Usa el nombre adecuado según el tipo de dato**
+
+**Arrays**
+
+Los arrays son una lista iterable de elementos, generalmente del mismo tipo. Es por ello que pluralizar el nombre de la variable puede ser una buena idea:
+
+\`\`\`
+//bad
+const fruit = ['manzana', 'platano', 'fresa'];
+// regular
+const fruitList = ['manzana', 'platano', 'fresa'];
+// good
+const fruits = ['manzana', 'platano', 'fresa'];
+// better
+const fruitNames = ['manzana', 'platano', 'fresa'];
+
+\`\`\`
+
+**Booleanos**
+
+Los booleanos solo pueden tener 2 valores, verdadero o falso. Dado esto, el uso de prefijos como "is", "has" y "can" ayudará inferir el tipo de variable, mejorando así la legibilidad de nuestro código.
+
+\`\`\`
+//bad
+const open = true;
+const write = true;
+const fruit = true;
+
+// good
+const isOpen = true;
+const canWrite = true;
+const hasFruit = true;
+
+\`\`\`
+
+**Números**
+
+Para los números es interesante escoger palabras que describan números, como “min”, “max”, “total”:
+
+\`\`\`
+//bad
+const fruits = 3;
+
+//better
+const maxFruits = 5;
+const minFruits = 1;
+const totalFruits = 3;
+
+\`\`\`
+
+**Funciones**
+
+Los nombres de las funciones deben representar acciones, por ello que deben construirse usando el verbo que representa la acción seguido de un sustantivo. Estos deben de ser descriptivos y, a su vez, concisos. Esto quiere decir que el nombre de la función debe expresar lo que hace, pero también debe de abstraerse de la implementación de la función.
+
+\`\`\`
+//bad
+createUserIfNotExists()
+updateUserIfNotEmpty()
+sendEmailIfFieldsValid()
+
+//better
+createUser(...)
+updateUser(...)
+sendEmail()
+
+\`\`\`
+
+En el caso de las funciones de acceso, modificación o predicado, el nombre debe el prefijo get, set, e is, respectivamente. \\[i\\]
+
+\`\`\`
+
+getUser()
+setUser(...)
+isValidUser()
+
+\`\`\`
+
+**Clases**
+
+Las clases y los objetos deben tener nombres formados por un sustantivo o frases de sustantivo como User, UserProfile, Account, AdressParser. Debemos evitar nombres como Manager, Processor, Data o Info.
+
+Hay que ser cuidadosos a la hora de escoger estos nombres, ya que son el paso previo a la hora de definir la responsabilidad de la clase. Si escogemos nombres demasiado genéricos tendemos a crear clases con múltiples responsabilidades.",
+    "slug": "clean-code-javascript",
+    "tags": [
+      "javascript",
+    ],
+    "title": "Clean Code aplicado a Javascript",
+    "userPicture": "",
+    "username": "Miguel A. Gómez",
   },
   {
     "category": "javascript",
