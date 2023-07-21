@@ -99,6 +99,7 @@
 .checkbox{
     margin: -1px 10px 0px 0px;
     height: 16px;
+    width: 16px;
 }
 
 .errorMessage{
