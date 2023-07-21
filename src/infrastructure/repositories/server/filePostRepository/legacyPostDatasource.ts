@@ -116,18 +116,6 @@ export const legacyPostsWithMarkdownContent: LegacyPost[] = [
         "ogImage": "https://swcrafters.fra1.cdn.digitaloceanspaces.com/Posts/tdd-react-typescript/og.png"
     },
     {
-        "title":"Clean Code aplicado a Javascript",
-        "seoTitle":"▷ Clean Code: ¿código limpio en JS?【2020】",
-        "slug": "clean-code-javascript",
-        "category": "javascript",
-        "author": "Miguel A. Gómez",
-        "background":"https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/JS_category.png",
-        "summaryChars" : 396,
-        "content": fs.readFileSync("./legacyData/clean-code-javascript.html", {encoding: 'utf-8'}),
-        "summary":"Clean code o código limpio en español, es un término al que ya hacían referencia desarrolladores de la talla de Ward Cunningham o Kent Beck",
-        "ogImage":"https://res.cloudinary.com/software-crafters/image/upload/v1553272577/posts/clean_code_javascript/og-cleancode-javascript.png"
-    },
-    {
         "title":"Introducción a TypeScript con ReactJS",
         "slug":"introduccion-typescript-react",
         "seoTitle":"▷ Introduccion a Typescript con React【2020】",
@@ -248,6 +236,18 @@ export const legacyPostsWithMarkdownContent: LegacyPost[] = [
 ];
 
 const legacyPostsWithHtmlContent: LegacyPost[] = [
+    {
+        "title":"Clean Code aplicado a Javascript",
+        "seoTitle":"▷ Clean Code: ¿código limpio en JS?【2020】",
+        "slug": "clean-code-javascript",
+        "category": "javascript",
+        "author": "Miguel A. Gómez",
+        "background":"https://swcrafters.fra1.cdn.digitaloceanspaces.com/Categories/JS_category.png",
+        "summaryChars" : 396,
+        "content": nhm.translate(fs.readFileSync("./legacyData/clean-code-javascript.html", {encoding: 'utf-8'})),
+        "summary":"Clean code o código limpio en español, es un término al que ya hacían referencia desarrolladores de la talla de Ward Cunningham o Kent Beck",
+        "ogImage":"https://res.cloudinary.com/software-crafters/image/upload/v1553272577/posts/clean_code_javascript/og-cleancode-javascript.png"
+    },
     {
         "title":"Introducción a la programación reactiva con RxJS",
         "seoTitle":"▷ RxJS: Programación Reactiva【2020】",
