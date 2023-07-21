@@ -16,8 +16,8 @@ export class NotionPostRepository implements PostRepository{
         this.notionToMarkdown = new NotionToMarkdown({ notionClient: this.client });
     }
 
-    //five minutes cache by default
-    static create(apiKey:string, databaseId:string, cacheInMsSeconds = 300000): NotionPostRepository {
+    //six minutes cache by default
+    static create(apiKey:string, databaseId:string, cacheInMsSeconds = 360000): NotionPostRepository {
         if(!apiKey || !databaseId){
             throw new Error('Notion API Key or Database ID not found');
         }
