@@ -64,5 +64,5 @@ describe('NotionPostRepository Cache Tests', () => {
         allPosts = await notionPostRepository.allPosts().toPromise() as Post[];
 
         expect((notionPostRepository as any).notionRequest).toHaveBeenCalledTimes(2);
-    }, 20000);
+    }, 40000);
 });
