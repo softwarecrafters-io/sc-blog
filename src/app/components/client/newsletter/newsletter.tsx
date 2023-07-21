@@ -11,7 +11,7 @@ export const Newsletter = ({hideEntry = false}:{hideEntry?:boolean}) => {
      if(isSubscribed()) {
         return <Thanks/>
     }
-    return <div className={styles.container} id={'newsletter'}>
+    return <div className={styles.container} id={hideEntry ? 'newsletter-short' : 'newsletter'}>
         <div className={styles.header}>
             <h3 className={styles.title}>La newsletter, por Miguel A. Gómez</h3>
             {hideEntry ? <></> : <Image  className={styles.profilePhone} src={'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Assets/foto-circle-small.png'} alt={'Miguel A. Gómez - Clean JavaScript'} width={140} height={140}/>}
