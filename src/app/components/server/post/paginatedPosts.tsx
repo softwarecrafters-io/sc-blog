@@ -10,7 +10,7 @@ export const PaginatedPosts = async ({currentPage, title}:{currentPage:number, t
     const {getPostsWithPagination} = usePosts(ServerFactory.createBlogService());
     const {posts, pagination} = await getPostsWithPagination(currentPage);
     return (<div>
-        <h3 className={styles.title}>{title}</h3>
+        <h2 className={styles.title}>{title}</h2>
         {posts.map(post =>
             <SummarizedPostBlock key={post.id} summarizedPost={post} />
         )}
@@ -22,7 +22,7 @@ export const PostsByCategory = async ({category, title}:{category:string, title:
     const blogService = ServerFactory.createBlogService();
     const posts = await blogService.allSummarizedPostsByCategory(category).toPromise() as SummarizedPost[];
     return <div>
-        <h3 className={styles.title}>{title}</h3>
+        <h2 className={styles.title}>{title}</h2>
         {posts.map(post =>
             <SummarizedPostBlock key={post.id} summarizedPost={post} />
         )}

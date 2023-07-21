@@ -5,8 +5,11 @@
 }
 
 .title{
-
+    font-size: 1.17em;
+    font-weight: bold;
+    letter-spacing: 0;
 }
+
 .link{
 }
 

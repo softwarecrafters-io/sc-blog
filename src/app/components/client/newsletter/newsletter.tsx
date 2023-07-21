@@ -7,13 +7,15 @@ import Link from "next/link";
 import {Routes} from "@/app/routes";
 
 export const Newsletter = ({hideEntry = false}:{hideEntry?:boolean}) => {
+    const titleId = hideEntry ? 'newsletter-short' : 'newsletter';
+    const checkboxId = hideEntry ? 'newsletterCheckboxShort' : 'newsletterCheckbox';
     const {handleSubscribe, handleEmailChange, isSubscribed, hasError, errorMessage, handlePrivacyPolicyChange  } = useNewsletter();
      if(isSubscribed()) {
         return <Thanks/>
     }
-    return <div className={styles.container} id={hideEntry ? 'newsletter-short' : 'newsletter'}>
+    return <div className={styles.container} id={titleId}>
         <div className={styles.header}>
-            <h3 className={styles.title}>La newsletter, por Miguel A. Gómez</h3>
+            <h2 className={styles.title}>La newsletter, por Miguel A. Gómez</h2>
             {hideEntry ? <></> : <Image  className={styles.profilePhone} src={'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Assets/foto-circle-small.png'} alt={'Miguel A. Gómez - Clean JavaScript'} width={140} height={140}/>}
             <div className={styles.content}>
                 <div className={styles.textContainer}>
@@ -30,8 +32,8 @@ export const Newsletter = ({hideEntry = false}:{hideEntry?:boolean}) => {
                 <button className={styles.actionButton} onClick={handleSubscribe}>VALE</button>
             </div>
             <div className={styles.privacyContainer}>
-                <input type="checkbox" id="newsletterCheckbox" className={styles.checkbox} onChange={handlePrivacyPolicyChange}></input>
-                <label htmlFor="newsletterCheckbox" className={styles.privacyMessage}>Para cumplir con el RGPD debes leer y aceptar <Link href={Routes.legal}> la política de privacidad </Link>.</label>
+                <input type="checkbox" id={checkboxId} className={styles.checkbox} onChange={handlePrivacyPolicyChange}></input>
+                <label htmlFor={checkboxId} className={styles.privacyMessage}>Para cumplir con el RGPD debes leer y aceptar <Link href={Routes.legal}> la política de privacidad.</Link></label>
             </div>
             <div className={styles.errorMessage} hidden={!hasError()}>{errorMessage()}</div>
         </div>

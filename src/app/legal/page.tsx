@@ -106,8 +106,9 @@ export default async function Legal() {
 
             <h2><em>Cookies</em></h2>
 
+            <p>La web <a href={'https://softwarecrafters.io'} target={'_blank'}>softwarecrafters.io</a> no usa cookies, en el resto si. </p>
 
-            <p>Este sitio web usa <em>cookies</em> de Google, Facebook y LinkedIn que me sirven para mostrar
+            <p>Las <em>cookies</em> que usamos son de Google, Facebook y LinkedIn que me sirven para mostrar
                 publicidad a usuarios que se parezcan a ti. En concreto, las siguientes:</p>
 
 

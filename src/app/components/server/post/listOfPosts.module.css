@@ -1,5 +1,9 @@
 .title{
     text-transform: capitalize;
+    font-size: 1.17em;
+    margin: 25px auto 0 auto;
+    font-weight: bold;
+    letter-spacing: 0;
 }
 
 .pagination{
