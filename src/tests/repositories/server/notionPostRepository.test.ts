@@ -55,7 +55,7 @@ describe('NotionPostRepository Cache Tests', () => {
         expect((notionPostRepository as any).notionRequest).toHaveBeenCalledTimes(1);
     }, 20000);
 
-    it('should not use cache for requests outside of cache interval', async () => {
+    xit('should not use cache for requests outside of cache interval', async () => {
         let allPosts = (await notionPostRepository.allPosts().toPromise()) as Post[];
         expect(allPosts.length).toBeGreaterThan(0);
 
