@@ -14,7 +14,7 @@ export const CodeBlock = ({children, post}:{children:ReactNode, post:Post}) => {
     const [codeStyle, setCodeStyle] = useState(oneDark);
     useEffect(() => {
         const storedTheme = window.localStorage.getItem('theme') as Theme;
-        const defaultTheme = storedTheme || 'light';
+        const defaultTheme = storedTheme || 'dark';
         setCodeStyle(defaultTheme === 'dark' ? oneDark : oneLight);
         themeStore.getThemeSubject().subscribe((theme:Theme) => {
             theme === 'dark' ? setCodeStyle(oneDark): setCodeStyle(oneLight)
