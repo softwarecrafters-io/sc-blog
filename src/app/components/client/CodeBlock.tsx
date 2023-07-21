@@ -9,7 +9,7 @@ import {Theme} from "@/app/components/client/theme/themeSwicher";
 import {ClientFactory} from "@/infrastructure/factories/clientFactory";
 
 
-export const CodeBlock = ({children, post}:{children:ReactNode, post:Post}) => {
+export const CodeBlock = ({children}:{children:ReactNode, post:Post}) => {
     const themeStore = ClientFactory.getThemeStore();
     const [codeStyle, setCodeStyle] = useState(oneDark);
     useEffect(() => {

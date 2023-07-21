@@ -6,7 +6,6 @@ import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 import styles from './legal.module.css';
 
 export default async function Legal() {
-    const data = await getMarkdown();
     return (
         <div className={styles.container}>
             <h1>Tostón Legal</h1>
@@ -112,23 +111,23 @@ export default async function Legal() {
                 publicidad a usuarios que se parezcan a ti. En concreto, las siguientes:</p>
 
 
-            <div className="cky-audit-table-element"><h5 cky-i18n="detail.tabItem.necessary.title">Necesarias</h5>
+            <div className="cky-audit-table-element"><h5 >Necesarias</h5>
                 <div className="cky-table-wrapper" id="cky-table-wrapper-necessary">
                     <table id="cky-anywhere-cookie-audit-table-necessary" className="cky-cookie-audit-table">
                         <thead>
                         <tr>
-                            <th cky-i18n="auditTable.cookie">Cookie</th>
-                            <th cky-i18n="auditTable.type">tipo</th>
-                            <th cky-i18n="auditTable.duration">Duración</th>
-                            <th cky-i18n="auditTable.description">Descripción</th>
+                            <th >Cookie</th>
+                            <th>tipo</th>
+                            <th>Duración</th>
+                            <th>Descripción</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>PHPSESSID</td>
-                            <td cky-i18n="cookies.PHPSESSID.type">https</td>
-                            <td cky-i18n="cookies.PHPSESSID.duration"></td>
-                            <td cky-i18n="cookies.PHPSESSID.description">This cookie is native to PHP applications.
+                            <td >https</td>
+                            <td></td>
+                            <td>This cookie is native to PHP applications.
                                 The cookie is used to store and identify a users unique session ID for the purpose
                                 of managing user session on the website. The cookie is a session cookies and is
                                 deleted when all the browser windows are closed.
@@ -136,157 +135,157 @@ export default async function Legal() {
                         </tr>
                         <tr>
                             <td>cky-active-check</td>
-                            <td cky-i18n="cookies.cky-active-check.type">https</td>
-                            <td cky-i18n="cookies.cky-active-check.duration">1 dia</td>
-                            <td cky-i18n="cookies.cky-active-check.description">CookieYes establece la cookie para
+                            <td>https</td>
+                            <td>1 dia</td>
+                            <td>CookieYes establece la cookie para
                                 comprobar si el banner de consentimiento está activo en el sitio web.
                             </td>
                         </tr>
                         <tr>
                             <td>cookieyesID</td>
-                            <td cky-i18n="cookies.cookieyesID.type">https</td>
-                            <td cky-i18n="cookies.cookieyesID.duration">1 año</td>
-                            <td cky-i18n="cookies.cookieyesID.description">Identificador único para visitantes
+                            <td>https</td>
+                            <td >1 año</td>
+                            <td>Identificador único para visitantes
                                 utilizado por CookieYes con respecto al consentimiento.
                             </td>
                         </tr>
                         <tr>
                             <td>cky-consent</td>
-                            <td cky-i18n="cookies.cky-consent.type">https</td>
-                            <td cky-i18n="cookies.cky-consent.duration">1 año</td>
-                            <td cky-i18n="cookies.cky-consent.description">CookieYes establece la cookie para
+                            <td>https</td>
+                            <td>1 año</td>
+                            <td>CookieYes establece la cookie para
                                 recordar el consentimiento del usuario para el uso de cookies en el sitio web.
                             </td>
                         </tr>
                         <tr>
                             <td>cookieyes-necessary</td>
-                            <td cky-i18n="cookies.cookieyes-necessary.type">https</td>
-                            <td cky-i18n="cookies.cookieyes-necessary.duration">1 año</td>
-                            <td cky-i18n="cookies.cookieyes-necessary.description">CookieYes establece esta cookie y
+                            <td>https</td>
+                            <td>1 año</td>
+                            <td>CookieYes establece esta cookie y
                                 se utiliza para recordar el consentimiento de los usuarios para el uso de cookies en
                                 la categoría Necesarias.
                             </td>
                         </tr>
                         <tr>
                             <td>cookieyes-functional</td>
-                            <td cky-i18n="cookies.cookieyes-functional.type">https</td>
-                            <td cky-i18n="cookies.cookieyes-functional.duration">1 año</td>
-                            <td cky-i18n="cookies.cookieyes-functional.description">CookieYes establece esta cookie
+                            <td>https</td>
+                            <td>1 año</td>
+                            <td>CookieYes establece esta cookie
                                 y se utiliza para recordar el consentimiento de los usuarios para el uso de cookies
                                 en la categoría Funcional.
                             </td>
                         </tr>
                         <tr>
                             <td>cookieyes-analytics</td>
-                            <td cky-i18n="cookies.cookieyes-analytics.type">https</td>
-                            <td cky-i18n="cookies.cookieyes-analytics.duration">1 año</td>
-                            <td cky-i18n="cookies.cookieyes-analytics.description">CookieYes establece esta cookie y
+                            <td>https</td>
+                            <td>1 año</td>
+                            <td>CookieYes establece esta cookie y
                                 se utiliza para recordar el consentimiento de los usuarios para el uso de cookies en
                                 la categoría Analíticas.
                             </td>
                         </tr>
                         <tr>
                             <td>cookieyes-performance</td>
-                            <td cky-i18n="cookies.cookieyes-performance.type">https</td>
-                            <td cky-i18n="cookies.cookieyes-performance.duration">1 año</td>
-                            <td cky-i18n="cookies.cookieyes-performance.description">CookieYes establece esta cookie
+                            <td>https</td>
+                            <td>1 año</td>
+                            <td>CookieYes establece esta cookie
                                 y se utiliza para recordar el consentimiento de los usuarios para el uso de cookies
                                 en la categoría Rendimiento.
                             </td>
                         </tr>
                         <tr>
                             <td>cookieyes-advertisement</td>
-                            <td cky-i18n="cookies.cookieyes-advertisement.type">https</td>
-                            <td cky-i18n="cookies.cookieyes-advertisement.duration">1 año</td>
-                            <td cky-i18n="cookies.cookieyes-advertisement.description">CookieYes establece esta
+                            <td>https</td>
+                            <td>1 año</td>
+                            <td>CookieYes establece esta
                                 cookie y se utiliza para recordar el consentimiento de los usuarios para el uso de
                                 cookies en la categoría Anuncios.
                             </td>
                         </tr>
                         <tr>
                             <td>cky-action</td>
-                            <td cky-i18n="cookies.cky-action.type">https</td>
-                            <td cky-i18n="cookies.cky-action.duration">1 año</td>
-                            <td cky-i18n="cookies.cky-action.description">CookieYes establece esta cookie y se
+                            <td>https</td>
+                            <td>1 año</td>
+                            <td>CookieYes establece esta cookie y se
                                 utiliza para recordar la acción realizada por el usuario.
                             </td>
                         </tr>
                         <tr>
                             <td>cookieyes-other</td>
-                            <td cky-i18n="cookies.cookieyes-other.type">https</td>
-                            <td cky-i18n="cookies.cookieyes-other.duration">1 año</td>
-                            <td cky-i18n="cookies.cookieyes-other.description">CookieYes sets this cookie to
+                            <td>https</td>
+                            <td>1 año</td>
+                            <td>CookieYes sets this cookie to
                                 remember the consent of users for the use of cookies in the Other category.
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <h5 cky-i18n="detail.tabItem.functional.title">Funcionales</h5>
+                <h5>Funcionales</h5>
                 <div className="cky-table-wrapper" id="cky-table-wrapper-functional">
                     <table id="cky-anywhere-cookie-audit-table-functional" className="cky-cookie-audit-table">
                         <thead>
                         <tr>
-                            <th cky-i18n="auditTable.cookie">Cookie</th>
-                            <th cky-i18n="auditTable.type">tipo</th>
-                            <th cky-i18n="auditTable.duration">Duración</th>
-                            <th cky-i18n="auditTable.description">Descripción</th>
+                            <th>Cookie</th>
+                            <th>tipo</th>
+                            <th>Duración</th>
+                            <th>Descripción</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>lang</td>
-                            <td cky-i18n="cookies.lang.type">https</td>
-                            <td cky-i18n="cookies.lang.duration">session</td>
-                            <td cky-i18n="cookies.lang.description">Esta cookie se utiliza para almacenar las
+                            <td>https</td>
+                            <td>session</td>
+                            <td>Esta cookie se utiliza para almacenar las
                                 preferencias de idioma de un usuario para ofrecer contenido en ese idioma almacenado
                                 la próxima vez que el usuario visite el sitio web.
                             </td>
                         </tr>
                         <tr>
                             <td>bcookie</td>
-                            <td cky-i18n="cookies.bcookie.type">https</td>
-                            <td cky-i18n="cookies.bcookie.duration">2 años</td>
-                            <td cky-i18n="cookies.bcookie.description">Esta cookie está configurada por linkedIn. El
+                            <td>https</td>
+                            <td>2 años</td>
+                            <td>Esta cookie está configurada por linkedIn. El
                                 propósito de la cookie es habilitar las funcionalidades de LinkedIn en la página.
                             </td>
                         </tr>
                         <tr>
                             <td>lidc</td>
-                            <td cky-i18n="cookies.lidc.type">https</td>
-                            <td cky-i18n="cookies.lidc.duration">1 dia</td>
-                            <td cky-i18n="cookies.lidc.description">Esta cookie la establece LinkedIn y se utiliza
+                            <td>https</td>
+                            <td>1 dia</td>
+                            <td>Esta cookie la establece LinkedIn y se utiliza
                                 para el enrutamiento.
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <h5 cky-i18n="detail.tabItem.analytics.title">Analíticas</h5>
+                <h5>Analíticas</h5>
                 <div className="cky-table-wrapper" id="cky-table-wrapper-analytics">
                     <table id="cky-anywhere-cookie-audit-table-analytics" className="cky-cookie-audit-table">
                         <thead>
                         <tr>
-                            <th cky-i18n="auditTable.cookie">Cookie</th>
-                            <th cky-i18n="auditTable.type">tipo</th>
-                            <th cky-i18n="auditTable.duration">Duración</th>
-                            <th cky-i18n="auditTable.description">Descripción</th>
+                            <th>Cookie</th>
+                            <th>tipo</th>
+                            <th>Duración</th>
+                            <th>Descripción</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>_ga_RZTKTJ0WKY</td>
-                            <td cky-i18n="cookies._ga_RZTKTJ0WKY.type">https</td>
-                            <td cky-i18n="cookies._ga_RZTKTJ0WKY.duration">2 años</td>
-                            <td cky-i18n="cookies._ga_RZTKTJ0WKY.description">Esta cookie es instalada por Google
+                            <td>https</td>
+                            <td>2 años</td>
+                            <td>Esta cookie es instalada por Google
                                 Analytics.
                             </td>
                         </tr>
                         <tr>
                             <td>_ga</td>
-                            <td cky-i18n="cookies._ga.type">https</td>
-                            <td cky-i18n="cookies._ga.duration">2 años</td>
-                            <td cky-i18n="cookies._ga.description">Esta cookie es instalada por Google Analytics. La
+                            <td>https</td>
+                            <td>2 años</td>
+                            <td>Esta cookie es instalada por Google Analytics. La
                                 cookie se utiliza para calcular los datos de visitantes, sesiones y campañas y
                                 realizar un seguimiento del uso del sitio para el informe de análisis del sitio. Las
                                 cookies almacenan información de forma anónima y asignan un número generado
@@ -295,9 +294,9 @@ export default async function Legal() {
                         </tr>
                         <tr>
                             <td>_gid</td>
-                            <td cky-i18n="cookies._gid.type">https</td>
-                            <td cky-i18n="cookies._gid.duration">1 dia</td>
-                            <td cky-i18n="cookies._gid.description">Esta cookie es instalada por Google Analytics.
+                            <td>https</td>
+                            <td>1 dia</td>
+                            <td>Esta cookie es instalada por Google Analytics.
                                 La cookie se utiliza para almacenar información sobre cómo los visitantes usan un
                                 sitio web y ayuda a crear un informe analítico de cómo está funcionando el sitio
                                 web. Los datos recopilados, incluido el número de visitantes, la fuente de donde

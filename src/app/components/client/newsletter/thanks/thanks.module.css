@@ -23,7 +23,7 @@
 
 @media (max-width: 560px){
     .container{
-        margin-top: 0px;
+        margin-top: 0;
         padding: 15px 20px 0 20px;
     }
     .profile {

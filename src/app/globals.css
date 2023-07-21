@@ -126,7 +126,7 @@ blockquote{
     border-left: 7px solid var(--highlight-color);
     font-style: italic;
     margin: 10px auto;
-    padding: 0px 20px 15px 60px;
+    padding: 0 20px 15px 60px;
     background-color: var(--bg-code-color);
     width: calc(100% - 90px);
 }
