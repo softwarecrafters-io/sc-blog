@@ -23,7 +23,7 @@ export const SummarizedPostBlock = ({summarizedPost}:{summarizedPost:SummarizedP
                     </div>
                 </div>
                 <Link className={styles.link} href={Routes.buildPostRoute(summarizedPost, isLoadedFromHome)}>
-                <Image className={styles.cover} src={summarizedPost.cover} alt={summarizedPost.title} width={150} height={100} />
+                <Image className={styles.cover} loading={'eager'} src={summarizedPost.cover} alt={summarizedPost.title} width={150} height={100} />
                 </Link>
             </div>
         </div>

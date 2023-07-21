@@ -9,7 +9,7 @@ import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 export const PostBlock = ({post}: { post: Post }) => {
     return (
         <div className={styles.container}>
-            <Image className={styles.cover} src={post.cover} alt={post.title} width={700} height={468} />
+            <Image loading={'eager'} className={styles.cover} src={post.cover} alt={post.title} width={700} height={468} />
             <h1 className={styles.title}>{post.title}</h1>
             <h2 className={styles.subtitle}>{post.description}</h2>
             <div className={styles.infoContainer}>
