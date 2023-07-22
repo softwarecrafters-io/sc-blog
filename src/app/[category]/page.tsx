@@ -1,11 +1,20 @@
 import {PaginatedPosts, PostsByCategory} from "@/app/components/server/post/paginatedPosts";
 import {generateStaticMetadata} from "@/app/services/metadataGenerator";
+import {CourseBlock} from "@/app/components/server/products/courseBlock";
+import {CategoryBlock} from "@/app/components/server/category/categoryBlock";
+import {BookBlock} from "@/app/components/server/products/bookBlock";
+import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 
 type CategoryPageParams = { params: { category: string } };
 
 export default async function PostsPage({params}:CategoryPageParams) {
-    return (
+    return (<>
         <PostsByCategory title={params.category} category={params.category}/>
+        <CourseBlock/>
+        <CategoryBlock/>
+        <BookBlock/>
+        <Newsletter/>
+        </>
   )
 }
 
