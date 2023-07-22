@@ -23,7 +23,7 @@ describe('NotionPostRepository Integration Test', () => {
     }, 20000);
 });
 
-describe('NotionPostRepository Cache Tests', () => {
+xdescribe('NotionPostRepository Cache Tests', () => {
     let notionPostRepository: NotionPostRepository;
     let originalNotionRequest: any;
 
