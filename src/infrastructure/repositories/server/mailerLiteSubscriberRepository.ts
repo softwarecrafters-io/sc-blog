@@ -11,8 +11,8 @@ export class MailerLiteSubscriberRepository implements SubscriberRepository{
     }
 
     getNumberOfSubscribers() {
-        // return from(this.requestToGetNumberOfSubscribers()).pipe(
-        return of({total: 29000}).pipe(
+        return from(this.requestToGetNumberOfSubscribers()).pipe(
+        // return of({total: 29000}).pipe(
             map(data => data.total)
         );
     }

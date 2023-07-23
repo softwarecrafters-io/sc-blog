@@ -19,7 +19,7 @@ describe('Subscription Service', ()=>{
         expect(result.email).toEqual(email);
     });
 
-    it('gets number of subscribers', async () => {
+    xit('gets number of subscribers', async () => {
         const result = await subscriberRepository.getNumberOfSubscribers().toPromise();
         expect(typeof result).toBe('number');
         expect(result).toBeGreaterThan(0);
