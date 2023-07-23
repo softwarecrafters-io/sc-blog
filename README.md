@@ -59,4 +59,4 @@ NOTION_API_KEY=<your-notion-api-key>
 NOTION_BLOG_DATABASE_ID=<your-notion-blog-database-id>
 ```
 
-In your production environment and in the GitHub Secrets, you also need to define these variables. Be sure to replace <your-mailer-lite-api-key>, <your-mailer-lite-group-id>, <your-notion-api-key>, and <your-notion-blog-database-id> with your actual keys and IDs for security reasons.
+In your production environment and in the GitHub Secrets, you also need to define these variables. Be sure to replace `<your-mailer-lite-api-key>`, `<your-mailer-lite-group-id>`, `<your-notion-api-key>`, and `<your-notion-blog-database-id>` with your actual keys and IDs for security reasons.
