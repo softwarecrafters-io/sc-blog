@@ -1,4 +1,4 @@
-import {from, map, Observable, of} from "rxjs";
+import {from, map} from "rxjs";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {Subscriber} from "@/core/models";
 import {SubscriberRepository} from "@/core/repositories";
@@ -24,13 +24,14 @@ export class MailerLiteSubscriberRepository implements SubscriberRepository{
         return fetch(url, {method, headers: header}).then(res => res.json())
     }
 
-    private requestToAddSubscribers(email:string){
+    private async requestToAddSubscribers(email:string){
         const header = this.header();
         const fields = {marketing_permissions: 'acepto'}
         const body = JSON.stringify({email, resubscribe: false, type: 'confirmed', fields});
         const method = 'POST';
         const url = `https://api.mailerlite.com/api/v2/groups/${this.groupId}/subscribers`;
-        return fetch(url, {method, headers: header, body}).then(res => res.json() as Promise<Subscriber>)
+        const result = await fetch(url, {method, headers: header, body}).then(res => res.json() as Promise<Subscriber>);
+        return result
     }
 
     private header() {

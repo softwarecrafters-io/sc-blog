@@ -14,7 +14,7 @@ describe('Subscription Service', ()=>{
     })
 
     it('adds subscriber ', async ()=>{
-        const email = 'miguelghz+blog1@gmail.com';
+        const email = 'miguelghz+DONTDELETE_IntegrationTesting@gmail.com';
         const result = await subscriberRepository.addSubscriber(email).toPromise() as Subscriber;
         expect(result.email).toEqual(email);
     });
