@@ -2,10 +2,7 @@ import './globals.css'
 import { Raleway } from 'next/font/google'
 import styles from "@/app/layout.module.css";
 import {Header} from "@/app/components/server/header/header";
-import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 import {Footer} from "@/app/components/server/footer/footer";
-import {ClientFactory} from "@/infrastructure/factories/clientFactory";
-import Head from "next/head";
 
 const raleway = Raleway({
     weight: ['400', '700'],
@@ -22,8 +19,8 @@ export default function RootLayout({
   return (
     <html lang="es">
     <body className={raleway.className}>
-          <main className={styles.main}>
-              <Header />
+        <Header />
+        <main className={styles.main}>
               {children}
               <Footer />
           </main>

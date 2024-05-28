@@ -14,9 +14,9 @@ export const Header = () => {
 
 const Logo = () => {
     return <Link href={Routes.home} aria-label="Software Crafters - Logo">
-    <div className={styles.logo}>
-        {logoSvg}
-    </div>
+        <div className={styles.logo}>
+            {logoSvg}
+        </div>
     </Link>
 }
 
