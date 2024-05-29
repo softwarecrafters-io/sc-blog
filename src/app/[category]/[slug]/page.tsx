@@ -8,7 +8,7 @@ import {PaginatedPosts} from "@/app/components/server/post/paginatedPosts";
 import {ServerFactory} from "@/infrastructure/factories/serverFactory";
 import {generateStaticMetadata} from "@/app/services/metadataGenerator";
 import {formatCategory, Post} from "@/core/models";
-import {homeMetadata} from "@/app/components/server/home/HomeComponent";
+import {blogMetadata} from "@/app/components/server/home/BlogComponent";
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 import {SuggestedPosts} from "@/app/components/server/post/suggestedPosts";
 import {CourseBlock} from "@/app/components/server/products/courseBlock";
@@ -44,7 +44,7 @@ export async function generateMetadata({params}:  { params:{slug: string;}} ){
     const {slug} = params;
     const post = await blogService.postBy(slug).toPromise() as Post;
     if (!post) {
-        return homeMetadata();
+        return blogMetadata();
     }
 
     const title = `${post.title} | Software Crafters`;

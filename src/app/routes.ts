@@ -4,6 +4,9 @@ export class Routes{
     static home = '/';
     static legal = '/legal';
     static posts = '/posts';
+    static courses = '/cursos';
+    static reviews = '/opiniones';
+    static blog = '/blog';
 
     static buildPostRoute(post: Post | SummarizedPost, isFromRoot: boolean) {
         if (isFromRoot) {

@@ -117,22 +117,29 @@ Personalmente he utilizado BEM en más de un proyecto y en cuanto lo hemos utili
 > Un ejemplo de implementación de BEM
 
 ```html
-<ul class="menu">
-  <li class="menu__item">...</li>
-  <li class="menu__item">...</li>
-  <li class="menu__item menu__item_size_m">...</li>
+
+<ul class="mainMenu">
+    <li class="menu__item">...</li>
+    <li class="menu__item">...</li>
+    <li class="menu__item menu__item_size_m">...</li>
 </ul>
 ```
 
 ```css
 /* Block */
-.menu { ... }
+.mainMenu {
+    ...
+}
 
 /* Element */
-.menu__item { ... }
+.menu__item {
+    ...
+}
 
 /* Modifier */
-.menu__item_size_m { ... }
+.menu__item_size_m {
+    ...
+}
 ```
 
 En [SUI Components](https://github.com/SUI-Components/sui-components) y los productos de [Adevinta Spain](https://www.adevinta.com/es/spain/) estamos utilizando [SUIT CSS](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) de [Nicolas Gallagher](https://twitter.com/necolas). Llegamos a la conclusión de utilizar esta convención porque tiene un enfoque orientado a componente y creemos que ganamos en legibilidad. Cosa que es de agradecer en proyectos de gran tamaño y con un equipo de gente grande.

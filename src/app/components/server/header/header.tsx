@@ -5,9 +5,11 @@ import {Routes} from "@/app/routes";
 
 export const Header = () => {
     return (
-        <header className={styles.header} id={"header"}>
-            <Logo/>
-            <ThemeToggle/>
+        <header className={styles.headerContainer} id={"header"}>
+            <div className={styles.header}>
+                <Menu/>
+                <ThemeToggle/>
+            </div>
         </header>
     )
 }
@@ -18,6 +20,17 @@ const Logo = () => {
             {logoSvg}
         </div>
     </Link>
+}
+
+const Menu = () => {
+    return <div className={styles.mainMenu}>
+        <Logo/>
+        <div className={styles.nav}>
+            <Link className={styles.navItem} href={Routes.blog}>Blog</Link>
+            <Link className={styles.navItem} href={Routes.courses}>Cursos</Link>
+            <Link className={styles.navItem} href={Routes.reviews}>Opiniones</Link>
+        </div>
+    </div>
 }
 
 const logoSvg = <svg

@@ -6,12 +6,12 @@ import {CourseBlock} from "@/app/components/server/products/courseBlock";
 import {CategoryBlock} from "@/app/components/server/category/categoryBlock";
 import {BookBlock} from "@/app/components/server/products/bookBlock";
 
-export const HomeComponent = ({params}: { params: { slug: string }; }) => {
+export const BlogComponent = ({params}: { params: { slug: string }; }) => {
     const parsedSlug = Number(params.slug);
     const currentPage = parsedSlug ? parsedSlug : 1;
     return (
         <>
-            <h1 className={styles.title}>El blog de Software Crafters</h1>
+            <h1 className={styles.title}>Blog</h1>
             <Newsletter hideEntry={true}/>
             <PaginatedPosts title={"Últimos artículos"} currentPage={currentPage} />
             <CourseBlock/>
@@ -23,9 +23,9 @@ export const HomeComponent = ({params}: { params: { slug: string }; }) => {
 }
 
 
-export function homeMetadata() {
-    const title = "Software Crafters";
-    const description = "Cansados de escribir código que mata la moral de cualquiera";
+export function blogMetadata() {
+    const title = "Software Crafters Blog";
+    const description = "Formaciones de alto nivel para developers profesionales.";
     const url = "softwarecrafters.io";
     const imageUrl = "https://softwarecrafters.io/og.png";
 
