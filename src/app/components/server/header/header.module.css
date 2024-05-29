@@ -7,10 +7,11 @@
 
 .header{
     display: flex;
-    max-width: 1400px;
+    max-width: 1200px;
     width: 100%;
     justify-content: space-between;
     align-items: flex-start;
+    margin: 1rem;
 }
 
 .mainMenu{
@@ -43,6 +44,7 @@
 
 .logo{
     margin-right: 15px;
+    padding-top: 5px
 }
 
 .containerLogoSvg{

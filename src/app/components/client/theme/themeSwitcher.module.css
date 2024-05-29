@@ -1,6 +1,7 @@
 .themeToggleContainer{
-    position: relative;
-    margin: 1rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
 }
 
 .sun {

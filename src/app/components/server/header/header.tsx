@@ -27,8 +27,9 @@ const Menu = () => {
         <Logo/>
         <div className={styles.nav}>
             <Link className={styles.navItem} href={Routes.blog}>Blog</Link>
-            <Link className={styles.navItem} href={Routes.courses}>Cursos</Link>
-            <Link className={styles.navItem} href={Routes.reviews}>Opiniones</Link>
+            <Link className={styles.navItem} target={'_blank'} href={"https://academy.softwarecrafters.io/"}>Acceso</Link>
+            {/*<Link className={styles.navItem} href={Routes.courses}>Cursos</Link>*/}
+            {/*<Link className={styles.navItem} href={Routes.reviews}>Opiniones</Link>*/}
         </div>
     </div>
 }
