@@ -13,6 +13,7 @@ describe('NotionPostRepository Integration Test', () => {
 
     beforeEach(() => {
         const apiKey = process.env.NOTION_API_KEY as string;
+        console.log(apiKey)
         const databaseId = process.env.NOTION_BLOG_DATABASE_ID as string;
         notionPostRepository = NotionPostRepository.create(apiKey, databaseId);
     });
