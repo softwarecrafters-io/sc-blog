@@ -1,4 +1,4 @@
-import {Theme} from "@/app/components/client/theme/themeSwicher";
+import {Theme} from "@/app/components/server/header/theme/themeSwicher";
 import {Subject, map, delay} from "rxjs";
 
 export class ThemeStore{

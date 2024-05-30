@@ -6,7 +6,7 @@ export default async function Home({params}: { params: { slug: string }; }) {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Software Crafters Academy</h1>
-            <h2 className={styles.subtitle}>Formaciones de alto nivel creadas por y para developers profesionales</h2>
+            <h2 className={styles.subtitle}>Formaciones de alto nivel para desarrolladores profesionales</h2>
             <Newsletter hideEntry={true}/>
 
         </div>

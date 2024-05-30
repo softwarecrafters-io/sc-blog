@@ -5,7 +5,7 @@ import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import { oneDark, oneLight} from "react-syntax-highlighter/dist/esm/styles/prism";
 import {Post} from "@/core/models";
 import {ReactNode, useEffect, useState} from "react";
-import {Theme} from "@/app/components/client/theme/themeSwicher";
+import {Theme} from "@/app/components/server/header/theme/themeSwicher";
 import {ClientFactory} from "@/infrastructure/factories/clientFactory";
 
 

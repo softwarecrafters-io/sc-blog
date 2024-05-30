@@ -1,14 +1,17 @@
 import styles from './header.module.css';
-import {ThemeToggle} from "@/app/components/client/theme/themeSwicher";
+import {ThemeToggle} from "@/app/components/server/header/theme/themeSwicher";
 import Link from "next/link";
 import {Routes} from "@/app/routes";
+import {MenuMobile} from "@/app/components/server/header/MenuMobile";
 
 export const Header = () => {
     return (
         <header className={styles.headerContainer} id={"header"}>
             <div className={styles.header}>
                 <Menu/>
-                <ThemeToggle/>
+                <div className={styles.toggleMenu}>
+                    <ThemeToggle/>
+                </div>
             </div>
         </header>
     )
@@ -23,14 +26,21 @@ const Logo = () => {
 }
 
 const Menu = () => {
+    const links: Record<string, string> = {
+        'Blog': Routes.blog,
+        'Acceso': 'https://academy.softwarecrafters.io/'
+    }
     return <div className={styles.mainMenu}>
         <Logo/>
         <div className={styles.nav}>
-            <Link className={styles.navItem} href={Routes.blog}>Blog</Link>
-            <Link className={styles.navItem} target={'_blank'} href={"https://academy.softwarecrafters.io/"}>Acceso</Link>
-            {/*<Link className={styles.navItem} href={Routes.courses}>Cursos</Link>*/}
-            {/*<Link className={styles.navItem} href={Routes.reviews}>Opiniones</Link>*/}
+                <Link className={styles.navItem} href={Routes.blog}>Blog</Link>
+                <Link className={styles.navItem} target={'_blank'}
+                      href={"https://academy.softwarecrafters.io/"}>Acceso</Link>
         </div>
+        <div className={styles.navMobileContainer}>
+            <MenuMobile links={links}/>
+        </div>
+
     </div>
 }
 

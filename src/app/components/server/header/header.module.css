@@ -14,6 +14,13 @@
     margin: 1rem;
 }
 
+.toggleMenu{
+    display:flex;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
 .mainMenu{
     display: flex;
     justify-content: center;
@@ -24,6 +31,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.navMobileContainer{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+/*media query*/
+@media screen and (max-width: 768px){
+    .toggleMenu{
+        display: none;
+    }
+    .mainMenu{
+        justify-content: space-between;
+        width: 100%;
+    }
+    .nav{
+        display: none;
+    }
+    .navMobileContainer{
+        display: flex;
+    }
 }
 
 .navItem{
