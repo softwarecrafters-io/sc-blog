@@ -28,14 +28,22 @@ const Logo = () => {
 const Menu = () => {
     const links: Record<string, string> = {
         'Blog': Routes.blog,
-        'Acceso': 'https://academy.softwarecrafters.io/'
+        'Motivacion.dev': 'https://motivacion.dev/',
+        'Acceso': 'https://academy.softwarecrafters.io/',
     }
+    const renderedLinks = Object.keys(links).map((key) =>
+        <Link
+            key={key}
+            className={styles.navItem}
+            target={links[key].startsWith('http') ? '_blank' : '_self'}
+            href={links[key]}>
+            {key}
+        </Link>);
+
     return <div className={styles.mainMenu}>
         <Logo/>
         <div className={styles.nav}>
-                <Link className={styles.navItem} href={Routes.blog}>Blog</Link>
-                <Link className={styles.navItem} target={'_blank'}
-                      href={"https://academy.softwarecrafters.io/"}>Acceso</Link>
+            {renderedLinks}
         </div>
         <div className={styles.navMobileContainer}>
             <MenuMobile links={links}/>
