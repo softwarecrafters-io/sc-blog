@@ -8,9 +8,8 @@ export default async function Home({params}: { params: { slug: string }; }) {
             <h1 className={styles.title}>Software Crafters Academy</h1>
             <Newsletter hideEntry={true}/>
             <h2 className={styles.subtitle}>Formaciones de alto nivel para Developers Profesionales</h2>
-            <p>A la mayoría de los developers nos han enseñado a programar mal, sin entender los verdaderos fundamentos
-                y muchos ni siquiera lo saben.</p>
-            <strong><p>Quizás tu si, pero porque llevas el suficiente tiempo en esto (o no).</p></strong>
+            <p>A la mayoría de los desarrolladores nos han enseñado a programar mal... y muchos ni siquiera lo saben.</p>
+            <strong><p>Quizás tu si, pero porque llevas el suficiente tiempo en esto.</p></strong>
             <p>Principalmente existen dos motivos.</p>
             <strong><p>El primero es consecuencia directa de la persona que te está instruyendo.</p></strong>
             <p>Docentes que no son profesionales del desarrollo de software, sino de la enseñanza, y que no han
