@@ -31,8 +31,10 @@ export default async function Legal() {
             <p><strong>Los cursos son tan buenos que esa es la formación que hacen los nuevos programadores que se incorporan en
                 su empresa de consultoría, da igual que sean Juniors o Seniors.</strong></p>
             <p>Ahora estas formaciones ayudan a los profesionales de otras empresas a llevar sus carreras a otro nivel. </p>
-            <p><strong>¿No me crees? Haces bien.</strong></p>
+            <p><strong>¿No me crees? También haces bien.</strong></p>
             <p>Échale un ojo a los <Link href={Routes.opinions}>testimonios (que por supuesto me he inventado)</Link> de algunos de los programadores que se han formado con nosotros y me cuentas.</p>
+            <p><strong>Por cierto, Software Crafters Academy no hubiera sido posible sin las enseñanzas de mis dos mentores: Mi hermano Juan M. Gómez (desarrollador del compilador del lenguaje Nim) y mi colega Carlos Blé (fundador de Lean Mind).</strong></p>
+            <p>Casi todo lo que sé sobre programación (y sobre muchas otras cosas de la vida) se lo debo a ellos. Eternamente agradecido.</p>
         </div>
     );
 }

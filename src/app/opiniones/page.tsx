@@ -6,8 +6,8 @@ export default async function Legal() {
     return (
         <div className={styles.container}>
             <h2 className={styles.subtitle}>Todas estas opiniones son inventadas </h2>
-            <p>Así que mejor que no te creas nada... </p>
-            <p><strong>Algunas opiniones no solicitadas sobre Miguel A. Gómez y Software Crafters Academy: </strong></p>
+            <p><strong>Así que mejor que no te creas nada... </strong></p>
+            <p>Algunas opiniones no solicitadas sobre Miguel A. Gómez y Software Crafters Academy. También encontrarás testimonios sobre la newsletter, el libro, los cursos… Todo sin un orden en concreto: </p>
             <blockquote>
                 <p>Buenas tardes, Miguel:</p>
 
