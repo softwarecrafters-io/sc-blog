@@ -27,8 +27,9 @@ const Logo = () => {
 
 const Menu = () => {
     const links: Record<string, string> = {
+        'About':  Routes.about,
+        'Opiniones':  Routes.opinions,
         'Blog': Routes.blog,
-        'Motivacion.dev': 'https://motivacion.dev/',
         'Acceso': 'https://academy.softwarecrafters.io/',
     }
     const renderedLinks = Object.keys(links).map((key) =>

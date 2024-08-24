@@ -7,6 +7,8 @@ export class Routes{
     static courses = '/cursos';
     static reviews = '/opiniones';
     static blog = '/blog';
+    static about = '/about';
+    static opinions = '/opiniones';
 
     static buildPostRoute(post: Post | SummarizedPost, isFromRoot: boolean) {
         if (isFromRoot) {

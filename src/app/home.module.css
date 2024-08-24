@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     /*height: 50vh;*/
     padding: 10px 20px;
@@ -14,12 +14,19 @@
     text-align: center;
 }
 
-/*Todo add efecto blur como el de vercel*/
-.subtitle{
-    font-size: 2rem;
-    margin-bottom: 3rem;
+.subtitle, .hello{
+    font-size: 2.3rem;
+    font-weight: 700;
+    max-width: 580px;
+    margin-bottom: 20px;
     text-align: center;
     letter-spacing: normal;
+    align-self: center;
+}
+
+.hello{
+    text-align: left;
+    align-self: flex-start;
 }
 
 @media screen and (max-width: 768px){
@@ -27,8 +34,8 @@
         font-size: 2rem;
         margin-bottom: 2rem;
     }
-    .subtitle{
+    .subtitle, .hello{
         font-size: 1.5rem;
-        margin-bottom: 2rem;
     }
+
 }

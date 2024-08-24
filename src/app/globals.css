@@ -24,16 +24,16 @@
     --bg-code-color-dark: #282c34;
 
     /* Inicializa las variables a los valores del tema 'light' */
-    --bg-color: var(--bg-color-dark);
-    --text-color: var(--text-color-dark);
-    --text-secondary-color: var(--text-secondary-color-dark);
-    --border-color: var(--border-color-dark);
-    --button-bg-color: var(--button-bg-color-dark);
-    --button-text-color: var(--button-text-color-dark);
-    --link-color: var(--link-color-dark);
-    --icon-color: var(--icon-color-dark);
-    --highlight-color: var(--highlight-color-dark);
-    --bg-code-color: var(--bg-code-color-dark);
+    --bg-color: var(--bg-color-light);
+    --text-color: var(--text-color-light);
+    --text-secondary-color: var(--text-secondary-color-light);
+    --border-color: var(--border-color-light);
+    --button-bg-color: var(--button-bg-color-light);
+    --button-text-color: var(--button-text-color-light);
+    --link-color: var(--link-color-light);
+    --icon-color: var(--icon-color-light);
+    --highlight-color: var(--highlight-color-light);
+    --bg-code-color: var(--bg-code-color-light);
 }
 
 [data-theme="light"] {
