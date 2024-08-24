@@ -8,9 +8,8 @@ import styles from './legal.module.css';
 export default async function Legal() {
     return (
         <div className={styles.container}>
-            <h1>Tostón Legal</h1>
-        <p>Aviso legal, política de privacidad, información de <em>cookies</em> y otras cosas extrañas que los
-                legisladores nos obligan a incluir.</p>
+            <h1>Aviso legal y Política de Privacidad</h1>
+        <p>Aviso legal, política de privacidad, información de cookies y demás burocracia que nos obligan a incluir.</p>
             <strong>Este aviso legal define las condiciones establecidas para los siguientes dominios:</strong>
             <ul>
                 <li><a href={'https://softwarecrafters.io'} target={'_blank'}>softwarecrafters.io</a></li>
@@ -24,8 +23,8 @@ export default async function Legal() {
                 <li><strong>Identidad del Responsable:</strong>&nbsp;Software Crafters, SLU</li>
                 <li><strong>Nombre comercial:</strong>&nbsp;Software Crafters</li>
                 <li><strong>NIF/CIF:</strong>&nbsp;B-76730373</li>
-                <li><strong>Direcci&oacute;n:</strong>&nbsp;C/ Barranco del Ingl&eacute;s,6 Portal B,P.2&ordm; &ndash; Sta.Cruz Tf. (35018)</li>
-                <li><strong>Correo electr&oacute;nico: miguel.gomez@softwarecrafters.io</strong>&nbsp;</li>
+                <li><strong>Dirección</strong>: C/ Barranco del Inglés, 6B – Santa Cruz de Tenerife (38670)</li>
+                <li><strong>Correo electr&oacute;nico:</strong> miguel.gomez@softwarecrafters.io&nbsp;</li>
                 <li><strong>Actividad:</strong>&nbsp;Programaci&oacute;n, consultor&iacute;a y otras actividades relacionadas con la inform&aacute;tica.</li>
                 <li><strong>Inscrita en el Registro Mercantil</strong>&nbsp;de Sta.Cruz de Tenerife, Tomo 3494., Libro 0, Folio 81, Hoja TF-58805, Inscripci&oacute;n 1&ordf; .</li>
             </ul>
