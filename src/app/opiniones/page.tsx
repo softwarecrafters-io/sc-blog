@@ -57,7 +57,7 @@ export default async function Opinions() {
                 <p>Bueno perdona por el rollo 😅 y en resumen, muchas gracias!</p>
                 <p>Un fuerte abrazo<br/>Juanan</p>
             </blockquote>
-            <p>Juan Antona - Ingeniero de Software en Iron Hack</p>
+            <p>Juan Antona - Ingeniero de Software</p>
             <blockquote className={opinionStyle.opinion}>
                 <p>Miguel, tu curso ha sido la mejor inversión que he hecho en todos los años que llevo invirtiendo en
                     formación. </p>
@@ -105,7 +105,7 @@ export default async function Opinions() {
                     de GMV los que lo estamos haciendo a la vez (unos más rápido que otros, cada uno a su ritmo) pero
                     gusta, gusta 😊.</p>
             </blockquote>
-            <p>Belén Moreno - Developer en GMV</p>
+            <p>Belén Moreno - Developer</p>
             <blockquote className={opinionStyle.opinion}>
                 <p>Me ha llevado tiempo y esfuerzo pero por fin he completado el curso de Testing. He de decir que la
                     calidad es enorme, no me imagino la cantidad de tiempo que les ha llevado hacerlo</p>
