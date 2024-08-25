@@ -1,0 +1,21 @@
+.opinion{
+        border-left: 7px solid var(--border-color);
+        font-style: italic;
+        margin: 0 30px 0 0;
+        padding: 0 30px 0px 30px;
+        background-color: transparent;
+        width: calc(100% - 60px);
+}
+
+.opinion:before {
+    content: "“";
+    color: var(--border-color);
+    font-size: 96px;
+    line-height: 0;
+    position: relative;
+    left: -25px;
+    top: 50px;
+    font-style: normal;
+}
+
+

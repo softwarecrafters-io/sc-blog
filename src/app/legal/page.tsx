@@ -3,7 +3,7 @@ import path from 'path';
 import {remark} from 'remark';
 import htmlHtml from 'remark-html';
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
-import styles from './legal.module.css';
+import styles from '../home.module.css';
 
 export default async function Legal() {
     return (
@@ -50,7 +50,7 @@ export default async function Legal() {
                 de las personas físicas. También cumplimos con otras leyes, aunque eso no nos obligan a decirlo.</p>
             <h3><strong>Responsable del tratamiento</strong></h3>
             <p>Los datos personales recabados a través de este sitio web serán incorporados un fichero
-                responsabilidad de Software Crafters.</p>
+                responsabilidad de Software Crafters SLU y Savvily SLU.</p>
             <h3><strong>Principio de calidad</strong></h3>
             <p>El Usuario será responsable de cualquier daño o perjuicio que ocasione a Software Crafters o a cualquier tercero
                 por rellenar los formularios de este sitio web con datos falsos, inexactos o con datos de
@@ -59,7 +59,7 @@ export default async function Legal() {
             <p>Nuestro sitio web obtiene los datos personales mediante la recepción de formularios y por medio de
                 correo electrónico, para:</p>
             <ul>
-                <li>Enviar comunicaciones comerciales relacionadas con los servicios de Software Crafters.</li>
+                <li>Enviar comunicaciones comerciales relacionadas con los servicios de Software Crafters SLU y Savvily SLU.</li>
                 <li>Atender la petición de información y prestación de los servicios ofrecidos.</li>
             </ul>
             <h3><strong>Recopilación de información</strong></h3>

@@ -30,29 +30,38 @@ export default async function Legal() {
             <p>Llevo desarrollando software desde 2006, en realidad empecé antes pero ese año fue la primera vez que le
                 vendí una web a un cliente. De aquellas estaba terminando Ingeniería en Radioelectronica, pero ya me
                 había dado cuenta que programar era realmente lo que quería hacer.</p>
+            <p><strong>Durante esa época empecé a sufrir titulitis aguda. Estaba obsesionado con coleccionar papelitos
+                de
+                masters, certificaciones, carreras universitarias…</strong></p>
             <p>Supongo que de aquellas soñaba con tener una oficina con todos los títulos colgados como el típico
                 despacho de un abogado de película. Ya sabes, con todas las paredes cubiertas de diplomas y
                 certificados.</p>
-            <p><strong>Durante esa época empecé a sufrir titulitis aguda. Estaba obsesionado con coleccionar papelitos de
-                masters, certificaciones, carreras universitarias…</strong></p>
-            <p>Y si, leíste bien, carreras universitarias en plural. No era suficiente con estudiar una carrera que
+            <p><strong>Y si, leíste bien, carreras universitarias en plural. </strong></p>
+
+            <p>No era suficiente con estudiar una carrera que
                 me dio por estudiar otra… y no solo eso, sino que mientras hacía la segunda me matriculé en una
                 tercera.</p>
-            <p><strong>Hice el camino largo no, el larguísimo. Ingeniería en Radioelectrónica, Ingeniería Informática y Teleco.
+            <p><strong>Hice el camino largo no, el larguísimo. Ingeniería en Radioelectrónica, Ingeniería Informática y
+                Teleco.
                 Las dos primeras las terminé. Con la tercera me dije: ¿pero qué estás haciendo con tu vida?</strong></p>
-            <p>Eso sí, llevaba emprendiendo y currando desde la primera. Pero bueno que no he venido a hablarte de mi currículum.</p>
-            <p><strong>Hace unos años me dió por escribir un libro, <Link href={"https://cleanjavascript.es"} target={"_blank"}>Clean
+            <p>Llego un momento en que abrí los ojos, me di cuenta que la universidad estaba obsoleta y que acumular papelitos no era el camino. No hace falta pasar por la universidad para ser un programador de éxito ...  </p>
+            <p><strong>Hace unos años me dió por escribir un libro, <Link href={"https://cleanjavascript.es"}
+                                                                          target={"_blank"}>Clean
                 JavaScript</Link>, lo mismo te suena. Lo usan miles de developers en España y en Latam como referencia
-                (quizás tu seas uno). También lo tienes en inglés, por si te interesa.</strong> </p>
+                (quizás tu seas uno). También lo tienes en inglés, por si te interesa.</strong></p>
             <p>El libro es un poco raro porque no va sobre JavaScript sino sobre como escribir mejor software en
-                general. Ni siquiera los ejemplos son en el lenguaje de Brendan Eich sino en TypeScript. Por cierto, lo escribí antes de ChatGPT, ahora todo el mundo tiene uno. </p>
+                general. Ni siquiera los ejemplos son en el lenguaje de Brendan Eich sino en TypeScript. Por cierto, lo
+                escribí antes de ChatGPT, ahora todo el mundo tiene uno.  </p>
             <p><strong>En el 2020 (en pleno apocalipsis) me junté con mi colega Carlos Blé (el
-                fundador de Lean Mind) con la intención de crear la mejor formación posible para developers profesionales.</strong></p>
-            <p>La formación que nos hubiera gustado encontrar a nosotros cuando empezamos. Después de dedicarle más de dos años a desarrollar los contenidos, de esa asociación
+                fundador de Lean Mind) con la intención de crear la mejor formación posible para developers
+                profesionales.</strong></p>
+            <p>La formación que nos hubiera gustado encontrar a nosotros cuando empezamos. Después de dedicarle más de
+                dos años a desarrollar los contenidos, de esa asociación
                 no salió un curso, sino varios.</p>
             <p><strong>Los cursos son tan buenos que esa es la formación que hacen los nuevos programadores que se
                 incorporan en Lean Mind, su empresa de consultoría, da igual que sean Juniors o Seniors.</strong></p>
-            <p>Ahora estas formaciones ayudan a cientos de developers profesionales de decenas de empresas a llevar sus carreras a otro
+            <p>Ahora estas formaciones ayudan a cientos de developers profesionales de decenas de empresas a llevar sus
+                carreras a otro
                 nivel. </p>
             <p><strong>¿No me crees? Haces bien.</strong></p>
             <p>Échale un ojo a los <Link href={Routes.opinions}>testimonios (que por supuesto me he inventado)</Link> de

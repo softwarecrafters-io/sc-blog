@@ -156,3 +156,10 @@ img{
 code {
     counter-reset: line;
 }
+
+ul{
+    padding: 0 15px;
+}
+li{
+    margin: 15px 0;
+}
