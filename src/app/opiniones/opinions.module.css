@@ -1,10 +1,10 @@
 .opinion{
         border-left: 7px solid var(--border-color);
         font-style: italic;
-        margin: 0 30px 0 0;
+        margin: 45px 30px 5px 0;
         padding: 0 30px 0px 30px;
         background-color: transparent;
-        width: calc(100% - 60px);
+        width: calc(100% - 90px);
 }
 
 .opinion:before {
@@ -14,8 +14,14 @@
     line-height: 0;
     position: relative;
     left: -25px;
-    top: 50px;
+    top: 38px;
     font-style: normal;
 }
 
+.opinion > p:first-child {
+    margin-top: 0px;
+}
 
+.opinion > p:last-child {
+    margin-bottom: 10px;
+}
