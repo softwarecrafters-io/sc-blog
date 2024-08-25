@@ -25,6 +25,7 @@
 }
 
 .hello{
+    font-size: 3rem;
     text-align: left;
     align-self: flex-start;
 }
@@ -34,7 +35,7 @@
         font-size: 2rem;
         margin-bottom: 2rem;
     }
-    .subtitle, .hello{
+    .subtitle{
         font-size: 1.5rem;
     }
 
