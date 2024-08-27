@@ -30,15 +30,16 @@ export default async function Legal() {
                 pulseritas, o de
                 convertir buenas prácticas de programación en una religión...</strong></p>
             <Newsletter hideEntry={true}/>
-            <h2 className={styles.hello}>Hola<span className={styles.emojiHello}>👋</span></h2>
+            <h2 className={styles.hello}>Hola,</h2>
             <p>Mi nombre es Miguel A. Gómez, soy developer y emprendedor. He trabajado en proyectos grandes, medianos y
-                pequeños, he co-fundado varias empresas y he ayudado directamente a que una startup americana se
-                vendiera en el 2020 por muchos millones de dólares (la putada es que de ésta no tenía acciones).</p>
-            <p><strong>Quizás esto no te diga nada y haces bien.</strong></p>
-            <p>Llevo desarrollando software desde 2006. En realidad empecé antes pero ese año fue la primera empecé a
-                crear webs y software a medida para clientes. De aquellas estaba terminando Ingeniería en
-                Radioelectronica, pero ya me
-                había dado cuenta que programar era realmente lo que quería hacer.</p>
+                pequeños, he co-fundado varias empresas y he ayudado a que una startup americana se
+                vendiera por muchos millones de dólares gracias a escribir código sostenible.</p>
+            <p><strong>Con sostenible me refiero a código fácil de mantener. Y con fácil de mantener quiero decir sencillo de
+                cambiar.</strong></p>
+            <p>Hay una verdad absoluta en el software: y es que si un proyecto tiene cierto éxito cambiará.</p>
+            <p><strong>Llevo desarrollando software desde 2006. En realidad empecé antes, pero ese año fue cuando vendí mi primera web.</strong></p>
+            <p> En aquel momento estaba terminando Ingeniería en Radioelectrónica, pero ya me
+                había dado cuenta que programar era realmente lo que quería hacer, sabía que con el hardware no iba a llegar muy lejos desde Canarias.</p>
             <p><strong>Durante esa época empecé a sufrir titulitis aguda. Estaba obsesionado con coleccionar papelitos
                 de
                 masters, certificaciones, carreras universitarias…</strong></p>
@@ -54,8 +55,11 @@ export default async function Legal() {
                 Teleco.
                 Las dos primeras las terminé. Con la tercera me dije: ¿pero qué estás haciendo con tu vida?</strong></p>
             <p>Llego un momento en que abrí los ojos, me di cuenta que la universidad estaba obsoleta y que acumular
-                papelitos no era el camino. No hace falta pasar por la universidad para ser un programador de éxito
-                ... </p>
+                papelitos no era el camino. </p>
+            <p><strong>No hace falta pasar por la universidad para ser un gran programador... </strong></p>
+            <p>A finales de 2015 nos juntamos unos cuantos amigos y confundé mi segunda una startup (en la que yo sería el CTO). El plan era construir una especie de Booking .com orientado a personas con movilidad reducida.</p>
+            <p><strong>La idea era buena, conseguimos levantar más de un millón y medio de euros entre premios y rondas de inversión. </strong></p>
+            <p> Pero aquello no terminó de salir bien (en la newsletter te cuento por qué).</p>
             <p><strong>Hace unos años me dió por escribir un libro, <Link href={"https://cleanjavascript.es"}
                                                                           target={"_blank"}>Clean
                 JavaScript</Link>, lo mismo te suena. Lo usan miles de developers en España y en Latam como referencia
@@ -82,6 +86,7 @@ export default async function Legal() {
                 Carlos Blé (fundador de Lean Mind).</strong></p>
             <p>Casi todo lo que sé sobre programación (y sobre muchas otras cosas de la vida) se lo debo a ellos.
                 Eternamente agradecido.</p>
+            <Newsletter hideEntry={true}/>
         </div>
     );
 }
