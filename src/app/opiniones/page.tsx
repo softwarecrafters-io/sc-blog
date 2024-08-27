@@ -122,7 +122,6 @@ export default async function Opinions() {
             <p>Marcos Rodrigo - Desarrollador de Sistemas</p>
 
             <blockquote className={opinionStyle.opinion}>
-                <p>Buenas señor! Primero que nada, los elogios y toda esa movida XD.</p>
                 <p>Mil felicidades por todos los cursos y el libro de Clean Javascript. Es 100% calidad. Estoy suscrito
                     a tus dos cursos, he comprado tu libro tanto en digital como en físico, y creo que tus emails son la
                     única newsletter que me suelo leer...</p>

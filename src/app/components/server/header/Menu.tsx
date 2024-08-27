@@ -4,7 +4,6 @@ import Link from "next/link";
 import styles from "@/app/components/server/header/header.module.css";
 import {MenuMobile} from "@/app/components/server/header/MenuMobile";
 import {useEffect, useState} from "react";
-import {useRouter} from "next/router";
 
 export const Menu = () => {
     const [activeLink, setActiveLink] = useState("");
@@ -33,15 +32,20 @@ export const Menu = () => {
                 key={key}
                 className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
                 target={href.startsWith('http') ? '_blank' : '_self'}
-                href={href}>
+                href={href}
+                onClick={() => setActiveLink(href)}
+            >
                 {key}
             </Link>
         );
     });
 
-
     return <div className={styles.mainMenu}>
-        <Logo/>
+        <Link href={Routes.home} aria-label="Software Crafters - Logo" onClick={() => setActiveLink("/")}>
+            <div className={styles.logo}>
+                {logoSvg}
+            </div>
+        </Link>
         <div className={styles.nav}>
             {renderedLinks}
         </div>
@@ -49,14 +53,6 @@ export const Menu = () => {
             <MenuMobile links={links}/>
         </div>
     </div>
-}
-
-const Logo = () => {
-    return <Link href={Routes.home} aria-label="Software Crafters - Logo">
-        <div className={styles.logo}>
-            {logoSvg}
-        </div>
-    </Link>
 }
 
 
