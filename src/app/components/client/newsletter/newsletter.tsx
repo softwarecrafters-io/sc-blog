@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {Routes} from "@/app/routes";
 
-export const Newsletter = ({hideEntry = false}:{hideEntry?:boolean}) => {
+export const Newsletter = ({hideEntry = true}:{hideEntry?:boolean}) => {
     const titleId = hideEntry ? 'newsletter-short' : 'newsletter';
     const checkboxId = hideEntry ? 'newsletterCheckboxShort' : 'newsletterCheckbox';
     const {handleSubscribe, handleEmailChange, isSubscribed, hasError, errorMessage, handlePrivacyPolicyChange  } = useNewsletter();
@@ -33,7 +33,7 @@ export const Newsletter = ({hideEntry = false}:{hideEntry?:boolean}) => {
             </div>
             <div className={styles.privacyContainer}>
                 <input type="checkbox" id={checkboxId} className={styles.checkbox} onChange={handlePrivacyPolicyChange}></input>
-                <label htmlFor={checkboxId} className={styles.privacyMessage}>Para cumplir con el RGPD debes leer y aceptar <Link href={Routes.legal}> la política de privacidad.</Link></label>
+                <label htmlFor={checkboxId} className={styles.privacyMessage}>Autorízame a enviarte estos emails que no quiero problemas (<Link href={Routes.legal}>política de privacidad</Link>).</label>
             </div>
             <div className={styles.errorMessage} hidden={!hasError()}>{errorMessage()}</div>
         </div>

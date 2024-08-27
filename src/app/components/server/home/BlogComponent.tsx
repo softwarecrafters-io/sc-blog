@@ -14,9 +14,9 @@ export const BlogComponent = ({params}: { params: { slug: string }; }) => {
             <h1 className={styles.title}>Blog</h1>
             <Newsletter hideEntry={true}/>
             <PaginatedPosts title={"Últimos artículos"} currentPage={currentPage} />
-            <CourseBlock/>
+            {/*<CourseBlock/>*/}
             <CategoryBlock/>
-            <BookBlock/>
+            {/*<BookBlock/>*/}
             <Newsletter/>
         </>
     )
