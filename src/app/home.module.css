@@ -17,11 +17,12 @@
 .subtitle, .hello{
     font-size: 2.3rem;
     font-weight: 700;
-    max-width: 580px;
+    max-width: 650px;
     margin-bottom: 20px;
     text-align: center;
     letter-spacing: normal;
     align-self: center;
+    font-style: italic;
 }
 
 .hello{

@@ -4,7 +4,7 @@ import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 export default async function Opinions() {
     return (
         <div className={styles.container}>
-            <h2 className={styles.subtitle}>Opiniones podrían ser inventadas... </h2>
+            <h2 className={styles.subtitle}>Opiniones que podrían ser inventadas... </h2>
             <p><strong>... así que mejor que no te creas nada. </strong></p>
             <p>Algunas opiniones no solicitadas sobre Miguel A. Gómez y Software Crafters Academy. Aquí encontrarás
                 testimonios sobre la newsletter, el libro, los cursos, los bonus… Todo sin un orden concreto. </p>
@@ -129,7 +129,6 @@ export default async function Opinions() {
             </blockquote>
             <p>Killian Jimenez - Developer</p>
 
-            <Newsletter hideEntry={true}/>
             <blockquote className={opinionStyle.opinion}>
                 <p>El curso de Testing es una verdadera joya para cualquier profesional que desee subir de nivel.</p>
             </blockquote>
@@ -154,6 +153,7 @@ export default async function Opinions() {
                     cracks</p>
             </blockquote>
             <p>Leonardo Omaña - Frontend Developer</p>
+            <Newsletter hideEntry={true}/>
             <blockquote className={opinionStyle.opinion}>
                 <p>Mi enhorabuena por el curso, me está siendo muy útil e interesante, incluso en conceptos que ya creía
                     saber estoy descubriendo cosas nuevas</p>
@@ -269,9 +269,6 @@ export default async function Opinions() {
                     permitido entender mucho mejor lo que explicais en el curso, son un gran aporte.</p>
             </blockquote>
             <p>Josecho- Backend Developer</p>
-
-            <Newsletter hideEntry={true}/>
-
             <blockquote className={opinionStyle.opinion}>
                 <p>He terminado el de bonus de frontend y Miguel me ha parecido E X C E L E N T E. Maravilloso
                     trabajo. </p>
@@ -311,6 +308,7 @@ export default async function Opinions() {
                 <p>Para codear como un pro y adelantar por la derecha a mucha gente. Y lo genial es que todo el conocimiento traspasa al lenguaje. </p>
             </blockquote>
             <p>Kevin Hierro - Artesano de Software</p>
+            <Newsletter hideEntry={true}/>
         </div>
     );
 }
