@@ -12,17 +12,38 @@
     font-size: 4rem;
     margin-bottom: 3rem;
     text-align: center;
+    align-self: center;
 }
 
-.subtitle, .hello{
+.subtitle, .hello, .subtitleWithIcon{
+    position: relative;
     font-size: 2.3rem;
     font-weight: 700;
-    max-width: 650px;
+    max-width: 600px;
     margin-bottom: 20px;
     text-align: center;
     letter-spacing: normal;
     align-self: center;
     font-style: italic;
+}
+
+.subtitleWithIcon {
+    padding-left: 0px;
+    padding-top: 20px
+}
+
+.subtitleWithIcon::before {
+    content: "";
+    position: absolute;
+    top: 0px; /* Ajusta la posición según sea necesario */
+    left: -90px;
+    width: 90px; /* Tamaño de la imagen */
+    height: 60px; /* Tamaño de la imagen */
+    background-image: url('https://swcrafters.fra1.cdn.digitaloceanspaces.com/Blog/quotes-mark.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3; /* Controla la opacidad aquí */
+    z-index: -1; /* Para que esté detrás del texto */
 }
 
 .hello{
@@ -33,11 +54,20 @@
 
 @media screen and (max-width: 768px){
     .title{
-        font-size: 2rem;
+        font-size: 2.5rem;
         margin-bottom: 2rem;
     }
-    .subtitle{
-        font-size: 1.5rem;
+    .subtitle, .subtitleWithIcon{
+        font-size: 1.8rem;
+    }
+    .subtitleWithIcon::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -20px;
+        width: 90px;
+        height: 60px;
+
     }
 
 }

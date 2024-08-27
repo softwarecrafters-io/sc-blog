@@ -7,7 +7,7 @@ export default async function Home({params}: { params: { slug: string }; }) {
         <div className={styles.container}>
             <h1 className={styles.title}>Software Crafters Academy</h1>
             <Newsletter hideEntry={true}/>
-            <h2 className={styles.subtitle}>Programar es el arte de decirle a otra persona lo que quieres que la máquina haga</h2>
+            <h2 className={styles.subtitleWithIcon}>Programar es el arte de decirle a otra persona lo que quieres que la máquina haga</h2>
             <p>A la mayoría de los desarrolladores nos han enseñado a programar mal... y muchos ni siquiera lo
                 saben.</p>
             <strong><p>Quizás tu si, pero porque llevas el suficiente tiempo en esto.</p></strong>
@@ -40,7 +40,7 @@ export default async function Home({params}: { params: { slug: string }; }) {
             <strong><p>Diseñar software centrándote en librerías y frameworks es como cocinar usando la Thermomix. Ser un
                 chef profesional no es eso.</p></strong>
             <Newsletter hideEntry={true}/>
-            <h2 className={styles.subtitle}>Ser un verdadero Programador Senior es otra historia</h2>
+            <h2 className={styles.subtitleWithIcon}>Ser un verdadero Programador Senior es otra historia</h2>
             <p>El significado de la palabra senior no ha cambiando demasiado durante los últimos 20 años.</p>
             <p><strong>Aún hoy en día en muchas empresas a los developers se les considera seniors (o se consideran
                 ellos mismos) por el simple hecho de llevar “n años” en la industria, sin tener en cuenta su

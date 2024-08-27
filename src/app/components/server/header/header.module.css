@@ -66,7 +66,7 @@
     padding: 0.5rem 1rem;
 }
 
-.navItem:hover{
+.navItemActive, .navItem:hover{
     background: var(--highlight-color);
     text-decoration: none;
     background: var(--border-color);
