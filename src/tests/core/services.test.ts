@@ -4,6 +4,7 @@ import {Post} from "../../core/models";
 describe('PaginationService', () => {
     const fakePosts: any[] = [
         { id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }, { id: '5' }, { id: '6' },
+        { id: '7' }, { id: '8' }, { id: '9' }, { id: '10' }, { id: '11' }, { id: '12' },
     ];
 
     let paginationService: PaginationService;
@@ -14,7 +15,7 @@ describe('PaginationService', () => {
 
     it('should paginate fakePosts correctly', () => {
         const paginatedPosts = paginationService.paginatePosts(1);
-        expect(paginatedPosts).toEqual(fakePosts.slice(0, 4));
+        expect(paginatedPosts).toEqual(fakePosts.slice(0, 10));
     });
 
     it('should calculate total pages correctly', () => {
