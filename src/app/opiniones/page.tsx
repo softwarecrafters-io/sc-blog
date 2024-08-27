@@ -8,14 +8,14 @@ export default async function Opinions() {
             <p><strong>... así que mejor que no te creas nada. </strong></p>
             <p>Algunas opiniones no solicitadas sobre Miguel A. Gómez y Software Crafters Academy. Aquí encontrarás
                 testimonios sobre la newsletter, el libro, los cursos, los bonus… Todo sin un orden concreto. </p>
+            <Newsletter hideEntry={true}/>
             <blockquote className={opinionStyle.opinion}>
                 <p>No recuerdo bien como llegué a tu Newsletter pero es la única que he leído desde que uso internet
                     desde principios del 2000... </p>
             </blockquote>
             <p>Maxi Alaniz - Analista de Sistemas y Programador</p>
             <blockquote className={opinionStyle.opinion}>
-                <p>Buenas tardes, Miguel:</p>
-                <p>Acabo de terminar el curso de Testing Sostenible con Typescript.</p>
+                <p>Miguel, acabo de terminar el curso de Testing Sostenible con Typescript.</p>
                 <p>Lo compré en septiembre gracias al budget de formación de la empresa. Trabajo en Ironhack.</p>
                 <p>Me ha llevado la friolera de 6 meses jaja... pero cuando tienes niños pequeños no dispones de mucho
                     tiempo libre. Pero bueno, aunque mi dedicación al curso ha sido intermitente, no he dejado de
@@ -301,7 +301,7 @@ export default async function Opinions() {
                     formadas de otros componentes más pequeños pero me he quedado con el TDD -Outside-In y con que casi
                     mis tests de lo que llamamos secciones (formadas por módulos formados por átomos) casi podrían ser
                     tests de integración. </p>
-                <p>Y sobretodo, con que los tests deben cumplir las reglas de negocio, no las mías,jeje... Muchas
+                <p>Y sobre todo, con que los tests deben cumplir las reglas de negocio, no las mías,jeje... Muchas
                     gracias! </p>
             </blockquote>
             <p>Itziar ZG - Frontend Developer</p>

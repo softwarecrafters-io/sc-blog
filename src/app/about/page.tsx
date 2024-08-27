@@ -1,6 +1,7 @@
 import styles from '../home.module.css';
 import Link from "next/link";
 import {Routes} from "@/app/routes";
+import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 
 export default async function Legal() {
     return (
@@ -21,7 +22,7 @@ export default async function Legal() {
                 sabes, las cosas del tío Bob, que cuando se pone la sotana de predicador nadie lo para...</p>
             <strong><p>Pero bueno, yo soy más de esforzarme en escribir buen código que de llevar pulseritas, o de
                 convertir buenas prácticas de desarrollo en una religión...</p></strong>
-
+            <Newsletter hideEntry={true}/>
             <h2 className={styles.hello}>Hola,</h2>
             <p>Mi nombre es Miguel A. Gómez, soy developer y emprendedor. He trabajado en proyectos grandes, medianos y
                 pequeños, he co-fundado varias empresas y he ayudado directamente a que una startup americana se
