@@ -1,12 +1,18 @@
 import styles from '../home.module.css';
 import opinionStyle from './opinions.module.css';
+import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 export default async function Opinions() {
     return (
         <div className={styles.container}>
-            <h2 className={styles.subtitle}>Opiniones (que por supuesto <br/>son inventadas) </h2>
-            <p><strong>Así que mejor que no te creas nada... </strong></p>
+            <h2 className={styles.subtitle}>Opiniones podrían ser inventadas... </h2>
+            <p><strong>... así que mejor que no te creas nada. </strong></p>
             <p>Algunas opiniones no solicitadas sobre Miguel A. Gómez y Software Crafters Academy. Aquí encontrarás
-                testimonios sobre la newsletter, el libro, los cursos… Todo sin un orden concreto: </p>
+                testimonios sobre la newsletter, el libro, los cursos, los bonus… Todo sin un orden concreto. </p>
+            <blockquote className={opinionStyle.opinion}>
+                <p>No recuerdo bien como llegué a tu Newsletter pero es la única que he leído desde que uso internet
+                    desde principios del 2000... </p>
+            </blockquote>
+            <p>Maxi Alaniz - Analista de Sistemas y Programador</p>
             <blockquote className={opinionStyle.opinion}>
                 <p>Buenas tardes, Miguel:</p>
                 <p>Acabo de terminar el curso de Testing Sostenible con Typescript.</p>
@@ -58,6 +64,12 @@ export default async function Opinions() {
                 <p>Un fuerte abrazo<br/>Juanan</p>
             </blockquote>
             <p>Juan Antona - Ingeniero de Software</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Una de las mejores newsletter que he leído en mucho tiempo, ¡gracias!</p>
+            </blockquote>
+            <p>Paula Quitián - Developer</p>
+
             <blockquote className={opinionStyle.opinion}>
                 <p>Miguel, tu curso ha sido la mejor inversión que he hecho en todos los años que llevo invirtiendo en
                     formación. </p>
@@ -65,6 +77,19 @@ export default async function Opinions() {
                     debería haber controlado desde hace mucho tiempo</p>
             </blockquote>
             <p>Luis del Amo - Full Stack Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Me ha llevado tiempo y esfuerzo pero por fin he completado el curso de Testing. He de decir que la
+                    calidad es enorme, no me imagino la cantidad de tiempo que les ha llevado hacerlo</p>
+            </blockquote>
+            <p>Kevin Hierro - Artesano de Software (wolfremium.dev)</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Estoy encantada con tus emails.. me gusta mucho el tono directo, desenfadado y provocador en el que
+                    te diriges a tus lectores.</p>
+            </blockquote>
+            <p>Carolina Manzanares - Developer</p>
+
             <blockquote className={opinionStyle.opinion}>
                 <p>Siento que he mejorado mucho este último año gracias a Testing Sostenible y ahora con este último
                     curso de Ingeniería y Artesanía del Software.</p>
@@ -73,6 +98,12 @@ export default async function Opinions() {
                     que poco a poco me estoy acercando a un senior de verdad.</p>
             </blockquote>
             <p>Alex Iraola - Full Stack Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Hola Miguel, geniales tus correo y mejor el curso...</p>
+            </blockquote>
+            <p>Edar José Blanco</p>
+
             <blockquote className={opinionStyle.opinion}>
                 <p>Solamente quería decirte que recientemente he finalizado el curso de Diseño Sostenible y quería darte
                     las gracias por la formación.</p>
@@ -89,6 +120,16 @@ export default async function Opinions() {
                 <p>Muchas gracias.</p>
             </blockquote>
             <p>Marcos Rodrigo - Desarrollador de Sistemas</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Buenas señor! Primero que nada, los elogios y toda esa movida XD.</p>
+                <p>Mil felicidades por todos los cursos y el libro de Clean Javascript. Es 100% calidad. Estoy suscrito
+                    a tus dos cursos, he comprado tu libro tanto en digital como en físico, y creo que tus emails son la
+                    única newsletter que me suelo leer...</p>
+            </blockquote>
+            <p>Killian Jimenez - Developer</p>
+
+            <Newsletter hideEntry={true}/>
             <blockquote className={opinionStyle.opinion}>
                 <p>El curso de Testing es una verdadera joya para cualquier profesional que desee subir de nivel.</p>
             </blockquote>
@@ -106,11 +147,7 @@ export default async function Opinions() {
                     gusta, gusta 😊.</p>
             </blockquote>
             <p>Belén Moreno - Developer</p>
-            <blockquote className={opinionStyle.opinion}>
-                <p>Me ha llevado tiempo y esfuerzo pero por fin he completado el curso de Testing. He de decir que la
-                    calidad es enorme, no me imagino la cantidad de tiempo que les ha llevado hacerlo</p>
-            </blockquote>
-            <p>Kevin Hierro - Artesano de Software</p>
+
             <blockquote className={opinionStyle.opinion}>
                 <p>La sección del módulo 3 de Testing Sostenible, TDD como herramienta de diseño, es increíble. </p>
                 <p>Ayuda mucho a entender cómo crear tests que validen los requerimientos del negocio. Sois unos
@@ -138,10 +175,6 @@ export default async function Opinions() {
             </blockquote>
             <p>Alejandro Torres - Backend Developer</p>
             <blockquote className={opinionStyle.opinion}>
-                <p>Hola Miguel, geniales tus correo y mejor el curso...</p>
-            </blockquote>
-            <p>Edar José Blanco</p>
-            <blockquote className={opinionStyle.opinion}>
                 <p>Soy alumno de tu curso de Diseño Sostenible y quería felicitarte por el contenido del mismo, las
                     explicaciones claras y concisas y la calidad del mismo en general, pero además debo decir que
                     disfruto los mails que llegan desde tu newsletter, son una genialidad!</p>
@@ -151,13 +184,7 @@ export default async function Opinions() {
                     legibilidad y escalabilidad.</p>
             </blockquote>
             <p>Gustavo Dominguez - Developer Lead</p>
-            <blockquote className={opinionStyle.opinion}>
-                <p>Buenas señor! Primero que nada, los elogios y toda esa movida XD.</p>
-                <p>Mil felicidades por todos los cursos y el libro de Clean Javascript. Es 100% calidad. Estoy suscrito
-                    a tus dos cursos, he comprado tu libro tanto en digital como en físico, y creo que tus emails son la
-                    única newsletter que me suelo leer...</p>
-            </blockquote>
-            <p>Killian Jimenez - Developer</p>
+
             <blockquote className={opinionStyle.opinion}>
                 <p>Hola Miguel, recibo tus emails desde hace bastante tiempo. Por un error garrafal al quedarse sin
                     espacio mi cuenta Gmail, eliminé sin querer tus emails que atesoraba fervientemente. Tendrás dichas
@@ -201,19 +228,89 @@ export default async function Opinions() {
             </blockquote>
             <p>Luis Corales - Developer</p>
             <blockquote className={opinionStyle.opinion}>
-                <p>Estoy encantada con tus emails.. me gusta mucho el tono directo, desenfadado y provocador en el que
-                    te diriges a tus lectores.</p>
-            </blockquote>
-            <p>Carolina Manzanares - Developer</p>
-            <blockquote className={opinionStyle.opinion}>
                 <p>Antes que nada, darte la enhorabuena por el contenido que generas que considero que es de muy buena
                     calidad...</p>
             </blockquote>
             <p>Antonio J. Galisteo - Developer</p>
             <blockquote className={opinionStyle.opinion}>
-                <p>Me encantan tus mails. Me mola mucho el contenido de los mismos, aprendo mucho con ellos, pero con este me siento muy identificado, yo siempre uso el simil del futbol cuando hablo con mi equipo y este especialmente me ha recordado muchas de las charlas que tenemos en las dailies. Siempre les digo que se juega como se entrena.</p>
+                <p>Me encantan tus mails. Me mola mucho el contenido de los mismos, aprendo mucho con ellos, pero con
+                    este me siento muy identificado, yo siempre uso el simil del futbol cuando hablo con mi equipo y
+                    este especialmente me ha recordado muchas de las charlas que tenemos en las dailies. Siempre les
+                    digo que se juega como se entrena.</p>
             </blockquote>
             <p>Carlos García - Developer</p>
+            <blockquote className={opinionStyle.opinion}>
+                <p>Mi nombre es Sergio Gil, un fiel seguidor. Estudié Ing. Informática en Almería y ya con más de 10
+                    años de experiencia pero con vuestro contenido, un plus para que esa experiencia sea real.</p>
+                <p>Compré tu libro de JS y los dos de Carlos (TDD y Código Sostenible), así como las dos formaciones que
+                    habéis sacado.</p>
+                <p>He de confesarte que he sido más fiel al formato en papel que al vídeo, que los tengo a 1/3 pero yo
+                    siempre colaboré con vosotros en lo que saquéis porque me parece un material excepcional.</p>
+            </blockquote>
+            <p>Sergio Gil Martinez - Ingeniero de Software</p>
+            <blockquote className={opinionStyle.opinion}>
+                <p>Ya he acabado el curso, y nada más que felicitaros por el gran trabajo que habéis hecho, espectacular
+                    y un boom mental!! Ahora a hacer pet projects practicando lo aprendido</p>
+                <p>Enhorabuena, un cursazo de 10</p>
+            </blockquote>
+            <p>Achraf - Frontend Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Felicidades a ti y a Carlos Blé por el curso porque es una maravilla...</p>
+            </blockquote>
+            <p>Alberto Morales - Fullstack Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Aunque de momento voy por la mitad del curso (repito los módulos para comprender mejor la teoría), el
+                    bonus de regalo: backing testing ha sido de gran ayuda. Trata los conceptos que estamos aprendiendo
+                    en el curso y en mi caso me ha permitido ver como se implementan los repositorios en TS (métodos
+                    asincronos haciendo uso de Promise).</p>
+                <p> Siempre he participado en proyectos cuyo back es java y en el curso es TS. Este bonus me ha
+                    permitido entender mucho mejor lo que explicais en el curso, son un gran aporte.</p>
+            </blockquote>
+            <p>Josecho- Backend Developer</p>
+
+            <Newsletter hideEntry={true}/>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>He terminado el de bonus de frontend y Miguel me ha parecido E X C E L E N T E. Maravilloso
+                    trabajo. </p>
+                <p> Es cierto que para los que no estamos al día de React a veces pasa rápido aspectos del framework,
+                    pero ciertamente no me ha importado, al contrario, me ha encantado que fuera al grano con lo que me
+                    interesaba: como hacer tests baratos que cubran la mayoría de funcionalidad y nos permita hacer el
+                    refactor.</p>
+                <p>Y también me ha parecido genial ver un proyecto frontend que usa DDD. Muy inspirador.</p>
+            </blockquote>
+            <p>Javi G. C. - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Pues terminado Testing Sostenible!! Me ha gustado mucho cómo lo contáis. Enhorabuena!</p>
+            </blockquote>
+            <p>Juanma- Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Primero muchas gracias por el recordatorio en la newsletter 📬 , segundo gracias por el bonus del
+                    property based testing, me gustó mucho, no conocía "fast-check" 🫶</p>
+            </blockquote>
+            <p>Luis del Amo - Fullstack Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Yo también lo he acabado Testing Sostenible. Está genial, felicidades porque se nota que está hecho
+                    con mucha intención (iba a decir amor,jeje) de mejorar nuestro código todo lo posible. </p>
+                <p>A mí personalmente me cuesta extrapolarlo al FrontEnd, a componentes más visuales, y a secciones
+                    formadas de otros componentes más pequeños pero me he quedado con el TDD -Outside-In y con que casi
+                    mis tests de lo que llamamos secciones (formadas por módulos formados por átomos) casi podrían ser
+                    tests de integración. </p>
+                <p>Y sobretodo, con que los tests deben cumplir las reglas de negocio, no las mías,jeje... Muchas
+                    gracias! </p>
+            </blockquote>
+            <p>Itziar ZG - Frontend Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Este curso está de lokos. Ojalá hubiese existido cuando empecé.</p>
+                <p>Para codear como un pro y adelantar por la derecha a mucha gente. Y lo genial es que todo el conocimiento traspasa al lenguaje. </p>
+            </blockquote>
+            <p>Kevin Hierro - Artesano de Software</p>
         </div>
     );
 }
