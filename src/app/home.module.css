@@ -36,7 +36,7 @@
     content: "";
     position: absolute;
     top: 0px; /* Ajusta la posición según sea necesario */
-    left: -90px;
+    left: -80px;
     width: 90px; /* Tamaño de la imagen */
     height: 60px; /* Tamaño de la imagen */
     background-image: url('https://swcrafters.fra1.cdn.digitaloceanspaces.com/Blog/quotes-mark.png');
@@ -50,12 +50,23 @@
     font-size: 3rem;
     text-align: left;
     align-self: flex-start;
+    font-style: italic;
 }
+
+.emojiHello{
+    font-size: 3rem;
+    margin-left: 10px;
+    font-style: normal;
+}
+
 
 @media screen and (max-width: 768px){
     .title{
         font-size: 2.5rem;
         margin-bottom: 2rem;
+    }
+    .hello, .emojiHello{
+        font-size: 2rem;
     }
     .subtitle, .subtitleWithIcon{
         font-size: 1.8rem;
@@ -67,7 +78,6 @@
         left: -20px;
         width: 90px;
         height: 60px;
-
     }
 
 }

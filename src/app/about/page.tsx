@@ -20,7 +20,8 @@ export default async function Legal() {
                 grandes repositorios de código legacy más rápido que nunca.</strong></p>
             <p> Ojo, no me malinterpretes, la IA y los LLM son una tecnología fantástica que multiplican tu
                 productividad como developer (siempre y cuando domines los fundamentos).</p>
-            <p><strong> Aunque la realidad es que más de diez años después del inicio del movimiento Software Crafter (con o sin IA) seguimos
+            <p><strong> Aunque la realidad es que más de diez años después del inicio del movimiento Software Crafter
+                (con o sin IA) seguimos
                 escribiendo código que mata la moral de cualquiera.</strong></p>
             <p>Por cierto, Robert C. Martin también decía algo sobre llevar unas pulseritas verdes
                 que ponían “Agile” o “Clean Coder”. Ya
@@ -29,12 +30,14 @@ export default async function Legal() {
                 pulseritas, o de
                 convertir buenas prácticas de programación en una religión...</strong></p>
             <Newsletter hideEntry={true}/>
-            <h2 className={styles.hello}>Hola,</h2>
+            <h2 className={styles.hello}>Hola<span className={styles.emojiHello}>👋</span></h2>
             <p>Mi nombre es Miguel A. Gómez, soy developer y emprendedor. He trabajado en proyectos grandes, medianos y
                 pequeños, he co-fundado varias empresas y he ayudado directamente a que una startup americana se
                 vendiera en el 2020 por muchos millones de dólares (la putada es que de ésta no tenía acciones).</p>
             <p><strong>Quizás esto no te diga nada y haces bien.</strong></p>
-            <p>Llevo desarrollando software desde 2006. En realidad empecé antes pero ese año fue la primera empecé a crear webs y software a medida para clientes. De aquellas estaba terminando Ingeniería en Radioelectronica, pero ya me
+            <p>Llevo desarrollando software desde 2006. En realidad empecé antes pero ese año fue la primera empecé a
+                crear webs y software a medida para clientes. De aquellas estaba terminando Ingeniería en
+                Radioelectronica, pero ya me
                 había dado cuenta que programar era realmente lo que quería hacer.</p>
             <p><strong>Durante esa época empecé a sufrir titulitis aguda. Estaba obsesionado con coleccionar papelitos
                 de
