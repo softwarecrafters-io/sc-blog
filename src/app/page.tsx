@@ -37,8 +37,9 @@ export default async function Home({params}: { params: { slug: string }; }) {
                 problemas de mantenimiento.</p></strong>
             <p>Añadimos tal cantidad de complejidad accidental que el proyecto en unas pocas semanas o meses se nos va
                 de las manos.</p>
-            <strong><p>Diseñar software centrándote en librerías y frameworks es como cocinar usando la Thermomix. Ser un
-                chef profesional no es eso.</p></strong>
+            <p><strong>Diseñar software centrándote en librerías y frameworks es como cocinar usando la Thermomix. </strong></p>
+                <p>Ser un verdadero
+                chef profesional es otra cosa.</p>
             <Newsletter hideEntry={true}/>
             <h2 className={styles.subtitleWithIcon}>Ser un verdadero Programador Senior es otra historia</h2>
             <p>El significado de la palabra senior no ha cambiando demasiado durante los últimos 20 años.</p>
