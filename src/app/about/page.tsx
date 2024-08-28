@@ -34,10 +34,10 @@ export default async function Legal() {
             <p>Mi nombre es Miguel A. Gómez, soy developer y emprendedor. He trabajado en proyectos grandes, medianos y
                 pequeños, he co-fundado varias empresas y he ayudado a que una startup americana se
                 vendiera por muchos millones de dólares gracias a escribir código sostenible.</p>
-            <p><strong>Con sostenible me refiero a código fácil de mantener. Y con fácil de mantener quiero decir sencillo de
+            <p><strong>Con código sostenible me refiero a fácil de mantener. Y con fácil de mantener quiero decir sencillo de
                 cambiar.</strong></p>
-            <p>Hay una verdad absoluta en el software: y es que si un proyecto tiene cierto éxito cambiará.</p>
-            <p><strong>Llevo desarrollando software desde 2006. En realidad empecé antes, pero ese año fue cuando vendí mi primera web.</strong></p>
+            <p>Y es que hay una verdad absoluta en el software: y es que si un proyecto tiene cierto éxito cambiará.</p>
+            <p><strong>Verás. Llevo desarrollando software desde 2006. En realidad empecé antes, pero ese año fue cuando vendí mi primera web.</strong></p>
             <p> En aquel momento estaba terminando Ingeniería en Radioelectrónica, pero ya me
                 había dado cuenta que programar era realmente lo que quería hacer, sabía que con el hardware no iba a llegar muy lejos desde Canarias.</p>
             <p><strong>Durante esa época empecé a sufrir titulitis aguda. Estaba obsesionado con coleccionar papelitos
@@ -60,8 +60,7 @@ export default async function Legal() {
             <p>A finales de 2015 nos juntamos unos cuantos amigos y confundé mi segunda una startup (en la que yo sería el CTO). El plan era construir una especie de Booking .com orientado a personas con movilidad reducida.</p>
             <p><strong>La idea era buena, conseguimos levantar más de un millón y medio de euros entre premios y rondas de inversión. </strong></p>
             <p> Pero aquello no terminó de salir bien (en la newsletter te cuento por qué).</p>
-            <p><strong>Hace unos años me dió por escribir un libro, <Link href={"https://cleanjavascript.es"}
-                                                                          target={"_blank"}>Clean
+            <p><strong>Hace unos años me dió por escribir un libro, <Link href={"https://cleanjavascript.es"} target={"_blank"}>Clean
                 JavaScript</Link>, lo mismo te suena. Lo usan miles de developers en España y en Latam como referencia
                 (quizás tu seas uno). También lo tienes en inglés, por si te interesa.</strong></p>
             <p>El libro es un poco raro porque no va sobre JavaScript sino sobre como escribir mejor software en
