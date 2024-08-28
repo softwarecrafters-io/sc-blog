@@ -10,7 +10,8 @@
 
 .title{
     font-size: 4rem;
-    margin-bottom: 3rem;
+    margin-top:0;
+    margin-bottom: 30px;
     text-align: center;
     align-self: center;
 }
