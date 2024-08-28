@@ -1,0 +1,41 @@
+.container{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px 30px;
+    border: var(--border-color) 1px solid;
+    border-radius: 20px;
+    margin: 20px 0px;
+}
+
+.title{
+    font-size: 1rem;
+    font-weight: normal;
+    max-width: 580px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    align-self: center;
+}
+
+.formInput{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: var(--border-color) 1px solid;
+    border-radius: 10px;
+}
+
+.actionButton{
+    margin: 1px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    height: 100%;
+    /*box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);*/
+}
+
+.actionButton:hover{
+    cursor: pointer;
+}

@@ -5,11 +5,13 @@ import {Thanks} from "@/app/components/client/newsletter/thanks/thanks";
 import Image from "next/image";
 import Link from "next/link";
 import {Routes} from "@/app/routes";
+import {DownloadLeadMagnet} from "@/app/components/client/newsletter/downloadLeadMagnet";
 
 export const Newsletter = ({hideEntry = true}:{hideEntry?:boolean}) => {
+    const {handleSubscribe, handleEmailChange, isSubscribed, hasError, errorMessage, handlePrivacyPolicyChange  } = useNewsletter();
+    return <DownloadLeadMagnet/>
     const titleId = hideEntry ? 'newsletter-short' : 'newsletter';
     const checkboxId = hideEntry ? 'newsletterCheckboxShort' : 'newsletterCheckbox';
-    const {handleSubscribe, handleEmailChange, isSubscribed, hasError, errorMessage, handlePrivacyPolicyChange  } = useNewsletter();
      if(isSubscribed()) {
         return <Thanks/>
     }
@@ -39,3 +41,5 @@ export const Newsletter = ({hideEntry = true}:{hideEntry?:boolean}) => {
         </div>
     </div>
 }
+
+

@@ -6,7 +6,7 @@ export default async function Opinions() {
         <div className={styles.container}>
             <h2 className={styles.subtitle}>Opiniones que podrían ser inventadas... </h2>
             <p><strong>... así que mejor que no te creas nada. </strong></p>
-            <p>Algunas opiniones no solicitadas sobre Miguel A. Gómez y Software Crafters Academy. Aquí encontrarás
+            <p>Estas son algunas opiniones sobre Miguel A. Gómez y Software Crafters Academy. Aquí encontrarás
                 testimonios sobre la newsletter, el libro, los cursos, los bonus… Todo sin un orden concreto. </p>
             <Newsletter hideEntry={true}/>
             <blockquote className={opinionStyle.opinion}>

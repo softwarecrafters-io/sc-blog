@@ -11,15 +11,15 @@
 .opinion:before {
     content: "";
     position: absolute;
-    top: 0px; /* Ajusta la posición según sea necesario */
+    top: 0px;
     left: 10px;
     width: 30px;
-    height: 20px; /* Tamaño de la imagen */
+    height: 20px;
     background-image: url('https://swcrafters.fra1.cdn.digitaloceanspaces.com/Blog/quotes-mark.png');
     background-size: contain;
     background-repeat: no-repeat;
-    opacity: 0.3; /* Controla la opacidad aquí */
-    z-index: -1; /* Para que esté detrás del texto */
+    opacity: 0.2;
+    z-index: -1;
 }
 
 /*.opinion:before {*/
