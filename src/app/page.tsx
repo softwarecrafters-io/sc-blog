@@ -40,6 +40,9 @@ export default async function Home({params}: { params: { slug: string }; }) {
             <p><strong>Diseñar software centrándote en librerías y frameworks es como cocinar usando la Thermomix. </strong></p>
                 <p>Ser un verdadero
                 chef profesional es otra cosa.</p>
+            <p><strong>Hablo sobre todo esto (y mucho más) en mi newsletter. Además, al suscribirte recibes gratis una guía con con 5 principios fundamentales de Ingeniería y Artesanía del Software que todo developer debería conocer.</strong></p>
+            <p>Únete gratis a las miles de personas que han descubierto una forma diferente de entender la
+                programación. Eso sí, si tienes la piel fina, mejor no te suscribas.</p>
             <Newsletter hideEntry={true}/>
             <h2 className={styles.subtitleWithIcon}>Ser un verdadero Programador Senior es otra historia</h2>
             <p>El significado de la palabra senior no ha cambiando demasiado durante los últimos 20 años.</p>
@@ -89,7 +92,7 @@ export default async function Home({params}: { params: { slug: string }; }) {
 
             <p>Con las dos primeras no podemos ayudarte. En lo que sí podemos ayudarte es a convertirte en mejor
                 programador.</p>
-
+            <p><strong>Únete gratis a las miles de personas que han descubierto una forma diferente de entender la programación. Eso sí, si tienes la piel fina, mejor no te suscribas.</strong></p>
             <Newsletter hideEntry={true}/>
         </div>
     )

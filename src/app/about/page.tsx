@@ -5,14 +5,6 @@ import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 import Image from "next/image";
 
 export default async function Legal() {
-    const entryText = <><p>Mi nombre es Miguel A. Gómez, soy developer y emprendedor. He trabajado en proyectos grandes,
-        medianos y
-        pequeños, he co-fundado varias empresas y he ayudado a que una startup americana se
-        vendiera por muchos millones de dólares gracias a escribir código sostenible.</p>
-    <p><strong>Con código sostenible me refiero a fácil de mantener. Y con fácil de mantener quiero
-        decir
-        sencillo de
-        cambiar.</strong></p></>
     return (
         <div className={styles.container}>
             <h2 className={styles.subtitleWithIcon}>Cansados de escribir código que mata la moral de cualquiera</h2>
@@ -36,31 +28,21 @@ export default async function Legal() {
                 que ponían “Agile” o “Clean Coder”. Ya
                 sabes, las cosas del tío Bob, que cuando se pone la sotana de predicador nadie lo para...</p>
             <p><strong>Pero bueno, yo soy más de esforzarme en seguir mejorando para escribir buen código que de llevar
-                pulseritas, o de
-                convertir buenas prácticas de programación en una religión...</strong></p>
+                pulseritas, o de convertir buenas prácticas de programación en una religión...</strong></p>
             <Newsletter hideEntry={true}/>
             <h2 className={styles.hello}>Hola,</h2>
-            <div className={styles.profileContainerMobile}>
-                <Image className={styles.pictureProfileMobile}
-                       src={'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Blog/miguel%20y%20teo.jpeg'}
-                       alt={'Miguel A. Gómez - Clean JavaScript'} width={140} height={140}/>
-
-                {entryText}
-            </div>
-            <div className={styles.profileContainer}>
-                <div>
-                    {entryText}
-                </div>
-                <Image className={styles.pictureProfile}
-                       src={'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Blog/miguel%20y%20teo.jpeg'}
-                       alt={'Miguel A. Gómez - Clean JavaScript'} width={140} height={140}/>
-            </div>
-
-            <p>Y es que hay una verdad absoluta en el software: y es que si un proyecto tiene cierto éxito cambiará.</p>
-            <p><strong>Verás. Llevo desarrollando software desde 2006. En realidad empecé antes, pero ese año fue cuando
-                vendí mi primera web.</strong></p>
-            <p> En aquel momento estaba terminando Ingeniería en Radioelectrónica, pero ya me
-                había dado cuenta que programar era realmente lo que quería hacer, sabía que con el hardware no iba a
+            <p>Mi nombre es Miguel A. Gómez, soy emprendedor y developer especializado en la calidad del
+                        software y en blockchain. </p>
+            <p><strong>He trabajado en proyectos grandes, medianos y pequeños, he co-fundado varias empresas y he ayudado a que una startup americana se vendiera por muchos millones de dólares gracias a escribir código sostenible.</strong></p>
+            <p>Quizás esto no te diga nada y haces bien.</p>
+            <p><strong>Por cierto, cuando hablo de código sostenible me refiero a código fácil de mantener. Y con fácil de mantener quiero decir sencillo de cambiar.</strong></p>
+            <p>Hay una verdad absoluta en el software: y es que si un proyecto tiene cierto éxito cambiará.</p>
+            <Image className={styles.pictureProfile}
+                   src={'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Blog/miguel%20y%20teo.jpeg'}
+                   alt={'Miguel A. Gómez - Clean JavaScript'} width={140} height={140}/>
+            <p><strong>Llevo desarrollando software desde 2006. En realidad empecé antes, pero ese año fue cuando
+                cuando creé una pequeña aplicación web para mi primer cliente.</strong></p>
+            <p> En aquel momento estaba terminando Ingeniería en Radioelectrónica aunque ya sabía que programar era realmente lo que quería hacer. Me había dado cuenta de que con el hardware no iba a
                 llegar muy lejos desde Canarias.</p>
             <p><strong>Durante esa época empecé a sufrir titulitis aguda. Estaba obsesionado con coleccionar papelitos
                 de
