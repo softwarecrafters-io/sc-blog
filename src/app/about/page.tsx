@@ -66,7 +66,8 @@ export default async function Legal() {
                 reducida.</p>
             <p><strong>La idea era buena, conseguimos levantar más de un millón y medio de euros entre premios y rondas
                 de inversión. </strong></p>
-            <p> Pero aquello no terminó de salir bien (en la newsletter te cuento por qué).</p>
+            <p> Pero aquello no terminó de salir bien en la newsletter te cuento por qué. Si te interesa de puedes suscribir justo aquí abajo.</p>
+            <Newsletter hideEntry={true}/>
             <p><strong>Hace unos años me dió por escribir un libro, <Link href={"https://cleanjavascript.es"}
                                                                           target={"_blank"}>Clean
                 JavaScript</Link>, lo mismo te suena. Lo usan miles de developers en España y en Latam como referencia
@@ -88,12 +89,13 @@ export default async function Legal() {
             <p><strong>¿No me crees? Haces bien.</strong></p>
             <p>Échale un ojo a los <Link href={Routes.opinions}>testimonios (que por supuesto me he inventado)</Link> de
                 algunos de los programadores que se han formado con nosotros y me cuentas.</p>
-            <p><strong>Por cierto, Software Crafters Academy no hubiera sido posible sin las enseñanzas de mis mentores,
+            <Newsletter hideEntry={true}/>
+
+            <p><strong>PD. Por cierto, Software Crafters Academy no hubiera sido posible sin las enseñanzas de mis mentores,
                 en especial de mi hermano Juan M. Gómez (desarrollador del compilador del lenguaje Nim) y de mi colega
                 Carlos Blé (fundador de Lean Mind).</strong></p>
             <p>Casi todo lo que sé sobre programación (y sobre muchas otras cosas de la vida) se lo debo a ellos.
                 Eternamente agradecido.</p>
-            <Newsletter hideEntry={true}/>
         </div>
     );
 }

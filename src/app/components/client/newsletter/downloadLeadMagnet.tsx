@@ -20,7 +20,7 @@ export const DownloadLeadMagnet = () => {
             <h3 className={styles.title}>5 Principios de Diseño de software que lo mismo te ayudan a escribir mejor código</h3>
             <div className={styles.formInput}>
 
-                <button className={styles.actionButton} style={jetBrainsMono.style} onClick={handleButtonClick}>DESCARGAR GUÍA GRATUITA</button>
+                <button className={styles.actionButton} style={jetBrainsMono.style} onClick={handleButtonClick}>DESCARGAR GUÍA GRATIS</button>
             </div>
         </div>
     );
