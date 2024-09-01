@@ -43,8 +43,7 @@ export default async function Legal() {
             <Image className={styles.pictureProfile}
                    src={'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Blog/miguel%20y%20teo.jpeg'}
                    alt={'Miguel A. Gómez - Clean JavaScript'} width={140} height={140}/>
-            <p><strong>Llevo desarrollando software desde 2006. En realidad empecé antes, pero ese año fue cuando
-                cuando creé una pequeña aplicación web para mi primer cliente.</strong></p>
+            <p><strong>Llevo desarrollando software desde 2006. En realidad empecé antes, pero ese año fue cuando creé una pequeña aplicación web para mi primer cliente.</strong></p>
             <p> En aquel momento estaba terminando Ingeniería en Radioelectrónica aunque ya sabía que programar era
                 realmente lo que quería hacer. Me había dado cuenta de que con el hardware no iba a
                 llegar muy lejos desde Canarias.</p>
@@ -62,11 +61,11 @@ export default async function Legal() {
             <p><strong>Hice el camino largo no, el larguísimo. Ingeniería en Radioelectrónica, Ingeniería Informática y
                 Teleco.
                 Las dos primeras las terminé. Con la tercera me dije: ¿pero qué estás haciendo con tu vida?</strong></p>
-            <p>Llego un momento en que abrí los ojos, me di cuenta que la universidad estaba obsoleta y que acumular
+            <p>Llegó un momento en que abrí los ojos, me di cuenta que la universidad estaba obsoleta y que acumular
                 papelitos no era el camino. </p>
             <h2 className={styles.subtitleWithIcon}>No hace falta ir a la universidad para ser un buen
                 developer... </h2>
-            <p>A finales de 2015 nos juntamos unos cuantos amigos y confundé mi segunda una startup (en la que yo
+            <p>A finales de 2015 nos juntamos unos cuantos amigos y cofundé mi segunda startup (en la que yo
                     sería
                     el CTO). El plan era construir una especie de Booking .com orientado a personas con movilidad
                     reducida.</p>

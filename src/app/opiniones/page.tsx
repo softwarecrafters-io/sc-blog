@@ -25,21 +25,9 @@ export default async function Opinions() {
             <p>Luis del Amo - Full Stack Developer</p>
 
             <blockquote className={opinionStyle.opinion}>
-                <p>Una de las mejores newsletter que he leído en mucho tiempo, ¡gracias!</p>
+                <p>Este libro es una maravilla y su autor, Miguel A. Gómez aún más.</p>
             </blockquote>
-            <p>Paula Quitián - Developer</p>
-
-            <blockquote className={opinionStyle.opinion}>
-                <p>Me ha llevado tiempo y esfuerzo pero por fin he completado el curso de Testing. He de decir que la
-                    calidad es enorme, no me imagino la cantidad de tiempo que les ha llevado hacerlo</p>
-            </blockquote>
-            <p>Kevin Hierro - Artesano de Software (wolfremium.dev)</p>
-
-            <blockquote className={opinionStyle.opinion}>
-                <p>Estoy encantada con tus emails.. me gusta mucho el tono directo, desenfadado y provocador en el que
-                    te diriges a tus lectores.</p>
-            </blockquote>
-            <p>Carolina Manzanares - Developer</p>
+            <p>Carlos Azaustre - Desarrollador y Formador en JavaScript (carlosazaustre.es)</p>
 
             <blockquote className={opinionStyle.opinion}>
                 <p>Miguel, acabo de terminar el curso de Testing Sostenible con Typescript.</p>
@@ -93,6 +81,23 @@ export default async function Opinions() {
             <p>Juan Antona - Ingeniero de Software</p>
 
             <blockquote className={opinionStyle.opinion}>
+                <p>Estoy encantada con tus emails.. me gusta mucho el tono directo, desenfadado y provocador en el que
+                    te diriges a tus lectores.</p>
+            </blockquote>
+            <p>Carolina Manzanares - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Si estabas buscando un libro para subir de nivel en JavaScript, me gustaría recomendarte "Clean
+                    JavaScript" de Miguel A. Gómez.</p>
+            </blockquote>
+            <p>Brais Moure - Full Stack developer y creador de contenido (mouredev.com)</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Hola Miguel, geniales tus correos y mejor el curso...</p>
+            </blockquote>
+            <p>Edar José Blanco</p>
+
+            <blockquote className={opinionStyle.opinion}>
                 <p>Siento que he mejorado mucho este último año gracias a Testing Sostenible y ahora con este último
                     curso de Ingeniería y Artesanía del Software.</p>
                 <p> He profundizado en Clean Code, he descubierto DDD y por fin he aprendido TDD bien.</p>
@@ -102,9 +107,34 @@ export default async function Opinions() {
             <p>Alex Iraola - Full Stack Developer</p>
 
             <blockquote className={opinionStyle.opinion}>
-                <p>Hola Miguel, geniales tus correos y mejor el curso...</p>
+                <p>Parece que he hecho una buena inversión... Si tengo que ponerle un pero, ayer me hizo irme tarde a la
+                    cama 🤣 ... Ya en serio, nivelazo. </p>
             </blockquote>
-            <p>Edar José Blanco</p>
+            <p>Jose Manuel Lucas -- Senior Frontend Architect (jmlweb.es)</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Si eres tan bueno haciendo tus cursos como tus mails, valen cada céntimo! 👌</p>
+            </blockquote>
+            <p>Ismael Berón - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Una de las mejores newsletter que he leído en mucho tiempo, ¡gracias!</p>
+            </blockquote>
+            <p>Paula Quitián - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Me ha llevado tiempo y esfuerzo pero por fin he completado el curso de Testing. He de decir que la
+                    calidad es enorme, no me imagino la cantidad de tiempo que les ha llevado hacerlo</p>
+            </blockquote>
+            <p>Kevin Hierro - Artesano de Software (wolfremium.dev)</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Está muy bien pero quiero poner un pero. Una manía de todos los programadores. Y es que ponen todo el
+                    código en inglés porque todos deben ser muy guays. El castellano no debe molar. Por lo demás, todos
+                    los consejos son muy buenos, y a priori no son obios. Muy buen libro que ha hecho avergonzarme de mi
+                    código.</p>
+            </blockquote>
+            <p>Cliente de Amazon</p>
 
             <blockquote className={opinionStyle.opinion}>
                 <p>Solamente quería decirte que recientemente he finalizado el curso de Diseño Sostenible y quería darte
@@ -195,15 +225,20 @@ export default async function Opinions() {
                 <p>Muchas gracias.</p>
             </blockquote>
             <p>Marcos Rodrigo - Developer</p>
-            <blockquote className={opinionStyle.opinion}>
-                <p>Si eres tan bueno haciendo tus cursos como tus mails, valen cada céntimo! 👌</p>
-            </blockquote>
-            <p>Ismael Berón - Developer</p>
+
             <blockquote className={opinionStyle.opinion}>
                 <p>Genial email sobre como ser mejor profesional...</p>
                 <p>Gracias por todo este material de alto valor que compartes.</p>
             </blockquote>
             <p>Armando Cruz - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Compacto y al grano. Hacia tiempo que no subrayaba tanto y ponía marcas en un libro. Tendría que ser
+                    esencial para todos
+                </p>
+            </blockquote>
+            <p> Alejandro Díez - Developer</p>
+
             <blockquote className={opinionStyle.opinion}>
                 <p>Hola Miguel, Me gustan mucho las historias que envías. Aprendo mucho de ellas y aunque nunca he
                     contratado un curso encuentro gran valor en tu newsletter y lo que haces.</p>
@@ -262,6 +297,12 @@ export default async function Opinions() {
             <p>Alberto Morales - Fullstack Developer</p>
 
             <blockquote className={opinionStyle.opinion}>
+                <p>Tenía muchas ganas de leer sobre “Clean Code”, además en castellano y aplicado a Javascript. Gran
+                    trabajo 🔝</p>
+            </blockquote>
+            <p>Sergio Suarez - FullStack Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
                 <p>Aunque de momento voy por la mitad del curso (repito los módulos para comprender mejor la teoría), el
                     bonus de regalo: backing testing ha sido de gran ayuda. Trata los conceptos que estamos aprendiendo
                     en el curso y en mi caso me ha permitido ver como se implementan los repositorios en TS (métodos
@@ -310,6 +351,53 @@ export default async function Opinions() {
                     conocimiento traspasa al lenguaje. </p>
             </blockquote>
             <p>Kevin Hierro - Artesano de Software</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Tengo el libro por la mitad y la verdad es que me está gustando bastante. Es directo y claro, muy
+                    fácil de digerir. </p>
+            </blockquote>
+            <p>Ulises Santana - Fullstack Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Ya tengo el libro en mis manos!! Recién compradito! menuda pinta que tiene, gracias por vuestro
+                    trabajo. </p>
+            </blockquote>
+            <p>Roberto Serrano - FullStack Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Es un libro que da mayor claridad cuando desde luego ya sabes JavaScript de una manera intermedia, no
+                    lo he terminado pero todo lo que me he leído me ha bastado para darme cuenta que fue a una excelente
+                    compra! Muy recomendado.
+                </p>
+            </blockquote>
+            <p>Brayan - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Buenas prácticas bien explicadas y con referencias a otros autores de renombre bien conocidos por el
+                    autor. Una fuente de conocimientos. Imprescindible.
+
+                </p>
+            </blockquote>
+            <p>José Ramón - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>El libro muy recomendable si quieres aprender Javascript con buenas prácticas
+                </p>
+            </blockquote>
+            <p>Javier Ortiz - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Es un muy buen libro para crecer como programador. Directo y claro.</p>
+            </blockquote>
+            <p> Vicente Alvaro - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Lo que más me gustó del libro es que el autor va "a saco", no se anda por las ramas ni marea la
+                    perdiz, te explica lo que te tiene que explicar en un lenguaje conciso y punto, cosa que le
+                    agradezco porque no estoy para leer ladrillos.</p>
+            </blockquote>
+            <p> Cliente de Amazon</p>
+
             <Newsletter hideEntry={true}/>
         </div>
     );
