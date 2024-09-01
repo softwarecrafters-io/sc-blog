@@ -1,6 +1,7 @@
 import styles from '../home.module.css';
 import opinionStyle from './opinions.module.css';
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
+
 export default async function Opinions() {
     return (
         <div className={styles.container}>
@@ -14,6 +15,32 @@ export default async function Opinions() {
                     desde principios del 2000... </p>
             </blockquote>
             <p>Maxi Alaniz - Analista de Sistemas y Programador</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Miguel, tu curso ha sido la mejor inversión que he hecho en todos los años que llevo invirtiendo en
+                    formación. </p>
+                <p>Lo habéis clavado porque me está explotando la cabeza con muchas cosas que tengo la sensación que
+                    debería haber controlado desde hace mucho tiempo</p>
+            </blockquote>
+            <p>Luis del Amo - Full Stack Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Una de las mejores newsletter que he leído en mucho tiempo, ¡gracias!</p>
+            </blockquote>
+            <p>Paula Quitián - Developer</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Me ha llevado tiempo y esfuerzo pero por fin he completado el curso de Testing. He de decir que la
+                    calidad es enorme, no me imagino la cantidad de tiempo que les ha llevado hacerlo</p>
+            </blockquote>
+            <p>Kevin Hierro - Artesano de Software (wolfremium.dev)</p>
+
+            <blockquote className={opinionStyle.opinion}>
+                <p>Estoy encantada con tus emails.. me gusta mucho el tono directo, desenfadado y provocador en el que
+                    te diriges a tus lectores.</p>
+            </blockquote>
+            <p>Carolina Manzanares - Developer</p>
+
             <blockquote className={opinionStyle.opinion}>
                 <p>Miguel, acabo de terminar el curso de Testing Sostenible con Typescript.</p>
                 <p>Lo compré en septiembre gracias al budget de formación de la empresa. Trabajo en Ironhack.</p>
@@ -66,31 +93,6 @@ export default async function Opinions() {
             <p>Juan Antona - Ingeniero de Software</p>
 
             <blockquote className={opinionStyle.opinion}>
-                <p>Una de las mejores newsletter que he leído en mucho tiempo, ¡gracias!</p>
-            </blockquote>
-            <p>Paula Quitián - Developer</p>
-
-            <blockquote className={opinionStyle.opinion}>
-                <p>Miguel, tu curso ha sido la mejor inversión que he hecho en todos los años que llevo invirtiendo en
-                    formación. </p>
-                <p>Lo habéis clavado porque me está explotando la cabeza con muchas cosas que tengo la sensación que
-                    debería haber controlado desde hace mucho tiempo</p>
-            </blockquote>
-            <p>Luis del Amo - Full Stack Developer</p>
-
-            <blockquote className={opinionStyle.opinion}>
-                <p>Me ha llevado tiempo y esfuerzo pero por fin he completado el curso de Testing. He de decir que la
-                    calidad es enorme, no me imagino la cantidad de tiempo que les ha llevado hacerlo</p>
-            </blockquote>
-            <p>Kevin Hierro - Artesano de Software (wolfremium.dev)</p>
-
-            <blockquote className={opinionStyle.opinion}>
-                <p>Estoy encantada con tus emails.. me gusta mucho el tono directo, desenfadado y provocador en el que
-                    te diriges a tus lectores.</p>
-            </blockquote>
-            <p>Carolina Manzanares - Developer</p>
-
-            <blockquote className={opinionStyle.opinion}>
                 <p>Siento que he mejorado mucho este último año gracias a Testing Sostenible y ahora con este último
                     curso de Ingeniería y Artesanía del Software.</p>
                 <p> He profundizado en Clean Code, he descubierto DDD y por fin he aprendido TDD bien.</p>
@@ -100,7 +102,7 @@ export default async function Opinions() {
             <p>Alex Iraola - Full Stack Developer</p>
 
             <blockquote className={opinionStyle.opinion}>
-                <p>Hola Miguel, geniales tus correo y mejor el curso...</p>
+                <p>Hola Miguel, geniales tus correos y mejor el curso...</p>
             </blockquote>
             <p>Edar José Blanco</p>
 
@@ -304,11 +306,11 @@ export default async function Opinions() {
 
             <blockquote className={opinionStyle.opinion}>
                 <p>Este curso está de lokos. Ojalá hubiese existido cuando empecé.</p>
-                <p>Para codear como un pro y adelantar por la derecha a mucha gente. Y lo genial es que todo el conocimiento traspasa al lenguaje. </p>
+                <p>Para codear como un pro y adelantar por la derecha a mucha gente. Y lo genial es que todo el
+                    conocimiento traspasa al lenguaje. </p>
             </blockquote>
             <p>Kevin Hierro - Artesano de Software</p>
             <Newsletter hideEntry={true}/>
         </div>
     );
 }
-

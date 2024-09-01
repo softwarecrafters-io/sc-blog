@@ -38,13 +38,12 @@ export default async function Home({params}: { params: { slug: string }; }) {
             <p>Añadimos tal cantidad de complejidad accidental que el proyecto en unas pocas semanas o meses se nos va
                 de las manos.</p>
             <p><strong>Diseñar software centrándote en librerías y frameworks es como cocinar usando la Thermomix. </strong></p>
-                <p>Ser un verdadero
-                chef profesional es otra cosa.</p>
+                <p>Ser un chef profesional no es eso. Ser un verdadero programador senior es otra historia.</p>
             <p><strong>Hablo sobre todo esto (y mucho más) en mi newsletter. Además, al suscribirte recibes gratis una guía con con 5 principios fundamentales de Ingeniería y Artesanía del Software que todo developer debería conocer.</strong></p>
             <p>Únete gratis a las miles de personas que han descubierto una forma diferente de entender la
                 programación. Eso sí, si tienes la piel fina, mejor no te suscribas.</p>
             <Newsletter hideEntry={true}/>
-            <h2 className={styles.subtitleWithIcon}>Ser un verdadero Programador Senior es otra historia</h2>
+            <h2 className={styles.subtitleWithIcon}>Programadores Junior con 10 años de experiencia</h2>
             <p>El significado de la palabra senior no ha cambiando demasiado durante los últimos 20 años.</p>
             <p><strong>Aún hoy en día en muchas empresas a los developers se les considera seniors (o se consideran
                 ellos mismos) por el simple hecho de llevar “n años” en la industria, sin tener en cuenta su

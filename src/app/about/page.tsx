@@ -32,17 +32,21 @@ export default async function Legal() {
             <Newsletter hideEntry={true}/>
             <h2 className={styles.hello}>Hola,</h2>
             <p>Mi nombre es Miguel A. Gómez, soy emprendedor y developer especializado en la calidad del
-                        software y en blockchain. </p>
-            <p><strong>He trabajado en proyectos grandes, medianos y pequeños, he co-fundado varias empresas y he ayudado a que una startup americana se vendiera por muchos millones de dólares gracias a escribir código sostenible.</strong></p>
+                software y en blockchain. </p>
+            <p><strong>He trabajado en proyectos grandes, medianos y pequeños, he co-fundado varias empresas y he
+                ayudado a que una startup americana se vendiera por muchos millones de dólares gracias a escribir código
+                sostenible.</strong></p>
             <p>Quizás esto no te diga nada y haces bien.</p>
-            <p><strong>Por cierto, cuando hablo de código sostenible me refiero a código fácil de mantener. Y con fácil de mantener quiero decir sencillo de cambiar.</strong></p>
+            <p><strong>Por cierto, cuando hablo de código sostenible me refiero a código fácil de mantener. Y con fácil
+                de mantener quiero decir sencillo de cambiar.</strong></p>
             <p>Hay una verdad absoluta en el software: y es que si un proyecto tiene cierto éxito cambiará.</p>
             <Image className={styles.pictureProfile}
                    src={'https://swcrafters.fra1.cdn.digitaloceanspaces.com/Blog/miguel%20y%20teo.jpeg'}
                    alt={'Miguel A. Gómez - Clean JavaScript'} width={140} height={140}/>
             <p><strong>Llevo desarrollando software desde 2006. En realidad empecé antes, pero ese año fue cuando
                 cuando creé una pequeña aplicación web para mi primer cliente.</strong></p>
-            <p> En aquel momento estaba terminando Ingeniería en Radioelectrónica aunque ya sabía que programar era realmente lo que quería hacer. Me había dado cuenta de que con el hardware no iba a
+            <p> En aquel momento estaba terminando Ingeniería en Radioelectrónica aunque ya sabía que programar era
+                realmente lo que quería hacer. Me había dado cuenta de que con el hardware no iba a
                 llegar muy lejos desde Canarias.</p>
             <p><strong>Durante esa época empecé a sufrir titulitis aguda. Estaba obsesionado con coleccionar papelitos
                 de
@@ -60,43 +64,55 @@ export default async function Legal() {
                 Las dos primeras las terminé. Con la tercera me dije: ¿pero qué estás haciendo con tu vida?</strong></p>
             <p>Llego un momento en que abrí los ojos, me di cuenta que la universidad estaba obsoleta y que acumular
                 papelitos no era el camino. </p>
-            <p><strong>No hace falta pasar por la universidad para ser un gran programador... </strong></p>
-            <p>A finales de 2015 nos juntamos unos cuantos amigos y confundé mi segunda una startup (en la que yo sería
-                el CTO). El plan era construir una especie de Booking .com orientado a personas con movilidad
-                reducida.</p>
-            <p><strong>La idea era buena, conseguimos levantar más de un millón y medio de euros entre premios y rondas
-                de inversión. </strong></p>
-            <p> Pero aquello no terminó de salir bien en la newsletter te cuento por qué. Si te interesa de puedes suscribir justo aquí abajo.</p>
-            <Newsletter hideEntry={true}/>
-            <p><strong>Hace unos años me dió por escribir un libro, <Link href={"https://cleanjavascript.es"}
-                                                                          target={"_blank"}>Clean
-                JavaScript</Link>, lo mismo te suena. Lo usan miles de developers en España y en Latam como referencia
-                (quizás tu seas uno). También lo tienes en inglés, por si te interesa.</strong></p>
-            <p>El libro es un poco raro porque no va sobre JavaScript sino sobre como escribir mejor software en
-                general. Ni siquiera los ejemplos son en el lenguaje de Brendan Eich sino en TypeScript. Por cierto, lo
-                escribí antes de ChatGPT, ahora todo el mundo tiene uno. </p>
-            <p><strong>En el 2020 (en pleno apocalipsis) me junté con mi colega Carlos Blé (el
-                fundador de Lean Mind) con la intención de crear la mejor formación posible para developers
-                profesionales.</strong></p>
-            <p>La formación que nos hubiera gustado encontrar a nosotros cuando empezamos. Después de dedicarle más de
-                dos años a desarrollar los contenidos, de esa asociación
-                no salió un curso, sino varios.</p>
-            <p><strong>Los cursos son tan buenos que esa es la formación que hacen los nuevos programadores que se
-                incorporan en Lean Mind, su empresa de consultoría, da igual que sean Juniors o Seniors.</strong></p>
-            <p>Ahora estas formaciones ayudan a cientos de developers profesionales de decenas de empresas a llevar sus
-                carreras a otro
-                nivel. </p>
-            <p><strong>¿No me crees? Haces bien.</strong></p>
-            <p>Échale un ojo a los <Link href={Routes.opinions}>testimonios (que por supuesto me he inventado)</Link> de
-                algunos de los programadores que se han formado con nosotros y me cuentas.</p>
-            <Newsletter hideEntry={true}/>
+            <h2 className={styles.subtitleWithIcon}>No hace falta ir a la universidad para ser un buen
+                developer... </h2>
+            <p>A finales de 2015 nos juntamos unos cuantos amigos y confundé mi segunda una startup (en la que yo
+                    sería
+                    el CTO). El plan era construir una especie de Booking .com orientado a personas con movilidad
+                    reducida.</p>
+                <p><strong>La idea era buena, conseguimos levantar más de un millón y medio de euros entre premios y
+                    rondas
+                    de inversión. </strong></p>
+                <p> Pero aquello no terminó de salir bien... en la newsletter te cuento por qué. Si te interesa de
+                    puedes suscribir en el enlace de abajo.</p>
+                <Newsletter hideEntry={true}/>
+                <p><strong>Hace unos años me dió por escribir un libro, <Link href={"https://cleanjavascript.es"}
+                                                                              target={"_blank"}>Clean
+                    JavaScript</Link>, lo mismo te suena. Lo usan miles de developers en España y en Latam como
+                    referencia
+                    (quizás tu seas uno). También lo tienes en inglés, por si te interesa.</strong></p>
+                <p>El libro es un poco raro porque no va sobre JavaScript sino sobre como escribir mejor software en
+                    general. Ni siquiera los ejemplos son en el lenguaje de Brendan Eich sino en TypeScript. Por cierto,
+                    lo
+                    escribí antes de ChatGPT, ahora todo el mundo tiene uno. </p>
+                <p><strong>En el 2020 (en pleno apocalipsis) me junté con mi colega Carlos Blé (el
+                    fundador de Lean Mind) con la intención de crear la mejor formación posible para developers
+                    profesionales.</strong></p>
+                <p>La formación que nos hubiera gustado encontrar a nosotros cuando empezamos. Después de dedicarle más
+                    de
+                    dos años a desarrollar los contenidos, de esa asociación
+                    no salió un curso, sino varios.</p>
+                <p><strong>Los cursos son tan buenos que esa es la formación que hacen los nuevos programadores que se
+                    incorporan en Lean Mind, su empresa de consultoría, da igual que sean Juniors o Seniors.</strong>
+                </p>
+                <p>Ahora estas formaciones ayudan a cientos de developers profesionales de decenas de empresas a llevar
+                    sus
+                    carreras a otro
+                    nivel. </p>
+                <p><strong>¿No me crees? Haces bien.</strong></p>
+                <p>Échale un ojo a los <Link href={Routes.opinions}>testimonios (que por supuesto me he
+                    inventado)</Link> de
+                    algunos de los programadores que se han formado con nosotros y me cuentas.</p>
+                <Newsletter hideEntry={true}/>
 
-            <p><strong>PD. Por cierto, Software Crafters Academy no hubiera sido posible sin las enseñanzas de mis mentores,
-                en especial de mi hermano Juan M. Gómez (desarrollador del compilador del lenguaje Nim) y de mi colega
-                Carlos Blé (fundador de Lean Mind).</strong></p>
-            <p>Casi todo lo que sé sobre programación (y sobre muchas otras cosas de la vida) se lo debo a ellos.
-                Eternamente agradecido.</p>
+                <p><strong>PD. Por cierto, Software Crafters Academy no hubiera sido posible sin las enseñanzas de mis
+                    mentores,
+                    en especial de mi hermano Juan M. Gómez (desarrollador del compilador del lenguaje Nim) y de mi
+                    colega
+                    Carlos Blé (fundador de Lean Mind).</strong></p>
+                <p>Casi todo lo que sé sobre programación (y sobre muchas otras cosas de la vida) se lo debo a ellos.
+                    Eternamente agradecido.</p>
         </div>
-    );
+);
 }
 
