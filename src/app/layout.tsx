@@ -27,11 +27,7 @@ export default function RootLayout({
   return (
     <html lang="es">
     <head>
-        <script
-            defer
-            data-domain="softwarecrafters.io"
-            src="https://plausible.io/js/script.js"
-        />
+        <script defer data-domain="softwarecrafters.io" src="https://plausible.io/js/script.outbound-links.js"></script>
     </head>
     <body className={raleway.className}>
     <Header/>
