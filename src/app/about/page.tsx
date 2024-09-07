@@ -104,13 +104,13 @@ export default async function Legal() {
                     algunos de los programadores que se han formado con nosotros y me cuentas.</p>
                 <Newsletter hideEntry={true}/>
 
-                <p><strong>PD. Por cierto, Software Crafters Academy no hubiera sido posible sin las enseñanzas de mis
-                    mentores,
-                    en especial de mi hermano Juan M. Gómez (desarrollador del compilador del lenguaje Nim) y de mi
-                    colega
-                    Carlos Blé (fundador de Lean Mind).</strong></p>
-                <p>Casi todo lo que sé sobre programación (y sobre muchas otras cosas de la vida) se lo debo a ellos.
-                    Eternamente agradecido.</p>
+                {/*<p><strong>PD. Por cierto, Software Crafters Academy no hubiera sido posible sin las enseñanzas de mis*/}
+                {/*    mentores,*/}
+                {/*    en especial de mi hermano Juan M. Gómez (desarrollador del compilador del lenguaje Nim) y de mi*/}
+                {/*    colega*/}
+                {/*    Carlos Blé (fundador de Lean Mind).</strong></p>*/}
+                {/*<p>Casi todo lo que sé sobre programación (y sobre muchas otras cosas de la vida) se lo debo a ellos.*/}
+                {/*    Eternamente agradecido.</p>*/}
         </div>
 );
 }

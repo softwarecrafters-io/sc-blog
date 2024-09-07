@@ -26,11 +26,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
+    <head>
+        <script
+            defer
+            data-domain="softwarecrafters.io"
+            src="https://plausible.io/js/script.js"
+        />
+    </head>
     <body className={raleway.className}>
-        <Header />
-        <FullscreenPopup />
-        <main className={styles.main}>
-              {children}
+    <Header/>
+    <FullscreenPopup/>
+    <main className={styles.main}>
+    {children}
               <Footer />
           </main>
       </body>

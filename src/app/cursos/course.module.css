@@ -1,0 +1,33 @@
+.coverLink{
+    align-self: center;
+}
+.cover{
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.cover {
+    transition: transform 0.5s ease;
+}
+
+.cover:hover {
+    cursor: pointer;
+    animation: scale 0.5s forwards;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.04);
+    }
+}
+
+.cover:hover:active,
+.cover:hover:focus,
+.cover:hover:focus-within {
+    transform: scale(1.04);
+}

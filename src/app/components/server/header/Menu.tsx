@@ -13,7 +13,8 @@ export const Menu = () => {
         'Opiniones':  Routes.opinions,
         'Blog': Routes.blog,
         'Libro': 'https://cleanjavascript.es',
-        'Acceso': 'https://academy.softwarecrafters.io/',
+        'Cursos': Routes.courses,
+        'Acceso': 'https://academy.softwarecrafters.io/sign_in',
     }
 
     useEffect(() => {
