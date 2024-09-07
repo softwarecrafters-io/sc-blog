@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      
+    <url>
+      <loc>https://softwarecrafters.io/</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/about</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/opiniones</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/cursos</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/blog</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/legal</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/react/arquitectura-hexagonal-frontend</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/javascript/introduccion-programacion-funcional-javascript</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/blockchain/merkle-trees-typescript-tdd</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/el-error-del-billon-de-dolares-de-tony-hoare</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/john-von-neumann-un-computador-humano</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/sesgos/wysiati-software</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/cisne-negro-codigo</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/testing/dejemos-de-picar-codigo</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/testing/dejemos-de-picar-codigo</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/programar-rapido-programar-despacio</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/refactoring/code-smells-hay-algo-en-ese-codigo-que-me-huele-mal</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/codigo-bueno-feo-y-malo</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/el-programador-unabomber</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/testing/cobertura-de-tests-el-efecto-cobra</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/javascript/brendan-eich-creo-javascript-10-dias</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/ia/la-ia-esta-cambiando-las-reglas-del-juego</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/property-based-testing-la-ley-de-los-pequenos-numeros</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/developers-sin-los-pies-en-la-tierra</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/la-pregunta-del-millon</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/historias/el-programador-chofer</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    <url>
+      <loc>https://softwarecrafters.io/git/git-tips-notas-sobre-el-control-de-versiones</loc>
+      <lastmod>2024-09-07T17:29:04.485Z</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>
+  
+    </urlset>
+  
