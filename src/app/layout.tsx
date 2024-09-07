@@ -3,6 +3,7 @@ import { Raleway, JetBrains_Mono } from 'next/font/google'
 import styles from "@/app/layout.module.css";
 import {Header} from "@/app/components/server/header/header";
 import {Footer} from "@/app/components/server/footer/footer";
+import {FullscreenPopup} from "@/app/components/client/newsletter/fullscreenPopup/fullscreenPopup";
 
 const raleway = Raleway({
     weight: ['400', '700'],
@@ -27,6 +28,7 @@ export default function RootLayout({
     <html lang="es">
     <body className={raleway.className}>
         <Header />
+        <FullscreenPopup />
         <main className={styles.main}>
               {children}
               <Footer />
