@@ -9,9 +9,10 @@ const jetBrainsMono = JetBrains_Mono({
     display: 'swap'
 })
 
-export const DownloadLeadMagnet = () => {
+export const DownloadLeadMagnet = (props:{onClick?:()=>void}) => {
 
     const handleButtonClick = () => {
+        if(props.onClick) props.onClick();
         window.open("https://principios.softwarecrafters.io", "_blank");
     }
 

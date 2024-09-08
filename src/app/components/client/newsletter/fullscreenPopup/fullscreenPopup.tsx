@@ -54,7 +54,7 @@ export const FullscreenPopup = () => {
                     <div className={styles.closeButtonItemOpen} data-position="top"></div>
                     <div className={styles.closeButtonItemOpen} data-position="top"></div>
                 </button>
-                <DownloadLeadMagnet/>
+                <DownloadLeadMagnet onClick={closePopup}/>
             </div>
         </div>
     );

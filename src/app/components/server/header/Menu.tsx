@@ -12,8 +12,8 @@ export const Menu = () => {
         'About':  Routes.about,
         'Opiniones':  Routes.opinions,
         'Blog': Routes.blog,
-        'Libro': 'https://cleanjavascript.es',
         'Cursos': Routes.courses,
+        'Libro': 'https://cleanjavascript.es',
         'Acceso': 'https://academy.softwarecrafters.io/sign_in',
     }
 
