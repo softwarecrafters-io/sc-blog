@@ -8,7 +8,7 @@ import Image from "next/image";
 export default async function Legal() {
     return (
         <div className={styles.container}>
-            <h2 className={styles.subtitleWithIcon}>Formaciones de alto nivel para developers profesionales</h2>
+            <h2 className={styles.subtitle}>Formaciones de alto nivel para developers profesionales</h2>
             <p>La mayoría de las formaciones académicas para desarrolladores que te encuentras hoy en día en el mercado están creadas por personas que nunca han convivido lo suficiente con su propio código.</p>
             <strong><p>Simplemente no son conscientes de los problemas de mantenimiento que puede acarrear la forma en la que enseñan a programar.</p></strong>
             <p>Nuestros cursos te ahorrarán muchas horas en el camino del aprendizaje, evitarán que te choques con los mismos obstáculos que nos hicieron perder tiempo a nosotros y te ayudarán a alcanzar el siguiente nivel como developer.</p>
