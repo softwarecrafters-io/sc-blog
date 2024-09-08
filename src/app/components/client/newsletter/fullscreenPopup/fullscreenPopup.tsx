@@ -25,10 +25,10 @@ export const FullscreenPopup = () => {
             setVisibleAfter(delay);
         }
         const now = new Date().getTime();
-        const aDay = 24 * 60 * 60 * 1000;
+        const aHour = 60 * 60 * 1000;
         const lastClosedParsed = parseInt(lastClosed as string, 10);
         const currentTime = now - lastClosedParsed
-        if (currentTime > aDay) {
+        if (currentTime > aHour) {
             setVisibleAfter(delay);
         }
     };
