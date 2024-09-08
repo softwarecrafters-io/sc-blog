@@ -27,6 +27,8 @@ export default function RootLayout({
   return (
     <html lang="es">
     <head>
+        <title>Software Crafters Academy</title>
+        <meta name="description" content="Programar es el arte de decirle a otra persona lo que quieres que la máquina haga"/>
         <script defer data-domain="softwarecrafters.io" src="https://plausible.io/js/script.outbound-links.js"></script>
     </head>
     <body className={raleway.className}>
