@@ -1,4 +1,4 @@
-export function generateStaticMetadata({title, description, url, imageUrl}:{title:string, description:string, url:string, imageUrl:string}){
+export function generateStaticMetadata({title, description, url, imageUrl, noIndex}:{title:string, description:string, url:string, imageUrl:string, noIndex?:boolean}){
     return {
         title: title,
         description: description,
@@ -17,5 +17,6 @@ export function generateStaticMetadata({title, description, url, imageUrl}:{titl
             locale: 'es_ES',
             type: 'website',
         },
+        robots: noIndex ? 'noindex' : 'index',
     }
 }

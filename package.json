@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "compile": "npx tsc --noEmit",
+    "compile:watch": "npx tsc --noEmit --watch",
     "sitemap": "ts-node scripts/generate-sitemap.ts",
     "test": "jest",
     "docker:build": "export $(xargs < .env.local) && docker build --build-arg NOTION_API_KEY --build-arg NOTION_BLOG_DATABASE_ID -t blog . ",

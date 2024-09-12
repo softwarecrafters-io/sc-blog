@@ -23,8 +23,8 @@ export const BlogComponent = ({params}: { params: { slug: string }; }) => {
 }
 
 
-export function blogMetadata() {
-    const title = "Software Crafters Academy";
+export function blogMetadata(titleExtra?: string) {
+    const title = titleExtra ? `${titleExtra}` : "Software Crafters Academy";
     const description = "Formaciones de alto nivel para developers profesionales.";
     const url = "softwarecrafters.io";
     const imageUrl = "https://softwarecrafters.io/og.png";

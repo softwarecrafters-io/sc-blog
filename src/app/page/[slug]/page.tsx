@@ -7,6 +7,7 @@ export default async function Home({params}: { params: { slug: string }; }) {
 }
 
 export async function generateMetadata({params}: { params: { slug: string }; }){
+    console.log("generateMetadata called from src/app/page/page.tsx")
     return blogMetadata();
 }
 

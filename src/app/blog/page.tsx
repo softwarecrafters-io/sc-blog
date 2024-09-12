@@ -1,6 +1,7 @@
 import {BlogComponent, blogMetadata} from "@/app/components/server/home/BlogComponent";
 
 export default async function Home({params}: { params: { slug: string }; }) {
+    console.log("asdfasdf")
     return (
         <>
             <BlogComponent params={params}/>
@@ -9,7 +10,7 @@ export default async function Home({params}: { params: { slug: string }; }) {
 }
 
 export async function generateMetadata({params}: { params: { slug: string }; }){
-    return blogMetadata();
+    return blogMetadata("Blog");
 }
 
 

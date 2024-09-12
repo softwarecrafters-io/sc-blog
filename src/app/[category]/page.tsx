@@ -24,7 +24,7 @@ export async function generateMetadata({params}: CategoryPageParams ){
     const description = `Artículos de ${category} en el blog de los Software Crafters`;
     const url = "softwarecrafters.io";
     const imageUrl = "https://softwarecrafters.io/og.jpg";
-
+    const noIndex = true;
     return generateStaticMetadata(
-        {title, description, url, imageUrl});
+        {title, description, url, imageUrl, noIndex});
 }
