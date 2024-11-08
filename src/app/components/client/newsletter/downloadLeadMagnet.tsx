@@ -18,7 +18,7 @@ export const DownloadLeadMagnet = (props:{onClick?:()=>void}) => {
 
     return (
         <div className={styles.container} style={jetBrainsMono.style}>
-            <h3 className={styles.title}>5 Principios de Diseño de software que lo mismo te ayudan a escribir mejor código</h3>
+            <h3 className={styles.title}>Descubre 5 Principios de Diseño de software que lo mismo te ayudan a escribir mejor código</h3>
             <div className={styles.formInput}>
 
                 <button className={styles.actionButton} style={jetBrainsMono.style} onClick={handleButtonClick}>DESCARGAR GUÍA GRATIS</button>

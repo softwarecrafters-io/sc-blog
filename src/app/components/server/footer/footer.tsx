@@ -6,8 +6,7 @@ export const Footer = () => {
     const year = new Date().getFullYear();
     return (
         <div className={styles.container}>
-            <Link className={styles.legal} href={Routes.legal}>Aviso Legal</Link>
-            <p className={styles.cookies}>® Software Crafters es una marca registrada.</p>
+            <p className={styles.cookies}>Software Crafters ®  | Creado con 🖤 para elevar el nivel de la conversación sobre programación en español 💪🏼 | <Link className={styles.legal} href={Routes.legal}>Legal</Link></p>
         </div>
     )
 }
