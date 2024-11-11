@@ -16,9 +16,11 @@ export default async function Legal() {
                 <li><a href={'https://motivacion.dev'} target={'_blank'}>motivacion.dev</a></li>
                 <li><a href={'https://cleanjavascript.es'} target={'_blank'}>cleanjavascript.es</a></li>
                 <li><a href={'https://testingsostenible.com'} target={'_blank'}>testingsostenible.com</a></li>
+                <li><a href={'https://diseñosostenible.com'} target={'_blank'}>diseñosostenible.com</a></li>
+                <li><a href={'https://refactoringsostenible.com'} target={'_blank'}>refactoringsostenible.com</a></li>
             </ul>
             <p>Por cierto, en la web <a href={'https://softwarecrafters.io'} target={'_blank'}>softwarecrafters.io</a> no usamos cookies, en el resto si. Si te interesan saber cuales son, las detallamos un poco más abajo.</p>
-            <strong>Titular de los sitios web softwarecrafters.io, cleanjavascript.es <br/> y testingsostenible.com</strong>
+            <strong>Titular de los sitios web softwarecrafters.io, cleanjavascript.es, testingsostenible.com, diseñosostenible.com y refactoringsostenible.com</strong>
             <ul>
                 <li><strong>Identidad del Responsable:</strong>&nbsp;Software Crafters, SLU</li>
                 <li><strong>Nombre comercial:</strong>&nbsp;Software Crafters</li>
@@ -50,7 +52,7 @@ export default async function Legal() {
                 de las personas físicas. También cumplimos con otras leyes, aunque eso no nos obligan a decirlo.</p>
             <h3><strong>Responsable del tratamiento</strong></h3>
             <p>Los datos personales recabados a través de este sitio web serán incorporados un fichero
-                responsabilidad de Software Crafters SLU y Savvily SLU.</p>
+                responsabilidad de Software Crafters SLU, Savvily SLU y LeanMind SL.</p>
             <h3><strong>Principio de calidad</strong></h3>
             <p>El Usuario será responsable de cualquier daño o perjuicio que ocasione a Software Crafters o a cualquier tercero
                 por rellenar los formularios de este sitio web con datos falsos, inexactos o con datos de
