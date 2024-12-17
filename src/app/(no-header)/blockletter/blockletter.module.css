@@ -1,0 +1,126 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.title{
+    font-size: 4rem;
+    margin-top:0;
+    margin-bottom: 0px;
+    text-align: center;
+    align-self: center;
+    font-style: normal;
+}
+
+.subject{
+    position: relative;
+    font-size: 1.6rem;
+    font-weight: 300;
+    /*max-width: 500px;*/
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: normal;
+    align-self: center;
+    /*color: #777;*/
+}
+
+.subtitle, .subtitleWithIcon{
+    position: relative;
+    font-size: 2.3rem;
+    font-weight: 700;
+    max-width: 600px;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: normal;
+    align-self: center;
+    font-style: italic;
+}
+
+.aProject{
+    font-size: 2rem;
+    font-weight: 600;
+    max-width: 600px;
+    text-align: center;
+    letter-spacing: normal;
+    align-self: center;
+}
+
+.subtitleWithIcon {
+    padding-left: 0px;
+    padding-top: 20px
+}
+
+.subtitleWithIcon::before {
+    content: "";
+    position: absolute;
+    top: 0px; /* Ajusta la posición según sea necesario */
+    left: -80px;
+    width: 90px; /* Tamaño de la imagen */
+    height: 60px; /* Tamaño de la imagen */
+    background-image: url('https://swcrafters.fra1.cdn.digitaloceanspaces.com/Blog/quotes-mark.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3; /* Controla la opacidad aquí */
+    z-index: -1; /* Para que esté detrás del texto */
+}
+
+.pictureProfile{
+    margin: 10px 15px 15px 15px;
+    width: 220px;
+    border-radius: 50%;
+    align-self: center;
+}
+
+
+@media screen and (max-width: 768px){
+    .container{
+        padding: 0 10px;
+        margin-top: 0px;
+    }
+    .title{
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    .subtitle, .subtitleWithIcon{
+        font-size: 1.8rem;
+    }
+    .subtitleWithIcon::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -20px;
+        width: 90px;
+        height: 60px;
+    }
+
+}
+
+.logoContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: -40px;
+}
+.containerLogoSvg{
+    height: 50px;
+    transition:  0.3s ease-in-out;
+    margin:1rem;
+}
+
+.containerLogoSvg:hover{
+    transform: scale(1.1);
+}
+
+.logoSvg{
+    fill:var(--highlight-color);
+    fill-opacity:1;
+    stroke-width:0.0857143;
+    transition: transform ease .3s;
+}
+

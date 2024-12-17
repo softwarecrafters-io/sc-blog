@@ -1,64 +1,84 @@
-'use client';
-import {Routes} from "@/app/routes";
+import styles from "./blockletter.module.css";
 import Link from "next/link";
-import styles from "@/app/components/server/header/header.module.css";
-import {MenuMobile} from "@/app/components/server/header/MenuMobile";
-import {useEffect, useState} from "react";
+import {Routes} from "@/app/routes";
+import {Newsletter} from "@/app/components/client/newsletter/newsletter";
+import Image from "next/image";
 
-export const Menu = () => {
-    const [activeLink, setActiveLink] = useState("");
+export default async function BlockLetter() {
+    return (
+        <div className={styles.container}>
+            <h1 className={styles.title}>La Blockletter</h1>
+            <h2 className={styles.subject}>Criptografía, Blockchain y DeFi para Developers</h2>
 
-    const links: Record<string, string> = {
-        'About':  Routes.about,
-        'Opiniones':  Routes.opinions,
-        'La Blockletter': Routes.blockletter,
-        'Blog': Routes.blog,
-        'Cursos': Routes.courses,
-        'Libro': 'https://cleanjavascript.es',
-        'Acceso': 'https://academy.softwarecrafters.io/sign_in',
-    }
+            <p>Dos cosas importantes.</p>
 
-    useEffect(() => {
-        if (typeof window != null) {
-            setActiveLink(window.location.pathname);
-            console.log(window.location.pathname)
-        }
-    }, []);
+            <p><strong>Lo primero que te quiero aclarar es que la tecnología blockchain no sirve para trackear.</strong>
+            </p>
 
-    const renderedLinks = Object.keys(links).map((key) => {
-        const href = links[key];
-        const isActive = activeLink === href;
+            <p>Ni vino, ni leche, ni nada.</p>
 
-        return (
-            <Link
-                key={key}
-                className={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
-                target={href.startsWith('http') ? '_blank' : '_self'}
-                href={href}
-                onClick={() => setActiveLink(href)}
-            >
-                {key}
-            </Link>
-        );
-    });
+            <p><strong>La blockchain es ineficiente por diseño y más allá de la gestión de valor tiene muy poca
+                aplicación.</strong></p>
 
-    return <div className={styles.mainMenu}>
-        <Link href={Routes.home} aria-label="Software Crafters - Logo" onClick={() => setActiveLink("/")}>
-            <div className={styles.logo}>
-                {logoSvg}
+            <p>Si alguien a estas alturas viene a decirte que va a usar blockchain para resolver alguna historia, no le
+                hagas mucho caso…</p>
+
+            <p><strong>Esa burbuja ya pasó…</strong></p>
+
+            <p>La de la blockchain cómo solución mágica para todo, quiero decir.</p>
+
+            <p><strong>Tampoco deberías hacerle mucho caso al gurú que dice que la blockchain es una base de
+                datos.</strong></p>
+
+            <p> Spoiler: NO LO ES.</p>
+
+            <p><strong>Y lo segundo es que las criptomonedas y el bitcoin son una religión.</strong></p>
+
+            <p>La religión del dinero programable.</p>
+
+            <p><strong>Ojo, nada en contra de las religiones.</strong></p>
+
+            <p>Cada uno es libre de creer en lo que le da la gana.</p>
+
+            <p><strong>Mientras no me quieras imponer tu dogma, todo en orden.</strong></p>
+
+            <p>Verás.</p>
+
+            <p><strong>Hay quien cree en fantasmas, extraterrestres o que la tierra es plana.</strong></p>
+
+            <p>Otros creen en papelitos emitidos por los estados a cambio de nada.</p>
+
+            <p><strong>Si explicaras a alguien de hace 300 años que en el futuro cambiarían su oro por meros pedazos de
+                papel, te miraría incrédulo.</strong></p>
+
+            <p>Te diría que ni de coña te iba a entregar su oro a cambio de un simple pagaré.</p>
+
+            <p><strong>El problema es que desde los años 70 ya ni siquiera hay oro detrás.</strong></p>
+
+            <p>No hay nada.</p>
+
+            <p><strong>Bueno, si hay algo: </strong></p>
+
+            <p>Deudas de los estados.</p>
+
+            <p><strong>Y es que el dinero fiat, palabra que proviene del latin hágase (para muchos políticos hágase por
+                arte de magia), no tiene valor intrínseco y no está respaldado por un activo real.</strong></p>
+
+            <p>Su valor se basa en la confianza...</p>
+
+            <p><strong>Y ya sabes lo que dicen:</strong></p>
+            <p>La confianza es como el aire que respiramos, cuando tenemos de sobra nadie se da cuenta, cuando empieza a faltar todos lo notan.</p>
+
+            <div className={styles.logoContainer}>
+                <Link href={Routes.home} aria-label="Software Crafters - Logo">
+                    {logoSvg}
+                </Link>
             </div>
-        </Link>
-        <div className={styles.nav}>
-            {renderedLinks}
         </div>
-        <div className={styles.navMobileContainer}>
-            <MenuMobile links={links}/>
-        </div>
-    </div>
+    );
 }
 
-
-const logoSvg = <svg
+export const logoSvg = <svg
     className={styles.containerLogoSvg}
     height="44"
     viewBox="0 0 85 25.585621"

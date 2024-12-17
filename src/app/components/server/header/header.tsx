@@ -18,3 +18,14 @@ export const Header = () => {
     )
 }
 
+export const HeaderForBlockLetter = () => {
+    return (
+        <header className={styles.headerContainer} id={"header"}>
+            <div className={styles.header}>
+                <div className={styles.toggleMenu}>
+                    <ThemeToggle/>
+                </div>
+            </div>
+        </header>
+    )
+}

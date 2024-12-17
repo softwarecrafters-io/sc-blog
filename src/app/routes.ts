@@ -9,6 +9,7 @@ export class Routes{
     static blog = '/blog';
     static about = '/about';
     static opinions = '/opiniones';
+    static blockletter = '/blockletter';
 
     static buildPostRoute(post: Post | SummarizedPost, isFromRoot: boolean) {
         if (isFromRoot) {
