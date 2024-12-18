@@ -32,7 +32,7 @@
     position: relative;
     font-size: 2.3rem;
     font-weight: 700;
-    max-width: 600px;
+    max-width: 650px;
     margin-bottom: 20px;
     text-align: center;
     letter-spacing: normal;
@@ -87,6 +87,9 @@
     }
     .subtitle, .subtitleWithIcon{
         font-size: 1.8rem;
+    }
+    .subject{
+        margin-top: 0;
     }
     .subtitleWithIcon::before {
         content: "";

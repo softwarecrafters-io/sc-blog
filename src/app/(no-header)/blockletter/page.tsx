@@ -10,8 +10,8 @@ export default async function BlockLetter() {
         <div className={styles.container}>
             <h1 className={styles.title}>La Blockletter</h1>
             <h2 className={styles.subject}>Criptografía, Blockchain y DeFi para Developers</h2>
-            <MailerLiteForm />
-            <h2 className={styles.subtitleWithIcon}>Don't trust, verify</h2>
+            <MailerLiteForm/>
+            <h2 className={styles.subtitleWithIcon} style={{width:'100%'}}>Bitcoin es una religión y la blockchain no es eficiente...</h2>
             <p>Dos cosas importantes.</p>
 
             <p><strong>Lo primero que te quiero aclarar es que la tecnología blockchain no sirve para trackear.</strong>
@@ -71,8 +71,9 @@ export default async function BlockLetter() {
             <p><strong>Y ya sabes lo que dicen:</strong></p>
             <p>La confianza es como el aire que respiramos, cuando tenemos de sobra nadie se da cuenta, cuando empieza a
                 faltar todos lo notan.</p>
+            <h2 className={styles.subtitleWithIcon}>Don't trust, verify</h2>
 
-            <MailerLiteForm />
+            <MailerLiteForm/>
 
             <div className={styles.logoContainer}>
                 <Link href={Routes.home} aria-label="Software Crafters - Logo">

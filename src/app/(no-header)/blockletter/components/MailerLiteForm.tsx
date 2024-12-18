@@ -10,7 +10,9 @@ export const MailerLiteForm = () => {
 
     return (
         <div className={styles.container}>
-            <div className="ml-embedded" data-form="zGXnvS"></div>
+            <div className={styles.form}>
+                <div className="ml-embedded" data-form="zGXnvS"></div>
+            </div>
         </div>
     );
 }
