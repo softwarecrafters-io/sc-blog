@@ -3,6 +3,7 @@ import { Raleway, JetBrains_Mono } from 'next/font/google'
 import {HeaderForBlockLetter} from "@/app/components/server/header/header";
 import {FooterForBlockLetter} from "@/app/components/server/footer/footer";
 import styles from "@/app/(main)/layout.module.css";
+import {CookiesConsent} from "@/app/components/client/Cookies/CookiesConsent";
 
 const raleway = Raleway({
     weight: ['400', '700'],
@@ -16,10 +17,11 @@ export default function RootLayout({
                                    }: {
     children: React.ReactNode
 }) {
+
     return (
         <html lang="es">
         <head>
-            <title>La Block Letter</title>
+            <title>La BlockLetter</title>
             <meta
                 name="description"
                 content="Criptografía, Blockchain y Finanzas Descentralizadas para Developers"
@@ -29,12 +31,16 @@ export default function RootLayout({
                 data-domain="softwarecrafters.io"
                 src="https://plausible.io/js/script.outbound-links.js"
             />
+            {/*<script*/}
+            {/*    src="/mailerliteForms.js"*/}
+            {/*/>*/}
         </head>
         <body className={raleway.className}>
-            <main className={styles.main}>
-                <HeaderForBlockLetter/>
-                {children}
-                <FooterForBlockLetter/>
+        <main className={styles.main}>
+            <HeaderForBlockLetter/>
+            {children}
+            <FooterForBlockLetter/>
+            <CookiesConsent/>
             </main>
         </body>
         </html>

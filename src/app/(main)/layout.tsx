@@ -5,6 +5,7 @@ import {Header} from "@/app/components/server/header/header";
 import {FullscreenPopup} from "@/app/components/client/newsletter/fullscreenPopup/fullscreenPopup";
 import {Footer} from "@/app/components/server/footer/footer";
 import styles from "@/app/(main)/layout.module.css";
+import {CookiesConsent} from "@/app/components/client/Cookies/CookiesConsent";
 
 const raleway = Raleway({
     weight: ['400', '700'],
@@ -38,6 +39,7 @@ export default function RootLayout({
         <main className={styles.main}>
             {children}
             <Footer />
+            <CookiesConsent/>
         </main>
         </body>
         </html>

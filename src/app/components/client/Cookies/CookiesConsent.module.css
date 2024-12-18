@@ -1,0 +1,42 @@
+
+.cookiesBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    z-index: 50;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0.95;
+}
+
+.text {
+    color: var(--text-color);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.button {
+    padding: 0.5rem 1.5rem;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+@media (max-width: 640px) {
+    .cookiesBar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+    }
+}

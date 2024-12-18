@@ -3,13 +3,14 @@ import Link from "next/link";
 import {Routes} from "@/app/routes";
 import {Newsletter} from "@/app/components/client/newsletter/newsletter";
 import Image from "next/image";
+import {MailerLiteForm} from "@/app/(no-header)/blockletter/components/MailerLiteForm";
 
 export default async function BlockLetter() {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>La Blockletter</h1>
             <h2 className={styles.subject}>Criptografía, Blockchain y DeFi para Developers</h2>
-
+            <MailerLiteForm />
             <p>Dos cosas importantes.</p>
 
             <p><strong>Lo primero que te quiero aclarar es que la tecnología blockchain no sirve para trackear.</strong>
@@ -67,7 +68,8 @@ export default async function BlockLetter() {
             <p>Su valor se basa en la confianza...</p>
 
             <p><strong>Y ya sabes lo que dicen:</strong></p>
-            <p>La confianza es como el aire que respiramos, cuando tenemos de sobra nadie se da cuenta, cuando empieza a faltar todos lo notan.</p>
+            <p>La confianza es como el aire que respiramos, cuando tenemos de sobra nadie se da cuenta, cuando empieza a
+                faltar todos lo notan.</p>
 
             <div className={styles.logoContainer}>
                 <Link href={Routes.home} aria-label="Software Crafters - Logo">

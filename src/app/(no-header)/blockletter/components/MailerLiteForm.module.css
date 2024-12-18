@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+
+}
+
+.container input[type="email"]{
+    height: 42px;
+    border-radius: 5px 0 0 5px !important;
+    font-family: 'Raleway', sans-serif !important;
+}
+
+.container input[type="submit"]{
+    height: 42px;
+    border-radius: 0 5px 5px 0 !important;
+    font-family: 'Raleway', sans-serif !important;
+    background-color: #f9a825;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
