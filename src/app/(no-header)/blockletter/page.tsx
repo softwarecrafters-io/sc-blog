@@ -11,6 +11,7 @@ export default async function BlockLetter() {
             <h1 className={styles.title}>La Blockletter</h1>
             <h2 className={styles.subject}>Criptografía, Blockchain y DeFi para Developers</h2>
             <MailerLiteForm />
+            <h2 className={styles.subtitleWithIcon}>Don't trust, verify</h2>
             <p>Dos cosas importantes.</p>
 
             <p><strong>Lo primero que te quiero aclarar es que la tecnología blockchain no sirve para trackear.</strong>
@@ -71,11 +72,14 @@ export default async function BlockLetter() {
             <p>La confianza es como el aire que respiramos, cuando tenemos de sobra nadie se da cuenta, cuando empieza a
                 faltar todos lo notan.</p>
 
+            <MailerLiteForm />
+
             <div className={styles.logoContainer}>
                 <Link href={Routes.home} aria-label="Software Crafters - Logo">
                     {logoSvg}
                 </Link>
             </div>
+
         </div>
     );
 }
