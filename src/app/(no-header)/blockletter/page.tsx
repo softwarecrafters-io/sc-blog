@@ -9,7 +9,7 @@ export default async function BlockLetter() {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>La Blockletter</h1>
-            <h2 className={styles.subject}>Criptografía, Blockchain y DeFi para Developers</h2>
+            <h2 className={styles.subject}>Criptografía, Blockchain y Finanzas Descentralizadas para Programadores</h2>
             <MailerLiteForm/>
             {/*<h2 className={styles.subtitleWithIcon} style={{width:'100%'}}>Bitcoin es una religión y la blockchain no es eficiente...</h2>*/}
             {/*<p>Dos cosas importantes.</p>*/}

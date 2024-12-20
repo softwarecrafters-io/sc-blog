@@ -20,11 +20,12 @@
     position: relative;
     font-size: 1.6rem;
     font-weight: 300;
-    /*max-width: 500px;*/
+    max-width: 640px;
     margin-bottom: 20px;
     text-align: center;
     letter-spacing: normal;
     align-self: center;
+
     /*color: #777;*/
 }
 
