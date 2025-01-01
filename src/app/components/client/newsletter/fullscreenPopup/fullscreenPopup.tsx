@@ -5,7 +5,7 @@ import {DownloadLeadMagnet} from "@/app/components/client/newsletter/downloadLea
 
 
 export const FullscreenPopup = () => {
-    const delay = 25000;
+    const delay = 45000;
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const storageKey = 'popupLastClosed';
     const enableScroll = () => {

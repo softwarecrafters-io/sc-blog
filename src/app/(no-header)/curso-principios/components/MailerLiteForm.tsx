@@ -10,8 +10,8 @@ export const MailerLiteForm = () => {
 
     return (
         <div className={styles.container}>
+            <h2 className={styles.title}>Acceso inmediato a la primera lección</h2>
             <div className={styles.form}>
-                <h2>Acceder gratis al programa</h2>
                 <div className="ml-embedded" data-form="zGXnvS"></div>
             </div>
         </div>

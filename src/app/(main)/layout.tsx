@@ -6,6 +6,8 @@ import {FullscreenPopup} from "@/app/components/client/newsletter/fullscreenPopu
 import {Footer} from "@/app/components/server/footer/footer";
 import styles from "@/app/(main)/layout.module.css";
 import {CookiesConsent} from "@/app/components/client/Cookies/CookiesConsent";
+import {DownloadLeadMagnet} from "@/app/components/client/newsletter/downloadLeadMagnet";
+import React from "react";
 
 const raleway = Raleway({
     weight: ['400', '700'],
@@ -35,7 +37,7 @@ export default function RootLayout({
         </head>
         <body className={raleway.className}>
         <Header />
-        <FullscreenPopup />
+        <FullscreenPopup/>
         <main className={styles.main}>
             {children}
             <Footer />

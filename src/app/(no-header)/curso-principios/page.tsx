@@ -3,10 +3,9 @@ import Link from "next/link";
 import {Routes} from "@/app/routes";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
-import {faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
 
-import {MailerLiteForm} from "@/app/(no-header)/curso-principios/components/MailerLiteForm";
+import {CallToAction} from "@/app/(no-header)/curso-principios/components/CallToAction";
 
 
 export default async function CourseByEmail() {
@@ -19,89 +18,15 @@ export default async function CourseByEmail() {
                 </span>
             </div>
             <h2 className={styles.subject}>Conocer el último framework de moda no te hace mejor programador 💥</h2>
-            {/*<span>🛑 SPOILER: NO SE TRATA DE LOS PRINCIPIOS SOLID</span>*/}
             <h1 className={styles.title}>Descubre como escribir mejor código gracias a los principios de diseño que usan
                 los verdaderos seniors.</h1>
             <p className={styles.text}>Exclusivo para desarrolladores profesionales que quieran dar un salto de calidad. Vale para programadores juniors y seniors, si no sabes programar, no vale. </p>
-            <button className={styles.callToAction}>
-                Quiero leer la primera lección <b>ya</b> <FontAwesomeIcon className={styles.callToActionIcon} icon={faLongArrowAltRight} size="1x"/> </button>
-
+            <CallToAction/>
             <ul className={styles.bulletsContainer}>
                 <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/> Descubrirás un error que comete el 99% de los programadores y que está frenando tu carrera como developer.</li>
                 <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/> De una vez por todas entenderás cuáles son, exactamente, los principios más importantes para escribir software de calidad. Spoiler: no se trata de SOLID.</li>
-                <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/> Te hablaré de un tipo de arquitectura que últimamente se ha puesto de moda y del por qué NO la deberías utilizar. Además de un modelo mental, que si lo aplicas, sin duda te ayudará a ser mejor profesional.</li>
+                <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/> Te hablaré de un tipo de arquitectura que últimamente se ha puesto de moda y de por qué NO la deberías utilizar. Además de un modelo mental, que si lo aplicas, sin duda te ayudará a ser mejor profesional.</li>
             </ul>
-
-            {/*<MailerLiteForm/>*/}
-            {/*<p>Cada vez que nos hablan de Principios de Diseño de Software, nos marean con SOLID. A ver, nada en contra,*/}
-            {/*    simplemente hay otros más importantes y que la mayoría pasa por alto.</p>*/}
-            {/*<p>Por esta razón, hemos preparado una guía gratuita con 5 principios fundamentales de Ingeniería y*/}
-
-            {/*    Artesanía del Software que todo developer debería conocer.</p>*/}
-            {/*<h2 className={styles.subtitleWithIcon} style={{width:'100%'}}>Bitcoin es una religión y la blockchain no es eficiente...</h2>*/}
-            {/*<p>Dos cosas importantes.</p>*/}
-
-            {/*<p><strong>Lo primero que te quiero aclarar es que la tecnología blockchain no sirve para trackear.</strong>*/}
-            {/*</p>*/}
-
-            {/*<p>Ni vino, ni leche, ni nada.</p>*/}
-
-            {/*<p><strong>La blockchain es ineficiente por diseño y más allá de la gestión de valor tiene muy poca*/}
-            {/*    aplicación.</strong></p>*/}
-
-            {/*<p>Si alguien a estas alturas viene a decirte que va a usar blockchain para resolver alguna historia, no le*/}
-            {/*    hagas mucho caso…</p>*/}
-
-            {/*<p><strong>Esa burbuja ya pasó…</strong></p>*/}
-
-            {/*<p>La de la blockchain cómo solución mágica para todo, quiero decir.</p>*/}
-
-            {/*<p><strong>Tampoco deberías hacerle mucho caso al gurú que dice que la blockchain es una base de*/}
-            {/*    datos.</strong></p>*/}
-
-            {/*<p> Spoiler: NO LO ES.</p>*/}
-
-            {/*<p><strong>Y lo segundo es que las criptomonedas y el bitcoin son una religión.</strong></p>*/}
-
-            {/*<p>La religión del dinero programable.</p>*/}
-
-            {/*<p><strong>Ojo, nada en contra de las religiones.</strong></p>*/}
-
-            {/*<p>Cada uno es libre de creer en lo que le da la gana.</p>*/}
-
-            {/*<p><strong>Mientras no me quieras imponer tu dogma, todo en orden.</strong></p>*/}
-
-            {/*<p>Verás.</p>*/}
-
-            {/*<p><strong>Hay quien cree en fantasmas, extraterrestres o que la tierra es plana.</strong></p>*/}
-
-            {/*<p>Otros creen en papelitos emitidos por los estados a cambio de nada.</p>*/}
-
-            {/*<p><strong>Si explicaras a alguien de hace 300 años que en el futuro cambiarían su oro por meros pedazos de*/}
-            {/*    papel, te miraría incrédulo.</strong></p>*/}
-
-            {/*<p>Te diría que ni de coña te iba a entregar su oro a cambio de un simple pagaré.</p>*/}
-
-            {/*<p><strong>El problema es que desde los años 70 ya ni siquiera hay oro detrás.</strong></p>*/}
-
-            {/*<p>No hay nada.</p>*/}
-
-            {/*<p><strong>Bueno, si hay algo: </strong></p>*/}
-
-            {/*<p>Deudas de los estados.</p>*/}
-
-            {/*<p><strong>Y es que el dinero fiat, palabra que proviene del latin hágase (para muchos políticos hágase por*/}
-            {/*    arte de magia), no tiene valor intrínseco y no está respaldado por un activo real.</strong></p>*/}
-
-            {/*<p>Su valor se basa en la confianza...</p>*/}
-
-            {/*<p><strong>Y ya sabes lo que dicen:</strong></p>*/}
-            {/*<p>La confianza es como el aire que respiramos, cuando tenemos de sobra nadie se da cuenta, cuando empieza a*/}
-            {/*    faltar todos lo notan.</p>*/}
-            {/*<h2 className={styles.subtitleWithIcon}>Don't trust, verify</h2>*/}
-
-            {/*<MailerLiteForm/>*/}
-
             <div className={styles.logoContainer}>
                 <Link href={Routes.home} aria-label="Software Crafters - Logo">
                     {logoSvg}

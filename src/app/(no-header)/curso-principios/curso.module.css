@@ -40,7 +40,6 @@
     margin: 10px 0 0;
     letter-spacing: normal;
     text-transform: uppercase;
-    /*color: #777;*/
 }
 
 .title{
@@ -57,30 +56,6 @@
     font-size: 18px;
     line-height: 27px;
     font-weight: 300;
-}
-
-.callToAction{
-    font-size: 15px;
-    line-height: 15px;
-    font-weight: 500;
-    color: var(--button-text-color);
-    cursor: pointer;
-    margin-top: 20px;
-    background-color: var(--button-bg-color);
-    border: none;
-    border-radius: 5px;
-    box-shadow: 1.5px 1.5px 0px 1.5px var(--button-shadow-color);
-    padding: 10px 20px;
-}
-
-.callToAction:hover{
-    background-color: var(--button-bg-color);
-    box-shadow: 1px 1px 0px 1px var(--button-shadow-color);
-    opacity: 0.95;
-}
-
-.callToActionIcon{
-    margin-left: 10px;
 }
 
 .bulletsContainer{

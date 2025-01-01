@@ -167,3 +167,12 @@ ul{
 li{
     margin: 15px 0;
 }
+
+/* mailerLite hack  */
+.ml-embedded {
+    width: 100% !important;
+}
+
+.ml-form-embedBody {
+    padding: 0 !important;
+}
