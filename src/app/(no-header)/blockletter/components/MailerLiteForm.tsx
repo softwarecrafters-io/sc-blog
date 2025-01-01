@@ -19,7 +19,8 @@ export const MailerLiteForm = () => {
 
 declare global {
     interface Window {
-        ml: {
+        MailerLiteObject?: string;
+        ml?: {
             q?: any[];
             (...args: any[]): void;
         };
@@ -32,13 +33,13 @@ function initializeMailerLite() {
     const e = 'script';
     const u = 'https://assets.mailerlite.com/js/universal.js';
     const f = 'ml';
-    w[f] = w[f] || function () {
-        (w[f].q = w[f].q || []).push(arguments);
+    (w as any)[f] = (w as any)[f] || function () {
+        ((w as any)[f].q = (w as any)[f].q || []).push(arguments);
     };
     const l = d.createElement(e);
     l.async = true;
     l.src = u;
     const n = d.getElementsByTagName(e)[0];
     n.parentNode?.insertBefore(l, n);
-    w.ml('account', '18505');
+    (w as any).ml('account', '18505');
 }

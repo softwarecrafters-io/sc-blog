@@ -23,9 +23,15 @@ export default async function CourseByEmail() {
             <p className={styles.text}>Exclusivo para desarrolladores profesionales que quieran dar un salto de calidad. Vale para programadores juniors y seniors, si no sabes programar, no vale. </p>
             <CallToAction/>
             <ul className={styles.bulletsContainer}>
-                <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/> Descubrirás un error que comete el 99% de los programadores y que está frenando tu carrera como developer.</li>
-                <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/> De una vez por todas entenderás cuáles son, exactamente, los principios más importantes para escribir software de calidad. Spoiler: no se trata de SOLID.</li>
-                <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/> Te hablaré de un tipo de arquitectura que últimamente se ha puesto de moda y de por qué NO la deberías utilizar. Además de un modelo mental, que si lo aplicas, sin duda te ayudará a ser mejor profesional.</li>
+                <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/>
+                    Descubrirás un error que comete el 99% de los programadores y que está frenando tu carrera como developer.</li>
+                <p className={styles.text}>Y no, no se corrige instalando el último framework o librería de turno.</p>
+                <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/> De una vez por
+                    todas entenderás cuáles son, exactamente, los principios más importantes para escribir software de
+                    calidad.</li>
+                <p className={styles.text}>Spoiler: no se trata de SOLID.</p>
+                <li><FontAwesomeIcon className={styles.courseByEmailIcon} icon={faCheck} size="1x"/> Te hablaré de un tipo de arquitectura que últimamente se ha puesto de moda y de por qué NO la deberías utilizar. </li>
+                <p className={styles.text}>Además de un modelo mental, que si lo aplicas, sin duda te ayudará a ser mejor profesional.</p>
             </ul>
             <div className={styles.logoContainer}>
                 <Link href={Routes.home} aria-label="Software Crafters - Logo">

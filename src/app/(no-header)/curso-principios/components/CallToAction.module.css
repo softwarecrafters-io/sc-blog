@@ -1,6 +1,5 @@
 .callToAction{
-    font-size: 15px;
-    line-height: 15px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--button-text-color);
     cursor: pointer;
@@ -78,4 +77,11 @@
 
 .closeButtonItemOpen:nth-child(1) {
     transform: translateY(0) rotate(-45deg) scaleX(1.1);
+}
+
+
+@media screen and (max-width: 768px){
+    .popupContent{
+        max-width: 300px;
+    }
 }
