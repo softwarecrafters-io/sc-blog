@@ -11,6 +11,7 @@
     --icon-color-light: #888;
     --highlight-color-light: #000;
     --bg-code-color-light: #fafafa;
+    --button-shadow-color-light: #444;
     /* Definición de variables para el tema 'dark' */
     --bg-color-dark: #1c1c1c;
     --text-color-dark: #f0f0f0;
@@ -22,6 +23,7 @@
     --icon-color-dark: #f0f0f0;
     --highlight-color-dark: #fff;
     --bg-code-color-dark: #282c34;
+    --button-shadow-color-dark: #444;
 
     /* Inicializa las variables a los valores del tema 'light' */
     --bg-color: var(--bg-color-light);
@@ -43,6 +45,7 @@
     --border-color: var(--border-color-light);
     --button-bg-color: var(--button-bg-color-light);
     --button-text-color: var(--button-text-color-light);
+    --button-shadow-color: var(--button-shadow-color-light);
     --link-color: var(--link-color-light);
     --icon-color: var(--icon-color-light);
     --highlight-color: var(--highlight-color-light);
@@ -56,6 +59,7 @@
     --border-color: var(--border-color-dark);
     --button-bg-color: var(--button-bg-color-dark);
     --button-text-color: var(--button-text-color-dark);
+    --button-shadow-color: var(--button-shadow-color-dark);
     --link-color: var(--link-color-dark);
     --icon-color: var(--icon-color-dark);
     --highlight-color: var(--highlight-color-dark);

@@ -9,12 +9,42 @@ export default async function Confirm() {
     return (
         <>
         <div className={styles.container}>
-            <h2 className={styles.subtitle} style={{fontStyle: "normal", textAlign:"left", alignSelf:"start"}}>Gracias, tu suscripción ya ha sido confirmada.</h2>
-                <p>Estás dentro, en breve recibirás el primer email.</p>
+            <h2 className={styles.subtitle} style={{fontStyle: "normal", textAlign:"left", alignSelf:"start"}}>Tu suscripción NO ha sido confirmada (continúa leyendo)👇</h2>
+                <p><strong>Para que tu solicitud sea aprobada debes abrir el email que te acabo de enviar y haz clic en
+                    el enlace que contiene.</strong></p>
+                <p>Esto sirve para verificar que la dirección de correo que has proporcionado es correcta.</p>
+                <p>Para que funcione tienes que hacerlo antes de 5 minutos. De no hacerlo en ese tiempo no podrás
+                    suscribirte.</p>
+                <h2>Si no recibes ese correo…</h2>
+
+                <ol className={styles.list}>
+                    <li>Comprueba la carpeta de <em>spam</em> y también el apartado «Social» y «Promociones». Si me
+                        encuentras ahí pásame a la bandeja de entrada, la principal.
+                    </li>
+
+                    <li>Si consultas tu correo a través de un cliente como Apple Mail o es una dirección @icloud.com, es
+                        habitual que este mensaje sea borrado automáticamente y nunca te llegue. Te recomiendo que no lo
+                        uses, especialmente Apple Mail, @icloud (y @hotmail.com/es).
+                    </li>
+
+                    <li>Vuelve a apuntarte y presta especial atención a la dirección de email. Es MUY habitual que este
+                        problema se deba a que se ha cometido un error al escribir la dirección de email.
+                    </li>
+
+                    <li>Si esto no es, guárdame en la agenda de contactos de tu gestor de correo → Nombre: Miguel Gómez, email: miguel@blockletter.es y espera unos minutos.
+                    </li>
+
+                    <li>Si has usado una dirección de email corporativa, es decir, algo así como tunombre@tuempresa.com,
+                        el problema está en tu lado y la mejor solución es apuntarte con tu dirección de email personal.
+                    </li>
+                </ol>
+
+
+                <p>Si nada de eso funciona, espera. Normalmente llega en unos pocos minutos...</p>
         </div>
         <div className={styles.actionsEmail}>
-            <a  href={"https://mail.google.com/mail/u/0/#inbox"}  target={"_blank"}>Ir a Gmail</a>
-            <a  href={"https://outlook.live.com/mail/0/"} target={"_blank"}>Ir a Outlook</a>
+            <a className={styles.goToEmail} href={"https://mail.google.com/mail/u/0/#inbox"}  target={"_blank"}>Ir a Gmail para confirmar el registro</a>
+            <a className={styles.goToEmail} href={"https://outlook.live.com/mail/0/"} target={"_blank"}>Ir a Outlook para confirmar el registro</a>
         </div>
         </>
 )
