@@ -33,7 +33,7 @@
 .subject{
     position: relative;
     font-size: 22px;
-    line-height: 30px;
+    line-height: 32px;
     font-weight: 300;
     max-width: 640px;
     margin: 10px 0 0;
@@ -82,7 +82,7 @@
     }
     .subject{
         font-size: 20px;
-        line-height: 25px;
+        line-height: 30px;
     }
 }
 

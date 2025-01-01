@@ -1,9 +1,4 @@
-import styles from "../blockletter.module.css";
-import Link from "next/link";
-import {Routes} from "@/app/routes";
-import {Newsletter} from "@/app/components/client/newsletter/newsletter";
-import Image from "next/image";
-import {MailerLiteForm} from "@/app/(no-header)/blockletter/components/MailerLiteForm";
+import styles from "../../blockletter/blockletter.module.css";
 
 export default async function Confirm() {
     return (
