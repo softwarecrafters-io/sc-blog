@@ -5,7 +5,7 @@ export default async function Confirm() {
         <>
         <div className={styles.container}>
             <h2 className={styles.subtitle} style={{fontStyle: "normal", textAlign:"left", alignSelf:"start"}}>Gracias, tu suscripción ya ha sido confirmada.</h2>
-                <p>Estás dentro, en breve recibirás el primer email.</p>
+                <p>Estás dentro, en breve recibirás la primera lección en tu email.</p>
         </div>
         <div className={styles.actionsEmail}>
             <a  href={"https://mail.google.com/mail/u/0/#inbox"}  target={"_blank"}>Ir a Gmail</a>

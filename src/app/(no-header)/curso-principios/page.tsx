@@ -17,7 +17,7 @@ export default async function CourseByEmail() {
                                      size="1x"/> Curso <b> gratuito </b> por correo
                 </span>
             </div>
-            <h2 className={styles.subject}>Conocer el último framework de moda no te hace mejor programador 💥</h2>
+            <h2 className={styles.subject}>Conocer el último framework de moda no te hace ser un gran programador 💥</h2>
             <h1 className={styles.title}>Descubre como escribir mejor código gracias a los principios de diseño que usan
                 los verdaderos seniors.</h1>
             <p className={styles.text}>Exclusivo para desarrolladores profesionales que quieran dar un salto de calidad. Vale para programadores juniors y seniors, si no sabes programar, no vale. </p>

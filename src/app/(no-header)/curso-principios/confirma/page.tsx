@@ -4,7 +4,7 @@ export default async function Confirm() {
     return (
         <>
         <div className={styles.container}>
-            <h2 className={styles.subtitle} style={{fontStyle: "normal", textAlign:"left", alignSelf:"start"}}>Tu suscripción NO ha sido confirmada (continúa leyendo)👇</h2>
+            <h2 className={styles.subtitle} style={{fontStyle: "normal", textAlign:"left", alignSelf:"start"}}>Tu suscripción al curso NO ha sido confirmada (continúa leyendo)👇</h2>
                 <p><strong>Para que tu solicitud sea aprobada debes abrir el email que te acabo de enviar y haz clic en
                     el enlace que contiene.</strong></p>
                 <p>Esto sirve para verificar que la dirección de correo que has proporcionado es correcta.</p>
