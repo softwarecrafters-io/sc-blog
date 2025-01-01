@@ -1,11 +1,11 @@
 import '../../(main)/globals.css'
-import { Raleway, JetBrains_Mono } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 import {HeaderForBlockLetter} from "@/app/components/server/header/header";
-import {Footer, FooterForBlockLetter} from "@/app/components/server/footer/footer";
+import {Footer} from "@/app/components/server/footer/footer";
 import styles from "@/app/(main)/layout.module.css";
 import {CookiesConsent} from "@/app/components/client/Cookies/CookiesConsent";
 import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css'; // Importa los estilos de FontAwesome
+import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
 const raleway = Raleway({
@@ -34,9 +34,6 @@ export default function RootLayout({
                 data-domain="softwarecrafters.io"
                 src="https://plausible.io/js/script.outbound-links.js"
             />
-            {/*<script*/}
-            {/*    src="/mailerliteForms.js"*/}
-            {/*/>*/}
         </head>
         <body className={raleway.className}>
         <main className={styles.main}>
