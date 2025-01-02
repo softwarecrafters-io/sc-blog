@@ -1,4 +1,4 @@
-import {Offer, OfferId} from "@/boundedContexts/offer/core/models";
+import {Offer, OfferId} from "./models";
 
 export interface OfferRepository {
     save(offer: Offer): Promise<void>;
