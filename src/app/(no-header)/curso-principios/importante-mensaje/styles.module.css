@@ -1,0 +1,100 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+.subject{
+    position: relative;
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: 300;
+    max-width: 640px;
+    margin: 10px 0 0;
+    letter-spacing: normal;
+    text-transform: uppercase;
+}
+
+.title{
+    font-size: 38px;
+    margin:20px 0 30px;
+    font-weight: 700;
+    line-height: 50px;
+    text-align: left;
+    align-self: flex-start;
+    font-style: normal;
+}
+
+.text{
+    font-size: 18px;
+    line-height: 27px;
+    font-weight: 300;
+}
+
+.bulletsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px 0;
+    list-style: none;
+    font-size: 18px;
+    line-height: 27px;
+    padding: 0;
+    font-weight: 700;
+}
+
+.bulletsContainer li{
+    margin-bottom: 0px;
+}
+
+@media screen and (max-width: 768px){
+    .title{
+        font-size: 28px;
+        line-height: 40px;
+        margin-bottom: 0px;
+    }
+    .subject{
+        font-size: 20px;
+        line-height: 30px;
+    }
+}
+
+.logoContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: -40px;
+}
+.containerLogoSvg{
+    height: 50px;
+    transition:  0.3s ease-in-out;
+    margin:1rem;
+}
+
+.containerLogoSvg:hover{
+    transform: scale(1.1);
+}
+
+.logoSvg{
+    fill:var(--highlight-color);
+    fill-opacity:1;
+    stroke-width:0.0857143;
+    transition: transform ease .3s;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -10px;
+    line-height: 1.5em;
+
+}
+
