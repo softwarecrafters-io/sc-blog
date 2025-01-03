@@ -1,6 +1,6 @@
-import {Offer, OfferId} from "../../../../boundedContexts/offer/core/models";
+import {Offer} from "../../../../boundedContexts/offer/core/models";
 import {OfferUseCases} from "../../../../boundedContexts/offer/application/useCases";
-import {MemoryOfferRepository, OfferRepository} from "../../../../boundedContexts/offer/core/repositories";
+import {MemoryOfferRepository} from "../../../../boundedContexts/offer/core/repositories";
 
 describe('OfferUseCases', () => {
     let repository: MemoryOfferRepository;
@@ -11,9 +11,9 @@ describe('OfferUseCases', () => {
         useCases = new OfferUseCases(repository);
     });
 
-    describe('create', () => {
-        it('should create a new offer when none exists', async () => {
-            const offer = await useCases.create('127.0.0.1', 'test-offer', 30);
+    describe('getOrCreate', () => {
+        it('should create new offer when none exists', async () => {
+            const offer = await useCases.getOrCreate('127.0.0.1', 'test-offer');
 
             expect(offer).toBeInstanceOf(Offer);
             expect(offer.id.ip).toBe('127.0.0.1');
@@ -21,61 +21,50 @@ describe('OfferUseCases', () => {
             expect(offer.timeLeft()).toBeGreaterThan(0);
         });
 
-        it('should throw error when active offer exists', async () => {
-            // Primero creamos una oferta
-            await useCases.create('127.0.0.1', 'test-offer', 30);
+        it('should use default duration when not provided', async () => {
+            const offer = await useCases.getOrCreate('127.0.0.1', 'test-offer');
+            const expectedMinDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
 
-            // Intentamos crear otra con el mismo identificador
-            await expect(
-                useCases.create('127.0.0.1', 'test-offer', 30)
-            ).rejects.toThrow('Active offer already exists');
+            expect(offer.expiryTime - Date.now()).toBeGreaterThanOrEqual(expectedMinDuration - 100);
+            expect(offer.expiryTime - Date.now()).toBeLessThanOrEqual(expectedMinDuration + 100);
         });
 
-        it('should create new offer when existing offer is expired', async () => {
-            // Creamos una oferta que expira inmediatamente
-            const offer = await useCases.create('127.0.0.1', 'test-offer', 1/60); // 1 segundo
+        it('should use provided duration when creating new offer', async () => {
+            const durationInMinutes = 60;
+            const offer = await useCases.getOrCreate('127.0.0.1', 'test-offer', durationInMinutes);
+            const expectedDuration = durationInMinutes * 60 * 1000;
 
-            // Esperamos a que expire
-            await new Promise(resolve => setTimeout(resolve, 1100));
-
-            // Debería permitir crear una nueva oferta
-            const newOffer = await useCases.create('127.0.0.1', 'test-offer', 30);
-            expect(newOffer).toBeInstanceOf(Offer);
-            expect(newOffer.timeLeft()).toBeGreaterThan(0);
-        });
-    });
-
-    describe('hasActiveOffer', () => {
-        it('should return false when offer does not exist', async () => {
-            const result = await useCases.hasActiveOffer('127.0.0.1', 'non-existent');
-            expect(result).toBe(false);
+            expect(offer.expiryTime - Date.now()).toBeGreaterThanOrEqual(expectedDuration - 100);
+            expect(offer.expiryTime - Date.now()).toBeLessThanOrEqual(expectedDuration + 100);
         });
 
-        it('should return false when offer is expired', async () => {
-            // Creamos una oferta que expira inmediatamente
-            await useCases.create('127.0.0.1', 'test-offer', 1/60); // 1 segundo
+        it('should return existing offer without creating new one', async () => {
+            const firstOffer = await useCases.getOrCreate('127.0.0.1', 'test-offer', 60);
+            const secondOffer = await useCases.getOrCreate('127.0.0.1', 'test-offer', 30);
 
-            // Esperamos a que expire
-            await new Promise(resolve => setTimeout(resolve, 1100));
-
-            const result = await useCases.hasActiveOffer('127.0.0.1', 'test-offer');
-            expect(result).toBe(false);
+            expect(secondOffer.expiryTime).toBe(firstOffer.expiryTime);
         });
 
-        it('should return true when active offer exists', async () => {
-            await useCases.create('127.0.0.1', 'test-offer', 30);
+        it('should create different offers for different identifiers', async () => {
+            const offer1 = await useCases.getOrCreate('127.0.0.1', 'offer1');
+            await delay(10);
+            const offer2 = await useCases.getOrCreate('127.0.0.1', 'offer2');
 
-            const result = await useCases.hasActiveOffer('127.0.0.1', 'test-offer');
-            expect(result).toBe(true);
+            expect(offer1.id.toString()).not.toBe(offer2.id.toString());
+            expect(offer1.expiryTime).not.toBe(offer2.expiryTime);
         });
 
-        it('should handle multiple offers independently', async () => {
-            await useCases.create('127.0.0.1', 'offer1', 30);
-            await useCases.create('127.0.0.1', 'offer2', 30);
+        it('should create different offers for different IPs', async () => {
+            const offer1 = await useCases.getOrCreate('127.0.0.1', 'test-offer');
+            await delay(100);
+            const offer2 = await useCases.getOrCreate('192.168.1.1', 'test-offer');
 
-            expect(await useCases.hasActiveOffer('127.0.0.1', 'offer1')).toBe(true);
-            expect(await useCases.hasActiveOffer('127.0.0.1', 'offer2')).toBe(true);
-            expect(await useCases.hasActiveOffer('127.0.0.1', 'offer3')).toBe(false);
+            expect(offer1.id.toString()).not.toBe(offer2.id.toString());
+            expect(offer1.expiryTime).not.toBe(offer2.expiryTime);
         });
     });
 });
+
+function delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

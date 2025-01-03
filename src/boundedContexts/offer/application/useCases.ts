@@ -4,11 +4,12 @@ import {Offer, OfferId} from "../core/models";
 export class OfferUseCases {
     constructor(private readonly offerRepository: OfferRepository) {}
 
-    async create(ip: string, identifier: string, durationInMinutes: number): Promise<Offer> {
+    async getOrCreate(ip: string, identifier: string, durationInMinutes: number = 30): Promise<Offer> {
         const offerId = OfferId.create(ip, identifier);
+        const existingOffer = await this.offerRepository.findById(offerId);
 
-        if (await this.hasActiveOffer(ip, identifier)) {
-            throw new Error('Active offer already exists');
+        if (existingOffer) {
+            return existingOffer;
         }
 
         const offer = Offer.createWithDuration(offerId, durationInMinutes);
@@ -16,11 +17,6 @@ export class OfferUseCases {
 
         return offer;
     }
-
-    async hasActiveOffer(ip: string, identifier: string): Promise<boolean> {
-        const offerId = OfferId.create(ip, identifier);
-        const offer = await this.offerRepository.findById(offerId);
-
-        return offer !== undefined && !offer.isExpired();
-    }
 }
+
+
