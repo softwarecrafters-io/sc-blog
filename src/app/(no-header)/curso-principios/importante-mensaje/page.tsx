@@ -6,9 +6,9 @@ async function getOffer() {
     const ip = headersList.get('x-forwarded-for') || 'unknown';
     const host = headersList.get('host') || '';
 
-    const url = host.includes('localhost')
-        ? 'http://localhost:3010/api/offers?identifier=clean-js-offer'
-        : '/api/offers?identifier=clean-js-offer';  // URL relativa en producción
+    const url = process.env.ENV === 'PROD'
+        ? `https://${host}/api/offers?identifier=clean-js-offer`  // URL completa en producción
+        : 'http://localhost:3010/api/offers?identifier=clean-js-offer';  // URL completa en local
 
     const response = await fetch(url, {
         headers: {'X-Forwarded-For': ip},
@@ -21,6 +21,7 @@ async function getOffer() {
 
     return response.json();
 }
+
 export default async function ImportantMessage() {
     const offer = await getOffer();
     return <OfferMessage expiryTime={offer.expiryTime} />;
