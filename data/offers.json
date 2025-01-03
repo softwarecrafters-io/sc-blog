@@ -1,0 +1,9 @@
+{
+  "::1:clean-js-offer": {
+    "id": {
+      "ip": "::1",
+      "identifier": "clean-js-offer"
+    },
+    "expiryTime": 1735927811985
+  }
+}

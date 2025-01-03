@@ -34,6 +34,28 @@
     font-weight: 300;
 }
 
+.checkoutButton{
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--button-text-color);
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: var(--button-bg-color);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1.5px 1.5px 0px 1.5px var(--button-shadow-color);
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.checkoutButton:hover{
+    background-color: var(--button-bg-color);
+    box-shadow: 1px 1px 0px 1px var(--button-shadow-color);
+    opacity: 0.95;
+    text-decoration: none;
+
+}
+
 .bulletsContainer{
     display: flex;
     flex-direction: column;
